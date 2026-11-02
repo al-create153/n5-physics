@@ -72,10 +72,10 @@ button.b.danger{color:var(--bad)}
 .seglbl{font:600 .72rem var(--f-mono);color:var(--muted);margin:14px 0 6px;letter-spacing:.06em;text-transform:uppercase}
 .key{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted);margin-top:8px}
 .key i{display:inline-block;width:.8rem;height:.8rem;border-radius:2px;vertical-align:-1px;margin-right:4px;border:1px solid}
-.qtypes summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
-.qtypes summary::-webkit-details-marker{display:none}
-.qtypes summary::before{content:"";width:.5rem;height:.5rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);align-self:center;transition:transform .15s}
-.qtypes[open] summary::before{transform:rotate(45deg)}
+.drop>summary,.qtypes summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.drop>summary::-webkit-details-marker,.qtypes summary::-webkit-details-marker{display:none}
+.drop>summary::before,.qtypes summary::before{content:"";width:.5rem;height:.5rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);align-self:center;transition:transform .15s}
+.drop[open]>summary::before,.qtypes[open] summary::before{transform:rotate(45deg)}
 .qt-h{font-weight:700;font-size:1.05rem}
 .qt-body{margin-top:12px}
 .mixchips{display:flex;flex-direction:column;gap:6px;margin-top:12px}
@@ -207,9 +207,11 @@ textarea{font:inherit;font-size:1.05rem;width:100%;min-height:130px;padding:12px
       <div class="bar"><button class="b" id="redoBtn">Redo my mistakes</button></div>
     </header>
 
-    <div class="panel">
+    <details class="panel drop" id="mixBox">
+      <summary><span class="qt-h">Mixed practice</span><span class="msg">A random set of questions from the topics you tick</span></summary>
+      <div class="qt-body">
       <div class="row">
-        <div><h2 style="margin:0">Mixed practice</h2><span class="msg">Tick one topic or several for a random set of questions.</span></div>
+        <span class="msg">Tick one topic or several.</span>
         <div class="bar"><button class="b sm" id="selAll">Select all</button><button class="b sm" id="selNone">Clear</button></div>
       </div>
       <div id="mixTopics"></div>
@@ -230,9 +232,10 @@ textarea{font:inherit;font-size:1.05rem;width:100%;min-height:130px;padding:12px
           <button class="b pri" id="startBtn" disabled>Start</button>
         </div>
       </div>
-    </div>
+      </div>
+    </details>
 
-    <h2 class="seglbl" style="margin-top:24px">Or open a topic to choose questions by number</h2>
+    <h2 class="seglbl" style="margin-top:24px">Topics · tap one to see its numbered questions</h2>
     <div id="units"></div>
 
     <div class="panel">
