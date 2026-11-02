@@ -1,0 +1,1431 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>N5 Physics Theory Bank</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: same instrument-panel look as the Question Bank and Equation Bank; topic tiles grouped by course area, one exam "sheet" per question, feedback and "why" box beneath */
+:root{
+  --bg:#edf0f4; --surface:#ffffff; --ink:#152031; --muted:#56627a; --line:#cfd6e2;
+  --accent:#2549a8; --accent-ink:#ffffff; --tile:#e2e8f2; --mark:#8f4a0c; --mark-bg:#fbf1e4;
+  --good:#1f7a3a; --good-bg:#e3f3e8; --part:#946300; --part-bg:#fbf1d6; --bad:#a8322b; --bad-bg:#f9e3e1;
+  --sheet:#ffffff; --sheet-ink:#152031; --sel:#dfe7fb;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141c; --surface:#171e2a; --ink:#e3e8f1; --muted:#97a3b8; --line:#2b3546;
+  --accent:#7da0f2; --accent-ink:#0b1630; --tile:#1c2533; --mark:#f2ae6e; --mark-bg:#2c2016;
+  --good:#6fd08d; --good-bg:#173323; --part:#e8c15a; --part-bg:#33290f; --bad:#f08a82; --bad-bg:#3a1c1a;
+  --sheet:#1b2230; --sheet-ink:#e3e8f1; --sel:#22304d; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141c; --surface:#171e2a; --ink:#e3e8f1; --muted:#97a3b8; --line:#2b3546;
+  --accent:#7da0f2; --accent-ink:#0b1630; --tile:#1c2533; --mark:#f2ae6e; --mark-bg:#2c2016;
+  --good:#6fd08d; --good-bg:#173323; --part:#e8c15a; --part-bg:#33290f; --bad:#f08a82; --bad-bg:#3a1c1a;
+  --sheet:#1b2230; --sheet-ink:#e3e8f1; --sel:#22304d; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:17px/1.5 var(--f-body)}
+.wrap{max-width:60rem;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 16px;margin-bottom:18px}
+h1{font-size:1.65rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{text-wrap:balance}
+.eyebrow{font:600 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.unit{margin-top:22px}
+.unit h2{font:600 .78rem var(--f-mono);margin:0 0 10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.tile{all:unset;box-sizing:border-box;cursor:pointer;background:var(--tile);border:1px solid var(--line);border-radius:6px;padding:12px;display:grid;grid-template-rows:1fr auto auto;gap:6px;min-height:96px}
+.tile:hover{border-color:var(--accent)}
+.tile.on{border-color:var(--accent);background:var(--sel);box-shadow:inset 0 0 0 1px var(--accent)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tile .nm{font-weight:700;line-height:1.25;color:var(--ink)}
+.cnt{font:500 .72rem var(--f-mono);color:var(--muted)}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button.b{font:700 .92rem var(--f-body);border-radius:6px;padding:10px 15px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+button.b:hover{border-color:var(--accent)}
+button.b.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.b:disabled{opacity:.45;cursor:default}
+button.b.sm{padding:6px 10px;font-size:.82rem}
+button.b.ghost{background:transparent;border-color:transparent;color:var(--muted)}
+button.b.danger{color:var(--bad)}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;margin-top:14px}
+.panel h2{margin:0 0 8px;font-size:1.1rem}
+.msg{font-size:.88rem;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.prog{height:5px;border-radius:3px;background:var(--line);overflow:hidden;display:flex}
+.prog i{display:block;height:100%}.prog .g{background:var(--good)}.prog .p{background:var(--part)}.prog .n{background:var(--bad)}
+.countdown{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 14px;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:10px 14px;margin-bottom:16px}
+.cdl{font-weight:700}
+.cdt{display:flex;gap:12px;font:600 1rem var(--f-mono);font-variant-numeric:tabular-nums}
+.cdt span{display:inline-flex;flex-direction:column;align-items:center;line-height:1.1}
+.cdt small{font:500 .62rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.tchip{font:600 .82rem var(--f-body);padding:7px 11px;border-radius:999px;border:1px solid var(--line);background:var(--tile);color:var(--ink);cursor:pointer}
+.tchip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.tchip small{font:500 .72rem var(--f-mono);opacity:.8;margin-left:4px}
+.seglbl{font:600 .72rem var(--f-mono);color:var(--muted);margin:14px 0 6px;letter-spacing:.06em;text-transform:uppercase}
+.key{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted);margin-top:8px}
+.key i{display:inline-block;width:.8rem;height:.8rem;border-radius:2px;vertical-align:-1px;margin-right:4px;border:1px solid}
+.qtypes summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.qtypes summary::-webkit-details-marker{display:none}
+.qtypes summary::before{content:"";width:.5rem;height:.5rem;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:rotate(-45deg);align-self:center;transition:transform .15s}
+.qtypes[open] summary::before{transform:rotate(45deg)}
+.qt-h{font-weight:700;font-size:1.05rem}
+.qt-body{margin-top:12px}
+.startrow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.startrow #startBtn{padding:11px 26px;font-size:1rem}
+.sticky{position:sticky;bottom:0;z-index:5;background:var(--bg);padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);margin-top:16px}
+
+/* quiz */
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.qtitle{font-weight:700;font-size:1rem;min-width:0}
+.qspace{flex:1}
+.chip{font:600 .72rem var(--f-mono);padding:3px 8px;border-radius:4px;background:var(--tile);border:1px solid var(--line);color:var(--muted)}
+.chip.h{background:var(--mark-bg);color:var(--mark)}
+.qprog{height:4px;border-radius:2px;background:var(--line);overflow:hidden;margin-bottom:12px}
+.qprog i{display:block;height:100%;background:var(--accent);transition:width .2s}
+.sheet{background:var(--sheet);color:var(--sheet-ink);border:1px solid var(--line);border-radius:4px;padding:18px}
+.qtext{font-size:1.15rem;line-height:1.6;max-width:62ch;margin:0}
+.qtext sub,.qtext sup,.mi sub,.mi sup,.opt sub,.opt sup{font-size:.7em}
+.inst{font-size:.85rem;color:var(--muted);margin-top:10px;font-weight:700}
+table.dt{border-collapse:collapse;margin:10px 0 2px;font-size:.95rem}
+table.dt td,table.dt th{border:1px solid var(--line);padding:5px 10px;text-align:left}
+table.dt th{background:var(--tile)}
+table.dt td{font-variant-numeric:tabular-nums}
+.tscroll{overflow-x:auto;max-width:100%}
+.opts{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.opt{display:flex;gap:12px;align-items:center;text-align:left;width:100%;padding:13px 15px;border:1.5px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer;font:inherit;font-size:1.02rem;min-height:52px}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .k{font:600 .8rem var(--f-mono);color:var(--muted);flex:none;width:1.1rem}
+.opt:disabled{cursor:default}
+.opt.ok{border-color:var(--good);background:var(--good-bg)}
+.opt.no{border-color:var(--bad);background:var(--bad-bg);text-decoration:line-through;text-decoration-color:var(--bad)}
+.opt.dim{opacity:.5}
+.tf{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.tf .opt{justify-content:center;font-weight:700;font-size:1.1rem}
+.stmt{font-size:1.2rem;line-height:1.55;padding:14px 16px;border-left:4px solid var(--accent);background:var(--tile);border-radius:0 6px 6px 0;margin-top:10px}
+
+/* gaps */
+.gaptext{font-size:1.15rem;line-height:2.4;margin:0}
+.slot{display:inline-block;min-width:5.5em;padding:1px 10px;margin:0 2px;border:2px dashed var(--muted);border-radius:6px;text-align:center;cursor:pointer;line-height:1.6;vertical-align:baseline;background:var(--surface);color:var(--ink);font:inherit}
+.slot.fill{border-style:solid;border-color:var(--accent);background:var(--sel);font-weight:700}
+.slot.cur{box-shadow:0 0 0 3px var(--sel);border-color:var(--accent)}
+.slot.ok{border:2px solid var(--good);background:var(--good-bg)}
+.slot.no{border:2px solid var(--bad);background:var(--bad-bg)}
+.bank{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;padding-top:12px;border-top:1px dashed var(--line)}
+.word{font:700 1rem var(--f-body);padding:9px 14px;border-radius:6px;border:1.5px solid var(--line);background:var(--tile);color:var(--ink);cursor:pointer}
+.word:hover:not(:disabled){border-color:var(--accent)}
+.word:disabled{opacity:.3;cursor:default}
+
+/* sort */
+.sitems{display:flex;flex-direction:column;gap:10px;margin-top:14px}
+.sitem{border:1.5px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--surface)}
+.sitem.ok{border-color:var(--good);background:var(--good-bg)}
+.sitem.no{border-color:var(--bad);background:var(--bad-bg)}
+.sitem .st{font-weight:700;margin-bottom:8px}
+.sitem .sb{display:flex;flex-wrap:wrap;gap:6px}
+.sitem .sb button{font:600 .85rem var(--f-body);padding:7px 11px;border-radius:6px;border:1px solid var(--line);background:var(--tile);color:var(--ink);cursor:pointer}
+.sitem .sb button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.sitem .fix{font-size:.85rem;color:var(--bad);font-weight:700;margin-top:6px}
+
+/* build and order */
+.built{min-height:64px;border:2px dashed var(--line);border-radius:8px;padding:10px;margin-top:14px;display:flex;flex-direction:column;gap:8px;background:var(--surface)}
+.built:empty::before{content:attr(data-empty);color:var(--muted);font-size:.9rem}
+.pool{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.piece{display:flex;gap:10px;align-items:flex-start;text-align:left;width:100%;padding:11px 13px;border:1.5px solid var(--line);border-radius:8px;background:var(--tile);color:var(--ink);cursor:pointer;font:inherit;font-size:1rem;line-height:1.45}
+.piece:hover:not(:disabled){border-color:var(--accent)}
+.piece .n{font:600 .78rem var(--f-mono);color:var(--accent);flex:none;min-width:1.2rem;padding-top:2px}
+.built .piece{background:var(--sel);border-color:var(--accent)}
+.piece.ok{background:var(--good-bg);border-color:var(--good)}
+.piece.no{background:var(--bad-bg);border-color:var(--bad)}
+.piece:disabled{cursor:default}
+.lbl2{font:600 .72rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:14px}
+
+/* spot */
+.ans{margin-top:12px;display:flex;flex-direction:column;gap:6px}
+.sent{text-align:left;width:100%;padding:10px 12px;border:1.5px dashed var(--line);border-radius:6px;background:var(--surface);color:var(--ink);cursor:pointer;font:inherit;font-size:1.02rem;line-height:1.5}
+.sent:hover:not(:disabled){border-color:var(--accent)}
+.sent.ok{border:2px solid var(--good);background:var(--good-bg)}
+.sent.no{border:2px solid var(--bad);background:var(--bad-bg)}
+.sent.was{border:2px solid var(--bad);background:var(--bad-bg)}
+.sent:disabled{cursor:default}
+
+/* write */
+textarea{font:inherit;font-size:1.05rem;width:100%;min-height:130px;padding:12px;border-radius:6px;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);margin-top:12px;resize:vertical}
+.pts{display:flex;flex-direction:column;gap:6px;margin-top:8px}
+.pt{display:flex;gap:10px;align-items:flex-start;padding:8px 10px;border-radius:6px;border:1px solid var(--line);background:var(--surface)}
+.pt.got{border-color:var(--good);background:var(--good-bg)}
+.pt input{width:1.2rem;height:1.2rem;margin-top:2px;flex:none}
+.pt label{cursor:pointer}
+
+/* feedback */
+.fb{margin-top:12px;padding:11px 13px;border-radius:6px;border:1px solid var(--line);font-weight:700}
+.fb.ok{background:var(--good-bg);border-color:var(--good);color:var(--good)}
+.fb.mid{background:var(--part-bg);border-color:var(--part);color:var(--part)}
+.fb.no{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.fb span{display:block;font-weight:400;color:var(--ink);margin-top:3px}
+.mi{background:var(--mark-bg);border:1px solid var(--line);border-radius:6px;padding:12px 15px;margin-top:10px;line-height:1.55}
+.mi .lbl{font:600 .72rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mark);display:block;margin-bottom:3px}
+.mi p{margin:6px 0 0}
+.qnav{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;margin-top:14px}
+.score{font:600 2rem var(--f-mono)}
+.slist{display:flex;flex-direction:column;gap:4px;margin-top:10px}
+.sl{display:flex;gap:8px;align-items:baseline;font-size:.92rem}
+.sl i{display:inline-block;width:.7rem;height:.7rem;border-radius:2px;flex:none}
+.confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.foot{color:var(--muted);font-size:.8rem;margin-top:28px;max-width:70ch}
+@media (max-width:480px){.qspace{display:none}.qtext,.gaptext{font-size:1.08rem}body{font-size:16px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <div class="countdown"><span class="cdl">N5 Physics exam · Tuesday 4 May 2027, 1:00 pm</span><span class="cdt" id="cdt"></span></div>
+
+  <div id="home">
+    <header class="top">
+      <div><div class="eyebrow">National 5 Physics · knowledge and understanding</div><h1>Theory practice</h1></div>
+      <div class="bar"><button class="b" id="redoBtn">Redo my mistakes</button></div>
+    </header>
+
+    <details class="panel qtypes" id="qtypesBox">
+      <summary><span class="qt-h">Question types</span><span class="msg" id="qtypeSum"></span></summary>
+      <div class="qt-body">
+        <div class="chips" id="presets"></div>
+        <div class="seglbl">Or choose your own</div>
+        <div class="chips" id="types"></div>
+      </div>
+    </details>
+
+    <div class="panel">
+      <div class="row">
+        <div><h2 style="margin:0">Pick your topics</h2><span class="msg">Tap one topic or several, then start.</span></div>
+        <div class="bar"><button class="b sm" id="selAll">Select all</button><button class="b sm" id="selNone">Clear</button></div>
+      </div>
+      <label class="msg" style="display:flex;gap:6px;align-items:center;margin-top:8px;cursor:pointer"><input type="checkbox" id="skipGot"> Skip questions I got right first time</label>
+      <div class="startrow">
+        <span class="msg" id="selMsg">No topics picked yet</span>
+        <div class="bar">
+          <label class="msg" for="nq">Questions</label>
+          <select id="nq" class="b sm" style="font:600 .9rem var(--f-mono);padding:8px"><option>10</option><option selected>20</option><option>40</option><option value="0">All</option></select>
+          <button class="b pri" id="startBtn" disabled>Start</button>
+        </div>
+      </div>
+    </div>
+
+    <div id="units"></div>
+
+    <div class="panel">
+      <h2>How it works</h2>
+      <p class="msg" style="margin:0;max-width:70ch">Every question shows the physics behind the answer once you finish. If you get one wrong, you get a second try and a hint about the mistake you made. Questions you miss come back again later in the same set.</p>
+      <div class="key"><span><i style="background:var(--good-bg);border-color:var(--good)"></i>Right first time</span><span><i style="background:var(--part-bg);border-color:var(--part)"></i>Right on second try</span><span><i style="background:var(--bad-bg);border-color:var(--bad)"></i>Answer shown</span></div>
+      <div class="bar" style="margin-top:12px"><button class="b sm danger" id="resetBtn">Reset all progress</button></div>
+      <div class="confirm" id="resetAsk" hidden><span class="msg">Clear every result on this device?</span><button class="b sm danger" id="resetYes">Yes, clear it</button><button class="b sm" id="resetNo">Cancel</button></div>
+    </div>
+    <p class="foot" id="foot">Progress is saved in this browser only.</p>
+  </div>
+
+  <div id="quiz" hidden>
+    <div class="qbar">
+      <button class="b sm" id="back" aria-label="Back to topics">←</button>
+      <span class="qtitle" id="qtopic"></span>
+      <span class="chip" id="qtype"></span>
+      <span class="qspace"></span>
+      <span class="msg" id="qpos"></span>
+      <button class="b sm" id="finishNow">Finish now</button>
+    </div>
+    <div class="qprog"><i id="qbarfill"></i></div>
+    <div class="sheet" id="qbox"></div>
+    <div id="fb" class="fb" hidden></div>
+    <div id="why" hidden></div>
+    <div class="qnav">
+      <button class="b" id="skip">Skip</button>
+      <div class="bar"><button class="b pri" id="check">Check</button><button class="b pri" id="next" hidden>Next</button></div>
+    </div>
+  </div>
+
+  <div id="summary" hidden>
+    <div class="eyebrow">Set finished</div>
+    <h1>How you did</h1>
+    <div class="panel"><div class="score" id="sscore"></div><div class="msg" id="sline"></div><div class="slist" id="slist"></div>
+      <div class="bar" style="margin-top:14px"><button class="b pri" id="sagain">Another set, same topics</button><button class="b" id="smiss">Redo the ones I missed</button><button class="b" id="shome">Topics</button></div>
+    </div>
+  </div>
+</div>
+<script>
+const TOPICS=[];
+const TP=(key,unit,name,d)=>TOPICS.push({key,unit,name,d});
+
+TP("vec","Dynamics","Vectors and scalars",{
+terms:[
+["scalar","A quantity that has size (magnitude) only."],
+["vector","A quantity that has size (magnitude) and direction."],
+["displacement","The distance from the start point to the end point in a straight line, with a direction."],
+["velocity","The displacement travelled each second, with a direction."],
+["resultant","The single vector that has the same effect as two or more vectors added together."],
+["average speed","The total distance travelled divided by the total time taken."],
+["instantaneous speed","The speed of an object at one moment in time."]
+],
+tf:[
+["Speed is a scalar and velocity is a vector.","Speed is a vector and velocity is a scalar.","Velocity needs a direction. Speed does not."],
+["Force, weight and acceleration are all vectors.","Weight is a scalar because it is measured in newtons.","Weight is a force, so it has a direction (down, towards the centre of the Earth)."],
+["Mass, energy and time are all scalars.","Energy is a vector because energy moves from place to place.","Energy has no direction, so it is a scalar."],
+["A runner who finishes a lap where they started has a displacement of zero.","A runner who finishes a lap where they started has a displacement equal to the length of the track.","Displacement only compares the start and end points. Same start and end means zero displacement."],
+["The distance travelled can never be smaller than the size of the displacement.","Displacement is always bigger than distance.","The straight line is the shortest route, so displacement can only be equal to or smaller than distance."],
+["To find instantaneous speed you need a very short time measurement, for example using a light gate.","Instantaneous speed is found by timing the whole journey with a stopwatch.","Timing the whole journey gives average speed. A light gate measures over a tiny length, so it gives the speed at one moment."]
+],
+mc:[
+["Which list contains only vectors?","force, velocity, displacement",[["speed, velocity, force","Speed has no direction, so it is a scalar."],["mass, weight, force","Mass is a scalar. Weight is the vector."],["distance, time, energy","These are all scalars."]],"Force, velocity and displacement all need a direction to describe them fully.",""],
+["A girl walks 3 m north then 4 m east. What is the size of her displacement?","5 m",[["7 m","7 m is the distance. Displacement is a straight line from start to finish."],["1 m","You cannot just subtract vectors at right angles."],["12 m","Multiplying the values has no meaning here."]],"Draw the two vectors nose to tail. The resultant is the hypotenuse: 3, 4, 5 triangle.","h"],
+["A car goes round a roundabout at a steady 20 km/h. Which statement is correct?","Its speed is constant but its velocity is changing.",[["Its speed and velocity are both constant.","Its direction is changing, so its velocity changes."],["Its velocity is constant but its speed is changing.","The speed stays at 20 km/h. It is the direction that changes."],["It has no velocity because it goes in a circle.","It has a velocity at every moment. The direction keeps changing."]],"Velocity is a vector. A change in direction is a change in velocity, even if the speed stays the same.","h"],
+["Two forces act on a box: 8 N to the left and 5 N to the right. What is the resultant force?","3 N to the left",[["13 N to the left","Forces in opposite directions subtract."],["3 N to the right","The bigger force is to the left, so the resultant is to the left."],["3 N, no direction","A force is a vector. You must give a direction."]],"Opposite directions: subtract. The direction is the direction of the bigger force.",""],
+["A pupil wants to measure the average speed of a trolley down a ramp. What must they measure?","The length of the ramp and the time taken to travel the full length.",[["The length of a card on the trolley and the time it takes to pass a light gate.","That gives the instantaneous speed at the light gate."],["The mass of the trolley and the time taken.","Mass is not needed to calculate speed."],["The height of the ramp and the time taken.","Speed uses the distance travelled along the ramp, not its height."]],"Average speed = total distance ÷ total time.",""],
+["A boat heads north at 4 m/s. The river flows east at 3 m/s. Which is the best description of the boat's resultant velocity?","5 m/s on a bearing between north and east",[["7 m/s north","You cannot add vectors at right angles like ordinary numbers."],["1 m/s north","Subtracting only works when the vectors are in opposite directions."],["4 m/s north","The current pushes the boat east too."]],"The resultant is found by drawing the vectors nose to tail. The size is 5 m/s and the direction is between north and east (about 037°).","h"],
+["Which statement explains why an instantaneous speed measured with a light gate is usually different from the average speed of the same run?","The object speeds up or slows down during the run, so its speed at one point is not the same as its average.",[["Light gates always give values that are too high.","Light gates are accurate. The difference is in what is being measured."],["Average speed ignores the time taken.","Average speed uses the total time."],["Instantaneous speed is a vector and average speed is a scalar.","Both are speeds, so both are scalars."]],"If the speed changes during a journey, the speed at one moment will differ from the average.","p"],
+["A walker goes 6 km east and then 6 km west. Which is correct?","Distance 12 km, displacement 0 km",[["Distance 0 km, displacement 12 km","These are the wrong way round."],["Distance 12 km, displacement 12 km east","The walker ends up back at the start."],["Distance 6 km, displacement 6 km","Distance counts the whole path walked."]],"Distance is the whole path. Displacement compares start to finish.",""]
+],
+gap:[
+["A [scalar] quantity has size only. A [vector] quantity has size and [direction].",["energy","speed","mass"],"Every vector must be given with a direction."],
+["[Distance] is the total length of the path travelled. [Displacement] is the straight line from start to finish, with a direction.",["Speed","Velocity","Time"],"Distance and speed are scalars. Displacement and velocity are their vector partners."]
+],
+sort:[
+["Sort each quantity: is it a scalar or a vector?",{"Scalar":["speed","distance","mass","time","energy"],"Vector":["velocity","displacement","force","weight","acceleration"]},"A vector needs a direction to describe it fully."]
+],
+build:[
+["Explain the difference between distance and displacement.",["Distance is the total length of the path travelled.","Distance is a scalar, so it has size only.","Displacement is the length of a straight line from the start point to the end point.","Displacement is a vector, so it has size and direction."],["Distance and displacement are always the same size.","Displacement is measured in metres per second."],"Distance is the whole path and has no direction. Displacement is start to finish in a straight line and has a direction."]
+],
+spot:[
+["Describe how to measure the instantaneous speed of a trolley.",["Attach a card of known length to the trolley.","Measure the length of the card with a ruler.","Set up a light gate connected to a timer.","Use a stopwatch to time the trolley from the top to the bottom of the ramp.","Speed = length of card ÷ time to pass the light gate."],3,"Timing from top to bottom gives the average speed. For instantaneous speed you use the time for the card to pass through the light gate."]
+],
+write:[
+["A pupil says: 'Speed and velocity are the same thing.' Explain why this is wrong.",[["vector","Velocity is a vector"],["scalar","Speed is a scalar"],["direction","Velocity includes a direction (speed does not)"]],2,"Speed is a scalar, so it has size only. Velocity is a vector, so it has size and a direction."]
+]
+});
+
+TP("vt","Dynamics","Velocity-time graphs and acceleration",{
+terms:[
+["acceleration","The change in velocity in each second."],
+["deceleration","Slowing down: velocity decreasing with time."],
+["gradient","How steep a line on a graph is. On a velocity-time graph it gives the acceleration."],
+["area under a velocity-time graph","Gives the displacement of the object."],
+["constant velocity","Moving at the same speed in the same direction."],
+["uniform acceleration","Velocity increasing by the same amount every second."]
+],
+tf:[
+["The gradient of a velocity-time graph gives the acceleration.","The gradient of a velocity-time graph gives the displacement.","Gradient = change in velocity ÷ time = acceleration. The area gives displacement."],
+["The area under a velocity-time graph gives the displacement.","The area under a velocity-time graph gives the acceleration.","Area = velocity × time = displacement."],
+["A horizontal line on a velocity-time graph means constant velocity.","A horizontal line on a velocity-time graph means the object is not moving.","The velocity value stays the same. Only a line along the time axis (velocity = 0) means not moving."],
+["An acceleration of 3 m/s² means the velocity increases by 3 m/s every second.","An acceleration of 3 m/s² means the object travels 3 m every second.","Acceleration is about change in velocity each second, not distance."],
+["A steeper line on a velocity-time graph means a greater acceleration.","A steeper line on a velocity-time graph means a greater velocity.","Steepness is gradient, which is acceleration. Velocity is read from the height of the line."],
+["A line sloping down towards the time axis shows deceleration.","A line sloping down on a velocity-time graph means the object is moving backwards.","The velocity is getting smaller, so the object is slowing down. It still moves forwards until the line reaches zero."]
+],
+mc:[
+["On a velocity-time graph, what does a straight line sloping upwards show?","Constant (uniform) acceleration",[["Constant velocity","Constant velocity is a horizontal line."],["Increasing acceleration","A straight line has a constant gradient, so a constant acceleration."],["The object is stationary","A stationary object has zero velocity all the time."]],"A straight line has one gradient. A rising straight line means velocity goes up by the same amount each second.","h"],
+["A car's velocity-time graph is a horizontal line at 15 m/s. What is its acceleration?","0 m/s²",[["15 m/s²","15 m/s is the velocity. The velocity is not changing."],["1 m/s²","There is no change in velocity at all."],["It cannot be worked out","The gradient of a flat line is zero."]],"No change in velocity means no acceleration.","h"],
+["Which quantity is found from the area under a velocity-time graph?","Displacement",[["Acceleration","Acceleration is the gradient."],["Velocity","Velocity is read off the vertical axis."],["Force","A velocity-time graph does not show force directly."]],"Area = velocity × time, which is a displacement in metres.",""],
+["Car A's line is steeper than car B's line on the same velocity-time graph. What can you say?","Car A has the greater acceleration.",[["Car A has the greater velocity at all times.","You need the height of the line for velocity. Steepness tells you acceleration."],["Car A has travelled further.","Distance needs the area, not the steepness."],["Car A has the greater mass.","Mass is not shown on a velocity-time graph."]],"Steeper gradient means velocity changes more quickly, which is a greater acceleration.","h"],
+["A ball is thrown straight up. Which describes its velocity-time graph (taking up as positive) until it is caught again?","A straight line sloping down, crossing the time axis at the top of the flight.",[["A line going up then down like a hill.","That shape is the height-time graph. The velocity decreases all the time."],["A horizontal line.","Gravity changes the velocity all the way."],["A straight line sloping up.","The ball slows on the way up, so the velocity decreases."]],"Gravity gives a constant acceleration downwards, so the velocity drops steadily. It is zero at the top, then becomes negative (moving down).","h"],
+["A light gate method measures a trolley's velocity at two points and the time between them. What is calculated?","The acceleration of the trolley",[["The mass of the trolley","Mass is not found from velocity and time."],["The force on the trolley","You would also need the mass to find force."],["The average speed only","Two velocities and a time give the change in velocity per second."]],"a = (v − u) ÷ t. You need the initial velocity, final velocity and time between them.",""],
+["<div class='tscroll'><table class='dt'><tr><th>Time (s)</th><td>0</td><td>2</td><td>4</td><td>6</td></tr><tr><th>Velocity (m/s)</th><td>0</td><td>4</td><td>8</td><td>8</td></tr></table></div>Describe the motion between 4 s and 6 s.","Constant velocity of 8 m/s",[["Accelerating at 8 m/s²","8 m/s is the velocity. The velocity is not changing in this time."],["Stopped","Velocity is 8 m/s, so it is still moving."],["Decelerating","The velocity stays at 8 m/s."]],"From 4 s to 6 s the velocity stays at 8 m/s, so the acceleration is zero.","p"],
+["<div class='tscroll'><table class='dt'><tr><th>Time (s)</th><td>0</td><td>2</td><td>4</td><td>6</td></tr><tr><th>Velocity (m/s)</th><td>0</td><td>4</td><td>8</td><td>8</td></tr></table></div>What is the acceleration between 0 s and 4 s?","2 m/s²",[["8 m/s²","That is the change in velocity. Divide by the time taken."],["4 m/s²","Use the whole 4 s: 8 ÷ 4."],["32 m/s²","Multiplying gives an area, which is displacement."]],"a = change in velocity ÷ time = 8 ÷ 4 = 2 m/s².","p"]
+],
+gap:[
+["The [gradient] of a velocity-time graph gives the acceleration. The [area] under the line gives the displacement.",["height","length","intercept"],"Gradient for acceleration, area for displacement."],
+["A car that is slowing down has a [deceleration]. Its velocity-time graph slopes [down] towards the time axis.",["acceleration","up","flat"],"A decreasing velocity gives a downward slope."]
+],
+order:[
+["Put these steps in order to measure the acceleration of a trolley using a double mask card and one light gate.",["Measure the length of each part of the mask.","Release the trolley so the card passes through the light gate.","Record the time for each part of the mask and the time between them.","Calculate the initial and final velocity using length ÷ time.","Calculate acceleration = (final velocity − initial velocity) ÷ time between."],"You need two velocities and the time between them to find the acceleration."]
+],
+build:[
+["Describe the motion shown by a velocity-time graph that rises in a straight line, goes flat, then falls in a straight line to zero.",["First the object has a constant acceleration.","Then it moves at a constant velocity.","Finally it has a constant deceleration until it stops."],["First the object moves at a constant velocity up a hill.","Finally it moves backwards."],"Rising straight line: constant acceleration. Flat: constant velocity. Falling straight line to zero: constant deceleration to rest."]
+],
+spot:[
+["Explain how to find the displacement from a velocity-time graph.",["Displacement can be found from a velocity-time graph.","You find the gradient of the line.","For a triangle the area is ½ × base × height.","For a rectangle the area is base × height.","Add the areas together to get the total displacement."],1,"Displacement is the area under the graph, not the gradient. The gradient gives acceleration."]
+],
+write:[
+["State what is meant by an acceleration of 4 m/s².",[["velocity","Refers to velocity (or speed)"],["(increase|change|goes up|gain)","Says it increases or changes"],["(each|every|per|a) second","By 4 m/s each second"]],3,"The velocity increases by 4 m/s every second."]
+]
+});
+
+TP("newton","Dynamics","Forces and Newton's laws",{
+terms:[
+["Newton's first law","An object stays at rest or moves at constant velocity unless an unbalanced force acts on it."],
+["Newton's second law","An unbalanced force causes an acceleration: F = ma."],
+["Newton's third law","If A pushes on B, B pushes back on A with an equal force in the opposite direction."],
+["balanced forces","Forces that are equal in size and opposite in direction, giving zero resultant force."],
+["friction","A force that opposes motion between surfaces."],
+["terminal velocity","The constant velocity reached when the forces on a falling object are balanced."],
+["weight","The force of gravity acting on a mass. W = mg."],
+["mass","The amount of matter in an object, measured in kg."]
+],
+tf:[
+["If the forces on a moving object are balanced, it keeps moving at constant velocity.","If the forces on a moving object are balanced, it slows down and stops.","Newton's first law: balanced forces mean no change in velocity. Things only slow down because friction is an unbalanced force."],
+["Mass stays the same on the Moon but weight is less.","Mass is less on the Moon because gravity is weaker.","Mass is the amount of matter. Weight depends on gravitational field strength."],
+["Air resistance increases as an object falls faster.","Air resistance stays the same no matter how fast an object falls.","The faster an object moves through air, the more air particles it hits each second."],
+["The two forces in a Newton's third law pair act on different objects.","Newton's third law pairs cancel out because they act on the same object.","Third law pairs act on different objects, so they never cancel each other."],
+["Friction can be reduced by lubricating surfaces or streamlining a shape.","Friction can be reduced by making a surface rougher.","Lubrication and streamlining reduce friction. Rough surfaces increase it."],
+["The same unbalanced force gives a smaller acceleration to a larger mass.","The same unbalanced force gives a larger acceleration to a larger mass.","a = F ÷ m. Bigger mass, smaller acceleration."],
+["Weight always acts downwards towards the centre of the Earth.","Weight acts in the direction an object is moving.","Weight is the pull of gravity, which acts towards the centre of the planet."]
+],
+mc:[
+["A car travels along a flat road at a constant 30 m/s. What can you say about the forces on it?","The forward force equals the friction forces.",[["The forward force is bigger than friction.","That would make the car accelerate."],["There are no forces acting on the car.","The engine force and friction are both there. They balance."],["Friction is bigger than the forward force.","That would make the car slow down."]],"Constant velocity means balanced forces (Newton's first law).","h"],
+["A skydiver opens the parachute. What happens straight away?","Air resistance increases, so the skydiver decelerates.",[["The skydiver moves upwards.","The skydiver slows down but still moves down."],["Weight decreases, so the skydiver slows down.","Weight is mg. Opening a parachute does not change mass or g."],["The skydiver keeps the same speed.","The forces are now unbalanced upwards, so the speed changes."]],"The large area of the parachute greatly increases air resistance. The resultant force is upwards, so the skydiver slows down until a new, lower terminal velocity.","h"],
+["A rocket engine pushes gas downwards. Which force makes the rocket go up?","The gas pushes up on the rocket.",[["The gas pushes against the ground.","Rockets work in space where there is no ground or air to push on."],["The air pushes the rocket up.","Rockets work in space where there is no air."],["Gravity pushes the rocket up.","Gravity pulls the rocket down."]],"Newton's third law: the rocket pushes the gas down, so the gas pushes the rocket up with an equal force.","h"],
+["A book rests on a table. The Earth pulls the book down. What is the Newton's third law pair of this force?","The book pulls the Earth up.",[["The table pushes the book up.","That force acts on the same object (the book). Third law pairs act on different objects."],["The book pushes down on the table.","That pairs with the table pushing up on the book."],["Friction from the table.","There is no friction on a book at rest on a flat table."]],"Third law pairs are the same type of force, acting on two different objects: Earth pulls book, book pulls Earth.","h"],
+["When a falling object reaches terminal velocity, which is true?","Weight is equal to air resistance.",[["Air resistance is greater than weight.","Then the object would slow down."],["There is no air resistance.","Air resistance is at its largest at terminal velocity."],["The object has stopped accelerating because its weight is zero.","Weight does not change."]],"Balanced forces mean zero acceleration, so the velocity is constant.","h"],
+["An astronaut has a mass of 70 kg on Earth. What is her mass on Mars?","70 kg",[["Less than 70 kg","Mass is the amount of matter. It does not change from planet to planet."],["More than 70 kg","Mass does not depend on the planet."],["0 kg","She still has the same amount of matter."]],"Mass stays the same. Weight changes, because g on Mars is smaller.",""],
+["Two trolleys get the same push. Trolley X has twice the mass of trolley Y. Which statement is correct?","X has half the acceleration of Y.",[["X has twice the acceleration of Y.","More mass means less acceleration for the same force."],["They have the same acceleration.","Acceleration depends on mass too."],["X does not move.","Any unbalanced force makes it accelerate."]],"a = F ÷ m. Double the mass means half the acceleration.",""],
+["<div class='tscroll'><table class='dt'><tr><th>Mass (kg)</th><td>0.5</td><td>1.0</td><td>1.5</td><td>2.0</td></tr><tr><th>Acceleration (m/s²)</th><td>4.0</td><td>2.0</td><td>1.3</td><td>1.0</td></tr></table></div>The same force was used each time. What conclusion can be made?","As mass increases, acceleration decreases.",[["As mass increases, acceleration increases.","Read the table again: the acceleration values go down."],["Mass has no effect on acceleration.","The acceleration changes a lot."],["Acceleration decreases by 2 m/s² each time.","The drop is not the same each time."]],"Bigger mass gives smaller acceleration, as F = ma predicts. Mass × acceleration stays at 2 each time, so the force was 2 N.","p"],
+["A cyclist free-wheels on a flat road and slowly stops. Why?","Friction and air resistance act against the motion.",[["The forward force runs out.","No forward force is needed to keep moving. An object slows down only when an unbalanced force acts."],["Her weight slows her down.","Weight acts downwards, not backwards."],["Moving objects naturally stop.","Newton's first law: without friction she would keep going."]],"The unbalanced backward force (friction and air resistance) causes a deceleration.","h"]
+],
+gap:[
+["When the forces on an object are [balanced], it stays at rest or moves at a constant [velocity]. This is Newton's [first] law.",["unbalanced","acceleration","second","third"],"Balanced forces mean no change in motion."],
+["Weight is a [force] measured in [newtons]. Mass is measured in [kilograms].",["joules","energy","metres"],"Weight is a force (N). Mass is matter (kg)."],
+["A parachute has a large surface [area]. This increases the [air resistance] and lowers the terminal [velocity].",["mass","weight","acceleration"],"More area means more air hit each second, so more air resistance."]
+],
+order:[
+["Put these stages of a skydive in order.",["The skydiver jumps and accelerates because weight is bigger than air resistance.","Air resistance increases as the skydiver speeds up.","Air resistance equals weight, so the skydiver falls at terminal velocity.","The parachute opens and air resistance becomes bigger than weight.","The skydiver decelerates until air resistance equals weight again.","The skydiver falls at a new, lower terminal velocity."],"Each change in speed comes from the forces becoming unbalanced, then balanced again."]
+],
+build:[
+["Explain why a skydiver reaches terminal velocity.",["As the skydiver falls faster, the air resistance increases.","Eventually the air resistance becomes equal to the weight.","The forces are now balanced.","So the skydiver stops accelerating and falls at a constant velocity."],["The weight of the skydiver decreases as they fall.","Terminal velocity is when the skydiver stops moving."],"Air resistance grows with speed until it balances weight. Balanced forces mean constant velocity."],
+["A space probe is far from any planet. Its engines are switched off. Explain its motion.",["There are no forces acting on the probe.","So the forces on the probe are balanced.","By Newton's first law, it keeps moving at a constant velocity."],["The probe slows down because the engine is off.","There is air resistance in space."],"With no unbalanced force, nothing changes the probe's velocity."]
+],
+spot:[
+["Explain, using Newton's laws, how a rocket lifts off.",["The rocket pushes the exhaust gases downwards.","The gases push the rocket upwards with an equal and opposite force.","This is Newton's third law.","The upward force on the rocket must be smaller than its weight to lift off.","The unbalanced upward force makes the rocket accelerate."],3,"To lift off, the thrust must be bigger than the weight, so there is an unbalanced force upwards."]
+],
+write:[
+["A lorry and a car both use their brakes with the same braking force. Explain why the lorry takes longer to stop.",[["mass","Lorry has a larger mass"],["(smaller|less|lower).{0,30}(deceleration|acceleration)|(deceleration|acceleration).{0,30}(smaller|less|lower)","So it has a smaller deceleration"],["F\\s*=\\s*ma|a\\s*=\\s*F\\s*/\\s*m|force.{0,40}mass","Links force, mass and acceleration (F = ma)"]],2,"The lorry has a larger mass. With the same force, F = ma means it has a smaller deceleration, so it takes longer to stop."],
+["Using your knowledge of physics, explain why a car seat belt reduces injuries in a crash.",[["first law|keeps? moving|continue","Without a belt, the passenger keeps moving forward (Newton's first law)"],["(unbalanced|backward|opposite).{0,20}force|force.{0,30}(slow|stop|decelerat)","The belt provides a backwards force on the passenger"],["(longer|more) time|stretch","The belt stretches, so the passenger slows over a longer time"],["(smaller|less|reduce).{0,20}(force|deceleration)","This reduces the force on the passenger"]],2,"When the car stops, the passenger keeps moving forward (Newton's first law). The belt applies a backwards force to slow them. Because the belt stretches a little, they slow over a longer time, so the force on them is smaller."]
+]
+});
+
+TP("energy","Dynamics","Energy and work done",{
+terms:[
+["work done","The energy transferred when a force moves an object. Ew = Fd."],
+["kinetic energy","The energy an object has because it is moving."],
+["gravitational potential energy","The energy an object has because of its height above the ground."],
+["conservation of energy","Energy cannot be created or destroyed, only changed from one form to another."],
+["power","The energy transferred each second. P = E ÷ t."],
+["joule","The unit of energy and work done."]
+],
+tf:[
+["Work done is measured in joules.","Work done is measured in newtons.","Work done is energy transferred, so it is in joules."],
+["Doubling the speed of a car makes its kinetic energy four times bigger.","Doubling the speed of a car doubles its kinetic energy.","Ek = ½mv². Speed is squared, so 2 × 2 = 4 times."],
+["When a ball falls, gravitational potential energy changes to kinetic energy.","When a ball falls, kinetic energy changes to gravitational potential energy.","Losing height means losing Ep. That energy becomes Ek."],
+["In real situations some energy is always changed to heat and sound due to friction.","In real situations all of the potential energy becomes kinetic energy.","Friction and air resistance turn some energy into heat, so the Ek at the bottom is less than the Ep at the top."],
+["Lifting the same box twice as high needs twice as much energy.","Lifting the same box twice as high needs the same energy.","Ep = mgh. Double the height doubles the energy."],
+["A more powerful motor can do the same work in a shorter time.","A more powerful motor always does more work.","Power is energy per second, so more power means the same energy is transferred faster."]
+],
+mc:[
+["A ball is dropped from a height. Ignoring air resistance, which is true just before it hits the ground?","Its kinetic energy equals the potential energy it had at the top.",[["Its kinetic energy is double its starting potential energy.","Energy cannot be created. Ek cannot be more than the Ep it lost."],["Its kinetic energy is zero.","It is moving fastest just before landing."],["Its potential energy has become heat.","With no air resistance, the energy becomes kinetic energy."]],"Conservation of energy: Ep lost = Ek gained (when no energy is lost to friction).","h"],
+["A real roller coaster reaches the bottom of a drop. Why is its kinetic energy less than the potential energy it lost?","Some energy is changed to heat and sound by friction.",[["Energy is destroyed as it moves.","Energy cannot be destroyed."],["Its mass decreases.","Mass stays the same."],["Gravity is weaker at the bottom.","g is the same over such small heights."]],"Energy is conserved but some goes to heat and sound because of friction and air resistance.","h"],
+["Which change would double the kinetic energy of a moving trolley?","Doubling its mass",[["Doubling its speed","That makes the kinetic energy four times bigger."],["Halving its speed","That quarters the kinetic energy."],["Doubling its height","Height changes potential energy, not kinetic energy."]],"Ek = ½mv². Ek is proportional to mass but to speed squared.","h"],
+["A pupil pushes a heavy box with a force but it does not move. How much work is done on the box?","None",[["Force × time","Work done is force × distance, not time."],["It depends on how hard they push.","No distance moved means no work done on the box."],["Force × mass","That has no meaning here."]],"Ew = Fd. If d = 0, then no work is done on the box (even though the pupil gets tired).",""],
+["Which energy change happens when a car brakes to a stop?","Kinetic energy to heat",[["Heat to kinetic energy","That is the reverse: the car loses kinetic energy."],["Potential energy to kinetic energy","The car is on a flat road, so there is no height change."],["Kinetic energy to potential energy","The car does not gain height."]],"The brakes use friction, which changes kinetic energy into heat (and some sound).",""],
+["A pendulum swings. Where does it have the most kinetic energy?","At the lowest point of the swing",[["At the highest point of the swing","It stops for a moment at the top, so Ek is zero there."],["Halfway up","It has already started to slow down there."],["It is the same everywhere","Ek and Ep swap as it swings."]],"At the bottom all the potential energy has become kinetic energy, so it is moving fastest.","h"],
+["<div class='tscroll'><table class='dt'><tr><th>Drop height (m)</th><td>0.2</td><td>0.4</td><td>0.6</td><td>0.8</td></tr><tr><th>Speed at bottom (m/s)</th><td>1.9</td><td>2.7</td><td>3.3</td><td>3.8</td></tr></table></div>A pupil predicts that doubling the height will double the speed. Do the results support this?","No. Doubling the height from 0.2 m to 0.4 m does not double the speed.",[["Yes. The speed goes up when the height goes up.","Going up is not the same as doubling. 1.9 doubled would be 3.8, not 2.7."],["Yes. 0.4 m gives 2.7 m/s which is double 1.9.","Double 1.9 is 3.8, not 2.7."],["No. The speed decreases as the height increases.","The speed increases, but not in proportion."]],"Speed rises with height but not in direct proportion. Since mgh = ½mv², speed depends on the square root of height.","p"]
+],
+gap:[
+["Energy cannot be [created] or [destroyed]. It can only be changed from one [form] to another.",["moved","used","power"],"This is the principle of conservation of energy."],
+["When an object falls, it loses [potential] energy and gains [kinetic] energy. Some energy is changed to [heat] because of air resistance.",["chemical","nuclear","light"],"Falling: Ep goes to Ek, with some lost as heat."]
+],
+build:[
+["A ball rolls down a slope. Explain why its kinetic energy at the bottom is less than the potential energy it had at the top.",["The ball loses potential energy as it rolls down.","Most of this energy becomes kinetic energy.","Some of the energy is changed to heat and sound because of friction.","So the kinetic energy at the bottom is less than the potential energy at the top."],["Energy is destroyed by friction.","The ball gains mass as it rolls."],"Energy is conserved. Friction changes some of it into heat and sound, so less is left as kinetic energy."]
+],
+spot:[
+["Describe the energy changes when a ball is thrown upwards and then falls back down.",["As the ball rises, kinetic energy changes to potential energy.","At the top the ball has its most potential energy.","At the top the ball has its most kinetic energy.","As it falls, potential energy changes back to kinetic energy."],2,"At the top the ball stops for a moment, so its kinetic energy is zero (or smallest)."]
+],
+write:[
+["Using your knowledge of physics, explain why a car going twice as fast needs much more than twice the distance to stop.",[["kinetic","Refers to kinetic energy"],["squared|v²|v2|four|4 times","Kinetic energy depends on speed squared, so it is four times bigger"],["work|brak.{0,15}force|force.{0,20}distance","Brakes must do more work (Ew = Fd)"],["distance","So the braking distance is bigger"]],3,"Kinetic energy depends on speed squared, so doubling the speed makes the kinetic energy four times bigger. The brakes must do four times as much work. With the same braking force, Ew = Fd means the stopping distance is about four times as long."]
+]
+});
+
+TP("proj","Dynamics","Projectile motion",{
+terms:[
+["projectile","An object that moves through the air only under the force of gravity after it is launched."],
+["horizontal velocity","The sideways part of a projectile's velocity. It stays constant if air resistance is ignored."],
+["vertical velocity","The up-and-down part of a projectile's velocity. It changes because of gravity."],
+["trajectory","The curved path a projectile follows."]
+],
+tf:[
+["The horizontal velocity of a projectile stays constant (ignoring air resistance).","The horizontal velocity of a projectile increases as it falls.","No horizontal force acts, so the horizontal velocity does not change."],
+["The vertical velocity of a projectile increases by 9.8 m/s every second as it falls.","The vertical velocity of a projectile stays constant.","Gravity gives a vertical acceleration of 9.8 m/s² on Earth."],
+["The horizontal and vertical motions of a projectile are independent of each other.","A faster horizontal velocity makes a projectile fall faster.","Horizontal motion does not affect how fast the object falls."],
+["A ball dropped and a ball fired horizontally from the same height land at the same time.","A ball fired horizontally lands after a ball dropped from the same height.","Both have the same vertical motion, starting from zero vertical velocity."],
+["A satellite in orbit is a projectile that keeps falling around the Earth.","A satellite stays in orbit because there is no gravity in space.","Gravity pulls the satellite towards the Earth. Its horizontal speed is so high that the Earth curves away below it."]
+],
+mc:[
+["A ball rolls off a table. Ignoring air resistance, what happens to its horizontal velocity as it falls?","It stays the same.",[["It increases.","There is no horizontal force, so it cannot speed up sideways."],["It decreases.","There is no air resistance in this question, so no force slows it sideways."],["It becomes zero.","The ball keeps moving sideways as it falls."]],"Only gravity acts, and it acts vertically. So the horizontal velocity is constant.","h"],
+["What is the vertical acceleration of a projectile on Earth?","9.8 m/s² downwards",[["0 m/s²","That is the horizontal acceleration."],["9.8 m/s² upwards","Gravity pulls down."],["It depends on how fast it was thrown sideways","Vertical acceleration does not depend on horizontal speed."]],"Gravity gives every object the same downward acceleration of 9.8 m/s² (ignoring air resistance).",""],
+["Ball A is dropped. At the same moment ball B is fired horizontally from the same height. Which lands first?","They land at the same time.",[["A lands first","Both have the same vertical motion."],["B lands first","B's sideways speed does not make it fall faster."],["It depends on the mass","All masses have the same acceleration due to gravity here."]],"Horizontal and vertical motion are independent. Both balls start with zero vertical velocity and accelerate down at 9.8 m/s².","h"],
+["A package is dropped from a plane flying horizontally. Ignoring air resistance, where is the package as it falls, compared with the plane?","Directly below the plane",[["Behind the plane","Its horizontal velocity stays the same as the plane's."],["In front of the plane","It cannot gain horizontal speed."],["It falls straight down from where it was dropped","It keeps the plane's horizontal velocity."]],"The package keeps the plane's horizontal velocity, so it stays under the plane while it falls.","h"],
+["Which graph shape shows the horizontal velocity of a projectile against time?","A horizontal straight line",[["A straight line sloping up","That shows the vertical velocity of a falling object."],["A curve","The horizontal velocity does not change."],["A straight line sloping down","Nothing slows it horizontally."]],"Constant horizontal velocity gives a flat line.",""],
+["A ball is kicked horizontally off a cliff twice. The second time it is kicked faster. What changes?","It lands further from the cliff.",[["It takes longer to land.","Time to fall depends only on the vertical motion."],["It lands sooner.","Horizontal speed does not change the time to fall."],["It hits the ground with less vertical velocity.","The vertical velocity at landing is the same."]],"Same height means same time in the air. A faster horizontal speed means more horizontal distance in that time.","p"]
+],
+gap:[
+["A projectile has a constant [horizontal] velocity and an increasing [vertical] velocity. Its path is a [curve].",["straight line","circle","diagonal"],"The two motions combine to give a curved path."]
+],
+sort:[
+["Sort each description: horizontal motion or vertical motion of a projectile (no air resistance)?",{"Horizontal motion":["constant velocity","zero acceleration","distance = velocity × time"],"Vertical motion":["acceleration of 9.8 m/s²","velocity increases as it falls","affected by gravity"]},"Gravity only acts vertically, so only the vertical motion changes."]
+],
+build:[
+["Explain why a projectile follows a curved path.",["The projectile has a constant horizontal velocity.","Gravity makes it accelerate downwards.","So its vertical velocity increases as it falls.","Together these give a curved path."],["Its horizontal velocity decreases until it stops.","Gravity pulls it backwards."],"Steady sideways motion plus increasing downward motion makes a curve."]
+],
+spot:[
+["Describe the motion of a ball thrown horizontally from a cliff (ignore air resistance).",["The ball has a constant horizontal velocity.","Gravity acts downwards on the ball.","The ball accelerates downwards at 9.8 m/s².","The ball's horizontal velocity decreases because of gravity.","The ball follows a curved path."],3,"Gravity acts vertically, so it does not change the horizontal velocity."]
+],
+write:[
+["Explain how Newton's thought experiment about firing a cannonball from a mountain explains satellite orbits.",[["(faster|greater|higher).{0,20}(speed|velocity)|(speed|velocity).{0,20}(faster|greater|higher)","The faster it is fired, the further it goes"],["curv","The Earth's surface curves away"],["(keeps|continu|always).{0,20}fall|falling","It keeps falling towards Earth but never reaches it"],["gravity","Gravity provides the pull towards Earth"]],2,"The faster the cannonball is fired horizontally, the further it lands. At a high enough speed, the Earth curves away as fast as the ball falls. It keeps falling but never hits the ground, so it orbits."]
+]
+});
+TP("spex","Space","Space exploration",{
+terms:[
+["satellite","An object that orbits a planet or star."],
+["geostationary satellite","A satellite with a period of 24 hours that stays above the same point on the Equator."],
+["period","The time taken for one complete orbit."],
+["gravitational field strength","The weight per unit mass. It is 9.8 N/kg on Earth."],
+["re-entry","When a spacecraft comes back into a planet's atmosphere."],
+["heat shield","A layer that protects a spacecraft from the heat produced during re-entry."]
+],
+tf:[
+["The higher a satellite's orbit, the longer its period.","The higher a satellite's orbit, the shorter its period.","A higher orbit is a longer path and the satellite moves more slowly, so it takes longer to go round."],
+["A geostationary satellite has a period of 24 hours.","A geostationary satellite has a period of 1 hour.","It turns at the same rate as the Earth, so it stays above the same point."],
+["A spacecraft heats up during re-entry because of friction with the atmosphere.","A spacecraft heats up during re-entry because it gets closer to the Sun.","Friction with air changes kinetic energy into heat."],
+["Weight changes from planet to planet, but mass stays the same.","Mass changes from planet to planet, but weight stays the same.","W = mg, and g is different on each planet."],
+["Telescopes on satellites can detect radiation that is absorbed by Earth's atmosphere.","Telescopes on satellites are used because space is closer to the stars.","The atmosphere blocks some types of EM radiation (like X-rays). Space telescopes are above it."],
+["A spacecraft can change direction in space by firing thrusters.","A spacecraft can steer in space by pushing against the air.","There is no air in space. Thrusters push gas out, and the gas pushes the craft the other way (Newton's third law)."]
+],
+mc:[
+["Why does a geostationary satellite stay above the same point on Earth?","Its period is 24 hours, the same as the Earth's rotation.",[["It is not moving.","It moves very fast. It keeps pace with the Earth's spin."],["There is no gravity at that height.","Gravity is what keeps it in orbit."],["It is held up by its engines.","Satellites do not need engines to stay in orbit."]],"It orbits above the Equator at the same rate as the Earth turns, so from the ground it seems to stay still.","h"],
+["Which is a use of satellites?","Global positioning (GPS)",[["Generating electricity for homes","Satellites do not supply mains power to homes."],["Measuring the temperature inside the Sun","Satellites cannot measure inside the Sun."],["Making rain","Satellites observe weather. They do not make it."]],"Satellites are used for GPS, communications, weather forecasting and observing the Earth and space.",""],
+["A spacecraft re-enters the atmosphere. Which energy change causes the heating?","Kinetic energy changes to heat because of friction.",[["Heat changes to kinetic energy.","The craft slows down, so it is losing kinetic energy."],["Potential energy changes to light.","Most of the energy lost becomes heat."],["Chemical energy changes to heat.","The heating is from friction with air, not burning fuel."]],"Friction with the atmosphere slows the craft, turning kinetic energy into heat.","h"],
+["Why does a satellite in a low orbit have a shorter period than one in a high orbit?","It travels a shorter distance and moves faster.",[["It is closer, so gravity is weaker.","Gravity is stronger closer to the Earth."],["It has a smaller mass.","Period does not depend on the satellite's mass."],["It uses more fuel.","Satellites do not use fuel to keep orbiting."]],"Lower orbit: shorter path round and higher speed, so less time for one orbit.",""],
+["An astronaut weighs less on the Moon than on Earth. Why?","The gravitational field strength on the Moon is smaller.",[["Her mass is smaller on the Moon.","Mass stays the same everywhere."],["There is no air on the Moon.","Air does not affect weight."],["The Moon is further from the Sun.","The Moon's own gravity is what matters."]],"W = mg. The Moon's g is about 1.6 N/kg, much less than Earth's 9.8 N/kg.",""],
+["Which is a risk of manned space travel?","Exposure to high levels of radiation",[["Too much air pressure","Space has almost no air pressure. The risk is too little."],["Weight increasing in orbit","Astronauts feel weightless in orbit."],["Running out of gravity","Gravity is still present in orbit."]],"Risks include radiation, extreme temperatures, low pressure, lack of oxygen, and the dangers of launch and re-entry.",""],
+["<div class='tscroll'><table class='dt'><tr><th>Height of orbit (km)</th><td>400</td><td>2000</td><td>20 000</td><td>36 000</td></tr><tr><th>Period (hours)</th><td>1.5</td><td>2.1</td><td>11.8</td><td>?</td></tr></table></div>What is the best estimate for the period at 36 000 km?","24 hours",[["1 hour","Period increases with height, so it must be more than 11.8 hours."],["11.8 hours","The orbit is higher, so the period is longer."],["5 hours","Period goes up as height goes up."]],"36 000 km is the height of a geostationary orbit, with a period of 24 hours. The table also shows period rising with height.","p"]
+],
+gap:[
+["A geostationary satellite orbits above the [Equator] with a period of [24] hours, so it stays above the same [point] on Earth.",["poles","1","star"],"Matching the Earth's spin keeps it above one place."],
+["On re-entry, [friction] with the atmosphere changes [kinetic] energy into [heat]. A heat [shield] protects the spacecraft.",["gravity","potential","light"],"Heat shields stop the craft and crew overheating."]
+],
+sort:[
+["Sort these: a benefit of space exploration or a risk of space travel?",{"Benefit":["weather forecasting","satellite communication","GPS navigation","new materials such as heat-resistant plastics"],"Risk":["radiation from the Sun","extreme temperatures","no oxygen to breathe","heating during re-entry"]},"Space technology helps everyday life but space is a hostile place for people."]
+],
+build:[
+["Explain why a heat shield is needed on a spacecraft returning to Earth.",["The spacecraft enters the atmosphere at very high speed.","Friction with the air changes kinetic energy into heat.","The surface of the spacecraft gets very hot.","The heat shield stops the spacecraft and crew from overheating."],["The heat shield keeps the spacecraft warm in space.","Gravity heats up the spacecraft."],"Friction turns kinetic energy into heat. The shield absorbs or spreads the heat."]
+],
+spot:[
+["Explain how a spacecraft can change direction in space.",["The spacecraft fires a small thruster.","The thruster pushes gas out in one direction.","The gas pushes against the air to move the spacecraft.","The spacecraft moves in the opposite direction to the gas.","This is Newton's third law."],2,"There is no air in space. The gas pushes back on the spacecraft (Newton's third law) without needing air."]
+],
+write:[
+["Explain why satellites used for TV and phones are often geostationary.",[["24|same.{0,15}(rate|time|speed).{0,20}(earth|rotat)","Period of 24 hours, matching the Earth"],["same (point|place|position)|stays? above","Stays above the same point on Earth"],["(dish|aerial|receiver).{0,40}(fixed|not move|don.t|point)|no need to (move|track)","Dishes on the ground can be fixed in one direction"]],2,"A geostationary satellite has a period of 24 hours, so it stays above the same point on Earth. Dishes on the ground can stay pointed in one direction without tracking it."]
+]
+});
+
+TP("cosmo","Space","Cosmology",{
+terms:[
+["light year","The distance light travels in one year."],
+["Big Bang theory","The idea that the universe started from a tiny, very hot point and has been expanding ever since."],
+["galaxy","A large group of billions of stars held together by gravity."],
+["exoplanet","A planet that orbits a star other than the Sun."],
+["universe","Everything that exists, made of all the galaxies."],
+["line spectrum","A pattern of coloured lines that shows which elements are in a source of light."],
+["solar system","A star and all the planets, moons and other objects that orbit it."]
+],
+tf:[
+["A light year is a unit of distance.","A light year is a unit of time.","It is the distance light travels in one year, about 9.5 × 10¹⁵ m."],
+["The universe is about 14 billion years old.","The universe is about 6000 years old.","Measurements of the expansion of the universe give an age of about 13.8 billion years."],
+["Every element produces its own unique line spectrum.","All elements produce the same line spectrum.","The lines are like a fingerprint, so we can identify elements in stars."],
+["Light from distant galaxies is shifted towards the red end of the spectrum.","Light from distant galaxies is shifted towards the blue end of the spectrum.","Redshift shows the galaxies are moving away from us, so the universe is expanding."],
+["The Sun is a star in the Milky Way galaxy.","The Milky Way is a star in our solar system.","The Milky Way is our galaxy. The Sun is one of its billions of stars."],
+["Different telescopes detect different types of electromagnetic radiation.","All telescopes detect only visible light.","Radio, infrared, X-ray and other telescopes show different information about the universe."]
+],
+mc:[
+["What does a light year measure?","Distance",[["Time","It sounds like time but it is the distance light travels in one year."],["Speed","The speed of light is 3 × 10⁸ m/s. A light year is a distance."],["Brightness","It has nothing to do with brightness."]],"A light year is about 9.5 × 10¹⁵ m.","h"],
+["Which is evidence for the Big Bang?","Distant galaxies are moving away from us (redshift).",[["The Earth orbits the Sun.","That tells us about our solar system, not the universe's origin."],["Stars produce light.","That does not show how the universe began."],["The Moon has craters.","Craters come from impacts, not the Big Bang."]],"Redshift shows the universe is expanding, which fits with it starting from one point. The cosmic microwave background is more evidence.",""],
+["Put these in order of size, smallest first.","planet, solar system, galaxy, universe",[["galaxy, planet, solar system, universe","A galaxy contains billions of solar systems."],["planet, galaxy, solar system, universe","A solar system is inside a galaxy."],["solar system, planet, galaxy, universe","A planet is part of a solar system."]],"Planet inside solar system inside galaxy inside universe.","h"],
+["How do astronomers know which elements are in a distant star?","By comparing the star's line spectrum with spectra of known elements.",[["By collecting samples from the star.","Stars are far too far away to visit."],["By measuring the star's temperature only.","Temperature alone cannot identify elements."],["By looking at the star's colour with the naked eye.","Colour alone is not enough. The spectrum lines identify each element."]],"Each element gives its own pattern of lines. Matching the patterns shows which elements are there.",""],
+["Why do astronomers need telescopes that detect radiation other than visible light?","Some objects give out mainly other types of radiation, so we learn more about them.",[["Visible light cannot travel through space.","Visible light travels through space."],["Other radiation travels faster than light.","All EM radiation travels at the same speed in a vacuum."],["Visible light telescopes are too expensive.","The reason is scientific, not cost."]],"Different objects emit different parts of the EM spectrum. Using many types of telescope gives a fuller picture.",""],
+["Which feature would make an exoplanet most likely to support life as we know it?","It orbits at a distance where water can be liquid.",[["It is very close to its star.","It would be too hot for liquid water."],["It has no atmosphere.","An atmosphere helps keep temperatures stable and protects from radiation."],["It is the largest planet in its system.","Size alone does not make it habitable."]],"Liquid water needs the right temperature range, which depends on the distance from the star.","p"],
+["A galaxy's spectral lines are shifted further to the red than another galaxy's. What does this suggest?","It is moving away from us faster and is further away.",[["It is moving towards us.","Moving towards us would cause a shift to the blue."],["It is younger than the other galaxy.","Redshift tells us about motion and distance, not age directly."],["It is made of different elements.","The pattern is the same, just shifted."]],"Bigger redshift means faster recession, and more distant galaxies move away faster.","p"]
+],
+gap:[
+["A light year is the [distance] light travels in one [year]. It is used because distances in space are very [large].",["time","second","small"],"Using metres would give enormous numbers."],
+["The universe is about [14] billion years old. Light from distant galaxies is [redshifted], which shows the universe is [expanding].",["4.5","blueshifted","shrinking"],"Galaxies moving apart is evidence for the Big Bang."]
+],
+order:[
+["Put these in order of size, smallest first.",["Moon","Earth","Sun","Solar system","Milky Way","Universe"],"Each object is part of the next one."]
+],
+build:[
+["Describe the evidence for the Big Bang theory.",["Light from distant galaxies is redshifted.","This shows that galaxies are moving away from us.","So the universe is expanding.","There is also cosmic microwave background radiation coming from every direction."],["Stars are getting hotter over time.","The universe is getting smaller."],"Redshift (expansion) and the cosmic microwave background both support the Big Bang."]
+],
+spot:[
+["Explain how a line spectrum can identify elements in a star.",["Light from the star is split into a spectrum.","Lines appear at certain colours (wavelengths).","Each element produces its own unique pattern of lines.","All elements share the same pattern of lines.","Matching the lines with known elements shows which elements are present."],3,"Each element has its own pattern. That is why they can be identified."]
+],
+write:[
+["Using your knowledge of physics, comment on the challenges of sending people to a planet around another star.",[["light year|distance|far","The distances are huge (light years)"],["(long|many|years).{0,30}(time|journey|travel)|take (years|decades|centuries)","The journey would take a very long time"],["food|oxygen|water|supplies|life support","Supplies like food, water and oxygen are needed"],["radiation|temperature|fuel|energy","Problems such as radiation, temperature or fuel"]],3,"Stars are light years away, so even very fast spacecraft would take many years. The crew would need food, water and oxygen for the whole journey, and protection from radiation and extreme temperatures. Carrying enough fuel is also a problem."]
+]
+});
+
+TP("charge","Electricity","Charge, current and voltage",{
+terms:[
+["current","The rate of flow of charge (charge per second). Measured in amperes."],
+["charge","A property of particles such as electrons. Measured in coulombs."],
+["potential difference","The energy given to each coulomb of charge. Measured in volts."],
+["direct current (d.c.)","Current that flows in one direction only."],
+["alternating current (a.c.)","Current that changes direction many times each second."],
+["electric field","A region where a charged particle experiences a force."]
+],
+tf:[
+["In a metal wire, current is a flow of electrons.","In a metal wire, current is a flow of protons.","Protons stay in the nucleus. Free electrons move through metals."],
+["An a.c. supply changes direction many times a second.","An a.c. supply only flows in one direction.","Mains a.c. in the UK changes direction 50 times a second (50 Hz)."],
+["A battery supplies direct current.","A battery supplies alternating current.","Charge flows one way round the circuit from a battery."],
+["The UK mains supply is about 230 V with a frequency of 50 Hz.","The UK mains supply is about 12 V with a frequency of 100 Hz.","Mains voltage in the UK is quoted as 230 V, 50 Hz."],
+["The potential difference across a component is the energy given to each coulomb of charge.","Potential difference is the number of electrons flowing each second.","Electrons each second is to do with current. Voltage is energy per coulomb."],
+["A charged particle in an electric field feels a force.","A charged particle in an electric field feels no force unless it is moving.","Any charge in an electric field feels a force, whether moving or not."],
+["Opposite charges attract and like charges repel.","Like charges attract and opposite charges repel.","Positive and negative attract. Two negatives (or two positives) push apart."]
+],
+mc:[
+["What is current?","The rate of flow of charge",[["The energy carried by the charge","That describes voltage (energy per coulomb)."],["How hard it is for charge to flow","That is resistance."],["The amount of charge stored in a battery","Current is about flow, not storage."]],"I = Q ÷ t: current is the charge passing each second.","h"],
+["What is potential difference (voltage)?","The energy given to each coulomb of charge",[["The number of electrons passing each second","That is current."],["The speed of electrons in a wire","Voltage is about energy, not speed."],["The opposition to current","That is resistance."]],"1 volt means 1 joule of energy is given to each coulomb of charge.","h"],
+["Which particles carry the current in a copper wire?","Electrons",[["Protons","Protons are fixed in the nucleus."],["Neutrons","Neutrons have no charge."],["Atoms","Whole atoms do not flow through a solid wire."]],"Metals have free electrons that move when there is a voltage.",""],
+["An oscilloscope shows a trace that goes above and below the centre line. What does it show?","An a.c. supply",[["A d.c. supply","A d.c. trace is a flat line on one side only."],["No current","A changing trace means there is a current."],["A broken circuit","A broken circuit shows no trace."]],"Going above and below zero means the current changes direction: alternating current.",""],
+["A negative charge is placed between a positive plate and a negative plate. Which way does it move?","Towards the positive plate",[["Towards the negative plate","Like charges repel, so it moves away from the negative plate."],["It does not move","There is a force on it from the electric field."],["Round in a circle","The force is in one direction, so it moves in a line."]],"Opposite charges attract, so the negative charge is pushed away from the negative plate and pulled to the positive plate.","h"],
+["The quoted value of the UK mains voltage is 230 V. How does its peak voltage compare?","The peak voltage is greater than 230 V.",[["The peak voltage is less than 230 V.","The quoted value is less than the peak value, not more."],["The peak voltage is exactly 230 V.","An a.c. voltage keeps changing. 230 V is the quoted value, not the peak."],["There is no peak because a.c. is constant.","a.c. rises and falls all the time."]],"The quoted value of an a.c. voltage is less than its peak value. It is the value that gives the same power as a d.c. supply of 230 V.","h"]
+],
+gap:[
+["Current is the flow of [charge]. In metals the charge is carried by [electrons]. Current is measured in [amperes].",["protons","volts","neutrons"],"I = Q ÷ t."],
+["A [battery] gives direct current, which flows in [one] direction. The [mains] gives alternating current.",["two","both","solar"],"d.c. one way. a.c. changes direction."]
+],
+sort:[
+["Sort these: a.c. or d.c.?",{"a.c.":["UK mains supply","changes direction 50 times a second","oscilloscope trace goes above and below zero"],"d.c.":["battery","solar cell","flows in one direction only"]},"a.c. reverses direction. d.c. does not."]
+],
+build:[
+["Describe the difference between a.c. and d.c.",["In d.c., the current flows in one direction only.","In a.c., the current changes direction many times each second.","A battery supplies d.c.","The mains supplies a.c."],["In a.c., the current flows faster than in d.c.","A battery supplies a.c."],"Direction is the key difference."]
+],
+spot:[
+["Explain what is meant by a voltage of 6 V.",["Voltage is also called potential difference.","It is measured in volts.","A voltage of 6 V means 6 coulombs of charge pass each second.","A voltage of 6 V means each coulomb of charge gets 6 joules of energy."],2,"Charge passing each second is current. Voltage is energy per coulomb."]
+],
+write:[
+["State what is meant by a current of 3 A.",[["3 coulomb|three coulomb","3 coulombs"],["(each|per|every|a) second","pass each second"],["charge|coulomb","Refers to charge"]],3,"3 coulombs of charge pass a point each second."]
+]
+});
+
+TP("ohm","Electricity","Resistance and Ohm's law",{
+terms:[
+["resistance","How much a component opposes the flow of current. Measured in ohms."],
+["Ohm's law","For a resistor at constant temperature, the current is directly proportional to the voltage."],
+["directly proportional","When one quantity doubles, the other doubles. The graph is a straight line through the origin."],
+["ohm","The unit of resistance."]
+],
+tf:[
+["For a resistor at constant temperature, V ÷ I stays the same.","For a resistor, V ÷ I always increases as the voltage increases.","At constant temperature, resistance is constant, so V ÷ I is constant."],
+["The resistance of a metal wire increases as its temperature increases.","The resistance of a metal wire decreases as its temperature increases.","Hotter atoms vibrate more and get in the way of electrons."],
+["A graph of voltage against current for a resistor is a straight line through the origin.","A graph of voltage against current for a resistor is a curve.","Current is directly proportional to voltage for a resistor at constant temperature."],
+["A filament lamp's resistance increases as it gets brighter.","A filament lamp's resistance stays the same as it gets brighter.","The filament gets hotter, so its resistance increases. Its V-I graph curves."],
+["A bigger resistance means a smaller current for the same voltage.","A bigger resistance means a bigger current for the same voltage.","I = V ÷ R. More resistance, less current."]
+],
+mc:[
+["The voltage across a fixed resistor is doubled. What happens to the current?","It doubles.",[["It halves.","More voltage pushes more current through."],["It stays the same.","For a fixed resistor, I = V ÷ R changes with V."],["It quadruples.","Current is directly proportional to voltage, not to voltage squared."]],"Ohm's law: I is directly proportional to V for a fixed resistance.","h"],
+["Why does the resistance of a metal increase when it gets hotter?","The atoms vibrate more and make it harder for electrons to pass.",[["The electrons slow down because they get cold.","They are hotter, not colder."],["The metal loses electrons.","The number of free electrons stays about the same."],["Hot metal becomes an insulator.","It still conducts, just less well."]],"More vibration means more collisions between electrons and atoms.",""],
+["<div class='tscroll'><table class='dt'><tr><th>V (V)</th><td>1.0</td><td>2.0</td><td>3.0</td><td>4.0</td></tr><tr><th>I (A)</th><td>0.20</td><td>0.40</td><td>0.60</td><td>0.80</td></tr></table></div>What does this data show?","The resistance is constant at 5 Ω.",[["The resistance increases as voltage increases.","V ÷ I is 5 every time."],["The resistance is 0.2 Ω.","R = V ÷ I, not I ÷ V."],["Current is not proportional to voltage.","Doubling V doubles I, so they are proportional."]],"V ÷ I = 1.0 ÷ 0.20 = 5 Ω each time, so the resistor obeys Ohm's law.","p"],
+["What shape is the V-I graph for a filament lamp?","A curve, because resistance increases as it heats up",[["A straight line through the origin","That is for a resistor at constant temperature."],["A horizontal line","That would mean voltage stays the same as current changes."],["A straight line that does not pass through the origin","The line still starts at zero."]],"As the lamp heats up its resistance rises, so the graph bends.","h"],
+["A pupil wants to check Ohm's law for a resistor. Which meters do they need?","An ammeter in series and a voltmeter in parallel with the resistor",[["An ammeter in parallel and a voltmeter in series","These are the wrong way round."],["Two voltmeters in series","You need to measure current as well."],["Just an ohmmeter","An ohmmeter gives one resistance value but not how I changes with V."]],"Ammeter in series measures current through it. Voltmeter in parallel measures voltage across it.",""]
+],
+gap:[
+["Resistance is measured in [ohms]. For a resistor at constant [temperature], current is directly [proportional] to voltage.",["volts","amperes","pressure"],"This is Ohm's law."],
+["An [ammeter] is connected in series. A [voltmeter] is connected in parallel.",["ohmmeter","fuse"],"Ammeters measure current through. Voltmeters measure voltage across."]
+],
+order:[
+["Put these steps in order to find the resistance of a resistor.",["Set up the resistor with an ammeter in series and a voltmeter in parallel.","Set the supply to a low voltage.","Record the voltage and the current.","Increase the voltage and repeat the readings.","Plot a graph of voltage against current.","Calculate the resistance from the gradient."],"The gradient of a V against I graph is the resistance."]
+],
+build:[
+["Explain why a filament lamp does not obey Ohm's law.",["As the current increases, the filament gets hotter.","The resistance of the filament increases when it gets hotter.","So the voltage divided by current is not constant.","Ohm's law only applies when the resistance stays constant."],["The filament gets colder as the current increases.","The lamp has no resistance."],"Ohm's law needs constant temperature. The filament's temperature rises a lot."]
+],
+spot:[
+["Describe how the resistance of a wire changes with temperature.",["When the wire gets hotter, the atoms vibrate more.","The electrons collide with the atoms more often.","This makes it harder for the electrons to flow.","So the resistance decreases."],3,"Harder to flow means the resistance increases."]
+],
+write:[
+["A pupil says 'a 10 Ω resistor will always let 1 A through'. Explain why this is wrong.",[["voltage|p\\.?d|potential","Current depends on the voltage across it"],["V\\s*=\\s*IR|I\\s*=\\s*V|ohm","Uses Ohm's law (I = V/R)"],["10 ?V|only (if|when)","Only true if the voltage is 10 V"]],2,"Current depends on the voltage as well as the resistance. I = V ÷ R, so it is only 1 A if the voltage across it is 10 V."]
+]
+});
+
+TP("circ","Electricity","Circuits and components",{
+terms:[
+["series circuit","A circuit with only one path for the current."],
+["parallel circuit","A circuit with more than one path for the current."],
+["LDR","A light-dependent resistor. Its resistance decreases as light level increases."],
+["thermistor","A resistor whose resistance decreases as temperature increases."],
+["diode","A component that only lets current flow in one direction."],
+["LED","A light-emitting diode. It gives out light when current flows through it the right way."],
+["transistor","A component that acts as an electronic switch."],
+["potential divider","Two or more resistors in series that share the supply voltage."]
+],
+tf:[
+["In a series circuit, the current is the same at all points.","In a series circuit, the current gets smaller after each component.","There is only one path, so the same charge flows through everything each second."],
+["In a parallel circuit, the voltage across each branch is the same.","In a parallel circuit, the voltage is shared between the branches.","Each branch is connected straight across the supply."],
+["Adding another resistor in parallel decreases the total resistance.","Adding another resistor in parallel increases the total resistance.","An extra path lets more current flow, so the total resistance goes down."],
+["The resistance of an LDR decreases when the light gets brighter.","The resistance of an LDR increases when the light gets brighter.","More light, less resistance."],
+["An LED needs a resistor in series to protect it from too much current.","An LED needs a resistor in parallel to make it brighter.","The series resistor limits the current and the voltage across the LED."],
+["In a potential divider, the larger resistor gets the larger share of the voltage.","In a potential divider, the smaller resistor gets the larger share of the voltage.","V1 ÷ V2 = R1 ÷ R2. More resistance, more voltage."],
+["In a series circuit, the supply voltage is shared between the components.","In a series circuit, each component gets the full supply voltage.","The voltages across each component add up to the supply voltage."]
+],
+mc:[
+["Three lamps are in series. One lamp breaks. What happens?","All the lamps go out.",[["Only that lamp goes out.","That happens in a parallel circuit."],["The other lamps get brighter.","The circuit is broken, so no current flows."],["Nothing changes.","The only path for current is broken."]],"A series circuit has one path, so one break stops all the current.","h"],
+["Why are the lights in a house wired in parallel?","Each light gets the full mains voltage and can be switched on its own.",[["So the current is the same in every light.","That is a series circuit property."],["It uses less wire.","That is not the main reason."],["So the voltage is shared between the lights.","Sharing voltage would make them dim."]],"Parallel: each branch gets the full voltage and has its own switch.",""],
+["A thermistor is in a potential divider with a fixed resistor. The temperature rises. What happens to the voltage across the thermistor?","It decreases.",[["It increases.","Its resistance falls, so it gets a smaller share of the voltage."],["It stays the same.","The share of voltage depends on resistance, which changes."],["It becomes equal to the supply voltage.","It still shares with the fixed resistor."]],"Hotter: thermistor resistance falls. Smaller resistance gets a smaller share of the voltage.","h"],
+["An LDR and a fixed resistor form a potential divider. It gets darker. What happens to the voltage across the LDR?","It increases.",[["It decreases.","Darker means higher LDR resistance, so a bigger share of the voltage."],["It stays the same.","The LDR resistance changes with light."],["It drops to zero.","It still has a voltage across it."]],"Dark: high resistance. Bigger resistance takes a bigger share of the supply voltage.","h"],
+["What is the job of a MOSFET or NPN transistor in a circuit?","It acts as a switch.",[["It stores charge.","That is a capacitor."],["It lights up.","That is an LED."],["It measures current.","That is an ammeter."]],"A transistor switches on when the voltage across its input (gate or base) reaches a set value.",""],
+["An LED is connected with no series resistor. What is likely to happen?","Too much current flows and the LED is damaged.",[["The LED will not light because it needs a resistor to work.","It will light, but too much current can destroy it."],["The LED gets dimmer.","The current would be too large, not too small."],["The current flows backwards.","Direction depends on how it is connected, not the resistor."]],"The series resistor limits the current and reduces the voltage across the LED.",""],
+["Another lamp is added in parallel to a circuit. What happens to the current from the supply?","It increases.",[["It decreases.","An extra branch lets more current flow."],["It stays the same.","The extra branch draws its own current."],["It becomes zero.","The circuit still works."]],"Total current = sum of branch currents. Another branch adds more current.","h"],
+["<div class='tscroll'><table class='dt'><tr><th>Light level (units)</th><td>10</td><td>50</td><td>100</td><td>200</td></tr><tr><th>LDR resistance (kΩ)</th><td>40</td><td>12</td><td>6</td><td>3</td></tr></table></div>Which conclusion is correct?","As light level increases, resistance decreases.",[["As light level increases, resistance increases.","Resistance values go down as light goes up."],["Resistance is directly proportional to light level.","They change in opposite directions."],["Light has no effect on resistance.","Resistance changes a lot."]],"Brighter light, lower resistance. This is how an LDR works.","p"]
+],
+gap:[
+["In a [series] circuit the current is the same everywhere. In a [parallel] circuit the voltage across each branch is the [same].",["different","shared","bigger"],"Learn these two rules well."],
+["The resistance of an [LDR] falls as light increases. The resistance of a [thermistor] falls as temperature increases.",["diode","LED","fuse"],"Both are used as sensors in potential dividers."]
+],
+sort:[
+["Sort these rules: series circuit or parallel circuit?",{"Series":["current is the same everywhere","voltages add up to the supply voltage","adding a resistor increases total resistance","one break stops everything"],"Parallel":["voltage is the same across each branch","branch currents add up to the supply current","adding a resistor decreases total resistance","each branch can be switched separately"]},"Series: one path. Parallel: several paths."]
+],
+order:[
+["Put the steps in order to explain how a light-activated circuit switches on a lamp when it gets dark.",["It gets darker.","The resistance of the LDR increases.","The voltage across the LDR increases.","The voltage across the transistor reaches its switch-on value.","The transistor switches on and the lamp lights."],"Each step causes the next one."]
+],
+build:[
+["Explain how a thermistor circuit can switch on a fan when it gets hot. The thermistor is connected to the transistor's input in a potential divider.",["As the temperature rises, the thermistor's resistance decreases.","So the voltage across the thermistor decreases.","The voltage across the fixed resistor increases.","When the voltage at the transistor reaches its switching value, the transistor switches on.","The fan switches on."],["As the temperature rises, the thermistor's resistance increases.","The transistor stores the heat."],"The fixed resistor is connected across the transistor input, so its voltage rises as the thermistor's falls."]
+],
+spot:[
+["Describe what happens when another lamp is added in parallel to a circuit.",["The new lamp is on a separate branch.","The voltage across each lamp is the same as the supply.","The total resistance of the circuit increases.","The current from the supply increases."],2,"Adding a parallel branch decreases the total resistance."]
+],
+write:[
+["Explain why an LED in a circuit needs a resistor in series with it.",[["limit|reduce|protect|too (much|large|high)","To limit (reduce) the current"],["current","Refers to current"],["voltage|p\\.?d","Or to reduce the voltage across the LED"],["damage|break|blow","Otherwise the LED would be damaged"]],2,"The resistor limits the current through the LED and reduces the voltage across it. Without it, the current would be too large and the LED would be damaged."]
+]
+});
+
+TP("power","Electricity","Electrical power",{
+terms:[
+["power","The energy transferred each second. Measured in watts."],
+["watt","The unit of power. 1 W = 1 J/s."],
+["fuse","A thin wire that melts if the current is too large, breaking the circuit."],
+["power rating","The power an appliance uses when working normally, shown on its label."]
+],
+tf:[
+["A fuse protects the flex (cable) of an appliance from overheating.","A fuse is there to make the appliance work better.","If the current is too high, the fuse melts and breaks the circuit before the cable overheats."],
+["Appliances that produce heat usually have high power ratings.","Lamps and radios usually have higher power ratings than kettles.","Heating appliances like kettles and heaters need the most energy each second."],
+["A 2000 W heater transfers 2000 J of energy every second.","A 2000 W heater transfers 2000 J of energy every hour.","1 W = 1 joule per second."],
+["The correct fuse is slightly higher than the normal current of the appliance.","The correct fuse is much lower than the normal current of the appliance.","Too low and it blows when used normally. Too high and it will not protect the cable."],
+["Using an appliance for twice as long uses twice the energy.","An appliance uses the same energy whether it is on for 1 minute or 1 hour.","E = Pt. Double the time, double the energy."]
+],
+mc:[
+["What does a fuse do?","It melts if the current is too large, protecting the cable.",[["It stops electric shocks.","An earth wire and RCD protect from shocks. The fuse protects the cable."],["It increases the current.","It does not change the normal current."],["It stores spare charge.","A fuse does not store charge."]],"Too much current makes the fuse wire melt, which breaks the circuit.","h"],
+["A kettle has a normal current of 10 A. Which fuse should be used?","13 A",[["3 A","This would blow every time the kettle is used."],["5 A","Still below the normal current, so it would blow."],["30 A","Far too high to protect a normal plug cable."]],"Choose the fuse just above the normal operating current. UK plugs use 3 A or 13 A.",""],
+["Which appliance is likely to have the highest power rating?","Electric shower",[["Phone charger","Chargers use only a few watts."],["LED lamp","LED lamps use very little power."],["Radio","Radios use a small power."]],"Heating water quickly needs a lot of energy each second.",""],
+["Two lamps are run from the same supply. Lamp A has a higher power rating than lamp B. What is true?","Lamp A transfers more energy each second.",[["Lamp A uses less energy each second.","Higher power means more energy each second."],["Lamp A has a smaller current.","P = IV. At the same voltage, more power means more current."],["They transfer the same energy each second.","Power tells you the energy per second."]],"Power is energy per second.","h"],
+["What is the main energy change in an electric kettle?","Electrical energy to heat",[["Heat to electrical energy","The kettle uses electricity to make heat."],["Electrical energy to light","Some kettles have a small light, but most energy becomes heat."],["Electrical energy to kinetic energy","There are no moving parts that use the energy."]],"The heating element changes electrical energy into heat.",""],
+["<div class='tscroll'><table class='dt'><tr><th>Appliance</th><th>Power (W)</th></tr><tr><td>Toaster</td><td>1200</td></tr><tr><td>Laptop</td><td>60</td></tr><tr><td>Fan heater</td><td>2400</td></tr></table></div>Which uses the most energy in 10 minutes?","Fan heater",[["Toaster","The fan heater has double the power."],["Laptop","It has the lowest power."],["All the same","Same time, but different powers."]],"For the same time, energy is proportional to power (E = Pt).","p"]
+],
+gap:[
+["Power is the [energy] transferred each [second]. It is measured in [watts].",["force","minute","joules"],"P = E ÷ t."],
+["A [fuse] melts if the current is too [high]. This protects the [cable] from overheating.",["low","switch","battery"],"The fuse rating should be just above the normal current."]
+],
+build:[
+["Explain why a fuse should be rated just above the normal current of an appliance.",["The fuse must not melt when the appliance is working normally.","So it must be rated above the normal current.","If it is rated too high, it will not melt when there is a fault.","Then the cable could overheat and cause a fire."],["A higher fuse makes the appliance more powerful.","The fuse should be rated far below the normal current."],"Just above normal current: works normally, but blows quickly if there is a fault."]
+],
+spot:[
+["Explain what happens to a fuse when there is a fault.",["A fault makes a very large current flow.","The large current makes the fuse wire heat up.","The fuse wire melts.","This makes the current even larger.","The circuit is broken, so the current stops."],3,"When the fuse melts, the circuit is broken and the current stops."]
+],
+write:[
+["Explain why an electric heater has a much higher power rating than a lamp.",[["heat","Heater produces heat (thermal energy)"],["(more|lot|large).{0,20}energy|energy.{0,20}(more|lot)","Needs to transfer much more energy"],["(each|per|every) second|second","each second"]],2,"Producing heat needs a lot of energy. The heater must transfer much more energy each second than a lamp, so its power is higher."]
+]
+});
+TP("shc","Properties of matter","Specific heat capacity",{
+terms:[
+["specific heat capacity","The energy needed to change the temperature of 1 kg of a substance by 1 °C."],
+["temperature","A measure of the average kinetic energy of the particles in a substance."],
+["heat","Energy that is transferred from a hotter place to a colder place."],
+["insulation","A material that reduces heat loss."]
+],
+tf:[
+["A substance with a high specific heat capacity needs a lot of energy to heat up.","A substance with a high specific heat capacity heats up very easily.","High c means more energy for each kg and each °C."],
+["Heat always flows from a hotter object to a colder object.","Heat flows from a colder object to a hotter object.","Energy moves from hot to cold until they are at the same temperature."],
+["Temperature and heat are not the same thing.","Temperature and heat mean exactly the same thing.","Temperature is about how hot something is (particle energy). Heat is energy transferred."],
+["In a real experiment, some heat is lost to the surroundings, so the measured c is too big.","Heat lost to the surroundings makes the measured specific heat capacity too small.","More energy is supplied than actually heats the block, so the energy ÷ (m × ΔT) gives too large a value."],
+["Water is good for storing heat because it has a high specific heat capacity.","Water is good for storing heat because it has a low specific heat capacity.","It takes a lot of energy to heat water, and it gives out a lot of energy as it cools."]
+],
+mc:[
+["The same amount of energy is given to 1 kg of water and 1 kg of copper. Which has the bigger temperature rise?","Copper",[["Water","Water has a much higher specific heat capacity, so it rises less."],["Both the same","They have different specific heat capacities."],["It depends on the starting temperature","The rise depends on c, not the start temperature."]],"Copper's specific heat capacity (386 J/kg°C) is much less than water's (4180 J/kg°C), so the same energy raises its temperature more.","h"],
+["What does the specific heat capacity of water (4180 J/kg°C) mean?","4180 J is needed to raise the temperature of 1 kg of water by 1 °C.",[["4180 J is needed to boil 1 kg of water.","Boiling also needs latent heat. This is per °C rise."],["Water boils at 4180 °C.","It is an amount of energy, not a temperature."],["1 kg of water contains 4180 J.","It is the energy to change the temperature, not the energy stored."]],"c is the energy for 1 kg and 1 °C.","h"],
+["Why do pupils wrap a metal block in insulation when measuring its specific heat capacity?","To reduce heat loss to the surroundings",[["To make the block heat up more slowly","The aim is accuracy, not slower heating."],["To stop the thermometer breaking","It is to keep the heat in the block."],["To increase the mass","Insulation is not counted in the mass."]],"Less heat lost means more of the energy supplied heats the block, giving a more accurate value.",""],
+["The measured specific heat capacity of aluminium is higher than the data book value. Which is the best reason?","Heat was lost to the surroundings.",[["The thermometer read too high.","A high temperature reading would give a lower c."],["The block's mass was larger than recorded.","That changes the result, but heat loss is the usual reason."],["Aluminium has changed state.","It does not melt in this experiment."]],"Heat lost means the energy used in the calculation is more than the energy that actually warmed the block.","p"],
+["Two blocks of the same metal are heated with the same energy. Block X has twice the mass of block Y. How do the temperature rises compare?","X rises by half as much as Y.",[["X rises by twice as much as Y.","More mass to heat means a smaller rise."],["They rise by the same amount.","The energy is shared over more mass in X."],["X does not heat up.","It heats up, just less."]],"ΔT = E ÷ (cm). Double the mass halves the rise.","h"]
+],
+gap:[
+["Specific heat capacity is the [energy] needed to change the temperature of [1 kg] of a substance by [1 °C].",["force","1 g","100 °C"],"Learn this definition word for word."],
+["Heat flows from a [hotter] object to a [colder] object until they reach the same [temperature].",["bigger","smaller","mass"],"Energy flows from hot to cold."]
+],
+order:[
+["Put the steps in order to measure the specific heat capacity of a metal block.",["Measure the mass of the block.","Insert a heater and thermometer and wrap the block in insulation.","Record the starting temperature.","Switch on the heater for a measured time and record the energy supplied.","Record the final temperature.","Calculate c = Eh ÷ (m × ΔT)."],"You need E, m and ΔT."]
+],
+build:[
+["Explain why the specific heat capacity measured in class is often bigger than the true value.",["Some of the heat from the heater is lost to the surroundings.","So not all the energy supplied heats the block.","The temperature rise is smaller than it should be.","Using a smaller ΔT in c = E ÷ (mΔT) gives a bigger value of c."],["The block gains extra energy from the room.","Heat loss makes the temperature rise bigger."],"Energy lost means a smaller temperature rise for the energy you recorded, so c comes out too high."]
+],
+spot:[
+["Explain why water is used in central heating systems.",["Water has a high specific heat capacity.","It can store a lot of energy for each kilogram.","It cools down very quickly.","It gives out a lot of heat to the room as it cools."],2,"Because of its high specific heat capacity, water cools slowly and releases a lot of energy as it does."]
+],
+write:[
+["State what is meant by the specific heat capacity of copper being 386 J/kg°C.",[["386","386 J of energy"],["1 ?kg|one kilogram|each kilogram|per kilogram","for 1 kg"],["1 ?°?c|one degree|each degree|per degree","to raise the temperature by 1 °C"]],3,"386 J of energy is needed to raise the temperature of 1 kg of copper by 1 °C."]
+]
+});
+
+TP("slh","Properties of matter","Specific latent heat",{
+terms:[
+["specific latent heat","The energy needed to change the state of 1 kg of a substance without changing its temperature."],
+["latent heat of fusion","The energy needed to change 1 kg of a solid into a liquid at the same temperature."],
+["latent heat of vaporisation","The energy needed to change 1 kg of a liquid into a gas at the same temperature."],
+["change of state","Changing between solid, liquid and gas."],
+["condensing","Changing from a gas to a liquid. Energy is released."]
+],
+tf:[
+["The temperature stays the same while a substance is changing state.","The temperature rises steadily while a substance melts.","The energy is used to break bonds between particles, not to raise the temperature."],
+["Energy is released when a gas condenses into a liquid.","Energy is taken in when a gas condenses into a liquid.","Condensing and freezing release energy. Melting and boiling take it in."],
+["Fusion means melting or freezing.","Fusion means boiling or condensing.","Fusion: solid ↔ liquid. Vaporisation: liquid ↔ gas."],
+["Steam at 100 °C causes worse burns than water at 100 °C.","Water at 100 °C causes worse burns than steam at 100 °C.","Steam releases its latent heat as it condenses on the skin, as well as heat as it cools."],
+["The latent heat of vaporisation of water is bigger than its latent heat of fusion.","It takes more energy to melt ice than to boil the same mass of water.","Separating particles completely into a gas needs much more energy than loosening them into a liquid."]
+],
+mc:[
+["On a temperature-time graph for heating ice, what do the flat sections show?","A change of state",[["The heater has been switched off.","The heater is still on. The energy is breaking bonds."],["The substance is cooling.","The flat parts happen while heating continues."],["The thermometer is broken.","Flat sections are expected during melting and boiling."]],"During a change of state, energy goes into changing state, so the temperature stays constant.","h"],
+["Why does sweating cool you down?","Sweat takes energy from your skin to evaporate.",[["Sweat is colder than your body.","Sweat starts at body temperature."],["Sweat releases energy as it evaporates.","Evaporating takes in energy. It does not release it."],["Sweat blocks heat from the Sun.","The cooling comes from evaporation."]],"Changing liquid to gas needs latent heat, which is taken from your skin.","h"],
+["Which change of state releases energy?","Freezing",[["Melting","Melting takes in energy."],["Boiling","Boiling takes in energy."],["Evaporating","Evaporating takes in energy."]],"Freezing and condensing release latent heat.",""],
+["Ice at 0 °C is heated until it has all melted. What is the temperature of the water just after the last bit melts?","0 °C",[["100 °C","That is the boiling point."],["Above 0 °C","The temperature stays at 0 °C until all the ice has melted."],["Below 0 °C","It cannot get colder while being heated."]],"Melting happens at a fixed temperature: 0 °C for water.",""],
+["In an experiment to measure the latent heat of vaporisation of water, what must be measured?","The energy supplied and the mass of water boiled away",[["The energy supplied and the temperature rise","There is no temperature rise while boiling. You need the mass boiled off."],["The mass of water and its starting temperature only","You also need the energy supplied."],["The time taken to boil and the volume of the kettle","You need energy and the mass that changed state."]],"l = Eh ÷ m, where m is the mass that changed state.","p"]
+],
+gap:[
+["During a change of state the [temperature] stays the same. The energy is used to break [bonds] between particles.",["mass","volume","atoms"],"Latent means hidden: the energy does not show as a temperature rise."],
+["Latent heat of [fusion] is for melting. Latent heat of [vaporisation] is for boiling.",["condensation","evaporation"],"Fusion: solid-liquid. Vaporisation: liquid-gas."]
+],
+sort:[
+["Sort these changes of state: energy taken in or energy released?",{"Energy taken in":["melting","boiling","evaporating"],"Energy released":["freezing","condensing"]},"Going to a more spread-out state needs energy. Going back releases it."]
+],
+build:[
+["Explain why the temperature of boiling water does not rise even though the kettle is still on.",["The water is changing state from liquid to gas.","The energy supplied is used to break the bonds between particles.","None of the energy goes into increasing the temperature.","This energy is called latent heat."],["The heater stops working at 100 °C.","The water is losing mass so it cannot get hotter."],"During a change of state, energy breaks bonds instead of raising temperature."]
+],
+spot:[
+["Describe what happens to the temperature of ice as it is heated from −10 °C until it has melted.",["The temperature of the ice rises from −10 °C to 0 °C.","At 0 °C the ice starts to melt.","While it melts, the temperature keeps rising.","Energy is used to break bonds between the particles."],2,"While it melts, the temperature stays at 0 °C."]
+],
+write:[
+["Explain why a burn from steam at 100 °C is worse than a burn from boiling water at 100 °C.",[["condens","Steam condenses on the skin"],["latent","Releases latent heat"],["(more|extra|addition).{0,20}(energy|heat)|(energy|heat).{0,20}(more|extra)","So more energy is given to the skin"]],2,"Steam condenses on the skin and releases its latent heat of vaporisation. Then the water cools, giving out more heat. So steam gives the skin much more energy than water at the same temperature."]
+]
+});
+
+TP("gas","Properties of matter","Gas laws and the kinetic model",{
+terms:[
+["pressure","The force acting on each square metre of a surface. P = F ÷ A."],
+["absolute zero","The lowest possible temperature: 0 K or −273 °C. The particles have no kinetic energy."],
+["kelvin","The unit of temperature on the absolute scale. Kelvin = °C + 273."],
+["kinetic model","The idea that a gas is made of tiny particles moving at high speed in random directions."],
+["pascal","The unit of pressure. 1 Pa = 1 N/m²."]
+],
+tf:[
+["Gas pressure is caused by particles hitting the walls of the container.","Gas pressure is caused by particles pushing against each other.","Each collision with a wall gives a small force. Many collisions each second make the pressure."],
+["To change from °C to kelvin you add 273.","To change from °C to kelvin you subtract 273.","0 °C = 273 K. 100 °C = 373 K."],
+["When a gas is heated at constant volume, its pressure increases.","When a gas is heated at constant volume, its pressure decreases.","Faster particles hit the walls harder and more often."],
+["When a fixed mass of gas is squashed into a smaller volume at constant temperature, its pressure increases.","When a gas is squashed into a smaller volume, its pressure decreases.","Particles hit the walls more often because they have less distance to travel."],
+["Gas law calculations must use temperatures in kelvin.","Gas law calculations can use temperatures in °C.","Pressure and volume are only proportional to temperature on the kelvin scale."],
+["At absolute zero, gas particles would have no kinetic energy.","At absolute zero, gas particles move at their fastest.","Absolute zero is the lowest possible temperature, where the particles would stop moving."]
+],
+mc:[
+["Use the kinetic model to explain why the pressure of a gas increases when it is heated in a sealed rigid container.","The particles move faster, so they hit the walls more often and with more force.",[["The particles get bigger, so they hit the walls more.","Particles do not grow when heated."],["There are more particles in the container.","The container is sealed, so the number of particles stays the same."],["The particles slow down and stick to the walls.","Heating makes particles move faster."]],"Higher temperature: more kinetic energy, faster particles, more frequent and harder collisions, so higher pressure.","h"],
+["Convert 27 °C to kelvin.","300 K",[["246 K","You subtracted 273. You should add it."],["27 K","Kelvin and °C are not the same number."],["−246 K","Kelvin can never be negative."]],"K = °C + 273 = 27 + 273 = 300 K.",""],
+["A syringe of air is sealed and the plunger pushed in slowly (temperature constant). What happens to the pressure?","It increases.",[["It decreases.","A smaller volume means particles hit the walls more often."],["It stays the same.","Pressure changes when volume changes."],["It becomes zero.","The particles are still hitting the walls."]],"Same particles, smaller volume: more frequent collisions with the walls, so higher pressure.","h"],
+["Why is it impossible to cool a gas below −273 °C?","At −273 °C the particles have no kinetic energy left to lose.",[["The gas would turn into a liquid.","That may happen first, but the limit is about particle energy."],["Thermometers cannot measure that low.","It is a physical limit, not a measuring problem."],["The pressure would become too high.","Pressure decreases as temperature falls."]],"Absolute zero (0 K) is where particles have no kinetic energy, so nothing can be colder.",""],
+["What happens to the volume of a balloon when it is heated (pressure constant)?","It increases.",[["It decreases.","Faster particles push the walls outwards."],["It stays the same.","The rubber can stretch, so volume changes."],["It increases and then decreases.","It keeps increasing as temperature rises."]],"Faster particles hit the walls harder. The balloon expands until the pressure inside matches outside again.","h"],
+["<div class='tscroll'><table class='dt'><tr><th>Temperature (K)</th><td>250</td><td>300</td><td>350</td><td>400</td></tr><tr><th>Pressure (kPa)</th><td>100</td><td>120</td><td>140</td><td>160</td></tr></table></div>What is the relationship shown?","Pressure is directly proportional to temperature in kelvin.",[["Pressure is inversely proportional to temperature.","They go up together, so it is not inverse."],["Pressure increases by 20 kPa for every 1 K.","It increases by 20 kPa for every 50 K."],["There is no relationship.","P ÷ T = 0.4 every time."]],"P ÷ T is constant (0.4), so pressure is directly proportional to kelvin temperature.","p"],
+["A pupil plots pressure against temperature in °C for a gas at constant volume. Where would the line cross the temperature axis if it was extended?","−273 °C",[["0 °C","Pressure is not zero at 0 °C."],["273 °C","The line goes to the left, below zero."],["100 °C","That is the boiling point of water."]],"Extending the line to zero pressure gives absolute zero, −273 °C.","p"]
+],
+gap:[
+["Gas pressure is caused by [particles] colliding with the [walls] of the container. More collisions each second give a higher [pressure].",["atoms bonding","floor","volume"],"Pressure comes from the force of collisions."],
+["Absolute zero is [0] K, which is [−273] °C. At this temperature the particles have no [kinetic] energy.",["273","−100","potential"],"Nothing can be colder."]
+],
+order:[
+["Put these in order to explain why heating a sealed can increases its pressure.",["The gas is heated.","The particles gain kinetic energy.","The particles move faster.","They hit the walls more often and with more force.","The pressure increases."],"Each step leads to the next."]
+],
+build:[
+["Using the kinetic model, explain why the pressure of a gas increases when its volume is reduced at constant temperature.",["The gas particles have less space to move in.","So they hit the walls of the container more often.","More collisions each second means a bigger force on the walls.","So the pressure increases."],["The particles move faster when squashed.","The particles get smaller."],"At constant temperature the particle speed is the same. Collisions are just more frequent."]
+],
+spot:[
+["Explain why a car tyre's pressure is higher after a long drive.",["The tyre gets warmer during the drive.","The air particles inside gain kinetic energy.","The particles move faster.","There are now more particles in the tyre.","They hit the inside of the tyre more often and harder, so the pressure rises."],3,"The tyre is sealed, so the number of particles does not change."]
+],
+write:[
+["Using the kinetic model, explain why the pressure of a gas increases when it is heated at constant volume.",[["(faster|more kinetic|speed up|move more)","Particles move faster (more kinetic energy)"],["(more often|more frequent|frequen)","Hit the walls more often"],["(harder|more force|greater force|bigger force)","With greater force"],["wall|container|side","Collisions with the walls of the container"]],3,"Heating gives the particles more kinetic energy, so they move faster. They hit the container walls more often and with more force, so the pressure increases."]
+]
+});
+
+TP("waves","Waves","Wave properties and behaviour",{
+terms:[
+["amplitude","The height of a wave from the centre line to a crest (or trough)."],
+["wavelength","The distance from one point on a wave to the same point on the next wave."],
+["frequency","The number of waves produced (or passing a point) each second."],
+["period","The time taken for one wave to pass a point."],
+["transverse wave","A wave where the particles vibrate at right angles to the direction the wave travels."],
+["longitudinal wave","A wave where the particles vibrate back and forth along the direction the wave travels."],
+["diffraction","The bending of waves around an obstacle or through a gap."]
+],
+tf:[
+["Waves transfer energy without transferring matter.","Waves carry the particles of the material along with them.","The particles vibrate about a fixed point. Only energy moves along."],
+["Sound is a longitudinal wave.","Sound is a transverse wave.","Air particles vibrate along the direction the sound travels."],
+["Light and water waves are transverse waves.","Light is a longitudinal wave.","Vibrations are at right angles to the direction of travel."],
+["Long wavelength waves diffract more than short wavelength waves.","Short wavelength waves diffract more than long wavelength waves.","The longer the wavelength, the more the wave spreads out around obstacles."],
+["The amplitude of a wave is linked to the energy it carries.","The amplitude of a wave is linked to its speed.","Bigger amplitude, more energy. For sound, that means louder."],
+["Frequency is measured in hertz.","Frequency is measured in metres.","1 Hz is one wave per second. Wavelength is in metres."],
+["Diffraction does not change the wavelength of a wave.","Diffraction makes the wavelength shorter.","The wave changes direction but its wavelength, frequency and speed stay the same."]
+],
+mc:[
+["Which statement describes a transverse wave?","The vibrations are at right angles to the direction of travel.",[["The vibrations are along the direction of travel.","That describes a longitudinal wave."],["It cannot travel through a vacuum.","Light is transverse and travels through a vacuum."],["It is always a sound wave.","Sound is longitudinal."]],"Transverse: up and down while the wave moves along.","h"],
+["Why can long wave radio be received behind hills better than TV signals?","Long wave radio has a longer wavelength, so it diffracts more around the hills.",[["Radio waves travel faster than TV signals.","All EM waves travel at the same speed in air."],["TV signals have a longer wavelength.","TV signals have a shorter wavelength."],["Radio waves go through hills.","They bend around hills, not through them."]],"Longer wavelength gives more diffraction.","h"],
+["A wave has a frequency of 5 Hz. What does this mean?","5 waves pass a point each second.",[["The wave travels 5 m each second.","That is speed, not frequency."],["Each wave is 5 m long.","That is wavelength."],["Each wave takes 5 s.","That is the period. Here the period is 0.2 s."]],"Frequency = number of waves per second.","h"],
+["A wave's amplitude is doubled. Its frequency stays the same. What changes?","The energy it carries increases.",[["The wavelength doubles.","Amplitude does not change wavelength."],["The speed doubles.","Speed depends on the material, not amplitude."],["The period halves.","Period depends only on frequency."]],"Amplitude is linked to the energy carried by the wave.",""],
+["Water waves pass through a gap. Which gap gives the most diffraction?","A gap about the same size as the wavelength",[["A gap much bigger than the wavelength","Big gaps give only a little bending at the edges."],["Any gap gives the same diffraction","Gap size matters."],["No gap at all","Waves need a gap or edge to diffract."]],"Diffraction is greatest when the gap is similar in size to the wavelength.",""],
+["The period of a wave increases. What happens to its frequency?","It decreases.",[["It increases.","T = 1 ÷ f. Longer period means fewer waves per second."],["It stays the same.","Period and frequency are linked."],["It doubles.","It only halves if the period doubles."]],"f = 1 ÷ T.","h"]
+],
+gap:[
+["The [wavelength] is the distance between two crests. The [amplitude] is the height from the centre line to a crest. The [frequency] is the number of waves each second.",["speed","period","energy"],"Know these words with their units: m, m, Hz."],
+["Sound is a [longitudinal] wave. Light is a [transverse] wave. Both transfer [energy].",["mass","particles"],"Waves carry energy, not matter."]
+],
+sort:[
+["Sort these: transverse or longitudinal wave?",{"Transverse":["light","water waves","radio waves","vibrations at right angles to direction of travel"],"Longitudinal":["sound","ultrasound","vibrations along the direction of travel"]},"All EM waves are transverse. Sound is longitudinal."]
+],
+build:[
+["Explain why a radio station broadcast with long wavelengths can be heard in a valley, while a TV signal with short wavelengths cannot.",["The radio waves have a long wavelength.","Long wavelength waves diffract more.","So the radio waves bend around the hills into the valley.","The TV signals diffract less, so they do not reach the valley."],["Radio waves travel faster than TV signals.","The TV signals are absorbed by the valley floor."],"More diffraction for longer wavelengths."]
+],
+spot:[
+["Describe the difference between transverse and longitudinal waves.",["In a transverse wave, the particles vibrate at right angles to the direction of travel.","Water waves are transverse.","In a longitudinal wave, the particles vibrate along the direction of travel.","Sound waves are transverse."],3,"Sound waves are longitudinal."]
+],
+write:[
+["State what is meant by the frequency of a wave.",[["number|how many","The number of waves"],["(each|per|every|a) second|second","each second"],["pass|produced|made|point","produced or passing a point"]],2,"Frequency is the number of waves produced, or passing a point, each second."]
+]
+});
+
+TP("em","Waves","The electromagnetic spectrum",{
+terms:[
+["electromagnetic spectrum","The family of waves that all travel at 3 × 10⁸ m/s in a vacuum."],
+["gamma rays","The EM radiation with the highest frequency and energy."],
+["radio waves","The EM radiation with the longest wavelength and lowest frequency."],
+["infrared","EM radiation given out by hot objects. Detected by a thermometer with a blackened bulb."],
+["ultraviolet","EM radiation beyond violet light. Can cause skin cancer. Detected with fluorescent paint."]
+],
+tf:[
+["All electromagnetic waves travel at the same speed in a vacuum.","Gamma rays travel faster than radio waves in a vacuum.","All EM waves travel at 3 × 10⁸ m/s in a vacuum."],
+["Gamma rays have the highest frequency in the EM spectrum.","Radio waves have the highest frequency in the EM spectrum.","Order of increasing frequency: radio, microwave, infrared, visible, UV, X-ray, gamma."],
+["As frequency increases, the energy of EM radiation increases.","As frequency increases, the energy of EM radiation decreases.","Higher frequency means more energy, which is why UV, X-rays and gamma are harmful."],
+["X-rays can be detected using photographic film.","X-rays can be detected with a radio aerial.","X-rays darken photographic film. Aerials detect radio and microwaves."],
+["Infrared radiation can be detected with a thermometer with a blackened bulb.","Infrared radiation can be detected with fluorescent paint.","Fluorescent paint detects UV. A blackened bulb absorbs infrared and the temperature rises."],
+["All electromagnetic waves are transverse.","Some electromagnetic waves are longitudinal.","Every member of the EM spectrum is a transverse wave."]
+],
+mc:[
+["Which list is in order of increasing wavelength?","gamma, X-ray, UV, visible",[["visible, UV, X-ray, gamma","That is decreasing wavelength."],["UV, gamma, visible, X-ray","These are mixed up."],["X-ray, gamma, visible, UV","Gamma has the shortest wavelength of all."]],"Gamma rays have the shortest wavelength. Wavelength increases towards radio waves.","h"],
+["What do all members of the electromagnetic spectrum have in common?","They travel at 3 × 10⁸ m/s in a vacuum.",[["They have the same frequency.","Each type has a different range of frequencies."],["They are all harmful.","Radio waves and visible light are not normally harmful."],["They are all longitudinal.","EM waves are transverse."]],"Same speed in a vacuum. Different wavelengths and frequencies.",""],
+["Which type of EM radiation is used to sterilise medical equipment?","Gamma rays",[["Radio waves","They do not carry enough energy to kill bacteria."],["Infrared","Infrared heats things but is not used to sterilise equipment."],["Visible light","It does not carry enough energy."]],"Gamma rays have very high energy and kill bacteria.",""],
+["Which radiation is used in TV remote controls?","Infrared",[["Ultraviolet","UV is used for security marking and sterilising water."],["X-rays","X-rays are used for medical imaging."],["Gamma rays","Gamma would be dangerous."]],"Remote controls send pulses of infrared.",""],
+["A detector glows when it absorbs a certain radiation. The detector is fluorescent paint. What is the radiation?","Ultraviolet",[["Infrared","Infrared is detected by a thermometer with a blackened bulb or a photodiode."],["Radio waves","Radio waves are detected by an aerial."],["Gamma rays","Gamma rays are detected by a Geiger-Müller tube."]],"Fluorescent materials glow when they absorb ultraviolet.","h"],
+["Why are X-rays more dangerous than radio waves?","X-rays have a higher frequency so they carry more energy.",[["X-rays travel faster.","All EM waves travel at the same speed."],["X-rays have a longer wavelength.","X-rays have a much shorter wavelength."],["X-rays are louder.","EM radiation is not sound."]],"Higher frequency means higher energy, enough to damage cells.","h"]
+],
+gap:[
+["All EM waves travel at [3 × 10⁸] m/s in a vacuum. [Gamma] rays have the highest frequency and [radio] waves have the lowest.",["340","infrared","visible"],"Same speed, different frequencies."]
+],
+order:[
+["Put the EM spectrum in order of increasing frequency.",["Radio waves","Microwaves","Infrared","Visible light","Ultraviolet","X-rays","Gamma rays"],"A helpful phrase: Rabbits Mate In Very Unusual eXpensive Gardens."]
+],
+sort:[
+["Sort each detector to the radiation it detects.",{"Radio / microwaves":["aerial"],"Infrared":["blackened thermometer","photodiode"],"Ultraviolet":["fluorescent paint"],"X-rays":["photographic film"],"Gamma rays":["Geiger-Müller tube"]},"Each part of the EM spectrum has its own detector."]
+],
+build:[
+["Explain why ultraviolet radiation is more harmful to the skin than visible light.",["Ultraviolet has a higher frequency than visible light.","So ultraviolet carries more energy.","This energy can damage skin cells.","This can cause sunburn and skin cancer."],["Ultraviolet travels faster than visible light.","Ultraviolet has a longer wavelength than visible light."],"Higher frequency means more energy, which can damage cells."]
+],
+spot:[
+["Describe some properties of the electromagnetic spectrum.",["All EM waves are transverse.","All EM waves travel at the same speed in a vacuum.","Gamma rays have the longest wavelength.","Higher frequency waves carry more energy."],2,"Gamma rays have the shortest wavelength. Radio waves have the longest."]
+],
+write:[
+["Choose one type of EM radiation. State one use and one danger.",[["radio|microwave|infrared|visible|ultraviolet|uv|x-?ray|gamma","Names a type of EM radiation"],["use|used|for |to (cook|see|send|kill|treat|scan|heat|sterili)|communic|imaging|scan|cook|remote|treat","States a correct use"],["danger|harm|burn|cancer|damage|cataract|blind|kill (cells|living)","States a correct danger"]],3,"Example: Ultraviolet is used to detect forged banknotes. It can cause skin cancer. Another example: X-rays are used to image bones. They can damage cells and cause cancer."]
+]
+});
+
+TP("refr","Waves","Refraction of light",{
+terms:[
+["refraction","The change in speed of light when it passes from one material into another."],
+["normal","A line drawn at 90° to a surface where a ray meets it."],
+["angle of incidence","The angle between the incoming ray and the normal."],
+["angle of refraction","The angle between the refracted ray and the normal."]
+],
+tf:[
+["Light slows down when it enters glass from air.","Light speeds up when it enters glass from air.","Glass is denser than air, so light travels more slowly in it."],
+["Light entering glass from air bends towards the normal.","Light entering glass from air bends away from the normal.","Slowing down makes the ray bend towards the normal."],
+["A ray travelling along the normal does not change direction, but it does change speed.","A ray travelling along the normal does not refract at all and keeps the same speed.","Refraction is the change in speed. Direction only changes when the ray hits at an angle."],
+["Angles of incidence and refraction are measured from the normal.","Angles of incidence and refraction are measured from the surface.","Always measure from the normal, the line at 90° to the surface."],
+["When light refracts, its frequency stays the same but its wavelength changes.","When light refracts, its frequency changes but its wavelength stays the same.","The speed and wavelength change. Frequency is set by the source."]
+],
+mc:[
+["What causes refraction?","A change in the speed of light",[["A change in the colour of light","The colour (frequency) stays the same."],["Light bouncing off a surface","That is reflection."],["Light being absorbed","Absorption is a different effect."]],"Refraction is caused by a change in speed when light enters a new material.","h"],
+["A ray of light passes from glass into air at an angle. What happens?","It speeds up and bends away from the normal.",[["It slows down and bends towards the normal.","That happens going from air into glass."],["It speeds up and bends towards the normal.","Speeding up bends it away from the normal."],["It does not change direction.","It changes direction because it meets the surface at an angle."]],"Air is less dense than glass, so light speeds up and bends away from the normal.","h"],
+["A ray hits a glass block along the normal. What happens?","It slows down but does not change direction.",[["It bends towards the normal.","It is already along the normal."],["It is reflected straight back.","Most of the light goes into the glass."],["Nothing changes.","Its speed changes. That is still refraction."]],"Along the normal: speed changes, direction does not.","h"],
+["Where is the angle of refraction measured?","Between the refracted ray and the normal",[["Between the refracted ray and the surface","Angles are measured from the normal."],["Between the incident ray and the refracted ray","That is not how it is defined."],["Between the incident ray and the surface","That is not the angle of refraction."]],"All angles in refraction (and reflection) are measured from the normal.",""],
+["When light enters water from air, what happens to its wavelength?","It decreases.",[["It increases.","The light slows down, so the waves bunch up."],["It stays the same.","Speed changes, so wavelength changes. Frequency is fixed."],["It becomes zero.","The light still travels, just more slowly."]],"v = fλ. f stays the same, so if v decreases, λ decreases.","h"],
+["<div class='tscroll'><table class='dt'><tr><th>Angle of incidence (°)</th><td>10</td><td>20</td><td>30</td><td>40</td></tr><tr><th>Angle of refraction (°)</th><td>7</td><td>13</td><td>19</td><td>25</td></tr></table></div>A pupil says the ray is passing from glass into air. Is this correct?","No. The angle of refraction is smaller, so the ray bends towards the normal. It is going from air into glass.",[["Yes, because the angles get bigger.","Compare each pair. The refracted angle is smaller each time."],["Yes, because light always speeds up.","Light slows down entering glass."],["It is impossible to tell.","The size of the angles tells you."]],"A smaller angle of refraction means the light slowed down and bent towards the normal, so it entered a denser material.","p"]
+],
+gap:[
+["Refraction is a change in the [speed] of light as it passes into a different material. Entering glass, light [slows] down and bends [towards] the normal.",["colour","speeds","away from"],"Slower: towards the normal. Faster: away from the normal."]
+],
+order:[
+["Put these steps in order to investigate refraction with a glass block.",["Draw round the glass block on paper.","Shine a ray of light into the block at an angle.","Mark the path of the ray going in and coming out.","Remove the block and join the points to draw the ray through it.","Draw the normal and measure the angles of incidence and refraction with a protractor."],"Angles are measured from the normal."]
+],
+build:[
+["Explain why a ray of light bends when it enters a glass block at an angle.",["The light passes from air into glass.","Light travels more slowly in glass than in air.","This change in speed is called refraction.","Because the ray meets the surface at an angle, it changes direction towards the normal."],["The glass reflects the light back.","Light travels faster in glass than in air."],"The change in speed causes the change in direction."]
+],
+spot:[
+["Describe what happens to light as it passes from air into a glass block at an angle.",["The light slows down as it enters the glass.","Its wavelength gets shorter.","Its frequency gets lower.","It bends towards the normal."],2,"Frequency stays the same during refraction."]
+],
+write:[
+["State what is meant by refraction.",[["speed","Change in speed"],["(material|medium|substance|one .{0,20} (to|into) another|glass|water)","when light passes from one material into another"]],2,"Refraction is the change in speed of light when it passes from one material into another."]
+]
+});
+TP("rad","Radiation","Nuclear radiation",{
+terms:[
+["alpha particle","Two protons and two neutrons (a helium nucleus). Stopped by paper."],
+["beta particle","A fast-moving electron from the nucleus. Stopped by a few mm of aluminium."],
+["gamma ray","A high-energy electromagnetic wave from the nucleus. Reduced by thick lead."],
+["ionisation","When an atom gains or loses electrons and becomes charged."],
+["activity","The number of nuclei that decay each second. Measured in becquerels (Bq)."],
+["half-life","The time taken for the activity of a radioactive source to halve."],
+["absorbed dose","The energy absorbed by each kilogram of tissue. Measured in grays (Gy)."],
+["equivalent dose","Absorbed dose multiplied by the radiation weighting factor. Measured in sieverts (Sv)."],
+["background radiation","Radiation that is around us all the time from natural and man-made sources."],
+["nuclear fission","A large nucleus splits into two smaller nuclei, releasing energy and neutrons."],
+["nuclear fusion","Two small nuclei join together to make a larger nucleus, releasing energy."]
+],
+tf:[
+["Alpha radiation is the most ionising type of radiation.","Gamma radiation is the most ionising type of radiation.","Alpha particles are large and charged, so they ionise strongly. This is also why they are easily stopped."],
+["Gamma radiation is the most penetrating type of radiation.","Alpha radiation is the most penetrating type of radiation.","Gamma passes through paper and aluminium. It is only reduced by thick lead or concrete."],
+["After one half-life, the activity of a source is half what it was.","After one half-life, the source has no activity left.","Each half-life halves the activity. After two half-lives it is a quarter."],
+["Equivalent dose takes into account the type of radiation.","Absorbed dose takes into account the type of radiation.","H = D × wR. The weighting factor depends on the type of radiation."],
+["Radon gas from rocks is a natural source of background radiation.","All background radiation comes from nuclear power stations.","Most background radiation is natural: radon, rocks, cosmic rays, food. Only a little is man-made."],
+["Shielding, keeping your distance and limiting time all reduce your dose.","Standing closer to a source reduces your dose.","Further away, behind shielding, for a shorter time: all reduce exposure."],
+["Fusion is the process that powers the Sun.","Fission is the process that powers the Sun.","In the Sun, hydrogen nuclei fuse to form helium."],
+["A chain reaction happens when neutrons from fission cause more nuclei to split.","A chain reaction happens when nuclei join together.","Each fission releases neutrons that can trigger more fissions."]
+],
+mc:[
+["Which radiation is stopped by a sheet of paper?","Alpha",[["Beta","Beta passes through paper. It needs a few mm of aluminium."],["Gamma","Gamma passes through paper and aluminium."],["All three","Only alpha is stopped by paper."]],"Alpha is stopped by paper or a few cm of air.","h"],
+["Why is an alpha source very dangerous inside the body but not outside it?","Alpha is very ionising but cannot get through skin.",[["Alpha is very penetrating.","Alpha is the least penetrating."],["Alpha is a wave.","Alpha is a particle, a helium nucleus."],["Alpha has a very long half-life.","Danger inside the body comes from ionisation."]],"Outside, skin and air stop alpha. Inside, it ionises the cells around it.","h"],
+["A source has an activity of 800 Bq and a half-life of 2 days. What is the activity after 6 days?","100 Bq",[["200 Bq","That is after 4 days. 6 days is three half-lives."],["0 Bq","Activity halves each half-life. It never just stops."],["400 Bq","That is after only one half-life."]],"6 days = 3 half-lives: 800 → 400 → 200 → 100 Bq.",""],
+["What does a weighting factor allow for?","Different types of radiation do different amounts of biological harm.",[["Different masses of tissue","Absorbed dose already divides by mass."],["The time spent near the source","Time is used in dose rate, not the weighting factor."],["The distance from the source","Distance is not part of the weighting factor."]],"H = D × wR. Alpha has a weighting factor of 20; beta and gamma have 1.","h"],
+["What is meant by a source having an activity of 300 Bq?","300 nuclei decay each second.",[["The source gives out 300 J each second.","Becquerels count decays, not energy."],["300 people can be exposed safely.","Activity says nothing about safe numbers."],["The half-life is 300 s.","Half-life and activity are different quantities."]],"1 becquerel = 1 decay per second.","h"],
+["Which source would be best as a tracer injected into a patient?","A gamma source with a half-life of a few hours",[["An alpha source with a half-life of a few hours","Alpha cannot get out of the body to be detected, and it ionises cells."],["A gamma source with a half-life of 30 years","It would stay active in the patient for far too long."],["A beta source with a half-life of 1000 years","Long half-life and beta cannot easily escape the body."]],"Gamma passes out of the body to the detector. A short half-life means it does not stay active long.","p"],
+["A worker's badge is used to monitor radiation dose. What does it detect radiation with?","Photographic film",[["A thermometer","Radiation is not detected by small temperature changes in a badge."],["Fluorescent paint","That is used to detect ultraviolet."],["An aerial","Aerials detect radio waves."]],"Film badges darken when exposed to radiation. A Geiger-Müller tube is another detector.",""],
+["What happens in nuclear fission?","A large nucleus splits into smaller nuclei, releasing energy and neutrons.",[["Two small nuclei join to make a larger one.","That is fusion."],["An electron leaves the atom.","That is ionisation."],["A nucleus gives out an alpha particle only.","That is alpha decay."]],"Fission is used in nuclear power stations.","h"],
+["<div class='tscroll'><table class='dt'><tr><th>Time (min)</th><td>0</td><td>10</td><td>20</td><td>30</td></tr><tr><th>Count rate (counts/min)</th><td>640</td><td>320</td><td>160</td><td>80</td></tr></table></div>The background count was removed. What is the half-life?","10 minutes",[["30 minutes","The count halves in only 10 minutes."],["320 minutes","320 is a count rate, not a time."],["5 minutes","From 640 to 320 takes 10 minutes."]],"The count rate halves every 10 minutes.","p"]
+],
+gap:[
+["[Alpha] radiation is stopped by paper. [Beta] radiation is stopped by a few millimetres of aluminium. [Gamma] radiation is reduced by thick lead.",["Ultraviolet","X-ray"],"Penetration increases from alpha to gamma."],
+["Activity is measured in [becquerels]. Absorbed dose is measured in [grays]. Equivalent dose is measured in [sieverts].",["joules","watts","hertz"],"Bq for decays per second, Gy for energy per kg, Sv for biological harm."],
+["The [half-life] is the time for the activity to [halve]. To measure it you must subtract the [background] count.",["double","total","mass"],"Background radiation would make the readings too high."]
+],
+sort:[
+["Sort these sources of background radiation: natural or man-made?",{"Natural":["radon gas","cosmic rays","rocks such as granite","food and drink"],"Man-made":["medical X-rays","nuclear power","fallout from weapons testing"]},"Most of our background dose is natural, especially radon."],
+["Sort each property: alpha, beta or gamma?",{"Alpha":["helium nucleus","most ionising","stopped by paper"],"Beta":["fast electron","stopped by aluminium"],"Gamma":["electromagnetic wave","most penetrating","reduced by thick lead"]},"Ionising and penetrating go in opposite directions."]
+],
+order:[
+["Put the steps in order to measure the half-life of a radioactive source.",["Measure the background count rate with no source present.","Place the source near a Geiger-Müller tube and counter.","Record the count rate at regular time intervals.","Subtract the background count from each reading.","Plot a graph of corrected count rate against time.","Find the time for the count rate to halve."],"Remember to remove the background count."]
+],
+build:[
+["Explain why alpha radiation is the most ionising type of radiation.",["Alpha particles are large.","Alpha particles have a charge of +2.","So they collide with and ionise many atoms in a short distance.","This means they lose their energy quickly and are easily stopped."],["Alpha particles are electromagnetic waves.","Alpha particles have no charge."],"Big and highly charged: lots of ionisation, quickly stopped."],
+["Explain how a nuclear chain reaction happens.",["A neutron is absorbed by a large nucleus such as uranium.","The nucleus splits into two smaller nuclei.","Energy and two or three more neutrons are released.","These neutrons can cause more nuclei to split."],["Two small nuclei join together.","The neutrons are absorbed by the Sun."],"Each fission releases neutrons that start more fissions."]
+],
+spot:[
+["Describe how people working with radioactive sources can reduce their dose.",["They should keep as far away from the source as possible.","They should use shielding such as lead.","They should spend as little time near the source as possible.","They should hold the source in their hands to control it.","They should wear a film badge to monitor their dose."],3,"Sources should be handled with tongs, never held in the hand."]
+],
+write:[
+["Explain why a radioactive source used as a medical tracer should have a short half-life.",[["(activity|radioactiv).{0,30}(drop|fall|decrease|reduce|quick)|(quick|soon|fast).{0,30}(decay|less radioactive|drop)","Its activity drops quickly"],["(dose|harm|damage|exposure|less radiation|safe)","So the patient receives a smaller dose / less harm"],["long enough|enough time|time to (detect|measure|scan|take)","But it lasts long enough to be detected"]],2,"The activity drops quickly, so the patient is exposed for a short time and gets a smaller dose. It must still last long enough for the scan to be done."],
+["State what is meant by the half-life of a radioactive source.",[["time","The time taken"],["activity|count|nuclei|decay","for the activity (or number of unstable nuclei)"],["half|halve","to halve"]],3,"Half-life is the time taken for the activity of a radioactive source to halve."]
+]
+});
+
+TP("words","Exam skills","Command words and exam literacy",{
+terms:[
+["state","Give a short answer with no explanation. A word, phrase or one sentence."],
+["describe","Say what happens, step by step, without needing to give reasons."],
+["explain","Say what happens AND why it happens, using physics."],
+["predict","Say what you think will happen, based on a pattern or physics you know."],
+["suggest","Use your physics to give a sensible idea for a situation you have not met before."],
+["justify","Give the reasons that support your answer or choice."],
+["determine","Work out an answer from data, a graph or a calculation."]
+],
+tf:[
+["An 'explain' question needs a reason using physics, not just a description.","An 'explain' question only needs you to say what happens.","Explain means what AND why. Use words like 'because' and 'so'."],
+["A 'state' question usually needs only a short answer.","A 'state' question always needs a long, detailed answer.","State: one fact, one word or one sentence. Do not waste time."],
+["Open-ended questions ('Using your knowledge of physics, comment on...') have no single right answer.","Open-ended questions have one correct answer that you must find.","They reward any correct, relevant physics you explain well."],
+["Writing 'it' or 'they' can lose marks if it is not clear what you mean.","Using 'it' and 'they' is always clear enough in an exam answer.","Name the thing: 'the current', 'the particles', not 'it'."],
+["Using the correct physics word (like 'resistance' or 'frequency') makes an answer clearer.","Everyday words always get the same marks as physics words.","Markers look for precise physics terms."],
+["'Justify your answer' means you must give a reason for your choice.","'Justify your answer' means you only need to tick the right box.","Without a reason, a justify question gets no marks even with the right choice."]
+],
+mc:[
+["Which answer best fits the question 'State the unit of frequency'?","Hertz",[["Frequency is the number of waves each second, measured in hertz, because...","Too long. State needs a short answer."],["Waves per metre","That is not the unit of frequency."],["Frequency is high","That does not answer the question."]],"State: give the fact only.","h"],
+["Question: 'Explain why the lamp gets brighter when the resistor is removed.' Which answer would get full marks?","The total resistance decreases, so the current increases and the lamp gets brighter.",[["The lamp gets brighter.","That repeats what is in the question. There is no reason."],["Because it does.","There is no physics here."],["The current is different.","Too vague. Say how it changes and why."]],"An explain answer links a cause to the effect using physics words.","h"],
+["Which word in an answer shows the pupil is explaining, not just describing?","because",[["then","'Then' shows order, which is describing."],["first","'First' shows order, which is describing."],["also","'Also' adds another point but does not give a reason."]],"Words like 'because', 'so', 'this means' link cause and effect.",""],
+["Which answer best fits 'Describe how the speed of the trolley changes as it moves down the slope'?","The speed increases steadily as the trolley moves down the slope.",[["It moves.","Too vague. Say how the speed changes."],["Gravity is a force.","True, but it does not describe the change in speed."],["It accelerates because the forces are unbalanced and F = ma.","That is explaining. The question asked you to describe."]],"Describe: say what happens. You do not need to say why.",""],
+["A pupil writes: 'it goes up because of it'. What is the main problem?","It does not name what goes up or what causes it.",[["The answer is too long.","It is very short."],["It uses the word 'because'.","'Because' is good. The problem is 'it'."],["It uses physics words that are too difficult.","It uses no physics words at all."]],"Name the quantities: 'The current increases because the resistance decreases.'","h"],
+["Which answer best fits 'Suggest why the measured value was lower than the data book value'?","Some heat was lost to the surroundings.",[["The experiment was wrong.","Too vague. Name a physics reason."],["The data book value is lower.","That repeats the question in reverse."],["Because physics.","There is no physics reason given."]],"Suggest: give a sensible, specific physics reason for the situation.",""],
+["Which answer best fits 'Predict the current when the voltage is 8 V' (the table shows 2 V gives 0.5 A, 4 V gives 1.0 A)?","2.0 A",[["1.5 A","The current doubles when the voltage doubles. 4 V to 8 V doubles again."],["0.5 A","That is the current at 2 V."],["8 A","Current and voltage are not equal here."]],"Predict: use the pattern. Doubling voltage doubles current.","p"]
+],
+gap:[
+["A [state] question needs a short answer. A [describe] question says what happens. An [explain] question says what happens and [why].",["justify","when","predict"],"Read the command word before you start writing."],
+["In an answer, avoid using the word [it] on its own. Always [name] the physics [quantity].",["because","guess","story"],"Clear answers name what changes."]
+],
+sort:[
+["Sort these answers: description only, or explanation?",{"Description only":["The ball speeds up as it falls.","The lamp goes out.","The temperature stays at 0 °C."],"Explanation":["The ball speeds up because its weight is bigger than air resistance.","The lamp goes out because the circuit is broken, so no current flows.","The temperature stays at 0 °C because the energy is used to break bonds."]},"An explanation always gives a reason."]
+],
+order:[
+["Put these steps in order for answering a 'Using your knowledge of physics, comment on...' question.",["Read the question and underline the key words.","List the areas of physics it could link to.","Pick the one or two you understand best.","Write clear sentences that explain the physics.","Check you have named the quantities and used physics words."],"Quality of physics matters more than the number of ideas."]
+],
+build:[
+["Build the best answer: 'Explain why the current in a series circuit decreases when another lamp is added.'",["Adding another lamp in series increases the total resistance.","The supply voltage stays the same.","Since I = V ÷ R, the current decreases."],["The lamps use up the current.","It gets smaller because of it."],"Name the change, then link it with physics to the result."],
+["Build the best answer: 'Explain why a ball rolling on a carpet slows down.'",["There is friction between the ball and the carpet.","Friction acts in the opposite direction to the motion.","This unbalanced force makes the ball decelerate."],["The ball runs out of force.","It slows down because it does."],"Name the force, its direction, and its effect."]
+],
+spot:[
+["Explain why a skydiver reaches a terminal velocity.",["As the skydiver falls, their speed increases.","As the speed increases, it increases.","Eventually air resistance equals weight.","The forces are balanced, so the velocity is constant."],1,"'It increases' does not say what increases. It should say 'air resistance increases'."]
+],
+write:[
+["Rewrite this answer so it would get full marks: 'It got hotter so it went up.' (The question asked why the pressure in a sealed can rises when it is heated.)",[["particle","Mentions particles"],["(faster|kinetic|speed)","Particles move faster"],["(collid|hit).{0,30}(wall|side|container|more)|wall","Hit the walls more often or harder"],["pressure","Names pressure"]],3,"The gas particles gain kinetic energy and move faster. They hit the walls of the can more often and with more force, so the pressure increases."]
+]
+});
+
+TP("skills","Exam skills","Experimental skills",{
+terms:[
+["independent variable","The variable that you change in an experiment."],
+["dependent variable","The variable that you measure in an experiment."],
+["control variable","A variable kept the same so the test is fair."],
+["reliability","How consistent results are when the experiment is repeated."],
+["accuracy","How close a measurement is to the true value."],
+["random uncertainty","The spread of repeated readings. Found from (max − min) ÷ number of readings."],
+["systematic uncertainty","An error that makes all readings too high or too low by the same amount, such as a meter with a zero error."]
+],
+tf:[
+["Repeating an experiment and taking an average makes results more reliable.","Repeating an experiment makes the results less reliable.","Averaging reduces the effect of random uncertainty."],
+["A zero error on a meter is a systematic uncertainty.","A zero error is a random uncertainty.","It shifts every reading by the same amount in the same direction."],
+["Only one variable should be changed in a fair test.","In a fair test you should change as many variables as possible.","Change one variable, measure one, keep the rest the same."],
+["A line of best fit does not have to go through every point.","A line of best fit must join up every point.","It shows the trend, with points spread evenly either side."],
+["The independent variable is plotted on the x-axis.","The dependent variable is plotted on the x-axis.","What you change goes along the bottom. What you measure goes up the side."],
+["A reading that does not fit the pattern is called an outlier and should be checked.","An outlier should always be included in the average.","Repeat or check an outlier rather than letting it spoil the average."]
+],
+mc:[
+["A pupil investigates how the length of a wire affects its resistance. What is the independent variable?","Length of the wire",[["Resistance of the wire","That is what is measured, the dependent variable."],["Thickness of the wire","That should be kept the same: a control variable."],["Temperature of the wire","That should be kept the same."]],"The independent variable is the one you choose to change.","h"],
+["In the same investigation, which must be kept constant?","The material and thickness of the wire",[["The length of the wire","That is what is being changed."],["The resistance","That is what is being measured."],["Nothing needs to be kept constant","Other variables must be controlled for a fair test."]],"Control variables are kept the same so only the length affects the result.",""],
+["Times recorded: 2.4 s, 2.6 s, 2.5 s, 2.9 s, 2.6 s. What is the random uncertainty?","0.1 s",[["0.5 s","That is the range. Divide by the number of readings (5)."],["2.6 s","That is the mean, not the uncertainty."],["2.9 s","That is the biggest reading."]],"Random uncertainty = (max − min) ÷ n = (2.9 − 2.4) ÷ 5 = 0.1 s.","p"],
+["A pupil's stopwatch readings vary a lot each time. What is the best way to improve the reliability?","Repeat the measurement several times and find the average.",[["Use a ruler instead.","A ruler measures length, not time."],["Only record the first reading.","One reading gives no idea of reliability."],["Change more variables.","That makes the test unfair."]],"Repeats and averages reduce the effect of random uncertainty.",""],
+["An ammeter reads 0.1 A even when no current flows. What effect does this have?","All readings are 0.1 A too high.",[["All readings are 0.1 A too low.","It adds 0.1 A to every reading."],["The readings are spread out more.","A zero error shifts readings. It does not spread them."],["It has no effect.","It affects every reading."]],"This is a systematic uncertainty (zero error). Subtract 0.1 A from each reading.","h"],
+["Why is a light gate better than a stopwatch for timing a fast trolley?","It removes human reaction time.",[["It makes the trolley go faster.","It does not change the motion."],["It measures distance as well.","It measures time."],["It is easier to carry.","The reason is accuracy."]],"Human reaction time adds a big uncertainty when times are short.",""],
+["<div class='tscroll'><table class='dt'><tr><th>Length (m)</th><td>0.2</td><td>0.4</td><td>0.6</td><td>0.8</td></tr><tr><th>Resistance (Ω)</th><td>1.0</td><td>2.0</td><td>4.6</td><td>4.0</td></tr></table></div>Which reading is most likely to be an outlier?","4.6 Ω at 0.6 m",[["1.0 Ω at 0.2 m","It fits the pattern of 5 Ω per metre."],["4.0 Ω at 0.8 m","It fits the pattern: 0.8 × 5 = 4.0."],["2.0 Ω at 0.4 m","It fits the pattern."]],"The pattern is 5 Ω per metre, so 0.6 m should give about 3.0 Ω. 4.6 Ω does not fit.","p"],
+["What does it mean if a graph is a straight line through the origin?","The two quantities are directly proportional.",[["The two quantities are inversely proportional.","Inverse proportion gives a curve."],["There is no relationship.","A straight line shows a clear relationship."],["One quantity stays the same.","That would be a horizontal line."]],"Straight line through the origin means doubling one doubles the other.","h"]
+],
+gap:[
+["The [independent] variable is the one you change. The [dependent] variable is the one you measure. [Control] variables are kept the same.",["random","accurate","outlier"],"Change one, measure one, control the rest."],
+["Repeating readings and taking an [average] makes results more [reliable]. A reading that does not fit the pattern is an [outlier].",["total","accurate","error bar"],"Repeats help spot outliers too."]
+],
+sort:[
+["Sort these: random uncertainty or systematic uncertainty?",{"Random":["reaction time with a stopwatch","readings that vary each time","reading a scale between two marks"],"Systematic":["a meter with a zero error","a ruler that is worn at one end","a thermometer that always reads 2 °C high"]},"Random spreads readings out. Systematic shifts them all the same way."]
+],
+order:[
+["Put these in order for writing up an experiment.",["Aim","Method","Results table","Graph","Conclusion","Evaluation"],"This is the order used in the N5 assignment too."]
+],
+build:[
+["Explain how a pupil could make the results of a pendulum experiment more reliable.",["Repeat the timing several times for each length.","Calculate the average time for each length.","Time ten swings and divide by ten to find the time for one swing.","Check and repeat any results that do not fit the pattern."],["Change the mass and the length at the same time.","Only take one reading to save time."],"Repeats, averages and timing many swings all reduce the effect of random uncertainty."]
+],
+spot:[
+["Describe how to make an investigation into the length of a wire and its resistance a fair test.",["Change only the length of the wire.","Measure the resistance for each length.","Use the same type and thickness of wire each time.","Use a different wire for each length to save time.","Keep the temperature of the wire the same."],3,"Using different wires could change the material or thickness. Use the same wire."]
+],
+write:[
+["A pupil times one swing of a pendulum with a stopwatch. Suggest how they could improve their method.",[["(ten|10|many|several|multiple).{0,20}swing|swings","Time several (e.g. 10) swings and divide"],["repeat|again|more than once|several times","Repeat the measurement"],["average|mean","Take an average"],["light gate|reaction","Use a light gate to remove reaction time"]],2,"Time 10 swings and divide by 10 to find one swing. Repeat this several times and take the average. A light gate would also remove reaction time."]
+]
+});
+/* ===== engine ===== */
+const TYPES={K:"Key words",TF:"True or false",M:"Multiple choice",H:"Hinge question",P:"Problem solving",G:"Fill the gaps",S:"Sort",O:"Put in order",B:"Build an answer",X:"Spot the mistake",W:"Written answer"};
+const PRESETS=[["All types",Object.keys(TYPES)],["Literacy",["K","G","B","X","W"]],["Knowledge",["K","TF","M","H"]],["Problem solving",["P","H","O","W","S"]]];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+const strip=s=>String(s).replace(/<[^>]+>/g,"").trim().toLowerCase();
+
+/* expand topic data into items */
+function expand(t){
+  const d=t.d,items=[];let n=0;
+  const add=o=>{o.id=t.key+"."+(++n);o.topic=t.key;items.push(o);};
+  const terms=d.terms||[];
+  const others=i=>[1,2,3].map(k=>terms[(i+k)%terms.length]);
+  terms.forEach(([w,df],i)=>add({kind:"mc",type:"K",q:`Which word or phrase means this?<div class="stmt">${df}</div>`,right:w,wrong:others(i).map(o=>[o[0],`<b>${o[0]}</b> means: ${o[1]}`]),expl:`<b>${w}</b> means: ${df}`}));
+  terms.forEach(([w,df],i)=>add({kind:"mc",type:"K",q:`What does <b>${w}</b> mean?`,right:df,wrong:others(i).map(o=>[o[1],`That is the meaning of <b>${o[0]}</b>.`]),expl:`<b>${w}</b> means: ${df}`}));
+  (d.tf||[]).forEach(([tr,fa,why])=>{
+    add({kind:"tf",type:"TF",s:tr,ans:true,expl:why});
+    add({kind:"tf",type:"TF",s:fa,ans:false,expl:`${why}<p>The true version: <b>${tr}</b></p>`});
+  });
+  (d.mc||[]).forEach(([q,right,wrong,expl,f])=>add({kind:"mc",type:f==="h"?"H":f==="p"?"P":"M",q,right,wrong,expl}));
+  (d.gap||[]).forEach(([text,extra,expl])=>{
+    const parts=text.split(/\[([^\]]+)\]/);
+    add({kind:"gap",type:"G",parts,ans:parts.filter((_,i)=>i%2),extra,expl});
+  });
+  (d.sort||[]).forEach(([q,cats,expl])=>add({kind:"sort",type:"S",q,cats:Object.keys(cats),things:Object.entries(cats).flatMap(([c,arr])=>arr.map(x=>[x,c])),expl}));
+  (d.order||[]).forEach(([q,steps,expl])=>add({kind:"order",type:"O",q,steps,expl}));
+  (d.build||[]).forEach(([q,good,bad,model])=>add({kind:"build",type:"B",q,good,bad,expl:model}));
+  (d.spot||[]).forEach(([q,sents,wrongI,fix])=>add({kind:"spot",type:"X",q,sents,wrongI,expl:fix}));
+  (d.write||[]).forEach(([q,pts,need,model])=>add({kind:"write",type:"W",q,pts:pts.map(([r,p])=>[new RegExp(r,"i"),p]),need,expl:model}));
+  return items;
+}
+const ALL=[],BYID={};
+TOPICS.forEach(t=>{t.items=expand(t);t.items.forEach(it=>{ALL.push(it);BYID[it.id]=it;});});
+const TOPIC=Object.fromEntries(TOPICS.map(t=>[t.key,t]));
+
+/* storage */
+const KEY="n5theory.v1";
+let store={p:{},types:Object.keys(TYPES),skip:false,sel:[]};
+try{const s=JSON.parse(localStorage.getItem(KEY)||"null");if(s)store={...store,...s};}catch(e){}
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(store));}catch(e){}};
+store.types=store.types.filter(k=>TYPES[k]);if(!store.types.length)store.types=Object.keys(TYPES);
+store.sel=store.sel.filter(k=>TOPIC[k]);
+
+/* countdown */
+function tick(){const ms=new Date("2027-05-04T13:00:00+01:00")-new Date();const el=$("#cdt");if(ms<=0){el.textContent="Good luck";return;}
+  const d=Math.floor(ms/864e5),h=Math.floor(ms/36e5)%24,m=Math.floor(ms/6e4)%60;
+  el.innerHTML=`<span>${d}<small>days</small></span><span>${h}<small>hours</small></span><span>${m}<small>mins</small></span>`;}
+tick();setInterval(tick,30000);
+
+/* ===== home ===== */
+function progBar(items){const n=items.length||1;let g=0,a=0,r=0;items.forEach(it=>{const v=store.p[it.id];if(v==="g")g++;else if(v==="a")a++;else if(v==="r")r++;});
+  return {html:`<div class="prog"><i class="g" style="width:${g/n*100}%"></i><i class="p" style="width:${a/n*100}%"></i><i class="n" style="width:${r/n*100}%"></i></div>`,g,a,r};}
+function usable(items){return items.filter(it=>store.types.includes(it.type)&&!(store.skip&&store.p[it.id]==="g"));}
+function renderHome(){
+  $("#presets").innerHTML=PRESETS.map(([n,ks],i)=>{const on=ks.length===store.types.length&&ks.every(k=>store.types.includes(k));return `<button class="tchip" data-pre="${i}" aria-pressed="${on}">${n}</button>`;}).join("");
+  const counts={};ALL.forEach(it=>counts[it.type]=(counts[it.type]||0)+1);
+  $("#types").innerHTML=Object.entries(TYPES).map(([k,n])=>`<button class="tchip" data-type="${k}" aria-pressed="${store.types.includes(k)}">${n}<small>${counts[k]||0}</small></button>`).join("");
+  const pre=PRESETS.find(([n,ks])=>ks.length===store.types.length&&ks.every(k=>store.types.includes(k)));
+  $("#qtypeSum").textContent=pre?pre[0]:`${store.types.length} of ${Object.keys(TYPES).length} types`;
+  $("#skipGot").checked=store.skip;
+  const units=[...new Set(TOPICS.map(t=>t.unit))];
+  $("#units").innerHTML=units.map(u=>`<section class="unit"><h2>${u}</h2><div class="tiles">${TOPICS.filter(t=>t.unit===u).map(t=>{const pb=progBar(t.items);const n=usable(t.items).length;
+    return `<button class="tile${store.sel.includes(t.key)?" on":""}" data-topic="${t.key}" aria-pressed="${store.sel.includes(t.key)}"><span class="nm">${t.name}</span><span class="cnt">${n} of ${t.items.length} questions · ${pb.g+pb.a} right</span>${pb.html}</button>`;}).join("")}</div></section>`).join("");
+  const pool=usable(ALL.filter(it=>store.sel.includes(it.topic)));
+  $("#selMsg").textContent=store.sel.length?`${store.sel.length} topic${store.sel.length>1?"s":""} · ${pool.length} questions available`:"No topics picked yet";
+  $("#startBtn").disabled=!pool.length;
+  const miss=ALL.filter(it=>store.p[it.id]==="r"||store.p[it.id]==="a").length;
+  $("#redoBtn").textContent=miss?`Redo my mistakes (${miss})`:"Redo my mistakes";$("#redoBtn").disabled=!miss;
+  $("#foot").textContent=`${ALL.length} questions across ${TOPICS.length} topics. Progress is saved in this browser only.`;
+}
+document.addEventListener("click",e=>{
+  const t=e.target.closest("[data-topic]");if(t){const k=t.dataset.topic;store.sel=store.sel.includes(k)?store.sel.filter(x=>x!==k):[...store.sel,k];save();renderHome();return;}
+  const ty=e.target.closest("[data-type]");if(ty){const k=ty.dataset.type;store.types=store.types.includes(k)?store.types.filter(x=>x!==k):[...store.types,k];if(!store.types.length)store.types=[k];save();renderHome();return;}
+  const pr=e.target.closest("[data-pre]");if(pr){store.types=PRESETS[+pr.dataset.pre][1].slice();save();renderHome();}
+});
+$("#skipGot").onchange=e=>{store.skip=e.target.checked;save();renderHome();};
+$("#selAll").onclick=()=>{store.sel=TOPICS.map(t=>t.key);save();renderHome();};
+$("#selNone").onclick=()=>{store.sel=[];save();renderHome();};
+$("#resetBtn").onclick=()=>{$("#resetAsk").hidden=false;};
+$("#resetNo").onclick=()=>{$("#resetAsk").hidden=true;};
+$("#resetYes").onclick=()=>{store.p={};save();$("#resetAsk").hidden=true;renderHome();};
+$("#startBtn").onclick=()=>{const n=+$("#nq").value;startSet(usable(ALL.filter(it=>store.sel.includes(it.topic))),n,"set");};
+$("#redoBtn").onclick=()=>startSet(ALL.filter(it=>store.p[it.id]==="r"||store.p[it.id]==="a"),0,"redo");
+
+/* ===== session ===== */
+let Q=null;
+function show(id){["home","quiz","summary"].forEach(s=>$("#"+s).hidden=s!==id);window.scrollTo(0,0);}
+/* spread kinds so the set doesn't clump: shuffle then avoid same type twice in a row where possible */
+function mix(arr){const a=shuffle(arr);for(let i=1;i<a.length;i++){if(a[i].type===a[i-1].type){const j=a.findIndex((x,k)=>k>i&&x.type!==a[i-1].type);if(j>0)[a[i],a[j]]=[a[j],a[i]];}}return a;}
+function startSet(pool,n,mode){
+  let list=mix(pool);if(n)list=list.slice(0,n);
+  if(!list.length)return;
+  Q={list:list.map(it=>({it,retry:false})),i:0,res:{},mode,pool};
+  show("quiz");renderQ();
+}
+function finishItem(result){
+  const e=Q.list[Q.i],id=e.it.id;
+  if(e.retry){if(result!=="r")store.p[id]="a";}
+  else{store.p[id]=result;Q.res[id]=result;}
+  save();
+  if(result==="r"&&!e.retry){Q.list.splice(Math.min(Q.i+4,Q.list.length),0,{it:e.it,retry:true});}
+}
+
+let cur=null,tries=0,done=false;
+function renderQ(){
+  const e=Q.list[Q.i],it=e.it;tries=0;done=false;
+  $("#qtopic").textContent=TOPIC[it.topic].name;
+  $("#qtype").textContent=TYPES[it.type]+(e.retry?" · again":"");
+  $("#qtype").className="chip"+(it.type==="H"||it.type==="P"?" h":"");
+  $("#qpos").textContent=`${Q.i+1} / ${Q.list.length}`;
+  $("#qbarfill").style.width=`${Q.i/Q.list.length*100}%`;
+  $("#fb").hidden=true;$("#why").hidden=true;$("#next").hidden=true;$("#skip").hidden=false;
+  $("#check").textContent="Check";
+  const box=$("#qbox");box.innerHTML="";
+  cur=KINDS[it.kind](it,box);
+  $("#check").hidden=!cur.check;$("#check").disabled=!!cur.check;
+  if(cur.ready)cur.ready(v=>{$("#check").disabled=!v;});
+  window.scrollTo(0,0);
+}
+function feedback(cls,head,body){const f=$("#fb");f.className="fb "+cls;f.innerHTML=head+(body?`<span>${body}</span>`:"");f.hidden=false;}
+function showWhy(it,extra){const w=$("#why");w.className="mi";w.innerHTML=`<span class="lbl">The physics</span>${extra||""}${it.expl}`;w.hidden=false;}
+function settle(result,it,msg,extra){
+  done=true;finishItem(result);
+  if(result==="g")feedback("ok","Correct",msg);
+  else if(result==="a")feedback("mid","Correct on the second try",msg);
+  else feedback("no","Not this time",msg);
+  showWhy(it,extra);
+  $("#check").hidden=true;$("#skip").hidden=true;$("#next").hidden=false;$("#next").focus({preventScroll:true});
+}
+/* called by kinds: ok=true/false, wrongMsg shown when retry allowed */
+function attempt(ok,it,{maxTries=2,hint="",revealMsg="",extra=""}={}){
+  tries++;
+  if(ok){settle(tries===1?"g":"a",it,"",extra);cur.lock&&cur.lock(true);return;}
+  if(tries<maxTries){feedback("no","Not quite. Try again.",hint);cur.retry&&cur.retry();return;}
+  cur.lock&&cur.lock(false);settle("r",it,revealMsg||hint,extra);
+}
+$("#check").onclick=()=>{if(cur&&cur.check&&!done)cur.check();};
+$("#next").onclick=()=>{Q.i++;if(Q.i>=Q.list.length)summary();else renderQ();};
+$("#skip").onclick=()=>{Q.list.push(Q.list.splice(Q.i,1)[0]);if(Q.list.length===1){summary();return;}renderQ();};
+$("#back").onclick=()=>{show("home");renderHome();};
+$("#finishNow").onclick=()=>{if(Object.keys(Q.res).length)summary();else{show("home");renderHome();}};
+document.addEventListener("keydown",e=>{if($("#quiz").hidden)return;if(e.key==="Enter"&&e.target.tagName!=="TEXTAREA"){if(!$("#next").hidden){e.preventDefault();$("#next").click();}else if(!$("#check").hidden&&!$("#check").disabled){e.preventDefault();$("#check").click();}}});
+
+function summary(){
+  show("summary");const ids=Object.keys(Q.res);const v=ids.map(i=>Q.res[i]);
+  const g=v.filter(x=>x==="g").length,a=v.filter(x=>x==="a").length,r=v.filter(x=>x==="r").length;
+  $("#sscore").textContent=`${g+a} / ${ids.length}`;
+  $("#summary .eyebrow").textContent=Q.i<Q.list.length?`Finished early · ${ids.length} of ${new Set(Q.list.map(x=>x.it.id)).size} questions answered`:"Set finished";
+  $("#sline").textContent=`${g} right first time · ${a} on the second try · ${r} answer shown`;
+  const byT={};ids.forEach(id=>{const t=BYID[id].topic;(byT[t]=byT[t]||[]).push(Q.res[id]);});
+  $("#slist").innerHTML=Object.entries(byT).map(([t,arr])=>{const ok=arr.filter(x=>x!=="r").length;const col=ok===arr.length?"var(--good)":ok>=arr.length/2?"var(--part)":"var(--bad)";return `<div class="sl"><i style="background:${col}"></i><span>${TOPIC[t].name}: ${ok} of ${arr.length}</span></div>`;}).join("");
+  const missed=ids.filter(id=>Q.res[id]==="r").map(id=>BYID[id]);
+  $("#smiss").hidden=!missed.length;
+  $("#smiss").onclick=()=>startSet(missed,0,"redo");
+  $("#sagain").onclick=()=>{if(Q.mode==="set")startSet(usable(ALL.filter(it=>store.sel.includes(it.topic))),+$("#nq").value,"set");else{show("home");renderHome();}};
+  $("#sagain").hidden=Q.mode!=="set";
+}
+$("#shome").onclick=()=>{show("home");renderHome();};
+
+/* ===== question kinds ===== */
+const L="ABCDEFG";
+const KINDS={
+  mc(it,box){
+    const opts=shuffle([[it.right,null],...it.wrong]);
+    box.innerHTML=`<div class="qtext">${it.q}</div><div class="opts">${opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="k">${L[i]}</span><span>${o[0]}</span></button>`).join("")}</div>`;
+    const btns=[...box.querySelectorAll(".opt")];
+    btns.forEach(b=>b.onclick=()=>{if(done)return;const o=opts[+b.dataset.i];
+      if(o[1]===null){b.classList.add("ok");btns.forEach(x=>x.disabled=true);attempt(true,it);}
+      else{b.classList.add("no");b.disabled=true;
+        const rb=btns.find(x=>opts[+x.dataset.i][1]===null);
+        attempt(false,it,{hint:o[1],revealMsg:o[1]});
+        if(done){rb.classList.add("ok");btns.forEach(x=>{x.disabled=true;if(!x.classList.contains("ok")&&!x.classList.contains("no"))x.classList.add("dim");});}}
+    });
+    return {};
+  },
+  tf(it,box){
+    box.innerHTML=`<div class="qtext">Is this statement true or false?</div><div class="stmt">${it.s}</div><div class="tf"><button class="opt" data-v="1">True</button><button class="opt" data-v="0">False</button></div>`;
+    const btns=[...box.querySelectorAll(".opt")];
+    btns.forEach(b=>b.onclick=()=>{if(done)return;const v=b.dataset.v==="1";btns.forEach(x=>x.disabled=true);
+      b.classList.add(v===it.ans?"ok":"no");if(v!==it.ans)btns.find(x=>(x.dataset.v==="1")===it.ans).classList.add("ok");
+      attempt(v===it.ans,it,{maxTries:1,revealMsg:`The statement is ${it.ans?"true":"false"}.`});});
+    return {};
+  },
+  gap(it,box){
+    const words=shuffle([...it.ans,...it.extra]);
+    const fill=it.ans.map(()=>null);let sel=0;let ready=()=>{};
+    box.innerHTML=`<div class="qtext" style="margin-bottom:6px">Fill each gap with a word from the list.</div><p class="gaptext">${it.parts.map((p,i)=>i%2?`<button class="slot" data-s="${(i-1)/2}">&nbsp;</button>`:p).join("")}</p><div class="bank">${words.map((w,i)=>`<button class="word" data-w="${i}">${w}</button>`).join("")}</div>`;
+    const slots=[...box.querySelectorAll(".slot")],wb=[...box.querySelectorAll(".word")];
+    const draw=()=>{slots.forEach((s,i)=>{s.innerHTML=fill[i]===null?"&nbsp;":words[fill[i]];s.classList.toggle("fill",fill[i]!==null);s.classList.toggle("cur",i===sel&&!done);});
+      wb.forEach((b,i)=>b.disabled=done||fill.includes(i));ready(fill.every(x=>x!==null));};
+    slots.forEach((s,i)=>s.onclick=()=>{if(done)return;if(fill[i]!==null){fill[i]=null;}sel=i;s.classList.remove("ok","no");draw();});
+    wb.forEach((b,i)=>b.onclick=()=>{if(done)return;let k=fill[sel]===null?sel:fill.findIndex(x=>x===null);if(k<0)return;fill[k]=i;slots[k].classList.remove("ok","no");const nx=fill.findIndex(x=>x===null);sel=nx<0?k:nx;draw();});
+    draw();
+    return {ready:f=>{ready=f;draw();},
+      check(){const res=fill.map((w,i)=>strip(words[w])===strip(it.ans[i]));
+        res.forEach((r,i)=>{slots[i].classList.toggle("ok",r);slots[i].classList.toggle("no",!r);});
+        const ok=res.every(Boolean);const nw=res.filter(r=>!r).length;
+        attempt(ok,it,{hint:`${nw} gap${nw>1?"s are":" is"} wrong. Tap a red gap to clear it.`,revealMsg:"The red gaps are shown with the right word below."});
+        draw();
+        if(done&&!ok){res.forEach((r,i)=>{if(!r)slots[i].innerHTML=`<s>${words[fill[i]]}</s> ${it.ans[i]}`;});}}};
+  },
+  sort(it,box){
+    const things=shuffle(it.things);const pick=things.map(()=>null);let ready=()=>{};
+    box.innerHTML=`<div class="qtext">${it.q}</div><div class="sitems">${things.map(([t],i)=>`<div class="sitem" data-i="${i}"><div class="st">${t}</div><div class="sb">${it.cats.map((c,j)=>`<button data-c="${j}" aria-pressed="false">${c}</button>`).join("")}</div><div class="fix" hidden></div></div>`).join("")}</div>`;
+    const rows=[...box.querySelectorAll(".sitem")];
+    rows.forEach((r,i)=>r.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{if(done)return;pick[i]=+b.dataset.c;r.classList.remove("ok","no");r.querySelectorAll("[data-c]").forEach(x=>x.setAttribute("aria-pressed",x===b));ready(pick.every(x=>x!==null));}));
+    return {ready:f=>ready=f,
+      check(){const res=things.map(([t,c],i)=>it.cats[pick[i]]===c);
+        rows.forEach((r,i)=>{r.classList.toggle("ok",res[i]);r.classList.toggle("no",!res[i]);});
+        const nw=res.filter(x=>!x).length;
+        attempt(!nw,it,{hint:`${nw} ${nw>1?"are":"is"} in the wrong group. Change the red ones.`});
+        if(done&&nw)rows.forEach((r,i)=>{if(!res[i]){const f=r.querySelector(".fix");f.textContent="Belongs in: "+things[i][1];f.hidden=false;}});
+        if(done)rows.forEach(r=>r.querySelectorAll("button").forEach(b=>b.disabled=true));}};
+  },
+  order(it,box){return seqKind(it,box,shuffle(it.steps.map((s,i)=>({s,i}))),"Tap the steps in the right order.","Your order appears here");},
+  build(it,box){return seqKind(it,box,shuffle([...it.good.map((s,i)=>({s,i,g:true})),...it.bad.map(s=>({s,g:false}))]),"Tap the sentences that make a full, correct answer. Leave out the wrong ones.","Your answer builds up here");},
+  spot(it,box){
+    box.innerHTML=`<div class="qtext">${it.q}</div><div class="inst">A pupil wrote this answer. One sentence has a physics mistake. Tap it.</div><div class="ans">${it.sents.map((s,i)=>`<button class="sent" data-i="${i}">${s}</button>`).join("")}</div>`;
+    const btns=[...box.querySelectorAll(".sent")];
+    btns.forEach(b=>b.onclick=()=>{if(done)return;const i=+b.dataset.i;
+      if(i===it.wrongI){b.classList.add("ok");btns.forEach(x=>x.disabled=true);attempt(true,it);}
+      else{b.classList.add("no");b.disabled=true;attempt(false,it,{hint:"That sentence is correct physics. Look again.",revealMsg:"The highlighted sentence is the wrong one."});
+        if(done){btns[it.wrongI].classList.add("was");btns.forEach(x=>x.disabled=true);}}});
+    return {};
+  },
+  write(it,box){
+    let stage=0,ready=()=>{};
+    box.innerHTML=`<div class="qtext">${it.q}</div><div class="inst">Write your answer in full sentences. Then compare it with the marking points.</div><textarea id="wta" spellcheck="true" placeholder="Type your answer here"></textarea><div id="wpts"></div>`;
+    const ta=box.querySelector("textarea");ta.oninput=()=>ready(ta.value.trim().split(/\s+/).length>=3);
+    $("#check").textContent="Mark my answer";
+    const c={ready:f=>ready=f,
+      check(){
+        if(stage===0){stage=1;ta.readOnly=true;const txt=ta.value;
+          const got=it.pts.map(([re])=>re.test(txt));
+          box.querySelector("#wpts").innerHTML=`<div class="lbl2">Marking points · ${it.need} needed for full marks</div><div class="msg" style="margin-top:4px">Ticked points were found in your answer. If you clearly made a point that was missed, tick it yourself. Be honest.</div><div class="pts">${it.pts.map(([,p],i)=>`<div class="pt${got[i]?" got":""}"><input type="checkbox" id="wp${i}" ${got[i]?"checked":""}><label for="wp${i}">${p}</label></div>`).join("")}</div>`;
+          box.querySelectorAll(".pt input").forEach(x=>x.onchange=()=>x.parentNode.classList.toggle("got",x.checked));
+          $("#check").textContent="Confirm my mark";return;}
+        const n=[...box.querySelectorAll(".pt input")].filter(x=>x.checked).length;
+        box.querySelectorAll(".pt input").forEach(x=>x.disabled=true);
+        $("#check").textContent="Check";
+        tries=0;attempt(n>=it.need,it,{maxTries:1,revealMsg:`You made ${n} of the ${it.need} points needed.`,extra:"<b>Model answer:</b> "});
+      }};
+    return c;
+  }
+};
+/* shared: tap-to-sequence for order and build */
+function seqKind(it,box,pieces,inst,empty){
+  let chosen=[];let ready=()=>{};const isBuild=it.kind==="build";
+  box.innerHTML=`<div class="qtext">${it.q}</div><div class="inst">${inst}</div><div class="built" data-empty="${empty}"></div><div class="lbl2">${isBuild?"Sentences to choose from":"Steps"}</div><div class="pool"></div>`;
+  const built=box.querySelector(".built"),pool=box.querySelector(".pool");
+  const draw=()=>{
+    built.innerHTML=chosen.map((p,k)=>`<button class="piece" data-c="${k}"><span class="n">${k+1}</span><span>${p.s}</span></button>`).join("");
+    pool.innerHTML=pieces.map((p,k)=>chosen.includes(p)?"":`<button class="piece" data-p="${k}"><span class="n">+</span><span>${p.s}</span></button>`).join("");
+    built.querySelectorAll("[data-c]").forEach(b=>b.onclick=()=>{if(done)return;chosen.splice(+b.dataset.c,1);draw();});
+    pool.querySelectorAll("[data-p]").forEach(b=>b.onclick=()=>{if(done)return;chosen.push(pieces[+b.dataset.p]);draw();});
+    ready(isBuild?chosen.length>0:chosen.length===pieces.length);
+  };
+  draw();
+  return {ready:f=>{ready=f;draw();},
+    check(){
+      let ok,hint;
+      if(isBuild){const nGood=it.good.length;const gotGood=chosen.filter(p=>p.g).length,gotBad=chosen.filter(p=>!p.g).length;
+        ok=gotGood===nGood&&!gotBad;
+        hint=gotBad?`${gotBad} of your sentences ${gotBad>1?"are":"is"} wrong physics. Tap to remove ${gotBad>1?"them":"it"}.`:`Your answer is missing ${nGood-gotGood} sentence${nGood-gotGood>1?"s":""}.`;
+        if(gotBad&&gotGood<nGood)hint+=` It is also missing ${nGood-gotGood}.`;
+      }else{ok=chosen.every((p,k)=>p.i===k);const right=chosen.filter((p,k)=>p.i===k).length;hint=`${right} of ${pieces.length} are in the right place. Tap a step to take it out.`;}
+      attempt(ok,it,{hint});
+      if(done){
+        if(!ok){built.innerHTML=`<div class="lbl2" style="margin:0">Correct ${isBuild?"answer":"order"}</div>`+(isBuild?it.good:it.steps).map((s,k)=>`<div class="piece ok"><span class="n">${k+1}</span><span>${s}</span></div>`).join("");}
+        else built.querySelectorAll(".piece").forEach(b=>{b.classList.add("ok");b.disabled=true;});
+        pool.querySelectorAll(".piece").forEach(b=>{b.disabled=true;});
+        if(isBuild&&!ok)pool.querySelectorAll(".piece").forEach(b=>{if(!pieces[+b.dataset.p].g)b.classList.add("no");});
+      }
+    }};
+}
+renderHome();
+</script>
+
+</body>
+</html>

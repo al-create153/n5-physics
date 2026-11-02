@@ -1,0 +1,784 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>N5 Physics Equation Bank</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: same instrument-panel look as the Question Bank; formula tiles grouped by course area, one exam "sheet" per question with an answer bar beneath */
+:root{
+  --bg:#edf0f4; --surface:#ffffff; --ink:#152031; --muted:#56627a; --line:#cfd6e2;
+  --accent:#2549a8; --accent-ink:#ffffff; --tile:#e2e8f2; --mark:#8f4a0c; --mark-bg:#fbf1e4;
+  --good:#1f7a3a; --good-bg:#e3f3e8; --part:#946300; --part-bg:#fbf1d6; --bad:#a8322b; --bad-bg:#f9e3e1;
+  --sheet:#ffffff; --sheet-ink:#152031;
+  --f-body:"Atkinson Hyperlegible",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141c; --surface:#171e2a; --ink:#e3e8f1; --muted:#97a3b8; --line:#2b3546;
+  --accent:#7da0f2; --accent-ink:#0b1630; --tile:#1c2533; --mark:#f2ae6e; --mark-bg:#2c2016;
+  --good:#6fd08d; --good-bg:#173323; --part:#e8c15a; --part-bg:#33290f; --bad:#f08a82; --bad-bg:#3a1c1a;
+  --sheet:#1b2230; --sheet-ink:#e3e8f1; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141c; --surface:#171e2a; --ink:#e3e8f1; --muted:#97a3b8; --line:#2b3546;
+  --accent:#7da0f2; --accent-ink:#0b1630; --tile:#1c2533; --mark:#f2ae6e; --mark-bg:#2c2016;
+  --good:#6fd08d; --good-bg:#173323; --part:#e8c15a; --part-bg:#33290f; --bad:#f08a82; --bad-bg:#3a1c1a;
+  --sheet:#1b2230; --sheet-ink:#e3e8f1; color-scheme:dark}
+body{background:var(--bg);color:var(--ink);font:16px/1.5 var(--f-body)}
+.wrap{max-width:60rem;margin:0 auto;padding-block:20px 48px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:10px 16px;margin-bottom:18px}
+h1{font-size:1.65rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{text-wrap:balance}
+.eyebrow{font:600 .72rem var(--f-mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.unit{margin-top:22px}
+.unit h2{font:600 .78rem var(--f-mono);margin:0 0 10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.tile{all:unset;box-sizing:border-box;cursor:pointer;background:var(--tile);border:1px solid var(--line);border-radius:6px;padding:12px;display:grid;grid-template-rows:1fr auto auto;gap:6px;min-height:92px}
+.tile:hover{border-color:var(--accent)}
+.tile:focus-visible,button:focus-visible,select:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tile .eq{font:600 1.05rem var(--f-mono);color:var(--accent);line-height:1.3}
+.cnt{font:500 .72rem var(--f-mono);color:var(--muted)}
+.eq sub,.eq sup,.qtext sub,.qtext sup,.mi sub,.mi sup{font-size:.7em}
+.frac{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;line-height:1.1;font-size:.94em;margin:0 2px}
+.frac>span:first-child{border-bottom:1px solid currentColor;padding:0 3px}
+.frac>span:last-child{padding:0 3px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+button.b{font:700 .9rem var(--f-body);border-radius:6px;padding:9px 14px;cursor:pointer;border:1px solid var(--line);background:var(--surface);color:var(--ink)}
+button.b:hover{border-color:var(--accent)}
+button.b.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.b:disabled{opacity:.45;cursor:default}
+button.b.sm{padding:6px 10px;font-size:.82rem}
+button.b.ghost{background:transparent;border-color:transparent;color:var(--muted)}
+button.b.ghost:hover{border-color:var(--line);color:var(--ink)}
+button.b.danger{color:var(--bad)}
+select,input[type=text]{font:inherit;padding:9px 10px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--ink);max-width:100%}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;margin-top:14px}
+.panel h2{margin:0 0 8px;font-size:1.1rem}
+.filters{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;font-size:.92rem}
+.filters label{display:inline-flex;gap:6px;align-items:center;cursor:pointer}
+.msg{font-size:.86rem;color:var(--muted)}
+.row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;align-items:center}
+.prog{height:5px;border-radius:3px;background:var(--line);overflow:hidden;display:flex}
+.prog i{display:block;height:100%}.prog .g{background:var(--good)}.prog .p{background:var(--part)}.prog .n{background:var(--bad)}
+.countdown{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:6px 14px;background:var(--accent);color:var(--accent-ink);border-radius:6px;padding:10px 14px;margin-bottom:16px}
+.cdl{font-weight:700}
+.cdt{display:flex;gap:12px;font:600 1rem var(--f-mono);font-variant-numeric:tabular-nums}
+.cdt span{display:inline-flex;flex-direction:column;align-items:center;line-height:1.1}
+.cdt small{font:500 .62rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:14px}
+.col{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;min-width:0}
+.col h2{margin:0 0 4px;font-size:1.05rem}
+.qs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.qb{font:600 .8rem var(--f-mono);min-width:2.6rem;padding:6px 7px;border-radius:4px;border:1px solid var(--line);background:var(--tile);color:var(--ink);cursor:pointer;text-align:center;font-variant-numeric:tabular-nums}
+.qb small{font-weight:500;opacity:.8;margin-left:3px}
+.qb small sub{font-size:.75em}
+.qb:hover{border-color:var(--accent)}
+.qb.g{background:var(--good-bg);border-color:var(--good);color:var(--good)}
+.qb.a{background:var(--part-bg);border-color:var(--part);color:var(--part)}
+.qb.r{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.key{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.8rem;color:var(--muted);margin-top:8px}
+.key i{display:inline-block;width:.8rem;height:.8rem;border-radius:2px;vertical-align:-1px;margin-right:4px;border:1px solid}
+.qbar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding-bottom:10px;border-bottom:1px solid var(--line);margin-bottom:12px}
+.qtitle{font-weight:700;font-size:1.02rem}
+.qtitle .eq{font-family:var(--f-mono);color:var(--accent)}
+.qspace{flex:1}
+@media (max-width:480px){.qspace{display:none}.qtitle{flex:1 1 60%;min-width:0}}
+.chip{font:600 .72rem var(--f-mono);padding:3px 8px;border-radius:4px;background:var(--tile);border:1px solid var(--line);color:var(--muted)}
+.sheet{background:var(--sheet);color:var(--sheet-ink);border:1px solid var(--line);border-radius:4px;padding:18px 18px 20px}
+.qhead{font:600 .8rem var(--f-mono);color:var(--muted);margin-bottom:6px}
+.qtext{font-size:1.12rem;line-height:1.6;max-width:62ch;margin:0}
+.nv{white-space:nowrap}
+.marks{font:600 .85rem var(--f-mono);text-align:right;color:var(--muted);margin-top:6px}
+.ansbar{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,11rem) auto;gap:8px;margin-top:12px;align-items:end}
+.ansbar label{display:grid;gap:4px;font-size:.8rem;color:var(--muted);min-width:0}
+.ansbar input{font:600 1.15rem var(--f-mono);width:100%;box-sizing:border-box}
+.ansbar select{font:600 1rem var(--f-mono);width:100%;box-sizing:border-box;padding:10px}
+@media (max-width:480px){.ansbar{grid-template-columns:minmax(0,1fr) minmax(0,8.5rem)}.ansbar .go{grid-column:1/-1}}
+.fb{margin-top:10px;padding:10px 12px;border-radius:6px;border:1px solid var(--line);font-weight:700}
+.fb.ok{background:var(--good-bg);border-color:var(--good);color:var(--good)}
+.fb.mid{background:var(--part-bg);border-color:var(--part);color:var(--part)}
+.fb.no{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.mi{background:var(--mark-bg);border:1px solid var(--line);border-radius:4px;padding:14px 16px;margin-top:12px}
+.mi .lbl{font:600 .75rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--mark)}
+.mrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:center;padding:7px 0;border-bottom:1px dashed var(--line);font:500 1.08rem var(--f-mono);overflow-x:auto}
+.mrow:last-of-type{border-bottom:0}
+.mrow b{font-size:.85rem;color:var(--mark)}
+.acc{margin:8px 0 0;font-size:.88rem;color:var(--muted)}
+.acc span{font-family:var(--f-mono);color:var(--ink);white-space:nowrap}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);box-sizing:border-box;background:var(--surface);border-left:1px solid var(--line);z-index:20;overflow-y:auto;padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-bottom:calc(16px + env(safe-area-inset-bottom,0px));box-shadow:-8px 0 30px rgba(0,0,0,.18)}
+.rels{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:4px 14px;font:500 .95rem var(--f-mono)}
+.rels div{padding:7px 8px;border-bottom:1px solid var(--line)}
+.rels sub,.rels sup{font-size:.7em}
+table.dt{border-collapse:collapse;width:100%;font-size:.92rem;margin-top:6px}
+table.dt td,table.dt th{border-bottom:1px solid var(--line);padding:6px 8px;text-align:left}
+table.dt td:last-child{font-family:var(--f-mono);font-variant-numeric:tabular-nums}
+.tlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}
+.tlist label{display:flex;gap:6px;align-items:center;font:500 .88rem var(--f-mono);padding:5px 6px;border:1px solid var(--line);border-radius:4px;background:var(--tile);cursor:pointer}
+.seglbl{font:600 .72rem var(--f-mono);color:var(--muted);margin:12px 0 6px;letter-spacing:.06em;text-transform:uppercase}
+.score{font:600 2rem var(--f-mono)}
+.confirm{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+.foot{color:var(--muted);font-size:.78rem;margin-top:28px;max-width:70ch}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<div class="wrap">
+  <div class="countdown"><span class="cdl">N5 Physics exam · Tuesday 4 May 2027, 1:00 pm</span><span class="cdt" id="cdt"></span></div>
+
+  <div id="home">
+    <header class="top">
+      <div><div class="eyebrow">National 5 Physics · relationships sheet</div><h1>Equation practice</h1></div>
+      <div class="bar"><button class="b" data-sheet="data">Data sheet</button><button class="b" data-sheet="rel">Relationships</button></div>
+    </header>
+    <div class="panel">
+      <h2>Practice settings</h2>
+      <div class="filters">
+        <label><input type="checkbox" id="skipGot"> Skip questions I got right first time</label>
+      </div>
+      <div class="bar" style="margin-top:10px"><button class="b pri" id="mixBtn">Mixed practice across formulas</button><span class="msg" id="overall"></span></div>
+    </div>
+    <div id="units"></div>
+    <div class="panel">
+      <h2>How answers are marked</h2>
+      <p class="msg" style="margin:0;max-width:70ch">Type your number and choose a unit. Your answer is right if it is rounded to the same number of significant figures as the least precise value in the question, or one fewer, or up to two more. You can use any sensible prefix, so 2.4 kJ and 2400 J are both fine. For large or small numbers type 3.0e8 or 3.0x10^8.</p>
+      <div class="key"><span><i style="background:var(--good-bg);border-color:var(--good)"></i>Right first time</span><span><i style="background:var(--part-bg);border-color:var(--part)"></i>Right after another try</span><span><i style="background:var(--bad-bg);border-color:var(--bad)"></i>Answer shown</span></div>
+      <div class="bar" style="margin-top:12px"><button class="b sm danger" id="resetBtn">Reset all progress</button></div>
+      <div class="confirm" id="resetAsk" hidden><span class="msg">Clear every result on this device?</span><button class="b sm danger" id="resetYes">Yes, clear it</button><button class="b sm" id="resetNo">Cancel</button></div>
+    </div>
+    <p class="foot">Progress is saved in this browser only. Questions are fixed, so number 12 for a formula is the same question every time.</p>
+  </div>
+
+  <div id="menu" hidden>
+    <div class="row"><button class="b" id="mback">← Formulas</button><div class="bar"><button class="b" data-sheet="data">Data sheet</button><button class="b" data-sheet="rel">Relationships</button></div></div>
+    <div class="eyebrow" id="munit" style="margin-top:16px"></div>
+    <h1 id="mtitle" class="eq" style="font-family:var(--f-mono)"></h1>
+    <div class="bar" style="margin-top:10px"><button class="b pri" id="mstart">Start</button><span class="msg" id="mstat"></span></div>
+    <div class="cols" id="mcols"></div>
+  </div>
+
+  <div id="mix" hidden>
+    <div class="row"><button class="b" id="xback">← Formulas</button></div>
+    <h1 style="margin-top:14px">Mixed practice</h1>
+    <div class="panel">
+      <div class="bar" style="margin-bottom:6px"><button class="b sm" id="xall">Select all</button><button class="b sm" id="xnone">Clear</button></div>
+      <div id="xtopics"></div>
+    </div>
+    <div class="panel">
+      <div class="filters">
+        <label><input type="checkbox" id="xk0" checked> Non-rearranging</label>
+        <label><input type="checkbox" id="xk1" checked> Rearranging</label>
+        <label><input type="checkbox" id="xk2" checked> Random</label>
+        <label>Questions <select id="xn"><option>5</option><option selected>10</option><option>20</option><option>30</option></select></label>
+      </div>
+      <div class="bar" style="margin-top:10px"><button class="b pri" id="xstart">Start</button><span class="msg" id="xmsg"></span></div>
+    </div>
+  </div>
+
+  <div id="quiz" hidden>
+    <div class="qbar">
+      <button class="b sm" id="back" aria-label="Back">←</button>
+      <span class="qtitle"><span class="eq" id="qeq"></span> · Q<span id="qnum"></span></span>
+      <span class="chip" id="qsec"></span>
+      <span class="qspace"></span>
+      <span class="msg" id="qpos"></span>
+      <button class="b sm ghost" data-sheet="data">Data sheet</button>
+      <button class="b sm ghost" data-sheet="rel">Relationships</button>
+    </div>
+    <div class="sheet">
+      <p class="qtext" id="qtext"></p>
+      <div class="marks">3</div>
+    </div>
+    <form class="ansbar" id="aform" autocomplete="off">
+      <label for="ain">Answer<input type="text" id="ain" inputmode="text" spellcheck="false" placeholder="e.g. 2.4"></label>
+      <label for="aunit">Unit<select id="aunit"></select></label>
+      <button class="b pri go" type="submit" id="acheck">Check</button>
+    </form>
+    <div id="fb" class="fb" hidden></div>
+    <div id="sol" hidden></div>
+    <div class="row" style="margin-top:14px">
+      <button class="b" id="showAns">Show answer</button>
+      <div class="bar"><button class="b" id="prev">Previous</button><button class="b" id="rand">Random</button><button class="b pri" id="next">Next</button></div>
+    </div>
+  </div>
+
+  <div id="summary" hidden>
+    <h1>Practice finished</h1>
+    <div class="panel"><div class="score" id="sscore"></div><div id="slist" class="msg"></div>
+    <div class="bar" style="margin-top:12px"><button class="b pri" id="sagain">Another set</button><button class="b" id="shome">Formulas</button></div></div>
+  </div>
+</div>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="row"><h2 style="margin:0;font-size:1.15rem" id="dtitle"></h2><button class="b sm" id="dclose">Close</button></div>
+  <div id="dbody" style="margin-top:12px"></div>
+</div>
+
+<script>
+/* ---------- helpers ---------- */
+const $=id=>document.getElementById(id);
+function hash(s){let h=1779033703^s.length;for(let i=0;i<s.length;i++){h=Math.imul(h^s.charCodeAt(i),3432918353);h=h<<13|h>>>19}return()=>{h=Math.imul(h^h>>>16,2246822507);h=Math.imul(h^h>>>13,3266489909);return(h^=h>>>16)>>>0}}
+function rng(seed){const sd=hash(seed);let a=sd();return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const pick=(r,a)=>a[Math.floor(r()*a.length)];
+const rl=(r,a,b)=>a*Math.pow(b/a,r());
+const sfp=r=>r()<0.5?2:3;
+const frac=(a,b)=>`<span class="frac"><span>${a}</span><span>${b}</span></span>`;
+const art=w=>/^[aeiou]/i.test(w)?'an':'a';
+const cap=s=>s.charAt(0).toUpperCase()+s.slice(1);
+const list=a=>a.length<2?a.join(''):a.slice(0,-1).join(', ')+' and '+a[a.length-1];
+function fmt(v,sf){
+  if(v===0)return{t:'0',h:'0'};
+  const a=Math.abs(v);
+  if(a>=1e5||a<1e-3){let e=Math.floor(Math.log10(a));let m=(v/Math.pow(10,e)).toPrecision(sf);if(Math.abs(+m)>=10){e++;m=(v/Math.pow(10,e)).toPrecision(sf)}
+    return{t:m,h:`${m} × 10<sup>${e<0?'−'+(-e):e}</sup>`}}
+  let s=v.toPrecision(sf);if(/e/.test(s))s=String(+s);return{t:s,h:s}}
+function cntSF(t){t=String(t).replace(/^[-−+]/,'');if(t.includes('.'))return Math.max(1,t.replace('.','').replace(/^0+/,'').length);const s=t.replace(/^0+/,'').replace(/0+$/,'');return Math.max(1,s.length)}
+function tC(r,lo,hi){let n,k=0;do{n=Math.round(lo+(hi-lo)*r());k++}while(k<80&&(Math.abs(n)<11||n%10===0||(n+273)%10===0));return n}
+const ESER=[12,15,18,22,27,33,39,47,56,68,82];
+const resE=(r,lo,hi)=>{let v,k=0;do{v=pick(r,ESER)*pick(r,[1,10,100,1000]);k++}while(k<60&&(v<lo||v>hi));return v};
+
+/* ---------- units ---------- */
+const UL=[
+['—',{none:[1,0]}],
+['m',{len:[1,0]}],['km',{len:[1e3,0]}],['cm',{len:[1e-2,0]}],['mm',{len:[1e-3,0]}],
+['s',{time:[1,0]}],['ms',{time:[1e-3,0]}],['min',{time:[60,0]}],['h',{time:[3600,0]}],
+['m s⁻¹',{spd:[1,0]}],['m s⁻²',{acc:[1,0]}],
+['kg',{mass:[1,0]}],['g',{mass:[1e-3,0]}],
+['N',{force:[1,0]}],['N kg⁻¹',{gfs:[1,0]}],
+['J',{energy:[1,0]}],['kJ',{energy:[1e3,0]}],['MJ',{energy:[1e6,0]}],['mJ',{energy:[1e-3,0]}],['µJ',{energy:[1e-6,0]}],
+['W',{power:[1,0]}],['kW',{power:[1e3,0]}],['MW',{power:[1e6,0]}],
+['J kg⁻¹ °C⁻¹',{shc:[1,0]}],['J kg⁻¹',{lat:[1,0]}],
+['K',{tabs:[1,0],dT:[1,0]}],['°C',{tabs:[1,273],dT:[1,0]}],
+['Pa',{press:[1,0]}],['kPa',{press:[1e3,0]}],
+['m²',{area:[1,0]}],['cm²',{area:[1e-4,0]}],
+['m³',{vol:[1,0]}],['cm³',{vol:[1e-6,0]}],['l',{vol:[1e-3,0]}],
+['C',{charge:[1,0]}],
+['A',{cur:[1,0]}],['mA',{cur:[1e-3,0]}],
+['V',{volt:[1,0]}],['kV',{volt:[1e3,0]}],['mV',{volt:[1e-3,0]}],
+['Ω',{res:[1,0]}],['kΩ',{res:[1e3,0]}],['MΩ',{res:[1e6,0]}],
+['Hz',{freq:[1,0]}],['kHz',{freq:[1e3,0]}],['MHz',{freq:[1e6,0]}],
+['Bq',{act:[1,0]}],['kBq',{act:[1e3,0]}],['MBq',{act:[1e6,0]}],
+['Gy',{dose:[1,0]}],['mGy',{dose:[1e-3,0]}],['µGy',{dose:[1e-6,0]}],
+['Sv',{heq:[1,0]}],['mSv',{heq:[1e-3,0]}],['µSv',{heq:[1e-6,0]}],
+['Sv h⁻¹',{hrate:[1,0]}],['mSv h⁻¹',{hrate:[1e-3,0]}],['µSv h⁻¹',{hrate:[1e-6,0]}]];
+const U={};UL.forEach(([l,d])=>U[l]=d);
+const BASE={none:'—',len:'m',time:'s',spd:'m s⁻¹',acc:'m s⁻²',mass:'kg',force:'N',gfs:'N kg⁻¹',energy:'J',power:'W',shc:'J kg⁻¹ °C⁻¹',lat:'J kg⁻¹',tabs:'K',dT:'°C',press:'Pa',area:'m²',vol:'m³',charge:'C',cur:'A',volt:'V',res:'Ω',freq:'Hz',act:'Bq',dose:'Gy',heq:'Sv',hrate:'Sv h⁻¹'};
+const PFX={energy:['kJ','MJ','mJ','µJ'],mass:['g'],len:['km','cm','mm'],time:['min','ms'],power:['kW','MW'],press:['kPa'],area:['cm²'],vol:['cm³','l'],cur:['mA'],volt:['kV','mV'],res:['kΩ','MΩ'],freq:['kHz','MHz'],act:['kBq','MBq'],dose:['mGy','µGy'],heq:['mSv','µSv'],tabs:['°C']};
+const ul=u=>u==='—'?'':u;
+
+/* ---------- objects ---------- */
+// name, mass range kg, speed range m/s, acceleration range m/s²
+const OBJ=[['car',800,1600,8,32,0.8,4],['cyclist',60,95,3,12,0.3,2],['runner',50,90,2.5,9,0.4,3],['lorry',3500,38000,6,25,0.3,1.5],['train',40000,400000,10,55,0.2,1.2],['skateboarder',40,80,2,8,0.3,2],['bus',9000,18000,5,20,0.4,1.8],['drone',0.8,6,2,18,0.5,5],['boat',300,5000,2,14,0.2,1.5],['trolley',0.5,2.5,0.2,3,0.2,2]];
+const TRAVEL=OBJ.filter(o=>!['trolley','skateboarder'].includes(o[0]));
+const PLANETS=[['Mercury',3.7],['Venus',8.9],['Mars',3.7],['Jupiter',23],['Saturn',9.0],['Uranus',8.7],['Neptune',11],['the Moon',1.6]];
+const SHC=[['water',4180],['aluminium',902],['copper',386],['iron',480],['lead',128],['alcohol',2350],['glycerol',2400]];
+const LAT=[['ice','water','fusion','melt','melts',3.34e5,'melting point'],['water','water','vaporisation','turn into steam','turns into steam',22.6e5,'boiling point'],['alcohol','alcohol','vaporisation','vaporise','vaporises',11.2e5,'boiling point'],['aluminium','aluminium','fusion','melt','melts',3.95e5,'melting point'],['copper','copper','fusion','melt','melts',2.05e5,'melting point'],['glycerol','glycerol','vaporisation','vaporise','vaporises',8.30e5,'boiling point']];
+const RAD=[['alpha particles',20],['beta particles',1],['gamma rays',1],['fast neutrons',10],['slow neutrons',3],['X-rays',1]];
+const DEV=[['kettle',1800,3000],['lamp',5,100],['heater',500,3000],['hair dryer',800,2200],['microwave oven',600,1200],['phone charger',5,20],['toaster',800,1500],['television',60,250]];
+
+/* ---------- formulas ---------- */
+const F=[];
+function add(o){o.all=[o.subj,...o.rearr];o.nr=Math.max(20,5*o.rearr.length);o.n=40+o.nr;F.push(o)}
+const pl=c=>c.P?` on ${c.P}, where the gravitational field strength is ${c.G}`:'';
+
+add({id:'dvt',area:'Dynamics',eq:'d = v̄t',vars:{d:['d','distance','len'],v:['v̄','average speed','spd'],t:['t','time','time']},subj:'d',rearr:['v','t'],
+ gen(r,u){const V={},sf={},c={},hide=[];const m=u==='v'?'obj':pick(r,['obj','obj','obj','sound','light']);c.m=m;
+  if(m==='obj'){const o=pick(r,TRAVEL);c.o=o[0];V.v=rl(r,o[3],o[4]);V.t=rl(r,20,2400)}
+  else if(m==='sound'){V.v=340;hide.push('v');V.t=rl(r,0.6,9)}
+  else{V.v=3e8;hide.push('v');V.t=rl(r,0.002,1.5)}
+  V.d=V.v*V.t;sf.d=sfp(r);sf.v=m==='obj'?sfp(r):2;sf.t=sfp(r);return{V,sf,c,hide}},
+ solve:{d:V=>V.v*V.t,v:V=>V.d/V.t,t:V=>V.d/V.v},
+ sub:S=>`${S.d} = ${S.v} × ${S.t}`,
+ q(G,u,c){if(c.m==='sound')return u==='d'?`During a storm, thunder is heard ${G.t} after the lightning flash is seen. Calculate the distance from the observer to the lightning.`:`Lightning strikes ${G.d} from an observer. Calculate the time taken for the sound of the thunder to reach the observer.`;
+  if(c.m==='light')return u==='d'?`A radio signal takes ${G.t} to travel from a satellite to a ground station. Calculate the distance between the satellite and the ground station.`:`A satellite is ${G.d} from a ground station. Calculate the time taken for a radio signal to travel from the satellite to the ground station.`;
+  const o=c.o;if(u==='d')return`${cap(art(o))} ${o} travels at an average speed of ${G.v} for ${G.t}. Calculate the distance travelled by the ${o}.`;
+  if(u==='v')return`${cap(art(o))} ${o} travels ${G.d} in ${G.t}. Calculate the average speed of the ${o}.`;
+  return`${cap(art(o))} ${o} travels ${G.d} at an average speed of ${G.v}. Calculate the time taken.`}});
+
+add({id:'acc',area:'Dynamics',eq:`a = ${frac('v − u','t')}`,vars:{a:['a','acceleration','acc'],v:['v','final velocity','spd'],u:['u','initial velocity','spd'],t:['t','time','time']},subj:'a',rearr:['v','u','t'],
+ gen(r,u){const V={},sf={},c={},hide=[];const o=pick(r,OBJ);c.o=o[0];V.a=rl(r,o[5],o[6]);V.t=rl(r,2,25);
+  const dv=V.a*V.t;if(u!=='u'&&r()<0.3){V.u=0;hide.push('u');c.rest=1}else V.u=rl(r,Math.max(0.5,o[3]*0.4),o[4]*0.7);
+  V.v=V.u+dv;['a','v','u','t'].forEach(k=>sf[k]=sfp(r));if(u==='u'){sf.v=3;sf.a=3}return{V,sf,c,hide}},
+ solve:{a:V=>(V.v-V.u)/V.t,v:V=>V.u+V.a*V.t,u:V=>V.v-V.a*V.t,t:V=>(V.v-V.u)/V.a},
+ sub:S=>`${S.a} = ${frac(S.v+' − '+S.u,S.t)}`,
+ q(G,u,c){const o=c.o,A=cap(art(o))+' '+o;
+  if(c.rest){if(u==='a')return`${A} accelerates from rest to ${G.v} in ${G.t}. Calculate the acceleration of the ${o}.`;if(u==='v')return`${A} starts from rest and accelerates at ${G.a} for ${G.t}. Calculate the final velocity of the ${o}.`;return`${A} accelerates from rest to ${G.v} with an acceleration of ${G.a}. Calculate the time taken.`}
+  if(u==='a')return`${A} accelerates from ${G.u} to ${G.v} in ${G.t}. Calculate the acceleration of the ${o}.`;
+  if(u==='v')return`${A} travelling at ${G.u} accelerates at ${G.a} for ${G.t}. Calculate the final velocity of the ${o}.`;
+  if(u==='u')return`${A} accelerates at ${G.a} for ${G.t}, reaching a velocity of ${G.v}. Calculate the initial velocity of the ${o}.`;
+  return`${A} accelerates from ${G.u} to ${G.v} with an acceleration of ${G.a}. Calculate the time taken.`}});
+
+const WOBJ=[['astronaut',60,120],['rover',150,900],['crate of equipment',20,200],['lander',300,2000],['probe',50,800]];
+add({id:'wmg',area:'Dynamics',eq:'W = mg',vars:{W:['W','weight','force'],m:['m','mass','mass'],g:['g','gravitational field strength','gfs']},subj:'W',rearr:['m','g'],
+ gen(r,u){const V={},sf={},c={},hide=[];const o=pick(r,WOBJ);c.o=o[0];V.m=rl(r,o[1],o[2]);
+  if(u==='g'){V.g=rl(r,1.2,25);c.unk=1}else if(r()<0.45){const p=pick(r,PLANETS);c.P=p[0];V.g=p[1]}else{V.g=9.8;hide.push('g')}
+  V.W=V.m*V.g;sf.m=sfp(r);sf.W=sfp(r);sf.g=2;return{V,sf,c,hide}},
+ solve:{W:V=>V.m*V.g,m:V=>V.W/V.g,g:V=>V.W/V.m},
+ sub:S=>`${S.W} = ${S.m} × ${S.g}`,
+ q(G,u,c){const o=c.o,A=art(o)+' '+o;c.G=G.g;
+  if(u==='g')return`On the surface of a moon, ${A} of mass ${G.m} has a weight of ${G.W}. Calculate the gravitational field strength on the surface of this moon.`;
+  const where=c.P?`On ${c.P}, where the gravitational field strength is ${G.g}, ${A}`:cap(A)+' on Earth';
+  return u==='W'?`${where} has a mass of ${G.m}. Calculate the weight of the ${o}.`:`${where} has a weight of ${G.W}. Calculate the mass of the ${o}.`}});
+
+add({id:'fma',area:'Dynamics',eq:'F = ma',vars:{F:['F','unbalanced force','force'],m:['m','mass','mass'],a:['a','acceleration','acc']},subj:'F',rearr:['m','a'],
+ gen(r){const V={},sf={},c={};const o=pick(r,OBJ);c.o=o[0];V.m=rl(r,o[1],o[2]);V.a=rl(r,o[5],o[6]);V.F=V.m*V.a;['F','m','a'].forEach(k=>sf[k]=sfp(r));return{V,sf,c}},
+ solve:{F:V=>V.m*V.a,m:V=>V.F/V.a,a:V=>V.F/V.m},
+ sub:S=>`${S.F} = ${S.m} × ${S.a}`,
+ q(G,u,c){const o=c.o;
+  if(u==='F')return`${cap(art(o))} ${o} of mass ${G.m} accelerates at ${G.a}. Calculate the unbalanced force acting on the ${o}.`;
+  if(u==='m')return`An unbalanced force of ${G.F} acts on ${art(o)} ${o}, giving it an acceleration of ${G.a}. Calculate the mass of the ${o}.`;
+  return`An unbalanced force of ${G.F} acts on ${art(o)} ${o} of mass ${G.m}. Calculate the acceleration of the ${o}.`}});
+
+const PUSH=[['crate',40,600,1,25],['trolley',5,80,0.5,15],['broken-down car',300,900,5,60],['wheelbarrow',30,200,2,40],['sledge',20,150,5,200],['piano',200,800,0.5,6]];
+add({id:'ewfd',area:'Dynamics',eq:'E<sub>W</sub> = Fd',vars:{Ew:['E<sub>W</sub>','work done','energy'],F:['F','force','force'],d:['d','distance','len']},subj:'Ew',rearr:['F','d'],
+ gen(r){const V={},sf={},c={};const o=pick(r,PUSH);c.o=o[0];V.F=rl(r,o[1],o[2]);V.d=rl(r,o[3],o[4]);V.Ew=V.F*V.d;['Ew','F','d'].forEach(k=>sf[k]=sfp(r));return{V,sf,c}},
+ solve:{Ew:V=>V.F*V.d,F:V=>V.Ew/V.d,d:V=>V.Ew/V.F},
+ sub:S=>`${S.Ew} = ${S.F} × ${S.d}`,
+ q(G,u,c){const o=c.o;
+  if(u==='Ew')return`A force of ${G.F} is used to move ${art(o)} ${o} a distance of ${G.d}. Calculate the work done.`;
+  if(u==='F')return`${G.Ew} of work is done moving ${art(o)} ${o} a distance of ${G.d}. Calculate the force applied to the ${o}.`;
+  return`A force of ${G.F} does ${G.Ew} of work moving ${art(o)} ${o}. Calculate the distance the ${o} moves.`}});
+
+const LIFT=[['box',1,40,0.5,3],['pupil',45,90,2,15],['load',200,3000,5,60],['ball',0.05,0.6,1,30],['bag of shopping',2,12,0.5,4],['climber',55,95,10,400]];
+add({id:'epmgh',area:'Dynamics',eq:'E<sub>p</sub> = mgh',vars:{Ep:['E<sub>p</sub>','gravitational potential energy','energy'],m:['m','mass','mass'],g:['g','gravitational field strength','gfs'],h:['h','height','len']},subj:'Ep',rearr:['m','h','g'],
+ gen(r,u){const V={},sf={},c={},hide=[];const o=pick(r,LIFT);c.o=o[0];V.m=rl(r,o[1],o[2]);V.h=rl(r,o[3],o[4]);
+  if(u==='g'){V.g=rl(r,1.2,25)}else if(r()<0.25){const p=pick(r,PLANETS);c.P=p[0];V.g=p[1]}else{V.g=9.8;hide.push('g')}
+  V.Ep=V.m*V.g*V.h;['Ep','m','h'].forEach(k=>sf[k]=sfp(r));sf.g=2;return{V,sf,c,hide}},
+ solve:{Ep:V=>V.m*V.g*V.h,m:V=>V.Ep/(V.g*V.h),h:V=>V.Ep/(V.m*V.g),g:V=>V.Ep/(V.m*V.h)},
+ sub:S=>`${S.Ep} = ${S.m} × ${S.g} × ${S.h}`,
+ q(G,u,c){const o=c.o;c.G=G.g;const w=pl(c);
+  if(u==='Ep')return`${cap(art(o))} ${o} of mass ${G.m} is raised through a height of ${G.h}${w}. Calculate the gravitational potential energy gained by the ${o}.`;
+  if(u==='m')return`${cap(art(o))} ${o} gains ${G.Ep} of gravitational potential energy when it is raised through a height of ${G.h}${w}. Calculate the mass of the ${o}.`;
+  if(u==='h')return`${cap(art(o))} ${o} of mass ${G.m} gains ${G.Ep} of gravitational potential energy when it is raised${w}. Calculate the height through which the ${o} is raised.`;
+  return`On the surface of a planet, ${art(o)} ${o} of mass ${G.m} gains ${G.Ep} of gravitational potential energy when it is raised through ${G.h}. Calculate the gravitational field strength on this planet.`}});
+
+add({id:'ek',area:'Dynamics',eq:'E<sub>k</sub> = ½mv<sup>2</sup>',vars:{Ek:['E<sub>k</sub>','kinetic energy','energy'],m:['m','mass','mass'],v:['v','speed','spd']},subj:'Ek',rearr:['m','v'],
+ gen(r){const V={},sf={},c={};const o=pick(r,OBJ);c.o=o[0];V.m=rl(r,o[1],o[2]);V.v=rl(r,o[3],o[4]);V.Ek=0.5*V.m*V.v*V.v;['Ek','m','v'].forEach(k=>sf[k]=sfp(r));return{V,sf,c}},
+ solve:{Ek:V=>0.5*V.m*V.v*V.v,m:V=>2*V.Ek/(V.v*V.v),v:V=>Math.sqrt(2*V.Ek/V.m)},
+ sub:S=>`${S.Ek} = ½ × ${S.m} × ${S.v}<sup>2</sup>`,
+ q(G,u,c){const o=c.o;
+  if(u==='Ek')return`${cap(art(o))} ${o} of mass ${G.m} is travelling at ${G.v}. Calculate the kinetic energy of the ${o}.`;
+  if(u==='m')return`${cap(art(o))} ${o} travelling at ${G.v} has ${G.Ek} of kinetic energy. Calculate the mass of the ${o}.`;
+  return`${cap(art(o))} ${o} of mass ${G.m} has ${G.Ek} of kinetic energy. Calculate the speed of the ${o}.`}});
+
+const EDEV=[['lamp',0.05,1.2],['heater',2,12],['motor',0.2,6],['phone charger',0.3,2.5],['buzzer',0.01,0.08],['LED',0.005,0.03],['kettle',7,12.5]];
+add({id:'qit',area:'Electricity',eq:'Q = It',vars:{Q:['Q','charge','charge'],I:['I','current','cur'],t:['t','time','time']},subj:'Q',rearr:['I','t'],
+ gen(r){const V={},sf={},c={};const o=pick(r,EDEV);c.o=o[0];V.I=rl(r,o[1],o[2]);V.t=rl(r,5,3000);V.Q=V.I*V.t;['Q','I','t'].forEach(k=>sf[k]=sfp(r));return{V,sf,c}},
+ solve:{Q:V=>V.I*V.t,I:V=>V.Q/V.t,t:V=>V.Q/V.I},
+ sub:S=>`${S.Q} = ${S.I} × ${S.t}`,
+ q(G,u,c){const o=c.o;
+  if(u==='Q')return`The current in ${art(o)} ${o} is ${G.I}. Calculate the charge that flows through the ${o} in ${G.t}.`;
+  if(u==='I')return`${G.Q} of charge flows through ${art(o)} ${o} in ${G.t}. Calculate the current in the ${o}.`;
+  return`The current in ${art(o)} ${o} is ${G.I}. Calculate the time taken for ${G.Q} of charge to flow through the ${o}.`}});
+
+add({id:'vir',area:'Electricity',eq:'V = IR',vars:{V:['V','potential difference','volt'],I:['I','current','cur'],R:['R','resistance','res']},subj:'V',rearr:['I','R'],
+ gen(r){const V={},sf={};V.R=rl(r,4,6000);V.V=rl(r,1.5,240);V.I=V.V/V.R;['V','I','R'].forEach(k=>sf[k]=sfp(r));return{V,sf,c:{}}},
+ solve:{V:V=>V.I*V.R,I:V=>V.V/V.R,R:V=>V.V/V.I},
+ sub:S=>`${S.V} = ${S.I} × ${S.R}`,
+ q(G,u){if(u==='V')return`The current in a resistor is ${G.I}. The resistance of the resistor is ${G.R}. Calculate the potential difference across the resistor.`;
+  if(u==='I')return`A potential difference of ${G.V} is applied across a resistor of resistance ${G.R}. Calculate the current in the resistor.`;
+  return`When a potential difference of ${G.V} is applied across a resistor, the current in it is ${G.I}. Calculate the resistance of the resistor.`}});
+
+add({id:'rser',area:'Electricity',eq:'R<sub>T</sub> = R<sub>1</sub> + R<sub>2</sub> + …',vars:{RT:['R<sub>T</sub>','total resistance','res'],R1:['R<sub>1</sub>','resistance','res'],R2:['R<sub>2</sub>','resistance','res'],R3:['R<sub>3</sub>','resistance','res']},subj:'RT',rearr:['R2'],
+ gen(r){const V={},sf={},c={};c.n=r()<0.5?2:3;V.R1=resE(r,12,8200);V.R2=resE(r,12,8200);V.R3=c.n===3?resE(r,12,8200):null;V.RT=V.R1+V.R2+(V.R3||0);
+  sf.R1=sf.R2=sf.R3=2;sf.RT=Math.max(2,String(V.RT).replace(/0+$/,'').length);return{V,sf,c}},
+ solve:{RT:V=>V.R1+V.R2+(V.R3||0),R2:V=>V.RT-V.R1-(V.R3||0)},
+ sub:S=>`${S.RT} = ${S.R1} + ${S.R2}${S.R3?' + '+S.R3:''}`,
+ q(G,u,c){if(u==='RT')return`Resistors of ${list([G.R1,G.R2,G.R3].filter(Boolean))} are connected in series. Calculate the total resistance.`;
+  return c.n===2?`Two resistors are connected in series. One has a resistance of ${G.R1}. The total resistance is ${G.RT}. Calculate the resistance of the other resistor.`:`Three resistors are connected in series. Two of them have resistances of ${G.R1} and ${G.R3}. The total resistance is ${G.RT}. Calculate the resistance of the third resistor.`}});
+
+add({id:'rpar',area:'Electricity',eq:`${frac('1','R<sub>T</sub>')} = ${frac('1','R<sub>1</sub>')} + ${frac('1','R<sub>2</sub>')} + …`,vars:{RT:['R<sub>T</sub>','total resistance','res'],R1:['R<sub>1</sub>','resistance','res'],R2:['R<sub>2</sub>','resistance','res'],R3:['R<sub>3</sub>','resistance','res']},subj:'RT',rearr:['R2'],
+ gen(r,u){const V={},sf={},c={};c.n=(u==='RT'&&r()<0.4)?3:2;V.R1=resE(r,12,8200);let k=0;do{V.R2=resE(r,12,8200);k++}while(k<40&&(V.R2/V.R1>3||V.R1/V.R2>3));
+  V.R3=c.n===3?resE(r,V.R1/3,V.R1*3):null;V.RT=1/(1/V.R1+1/V.R2+(V.R3?1/V.R3:0));sf.R1=sf.R2=sf.R3=2;sf.RT=3;return{V,sf,c}},
+ solve:{RT:V=>1/(1/V.R1+1/V.R2+(V.R3?1/V.R3:0)),R2:V=>1/(1/V.RT-1/V.R1-(V.R3?1/V.R3:0))},
+ sub:S=>`${frac(1,S.RT)} = ${frac(1,S.R1)} + ${frac(1,S.R2)}${S.R3?' + '+frac(1,S.R3):''}`,
+ q(G,u){if(u==='RT')return`Resistors of ${list([G.R1,G.R2,G.R3].filter(Boolean))} are connected in parallel. Calculate the total resistance of the combination.`;
+  return`Two resistors are connected in parallel. One has a resistance of ${G.R1}. The total resistance of the combination is ${G.RT}. Calculate the resistance of the other resistor.`}});
+
+const VSUP=[3.0,4.5,5.0,6.0,9.0,12,15,24];
+const R1s='R<sub>1</sub>',R2s='R<sub>2</sub>';
+add({id:'vdiv',area:'Electricity',eq:`V<sub>2</sub> = ${frac('R<sub>2</sub>','R<sub>1</sub> + R<sub>2</sub>')} V<sub>s</sub>`,vars:{V2:['V<sub>2</sub>','potential difference across R<sub>2</sub>','volt'],R1:['R<sub>1</sub>','resistance of R<sub>1</sub>','res'],R2:['R<sub>2</sub>','resistance of R<sub>2</sub>','res'],Vs:['V<sub>s</sub>','supply voltage','volt']},subj:'V2',rearr:['Vs','R1','R2'],
+ gen(r){const V={},sf={};V.R1=resE(r,12,8200);let k=0;do{V.R2=resE(r,12,8200);k++}while(k<40&&(V.R2/V.R1>4||V.R1/V.R2>4));V.Vs=pick(r,VSUP);V.V2=V.R2/(V.R1+V.R2)*V.Vs;sf.R1=sf.R2=2;sf.Vs=2;sf.V2=3;return{V,sf,c:{}}},
+ solve:{V2:V=>V.R2/(V.R1+V.R2)*V.Vs,Vs:V=>V.V2*(V.R1+V.R2)/V.R2,R1:V=>V.R2*V.Vs/V.V2-V.R2,R2:V=>V.V2*V.R1/(V.Vs-V.V2)},
+ sub:S=>`${S.V2} = ${frac(S.R2,S.R1+' + '+S.R2)} × ${S.Vs}`,
+ q(G,u){if(u==='V2')return`Two resistors, ${R1s} = ${G.R1} and ${R2s} = ${G.R2}, are connected in series across a ${G.Vs} supply. Calculate the potential difference across ${R2s}.`;
+  if(u==='Vs')return`Two resistors, ${R1s} = ${G.R1} and ${R2s} = ${G.R2}, are connected in series across a supply. The potential difference across ${R2s} is ${G.V2}. Calculate the supply voltage.`;
+  if(u==='R1')return`Two resistors, ${R1s} and ${R2s}, are connected in series across a ${G.Vs} supply. ${R2s} = ${G.R2} and the potential difference across ${R2s} is ${G.V2}. Calculate the resistance of ${R1s}.`;
+  return`Two resistors, ${R1s} and ${R2s}, are connected in series across a ${G.Vs} supply. ${R1s} = ${G.R1} and the potential difference across ${R2s} is ${G.V2}. Calculate the resistance of ${R2s}.`}});
+
+add({id:'vrat',area:'Electricity',disp:true,eq:`${frac('V<sub>1</sub>','V<sub>2</sub>')} = ${frac('R<sub>1</sub>','R<sub>2</sub>')}`,vars:{V1:['V<sub>1</sub>','potential difference across R<sub>1</sub>','volt'],V2:['V<sub>2</sub>','potential difference across R<sub>2</sub>','volt'],R1:['R<sub>1</sub>','resistance of R<sub>1</sub>','res'],R2:['R<sub>2</sub>','resistance of R<sub>2</sub>','res']},subj:'V1',rearr:['V2','R1','R2'],
+ gen(r){const V={},sf={};V.R1=resE(r,12,8200);let k=0;do{V.R2=resE(r,12,8200);k++}while(k<40&&(V.R2/V.R1>5||V.R1/V.R2>5));V.V2=rl(r,0.8,10);V.V1=V.V2*V.R1/V.R2;sf.R1=sf.R2=2;sf.V1=sfp(r);sf.V2=sfp(r);return{V,sf,c:{}}},
+ solve:{V1:V=>V.V2*V.R1/V.R2,V2:V=>V.V1*V.R2/V.R1,R1:V=>V.R2*V.V1/V.V2,R2:V=>V.R1*V.V2/V.V1},
+ sub:S=>`${frac(S.V1,S.V2)} = ${frac(S.R1,S.R2)}`,
+ q(G,u){const s='In a voltage divider circuit, two resistors '+R1s+' and '+R2s+' are connected in series.';
+  if(u==='V1')return`${s} ${R1s} = ${G.R1} and ${R2s} = ${G.R2}. The potential difference across ${R2s} is ${G.V2}. Calculate the potential difference across ${R1s}.`;
+  if(u==='V2')return`${s} ${R1s} = ${G.R1} and ${R2s} = ${G.R2}. The potential difference across ${R1s} is ${G.V1}. Calculate the potential difference across ${R2s}.`;
+  if(u==='R1')return`${s} ${R2s} = ${G.R2}. The potential difference across ${R1s} is ${G.V1} and across ${R2s} is ${G.V2}. Calculate the resistance of ${R1s}.`;
+  return`${s} ${R1s} = ${G.R1}. The potential difference across ${R1s} is ${G.V1} and across ${R2s} is ${G.V2}. Calculate the resistance of ${R2s}.`}});
+
+add({id:'pet',area:'Electricity',eq:`P = ${frac('E','t')}`,vars:{P:['P','power','power'],E:['E','energy','energy'],t:['t','time','time']},subj:'P',rearr:['E','t'],
+ gen(r){const V={},sf={},c={};const o=pick(r,DEV);c.o=o[0];V.P=rl(r,o[1],o[2]);V.t=rl(r,10,2400);V.E=V.P*V.t;['P','E','t'].forEach(k=>sf[k]=sfp(r));return{V,sf,c}},
+ solve:{P:V=>V.E/V.t,E:V=>V.P*V.t,t:V=>V.E/V.P},
+ sub:S=>`${S.P} = ${frac(S.E,S.t)}`,
+ q(G,u,c){const o=c.o;
+  if(u==='P')return`${cap(art(o))} ${o} transfers ${G.E} of energy in ${G.t}. Calculate the power of the ${o}.`;
+  if(u==='E')return`${cap(art(o))} ${o} has a power rating of ${G.P}. It is switched on for ${G.t}. Calculate the energy transferred.`;
+  return`${cap(art(o))} ${o} has a power rating of ${G.P}. Calculate the time taken for the ${o} to transfer ${G.E} of energy.`}});
+
+add({id:'piv',area:'Electricity',eq:'P = IV',vars:{P:['P','power','power'],I:['I','current','cur'],V:['V','potential difference','volt']},subj:'P',rearr:['I','V'],
+ gen(r){const V={},sf={},c={};const o=pick(r,DEV);c.o=o[0];V.V=r()<0.5?230:rl(r,3,24);V.P=rl(r,o[1],o[2])*(V.V===230?1:0.05);V.I=V.P/V.V;['P','I'].forEach(k=>sf[k]=sfp(r));sf.V=V.V===230?3:sfp(r);c.o=V.V===230?o[0]:pick(r,['motor','lamp','heater','fan']);return{V,sf,c}},
+ solve:{P:V=>V.I*V.V,I:V=>V.P/V.V,V:V=>V.P/V.I},
+ sub:S=>`${S.P} = ${S.I} × ${S.V}`,
+ q(G,u,c){const o=c.o;
+  if(u==='P')return`${cap(art(o))} ${o} is connected to a ${G.V} supply. The current in it is ${G.I}. Calculate the power of the ${o}.`;
+  if(u==='I')return`${cap(art(o))} ${o} with a power of ${G.P} is connected to a ${G.V} supply. Calculate the current in the ${o}.`;
+  return`${cap(art(o))} ${o} has a power of ${G.P} when the current in it is ${G.I}. Calculate the potential difference across the ${o}.`}});
+
+add({id:'pi2r',area:'Electricity',eq:'P = I<sup>2</sup>R',vars:{P:['P','power','power'],I:['I','current','cur'],R:['R','resistance','res']},subj:'P',rearr:['I','R'],
+ gen(r){const V={},sf={};V.I=rl(r,0.05,10);V.R=rl(r,2,500);V.P=V.I*V.I*V.R;['P','I','R'].forEach(k=>sf[k]=sfp(r));return{V,sf,c:{}}},
+ solve:{P:V=>V.I*V.I*V.R,I:V=>Math.sqrt(V.P/V.R),R:V=>V.P/(V.I*V.I)},
+ sub:S=>`${S.P} = ${S.I}<sup>2</sup> × ${S.R}`,
+ q(G,u){if(u==='P')return`The current in a resistor of resistance ${G.R} is ${G.I}. Calculate the power dissipated in the resistor.`;
+  if(u==='I')return`A resistor of resistance ${G.R} dissipates a power of ${G.P}. Calculate the current in the resistor.`;
+  return`When the current in a resistor is ${G.I}, the power dissipated in it is ${G.P}. Calculate the resistance of the resistor.`}});
+
+add({id:'pv2r',area:'Electricity',eq:`P = ${frac('V<sup>2</sup>','R')}`,vars:{P:['P','power','power'],V:['V','potential difference','volt'],R:['R','resistance','res']},subj:'P',rearr:['V','R'],
+ gen(r){const V={},sf={};V.V=rl(r,1.5,230);V.R=rl(r,2,2000);V.P=V.V*V.V/V.R;['P','V','R'].forEach(k=>sf[k]=sfp(r));return{V,sf,c:{}}},
+ solve:{P:V=>V.V*V.V/V.R,V:V=>Math.sqrt(V.P*V.R),R:V=>V.V*V.V/V.P},
+ sub:S=>`${S.P} = ${frac(S.V+'<sup>2</sup>',S.R)}`,
+ q(G,u){if(u==='P')return`A potential difference of ${G.V} is applied across a resistor of resistance ${G.R}. Calculate the power dissipated in the resistor.`;
+  if(u==='V')return`A resistor of resistance ${G.R} dissipates a power of ${G.P}. Calculate the potential difference across the resistor.`;
+  return`When a potential difference of ${G.V} is applied across a resistor, the power dissipated is ${G.P}. Calculate the resistance of the resistor.`}});
+
+add({id:'cmdt',area:'Properties of matter',eq:'E<sub>h</sub> = cmΔT',vars:{Eh:['E<sub>h</sub>','heat energy','energy'],c:['c','specific heat capacity','shc'],m:['m','mass','mass'],dT:['ΔT','change in temperature','dT']},subj:'Eh',rearr:['c','m','dT'],
+ gen(r){const V={},sf={},c={};const s=pick(r,SHC);c.s=s[0];V.c=s[1];V.m=rl(r,0.1,5);V.dT=rl(r,4,75);V.Eh=V.c*V.m*V.dT;sf.c=cntSF(String(s[1]));['Eh','m','dT'].forEach(k=>sf[k]=sfp(r));return{V,sf,c}},
+ solve:{Eh:V=>V.c*V.m*V.dT,c:V=>V.Eh/(V.m*V.dT),m:V=>V.Eh/(V.c*V.dT),dT:V=>V.Eh/(V.c*V.m)},
+ sub:S=>`${S.Eh} = ${S.c} × ${S.m} × ${S.dT}`,
+ q(G,u,c){const s=c.s,cs=`The specific heat capacity of ${s} is ${G.c}.`;
+  if(u==='Eh')return`The temperature of ${G.m} of ${s} rises by ${G.dT}. ${cs} Calculate the heat energy supplied.`;
+  if(u==='c')return`${G.Eh} of heat energy raises the temperature of ${G.m} of a substance by ${G.dT}. Calculate the specific heat capacity of the substance.`;
+  if(u==='m')return['water','alcohol','glycerol'].includes(s)?`${G.Eh} of heat energy raises the temperature of some ${s} by ${G.dT}. ${cs} Calculate the mass of ${s}.`:`${G.Eh} of heat energy raises the temperature of a block of ${s} by ${G.dT}. ${cs} Calculate the mass of the block.`;
+  return`${G.Eh} of heat energy is supplied to ${G.m} of ${s}. ${cs} Calculate the change in temperature.`}});
+
+add({id:'eml',area:'Properties of matter',eq:'E<sub>h</sub> = ml',vars:{Eh:['E<sub>h</sub>','heat energy','energy'],m:['m','mass','mass'],l:['l','specific latent heat','lat']},subj:'Eh',rearr:['m','l'],
+ gen(r){const V={},sf={},c={};const L=pick(r,LAT);c.L=L;V.l=L[5];V.m=rl(r,0.02,3);V.Eh=V.m*V.l;sf.l=3;sf.m=sfp(r);sf.Eh=sfp(r);return{V,sf,c}},
+ solve:{Eh:V=>V.m*V.l,m:V=>V.Eh/V.l,l:V=>V.Eh/V.m},
+ sub:S=>`${S.Eh} = ${S.m} × ${S.l}`,
+ q(G,u,c){const [s,sub,type,verb,verbs,,pt]=c.L;const ls=`The specific latent heat of ${type} of ${sub} is ${G.l}.`;
+  if(u==='Eh')return`Calculate the heat energy needed to ${verb} ${G.m} of ${s} at its ${pt}. ${ls}`;
+  if(u==='m')return`${G.Eh} of heat energy is supplied to some ${s} at its ${pt}. ${ls} Calculate the mass of ${s} that ${verbs}.`;
+  return`${G.Eh} of heat energy is needed to ${type==='fusion'?'melt':'vaporise'} ${G.m} of a substance at its ${pt}. Calculate the specific latent heat of ${type} of the substance.`}});
+
+const PRESS=[['crate resting on the floor',100,3000,0.1,1.5],['person standing on the ground',450,1000,0.02,0.06],['tractor on soft ground',20000,60000,0.8,4],['brick resting on a table',20,40,0.006,0.03],['high-heeled shoe pressing on the floor',250,600,0.0001,0.0008],['elephant standing on the ground',30000,60000,0.4,1.0]];
+add({id:'pfa',area:'Properties of matter',eq:`p = ${frac('F','A')}`,vars:{p:['p','pressure','press'],F:['F','force','force'],A:['A','area','area']},subj:'p',rearr:['F','A'],
+ gen(r){const V={},sf={},c={};const o=pick(r,PRESS);c.o=o[0];V.F=rl(r,o[1],o[2]);V.A=rl(r,o[3],o[4]);V.p=V.F/V.A;['p','F','A'].forEach(k=>sf[k]=sfp(r));return{V,sf,c}},
+ solve:{p:V=>V.F/V.A,F:V=>V.p*V.A,A:V=>V.F/V.p},
+ sub:S=>`${S.p} = ${frac(S.F,S.A)}`,
+ q(G,u,c){const o=c.o,n=o.split(' ')[0];const A=cap(art(o))+' '+o;
+  if(u==='p')return`${A} exerts a force of ${G.F} on an area of ${G.A}. Calculate the pressure exerted.`;
+  if(u==='F')return`${A} exerts a pressure of ${G.p} on an area of ${G.A}. Calculate the force exerted.`;
+  return`${A} exerts a force of ${G.F}, producing a pressure of ${G.p}. Calculate the area in contact.`}});
+
+/* gas laws: pressures kPa, volumes cm³, temperatures K by default */
+function gasT(r,vary){return tC(r,-25,160)}
+add({id:'boyle',area:'Properties of matter',disp:true,eq:'p<sub>1</sub>V<sub>1</sub> = p<sub>2</sub>V<sub>2</sub>',vars:{p1:['p<sub>1</sub>','initial pressure','press'],V1:['V<sub>1</sub>','initial volume','vol'],p2:['p<sub>2</sub>','final pressure','press'],V2:['V<sub>2</sub>','final volume','vol']},subj:'p2',rearr:['p1','V1','V2'],
+ gen(r){const V={},sf={};V.p1=rl(r,80,300)*1e3;V.V1=rl(r,50,4000)*1e-6;V.V2=V.V1*rl(r,0.35,2.4);V.p2=V.p1*V.V1/V.V2;['p1','V1','p2','V2'].forEach(k=>sf[k]=sfp(r));return{V,sf,c:{},du:{p1:'kPa',p2:'kPa',V1:'cm³',V2:'cm³'},fix:['p1','p2']}},
+ solve:{p2:V=>V.p1*V.V1/V.V2,p1:V=>V.p2*V.V2/V.V1,V1:V=>V.p2*V.V2/V.p1,V2:V=>V.p1*V.V1/V.p2},
+ sub:S=>`${S.p1} × ${S.V1} = ${S.p2} × ${S.V2}`,
+ q(G,u){const ct=' The temperature of the gas stays constant.';
+  if(u==='p2')return`A fixed mass of gas has a pressure of ${G.p1} and a volume of ${G.V1}. The volume of the gas is changed to ${G.V2}.${ct} Calculate the new pressure of the gas.`;
+  if(u==='V2')return`A fixed mass of gas has a pressure of ${G.p1} and a volume of ${G.V1}. The pressure of the gas is changed to ${G.p2}.${ct} Calculate the new volume of the gas.`;
+  if(u==='p1')return`The volume of a fixed mass of gas changes from ${G.V1} to ${G.V2}. Its pressure is then ${G.p2}.${ct} Calculate the original pressure of the gas.`;
+  return`The pressure of a fixed mass of gas changes from ${G.p1} to ${G.p2}. Its volume is then ${G.V2}.${ct} Calculate the original volume of the gas.`}});
+
+add({id:'plaw',area:'Properties of matter',disp:true,eq:`${frac('p<sub>1</sub>','T<sub>1</sub>')} = ${frac('p<sub>2</sub>','T<sub>2</sub>')}`,vars:{p1:['p<sub>1</sub>','initial pressure','press'],T1:['T<sub>1</sub>','initial temperature','tabs'],p2:['p<sub>2</sub>','final pressure','press'],T2:['T<sub>2</sub>','final temperature','tabs']},subj:'p2',rearr:['p1','T1','T2'],
+ gen(r){const V={},sf={};V.p1=rl(r,80,300)*1e3;const a=gasT(r);let b;do{b=gasT(r)}while(Math.abs(b-a)<15);V.T1=a+273;V.T2=b+273;V.p2=V.p1*V.T2/V.T1;sf.p1=sfp(r);sf.p2=sfp(r);return{V,sf,c:{},du:{p1:'kPa',p2:'kPa'},fix:['p1','p2']}},
+ solve:{p2:V=>V.p1*V.T2/V.T1,p1:V=>V.p2*V.T1/V.T2,T1:V=>V.p1*V.T2/V.p2,T2:V=>V.p2*V.T1/V.p1},
+ sub:S=>`${frac(S.p1,S.T1)} = ${frac(S.p2,S.T2)}`,
+ q(G,u){const cv=' The volume of the gas stays constant.';
+  if(u==='p2')return`A sealed container holds gas at a pressure of ${G.p1} and a temperature of ${G.T1}. The temperature of the gas changes to ${G.T2}.${cv} Calculate the new pressure of the gas.`;
+  if(u==='p1')return`The temperature of a sealed container of gas changes from ${G.T1} to ${G.T2}. The pressure of the gas is then ${G.p2}.${cv} Calculate the original pressure of the gas.`;
+  if(u==='T2')return`A sealed container holds gas at a pressure of ${G.p1} and a temperature of ${G.T1}. The pressure of the gas changes to ${G.p2}.${cv} Calculate the new temperature of the gas in kelvin.`;
+  return`The pressure of a sealed container of gas changes from ${G.p1} to ${G.p2}. The temperature of the gas is then ${G.T2}.${cv} Calculate the original temperature of the gas in kelvin.`}});
+
+add({id:'charles',area:'Properties of matter',disp:true,eq:`${frac('V<sub>1</sub>','T<sub>1</sub>')} = ${frac('V<sub>2</sub>','T<sub>2</sub>')}`,vars:{V1:['V<sub>1</sub>','initial volume','vol'],T1:['T<sub>1</sub>','initial temperature','tabs'],V2:['V<sub>2</sub>','final volume','vol'],T2:['T<sub>2</sub>','final temperature','tabs']},subj:'V2',rearr:['V1','T1','T2'],
+ gen(r){const V={},sf={};V.V1=rl(r,50,4000)*1e-6;const a=gasT(r);let b;do{b=gasT(r)}while(Math.abs(b-a)<15);V.T1=a+273;V.T2=b+273;V.V2=V.V1*V.T2/V.T1;sf.V1=sfp(r);sf.V2=sfp(r);return{V,sf,c:{},du:{V1:'cm³',V2:'cm³'}}},
+ solve:{V2:V=>V.V1*V.T2/V.T1,V1:V=>V.V2*V.T1/V.T2,T1:V=>V.V1*V.T2/V.V2,T2:V=>V.V2*V.T1/V.V1},
+ sub:S=>`${frac(S.V1,S.T1)} = ${frac(S.V2,S.T2)}`,
+ q(G,u){const cp=' The pressure of the gas stays constant.';
+  if(u==='V2')return`A fixed mass of gas has a volume of ${G.V1} at a temperature of ${G.T1}. The temperature of the gas changes to ${G.T2}.${cp} Calculate the new volume of the gas.`;
+  if(u==='V1')return`The temperature of a fixed mass of gas changes from ${G.T1} to ${G.T2}. Its volume is then ${G.V2}.${cp} Calculate the original volume of the gas.`;
+  if(u==='T2')return`A fixed mass of gas has a volume of ${G.V1} at a temperature of ${G.T1}. Its volume changes to ${G.V2}.${cp} Calculate the new temperature of the gas in kelvin.`;
+  return`The volume of a fixed mass of gas changes from ${G.V1} to ${G.V2}. Its temperature is then ${G.T2}.${cp} Calculate the original temperature of the gas in kelvin.`}});
+
+add({id:'gen',area:'Properties of matter',disp:true,eq:`${frac('pV','T')} = constant`,vars:{p1:['p<sub>1</sub>','pressure','press'],V1:['V<sub>1</sub>','volume','vol'],T1:['T<sub>1</sub>','temperature','tabs'],p2:['p<sub>2</sub>','pressure','press'],V2:['V<sub>2</sub>','volume','vol'],T2:['T<sub>2</sub>','temperature','tabs']},subj:'p2',rearr:['p1','V1','T1','V2','T2'],
+ gen(r){const V={},sf={};V.p1=rl(r,80,250)*1e3;V.V1=rl(r,100,3000)*1e-6;const a=gasT(r);let b;do{b=gasT(r)}while(Math.abs(b-a)<15);V.T1=a+273;V.T2=b+273;V.V2=V.V1*rl(r,0.4,2.2);V.p2=V.p1*V.V1*V.T2/(V.T1*V.V2);['p1','V1','p2','V2'].forEach(k=>sf[k]=sfp(r));return{V,sf,c:{},du:{p1:'kPa',p2:'kPa',V1:'cm³',V2:'cm³'},fix:['p1','p2']}},
+ solve:{p2:V=>V.p1*V.V1*V.T2/(V.T1*V.V2),p1:V=>V.p2*V.V2*V.T1/(V.T2*V.V1),V1:V=>V.p2*V.V2*V.T1/(V.T2*V.p1),T1:V=>V.p1*V.V1*V.T2/(V.p2*V.V2),V2:V=>V.p1*V.V1*V.T2/(V.T1*V.p2),T2:V=>V.p2*V.V2*V.T1/(V.p1*V.V1)},
+ sub:S=>`${frac(S.p1+' × '+S.V1,S.T1)} = ${frac(S.p2+' × '+S.V2,S.T2)}`,
+ q(G,u){const ph={p:'a pressure of ',V:'a volume of ',T:'a temperature of '};
+  const st=n=>['p','V','T'].map(x=>x+n).filter(k=>k!==u).map(k=>ph[k[0]]+G[k]);
+  const nm={p:'pressure',V:'volume',T:'temperature'}[u[0]];const when=u[1]==='1'?'original':'new';
+  return`A fixed mass of gas has ${list(st(1))}. It is changed so that it has ${list(st(2))}. Calculate the ${when} ${nm} of the gas${u[0]==='T'?' in kelvin':''}.`}});
+
+add({id:'vfl',area:'Waves',eq:'v = fλ',vars:{v:['v','speed','spd'],f:['f','frequency','freq'],lam:['λ','wavelength','len']},subj:'v',rearr:['f','lam'],
+ gen(r,u){const V={},sf={},c={},hide=[];const m=u==='v'?pick(r,['water','rope']):pick(r,['water','water','sound','radio']);c.m=m;
+  if(m==='water'){V.f=rl(r,0.2,5);V.lam=rl(r,0.05,4);V.v=V.f*V.lam}
+  else if(m==='rope'){V.f=rl(r,1,20);V.lam=rl(r,0.2,3);V.v=V.f*V.lam}
+  else if(m==='sound'){V.v=340;hide.push('v');V.f=rl(r,40,15000);V.lam=340/V.f}
+  else{V.v=3e8;hide.push('v');V.f=rl(r,1.5e5,1.1e8);V.lam=3e8/V.f}
+  ['f','lam'].forEach(k=>sf[k]=sfp(r));sf.v=hide.length?2:sfp(r);return{V,sf,c,hide}},
+ solve:{v:V=>V.f*V.lam,f:V=>V.v/V.lam,lam:V=>V.v/V.f},
+ sub:S=>`${S.v} = ${S.f} × ${S.lam}`,
+ q(G,u,c){const m=c.m;
+  if(m==='sound')return u==='f'?`A sound wave in air has a wavelength of ${G.lam}. Calculate the frequency of the sound wave.`:`A sound wave in air has a frequency of ${G.f}. Calculate the wavelength of the sound wave.`;
+  if(m==='radio')return u==='f'?`A radio station broadcasts using radio waves with a wavelength of ${G.lam}. Calculate the frequency of the radio waves.`:`A radio station broadcasts at a frequency of ${G.f}. Calculate the wavelength of the radio waves.`;
+  const w=m==='water'?'Water waves':'Waves on a rope';
+  if(u==='v')return`${w} have a frequency of ${G.f} and a wavelength of ${G.lam}. Calculate the speed of the waves.`;
+  if(u==='f')return`${w} travel at ${G.v} and have a wavelength of ${G.lam}. Calculate the frequency of the waves.`;
+  return`${w} travel at ${G.v} and have a frequency of ${G.f}. Calculate the wavelength of the waves.`}});
+
+add({id:'t1f',area:'Waves',eq:`T = ${frac('1','f')}`,vars:{T:['T','period','time'],f:['f','frequency','freq']},subj:'T',rearr:['f'],
+ gen(r){const V={},sf={};V.f=rl(r,0.2,4000);V.T=1/V.f;sf.f=sfp(r);sf.T=sfp(r);return{V,sf,c:{w:pick(r,['A wave','A sound wave','A water wave','A signal'])}}},
+ solve:{T:V=>1/V.f,f:V=>1/V.T},
+ sub:S=>`${S.T} = ${frac(1,S.f)}`,
+ q(G,u,c){return u==='T'?`${c.w} has a frequency of ${G.f}. Calculate the period of the wave.`:`${c.w} has a period of ${G.T}. Calculate the frequency of the wave.`}});
+
+add({id:'ant',area:'Radiation',eq:`A = ${frac('N','t')}`,vars:{A:['A','activity','act'],N:['N','number of nuclei decaying','none'],t:['t','time','time']},subj:'A',rearr:['N','t'],
+ gen(r){const V={},sf={};V.t=rl(r,10,3600);V.A=rl(r,50,8e6);V.N=V.A*V.t;['A','N','t'].forEach(k=>sf[k]=sfp(r));return{V,sf,c:{s:pick(r,['A radioactive source','A sample of radioactive material','A medical tracer','A smoke detector source'])}}},
+ solve:{A:V=>V.N/V.t,N:V=>V.A*V.t,t:V=>V.N/V.A},
+ sub:S=>`${S.A} = ${frac(S.N,S.t)}`,
+ q(G,u,c){const s=c.s;
+  if(u==='A')return`In ${s.charAt(0).toLowerCase()+s.slice(1)}, ${G.N} nuclei decay in ${G.t}. Calculate the activity of the source.`;
+  if(u==='N')return`${s} has an activity of ${G.A}. Calculate the number of nuclei that decay in ${G.t}.`;
+  return`${s} has an activity of ${G.A}. Calculate the time taken for ${G.N} nuclei to decay.`}});
+
+const ABS=[['worker',55,100],['patient',45,95],['sample of tissue',0.01,0.5],['laboratory technician',50,95],['tumour',0.005,0.2]];
+add({id:'dem',area:'Radiation',eq:`D = ${frac('E','m')}`,vars:{D:['D','absorbed dose','dose'],E:['E','energy','energy'],m:['m','mass','mass']},subj:'D',rearr:['E','m'],
+ gen(r){const V={},sf={},c={};const o=pick(r,ABS);c.o=o[0];V.m=rl(r,o[1],o[2]);V.D=rl(r,2e-6,0.05);V.E=V.D*V.m;['D','E','m'].forEach(k=>sf[k]=sfp(r));return{V,sf,c}},
+ solve:{D:V=>V.E/V.m,E:V=>V.D*V.m,m:V=>V.E/V.D},
+ sub:S=>`${S.D} = ${frac(S.E,S.m)}`,
+ q(G,u,c){const o=c.o;
+  if(u==='D')return`${cap(art(o))} ${o} of mass ${G.m} absorbs ${G.E} of energy from radiation. Calculate the absorbed dose.`;
+  if(u==='E')return`${cap(art(o))} ${o} of mass ${G.m} receives an absorbed dose of ${G.D}. Calculate the energy absorbed.`;
+  return`${cap(art(o))} ${o} absorbs ${G.E} of energy from radiation and receives an absorbed dose of ${G.D}. Calculate the mass of the ${o}.`}});
+
+add({id:'hdw',area:'Radiation',eq:'H = Dw<sub>R</sub>',vars:{H:['H','equivalent dose','heq'],D:['D','absorbed dose','dose'],wR:['w<sub>R</sub>','radiation weighting factor','none']},subj:'H',rearr:['D','wR'],
+ gen(r,u){const V={},sf={},c={};const k=u==='wR'?pick(r,RAD.filter(x=>x[1]>1)):pick(r,RAD);c.rad=k[0];V.wR=k[1];V.D=rl(r,2e-6,0.02);V.H=V.D*V.wR;sf.D=sfp(r);sf.H=sfp(r);sf.wR=String(k[1]).length;c.who=pick(r,['A worker','A patient','A pilot','A laboratory technician']);return{V,sf,c,exact:['wR']}},
+ solve:{H:V=>V.D*V.wR,D:V=>V.H/V.wR,wR:V=>V.H/V.D},
+ sub:S=>`${S.H} = ${S.D} × ${S.wR}`,
+ q(G,u,c){const rf=`The radiation weighting factor for ${c.rad} is ${G.wR}.`;
+  if(u==='H')return`${c.who} receives an absorbed dose of ${G.D} from ${c.rad}. ${rf} Calculate the equivalent dose received.`;
+  if(u==='D')return`${c.who} receives an equivalent dose of ${G.H} from ${c.rad}. ${rf} Calculate the absorbed dose.`;
+  return`A sample of tissue receives an absorbed dose of ${G.D} from a type of radiation. The equivalent dose is ${G.H}. Calculate the radiation weighting factor for this radiation.`}});
+
+add({id:'hdot',area:'Radiation',disp:true,eq:`Ḣ = ${frac('H','t')}`,vars:{Hd:['Ḣ','equivalent dose rate','hrate'],H:['H','equivalent dose','heq'],t:['t','time','time']},subj:'Hd',rearr:['H','t'],
+ gen(r){const V={},sf={},c={};const pf=pick(r,['µ','m']);const f=pf==='µ'?1e-6:1e-3;const th=rl(r,0.5,400);const hd=pf==='µ'?rl(r,0.3,60):rl(r,0.02,3);V.t=th*3600;V.Hd=hd*f;V.H=V.Hd*th;['Hd','H','t'].forEach(k=>sf[k]=sfp(r));c.who=pick(r,['A worker','A nurse','A pilot','A research scientist']);return{V,sf,c,du:{Hd:pf+'Sv h⁻¹',H:pf+'Sv',t:'h'},fix:['Hd','H','t']}},
+ solve:{Hd:V=>V.H/V.t,H:V=>V.Hd*V.t,t:V=>V.H/V.Hd},
+ sub:S=>`${S.Hd} = ${frac(S.H,S.t)}`,
+ q(G,u,c){if(u==='Hd')return`${c.who} receives an equivalent dose of ${G.H} in ${G.t}. Calculate the equivalent dose rate.`;
+  if(u==='H')return`${c.who} works in an area where the equivalent dose rate is ${G.Hd}. Calculate the equivalent dose received in ${G.t}.`;
+  return`${c.who} works in an area where the equivalent dose rate is ${G.Hd}. Calculate the time taken to receive an equivalent dose of ${G.H}.`}});
+
+const AREAS=['Dynamics','Electricity','Properties of matter','Waves','Radiation'];
+const FB={};F.forEach(f=>FB[f.id]=f);
+
+/* ---------- question builder ---------- */
+const QC={};
+function sectionOf(f,idx){return idx<20?0:idx<20+f.nr?1:2}
+function unkOf(f,idx){const s=sectionOf(f,idx);return s===0?f.subj:s===1?f.rearr[(idx-20)%f.rearr.length]:null}
+function buildQ(f,idx){
+  const key=f.id+':'+idx;if(QC[key])return QC[key];
+  const r=rng(key);const sec=sectionOf(f,idx);let u=unkOf(f,idx);if(sec===2)u=pick(r,f.all);
+  const vary=sec===2;const g=f.gen(r,u,vary);
+  const hide=g.hide||[],exact=g.exact||[],fix=g.fix||[];
+  const keys=Object.keys(g.V).filter(k=>g.V[k]!=null);
+  const du={};keys.forEach(k=>{const d=f.vars[k][2];du[k]=(g.du&&g.du[k])||BASE[d]});
+  if(vary){
+    const dims=[...new Set(keys.filter(k=>!hide.includes(k)&&!fix.includes(k)).map(k=>f.vars[k][2]))];
+    for(const d of dims){
+      if(r()<0.5)continue;
+      const ks=keys.filter(k=>f.vars[k][2]===d&&!hide.includes(k)&&!fix.includes(k));
+      const gk=ks.filter(k=>k!==u);if(!gk.length)continue;
+      const mag=Math.max(...gk.map(k=>Math.abs(g.V[k])));
+      const ok=(PFX[d]||[]).filter(o=>{if(o==='°C')return true;const x=mag/U[o][d][0];return x>=1&&x<1000});
+      if(ok.length){const ch=pick(r,ok);ks.forEach(k=>du[k]=ch)}
+    }
+  }
+  const G={},S={},VV={};let smin=99;
+  for(const k of keys){
+    if(k===u)continue;const d=f.vars[k][2];const un=du[k];const sf=g.sf[k]||2;
+    if(hide.includes(k)){VV[k]=g.V[k];S[k]=fmt(g.V[k],sf).h;continue}
+    let dv,txt,html;
+    if(d==='tabs'){dv=un==='°C'?Math.round(g.V[k]-273):Math.round(g.V[k]);txt=html=String(dv).replace('-','−')}
+    else{const fc=U[un][d][0];dv=Number((g.V[k]/fc).toPrecision(sf));let o=fmt(dv,sf);
+      if(!exact.includes(k)&&!/[.e]/.test(o.t)&&Math.abs(dv)<1e5&&cntSF(o.t)<sf){const step=Math.pow(10,String(Math.round(Math.abs(dv))).length-sf);dv+=step;o=fmt(dv,sf)}
+      txt=o.t;html=o.h}
+    if(!exact.includes(k))smin=Math.min(smin,cntSF(txt));
+    G[k]=`<span class="nv">${html}${ul(un)?' '+un:''}</span>`;
+    if(d==='tabs'){VV[k]=un==='°C'?dv+273:dv;S[k]=String(VV[k])}
+    else if(f.disp){VV[k]=dv;S[k]=html}
+    else{const fc=U[un][d][0];VV[k]=dv*fc;S[k]=fc===1?html:fmt(VV[k],sf).h}
+  }
+  if(smin===99)smin=2;
+  S[u]=f.vars[u][0];
+  const ad=f.vars[u][2];
+  const au=f.disp?(ad==='tabs'?'K':du[u]):BASE[ad];
+  const ans=f.solve[u](VV);
+  const q={f,idx,sec,u,text:f.q(G,u,g.c||{},f),ans,au,ad,s:smin,sub:f.sub(S)};
+  QC[key]=q;return q;
+}
+
+/* ---------- marking ---------- */
+function parseNum(str){
+  let s=String(str).trim();
+  const sup={'⁰':'0','¹':'1','²':'2','³':'3','⁴':'4','⁵':'5','⁶':'6','⁷':'7','⁸':'8','⁹':'9','⁻':'-'};
+  s=s.replace(/10([⁻⁰¹²³⁴⁵⁶⁷⁸⁹]+)/g,(m,e)=>'10^'+[...e].map(c=>sup[c]).join(''));
+  s=s.replace(/\s+/g,'').replace(/,/g,'').replace(/[−–]/g,'-').replace(/[×xX*]10\^?/,'e').replace(/e\+/i,'e');
+  if(!/^-?(\d+\.?\d*|\.\d+)(e-?\d+)?$/i.test(s))return null;
+  return{v:parseFloat(s),m:s.split(/e/i)[0]};
+}
+function okRound(x,t,n){for(const tt of [t,t*(1+1e-9),t*(1-1e-9)]){const rr=+tt.toPrecision(n);if(Math.abs(x-rr)<=Math.abs(rr)*1e-9+1e-300)return true}return false}
+function mark(q,inStr,unit){
+  const p=parseNum(inStr);if(!p)return'parse';if(!unit)return'nounit';
+  const lo=Math.max(1,q.s-1),hi=q.s+2;
+  const inRange=(x,t)=>{for(let n=lo;n<=hi;n++)if(okRound(x,t,n))return true;return false};
+  const fa=U[q.au][q.ad];const ansB=q.ans*fa[0]+fa[1];
+  const ud=U[unit][q.ad];
+  if(!ud)return(inRange(p.v,ansB)||inRange(p.v,q.ans))?'unitwrong':'wrong';
+  const t=(ansB-ud[1])/ud[0];
+  if(inRange(p.v,t))return'right';
+  const rel=Math.abs(p.v-t)/Math.abs(t);const n=cntSF(p.m);
+  if(n>hi&&rel<0.05)return'manysf';
+  if(n<lo&&rel<0.25)return'fewsf';
+  if(rel<0.05)return'round';
+  for(const m of [1e3,1e-3,1e6,1e-6])if(Math.abs(p.v-t*m)/Math.abs(t*m)<0.03)return'prefix';
+  return'wrong';
+}
+const MSG={right:['ok','Correct.'],unitwrong:['mid','Your number is right, but the unit is wrong.'],manysf:['mid','Right value, but too many significant figures. Round it off.'],fewsf:['mid','Too few significant figures. Keep more figures in your answer.'],round:['mid','Close. Check your rounding.'],prefix:['no','Your number is out by a factor of a thousand or more. Check your units and prefixes.'],wrong:['no','Not right yet. Try again, or show the answer.'],parse:['no','Type a number, for example 2.5 or 3.0e8.'],nounit:['no','Choose a unit from the list.']};
+
+function solHTML(q){
+  const f=q.f,lo=Math.max(1,q.s-1),hi=q.s+2,un=ul(q.au);
+  const main=fmt(q.ans,q.s).h;
+  const acc=[];for(let n=lo;n<=hi;n++){const h=fmt(q.ans,n).h;if(!acc.includes(h))acc.push(h)}
+  return`<div class="mi"><div class="lbl">Marking instructions · 3 marks</div>
+  <div class="mrow"><span>${f.eq}</span><b>(1)</b></div>
+  <div class="mrow"><span>${q.sub}</span><b>(1)</b></div>
+  <div class="mrow"><span>${f.vars[q.u][0]} = ${main}${un?' '+un:''}</span><b>(1)</b></div>
+  <p class="acc">Accept ${lo} to ${hi} significant figures: ${acc.map(a=>`<span>${a}${un?' '+un:''}</span>`).join(', ')}${un?'. Any equivalent value with a correct prefix is also accepted.':''}</p></div>`;
+}
+
+/* ---------- storage ---------- */
+const SK='n5eqbank.v1';
+function load(){try{return JSON.parse(localStorage.getItem(SK))||{}}catch(e){return{}}}
+let DB=load();if(!DB.r)DB.r={};
+function save(){try{localStorage.setItem(SK,JSON.stringify(DB))}catch(e){}}
+const st=(fid,idx)=>(DB.r[fid]||{})[idx];
+function setSt(fid,idx,v){(DB.r[fid]=DB.r[fid]||{})[idx]=v;save()}
+function stats(f){let g=0,a=0,r=0;const m=DB.r[f.id]||{};for(const k in m){if(m[k]==='g')g++;else if(m[k]==='a')a++;else if(m[k]==='r')r++}return{g,a,r,n:f.n}}
+const progBar=s=>`<div class="prog"><i class="g" style="width:${s.g/s.n*100}%"></i><i class="p" style="width:${s.a/s.n*100}%"></i><i class="n" style="width:${s.r/s.n*100}%"></i></div>`;
+
+/* ---------- views ---------- */
+const VIEWS=['home','menu','mix','quiz','summary'];
+function show(v){VIEWS.forEach(x=>$(x).hidden=x!==v);window.scrollTo(0,0)}
+function renderHome(){
+  $('units').innerHTML=AREAS.map(a=>`<section class="unit"><h2>${a}</h2><div class="tiles">${F.filter(f=>f.area===a).map(f=>{const s=stats(f);return`<button class="tile" data-f="${f.id}"><span class="eq">${f.eq}</span><span class="cnt">${s.g+s.a} of ${s.n} correct</span>${progBar(s)}</button>`}).join('')}</div></section>`).join('');
+  let t=0,c=0;F.forEach(f=>{const s=stats(f);t+=s.n;c+=s.g+s.a});$('overall').textContent=`${c} of ${t} questions answered correctly`;
+  try{$('skipGot').checked=!!DB.skip}catch(e){}
+}
+let curF=null;
+function renderMenu(f){
+  curF=f;$('munit').textContent=f.area;$('mtitle').innerHTML=f.eq;const s=stats(f);
+  $('mstat').textContent=`${s.g} right first time · ${s.a} right after another try · ${s.r} shown`;
+  const btn=i=>{const v=st(f.id,i)||'';const u=unkOf(f,i);const lab=sectionOf(f,i)===1?`<small>${f.vars[u][0]}</small>`:'';return`<button class="qb ${v}" data-i="${i}">${i+1}${lab}</button>`};
+  const rng_=(a,b)=>Array.from({length:b-a},(_,k)=>btn(a+k)).join('');
+  const lets=f.rearr.map(k=>f.vars[k][0]).join(', ');
+  $('mcols').innerHTML=`<section class="col"><h2>Non-rearranging</h2><div class="msg">Find ${f.vars[f.subj][0]}</div><div class="qs">${rng_(0,20)}</div></section>
+  <section class="col"><h2>Rearranging</h2><div class="msg">Find ${lets}</div><div class="qs">${rng_(20,20+f.nr)}</div></section>
+  <section class="col"><h2>Random</h2><div class="msg">Any letter, some with unit prefixes</div><div class="qs">${rng_(20+f.nr,f.n)}</div></section>`;
+  show('menu');
+}
+
+/* quiz state */
+let QS={list:[],pos:0,set:false,res:[]};let curQ=null,tries=0,done=false;
+function unitOptions(){return`<option value="">Choose…</option>`+UL.map(([l])=>`<option value="${l}">${l==='—'?'no unit':l}</option>`).join('')}
+$('aunit').innerHTML=unitOptions();
+function openQ(){
+  const [fid,idx]=QS.list[QS.pos];const f=FB[fid];const q=buildQ(f,idx);curQ=q;tries=0;done=false;
+  $('qeq').innerHTML=f.eq;$('qnum').textContent=idx+1;$('qsec').textContent=['Non-rearranging','Rearranging','Random'][q.sec];
+  $('qtext').innerHTML=q.text;$('ain').value='';$('aunit').value='';$('fb').hidden=true;$('sol').hidden=true;$('sol').innerHTML='';
+  $('ain').disabled=$('aunit').disabled=$('acheck').disabled=false;$('showAns').disabled=false;
+  $('qpos').textContent=QS.set?`${QS.pos+1} of ${QS.list.length}`:'';
+  $('prev').hidden=$('rand').hidden=QS.set;$('next').textContent=QS.set&&QS.pos===QS.list.length-1?'Finish':'Next';
+  show('quiz');
+}
+function finishQ(res){
+  done=true;$('ain').disabled=$('aunit').disabled=$('acheck').disabled=true;$('showAns').disabled=true;
+  $('sol').innerHTML=solHTML(curQ);$('sol').hidden=false;
+  setSt(curQ.f.id,curQ.idx,res);if(QS.set)QS.res[QS.pos]=res;
+}
+$('aform').addEventListener('submit',e=>{e.preventDefault();if(done)return;
+  const k=mark(curQ,$('ain').value,$('aunit').value);const [cls,txt]=MSG[k];
+  const fb=$('fb');fb.className='fb '+cls;fb.textContent=txt;fb.hidden=false;
+  if(k==='right'){finishQ(tries===0?'g':'a')}else if(k!=='parse'&&k!=='nounit'){tries++}});
+$('showAns').onclick=()=>{if(done)return;const fb=$('fb');fb.className='fb no';fb.textContent='Answer shown. Read through the working, then try another.';fb.hidden=false;finishQ('r')};
+function skipOK(fid,i){return !(DB.skip&&st(fid,i)==='g')}
+function stepSingle(d){const f=FB[QS.list[0][0]];let i=QS.list[0][1];for(let k=0;k<f.n;k++){i=(i+d+f.n)%f.n;if(skipOK(f.id,i))break}QS.list=[[f.id,i]];openQ()}
+$('next').onclick=()=>{if(QS.set){if(QS.pos<QS.list.length-1){QS.pos++;openQ()}else summary()}else stepSingle(1)};
+$('prev').onclick=()=>stepSingle(-1);
+$('rand').onclick=()=>{const f=FB[QS.list[0][0]];const pool=[...Array(f.n).keys()].filter(i=>i!==QS.list[0][1]&&skipOK(f.id,i));const i=pool.length?pool[Math.floor(Math.random()*pool.length)]:QS.list[0][1];QS.list=[[f.id,i]];openQ()};
+$('back').onclick=()=>{if(QS.set){renderHome();show('home')}else renderMenu(FB[QS.list[0][0]])};
+function summary(){const n=QS.list.length,g=QS.res.filter(x=>x==='g').length,a=QS.res.filter(x=>x==='a').length;
+  $('sscore').textContent=`${g} / ${n}`;$('slist').textContent=`Right first time: ${g}. Right after another try: ${a}. Answer shown or skipped: ${n-g-a}.`;show('summary')}
+
+/* home & menu events */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('.tile');if(t){renderMenu(FB[t.dataset.f]);return}
+  const b=e.target.closest('.qb');if(b&&curF){QS={list:[[curF.id,+b.dataset.i]],pos:0,set:false,res:[]};openQ();return}
+  const s=e.target.closest('[data-sheet]');if(s)openSheet(s.dataset.sheet);
+});
+$('mback').onclick=()=>{renderHome();show('home')};
+$('mstart').onclick=()=>{const f=curF;let i=0;for(;i<f.n;i++){if(st(f.id,i)!=='g')break}if(i>=f.n)i=0;QS={list:[[f.id,i]],pos:0,set:false,res:[]};openQ()};
+$('skipGot').onchange=e=>{DB.skip=e.target.checked;save()};
+$('resetBtn').onclick=()=>{$('resetAsk').hidden=false};
+$('resetNo').onclick=()=>{$('resetAsk').hidden=true};
+$('resetYes').onclick=()=>{DB.r={};save();$('resetAsk').hidden=true;renderHome()};
+
+/* mixed practice */
+$('mixBtn').onclick=()=>{$('xtopics').innerHTML=AREAS.map(a=>`<div class="seglbl">${a}</div><div class="tlist">${F.filter(f=>f.area===a).map(f=>`<label><input type="checkbox" id="x_${f.id}" value="${f.id}" checked> <span class="eq">${f.eq}</span></label>`).join('')}</div>`).join('');$('xmsg').textContent='';show('mix')};
+$('xback').onclick=()=>{renderHome();show('home')};
+$('xall').onclick=()=>document.querySelectorAll('#xtopics input').forEach(i=>i.checked=true);
+$('xnone').onclick=()=>document.querySelectorAll('#xtopics input').forEach(i=>i.checked=false);
+$('xstart').onclick=()=>{
+  const fs=[...document.querySelectorAll('#xtopics input:checked')].map(i=>FB[i.value]);
+  const ks=[0,1,2].filter(k=>$('xk'+k).checked);
+  if(!fs.length||!ks.length){$('xmsg').textContent='Pick at least one formula and one question type.';return}
+  let pool=[];fs.forEach(f=>{for(let i=0;i<f.n;i++)if(ks.includes(sectionOf(f,i))&&skipOK(f.id,i))pool.push([f.id,i])});
+  if(!pool.length){$('xmsg').textContent='No questions left with these settings.';return}
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]]}
+  // spread across formulas
+  const by={};pool.forEach(p=>(by[p[0]]=by[p[0]]||[]).push(p));const groups=Object.values(by);const out=[];const n=+$('xn').value;
+  while(out.length<n&&groups.some(g=>g.length)){groups.sort(()=>Math.random()-.5);for(const g of groups){if(g.length&&out.length<n)out.push(g.pop())}}
+  QS={list:out,pos:0,set:true,res:[]};openQ()};
+$('sagain').onclick=()=>$('mixBtn').click();
+$('shome').onclick=()=>{renderHome();show('home')};
+
+/* sheets */
+const RELS=["d = vt","v = fλ",`T = ${frac('1','f')}`,`A = ${frac('N','t')}`,`D = ${frac('E','m')}`,"H = Dw<sub>R</sub>",`Ḣ = ${frac('H','t')}`,"s = vt","d = v̄t","s = v̄t",`a = ${frac('v − u','t')}`,"W = mg","F = ma","E<sub>W</sub> = Fd","E<sub>p</sub> = mgh","E<sub>k</sub> = ½mv<sup>2</sup>","Q = It","V = IR","R<sub>T</sub> = R<sub>1</sub> + R<sub>2</sub> + …",`${frac('1','R<sub>T</sub>')} = ${frac('1','R<sub>1</sub>')} + ${frac('1','R<sub>2</sub>')} + …`,`V<sub>2</sub> = ${frac('R<sub>2</sub>','R<sub>1</sub> + R<sub>2</sub>')} V<sub>s</sub>`,`${frac('V<sub>1</sub>','V<sub>2</sub>')} = ${frac('R<sub>1</sub>','R<sub>2</sub>')}`,`P = ${frac('E','t')}`,"P = IV","P = I<sup>2</sup>R",`P = ${frac('V<sup>2</sup>','R')}`,"E<sub>h</sub> = cmΔT",`p = ${frac('F','A')}`,`${frac('pV','T')} = constant`,"p<sub>1</sub>V<sub>1</sub> = p<sub>2</sub>V<sub>2</sub>",`${frac('p<sub>1</sub>','T<sub>1</sub>')} = ${frac('p<sub>2</sub>','T<sub>2</sub>')}`,`${frac('V<sub>1</sub>','T<sub>1</sub>')} = ${frac('V<sub>2</sub>','T<sub>2</sub>')}`,"E<sub>h</sub> = ml"];
+function openSheet(k){
+  $('dtitle').textContent=k==='rel'?'Relationships sheet':'Data sheet';
+  $('dbody').innerHTML=k==='rel'?`<div class="rels">${RELS.map(r=>`<div>${r}</div>`).join('')}</div>`:
+  `<table class="dt"><tr><th>Quantity</th><th>Value</th></tr><tr><td>Speed of light in a vacuum</td><td>3.0 × 10<sup>8</sup> m s⁻¹</td></tr><tr><td>Speed of sound in air</td><td>340 m s⁻¹</td></tr><tr><td>Gravitational field strength on Earth</td><td>9.8 N kg⁻¹</td></tr></table>
+  <h3 style="font-size:1rem;margin:16px 0 4px">Gravitational field strengths</h3><table class="dt">${[['Mercury',3.7],['Venus',8.9],['Earth','9.8'],['Mars',3.7],['Jupiter',23],['Saturn','9.0'],['Uranus',8.7],['Neptune',11],['Moon',1.6]].map(p=>`<tr><td>${p[0]}</td><td>${p[1]} N kg⁻¹</td></tr>`).join('')}</table>
+  <p class="msg">Specific heat capacities, specific latent heats and radiation weighting factors are given in each question.</p>`;
+  $('drawer').hidden=false;
+}
+$('dclose').onclick=()=>$('drawer').hidden=true;
+document.addEventListener('keydown',e=>{if(e.key==='Escape')$('drawer').hidden=true});
+
+/* countdown */
+function tick(){const d=Date.UTC(2027,4,4,12,0)-Date.now();if(d<=0){$('cdt').textContent='Good luck';return}
+  const D=Math.floor(d/864e5),H=Math.floor(d%864e5/36e5),M=Math.floor(d%36e5/6e4);
+  $('cdt').innerHTML=`<span>${D}<small>days</small></span><span>${H}<small>hours</small></span><span>${M}<small>mins</small></span>`}
+tick();setInterval(tick,30000);
+
+renderHome();show('home');
+</script>
+
+</body></html>
