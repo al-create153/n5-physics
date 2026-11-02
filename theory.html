@@ -1328,6 +1328,129 @@ EXA("em",{build:[["Explain why microwaves can be used to cook food.",["Microwave
 EXA("rad",{write:[["Explain why the background count must be measured and subtracted when finding the half-life of a source.",[["background.{0,40}(always|all the time|everywhere|present|around)|(natural|radon|cosmic)","Background radiation is always present"],["(add|adds|included|counted|too high|higher|bigger)","It adds to the count from the source, making readings too high"],["(only|just).{0,20}source|source.{0,20}(only|alone)|accura","So you measure only the source's count"]],2,"Background radiation is always present. The detector counts it as well as the source, so readings would be too high. Subtracting it leaves only the count from the source."]]});
 EXA("refr",{write:[["Describe what happens to a ray of light as it passes into and back out of a glass block at an angle.",[["slow|speed (decrease|falls|drops)","It slows down going into the glass"],["towards the normal","It bends towards the normal on entering"],["(speed|speeds) up|faster","It speeds up when it comes out"],["away from the normal","It bends away from the normal on leaving"]],3,"Entering the glass, the light slows down and bends towards the normal. Leaving the glass, it speeds up and bends away from the normal. It leaves parallel to the ray that went in."]]});
 EXA("slh",{write:[["Explain why your skin feels cold after you get out of a swimming pool on a windy day.",[["evaporat","Water on the skin evaporates"],["latent|energy|heat","Evaporating needs latent heat (energy)"],["(from|takes|taken).{0,20}(skin|body|you)","This energy is taken from your skin"],["wind","The wind speeds up evaporation"]],2,"The water on your skin evaporates. Evaporating needs latent heat, which is taken from your skin, so it cools. The wind makes the water evaporate faster."]]});
+/* Second batch of extra questions. Numbered after batch one so earlier question numbers never change. */
+const EX2=(key,x)=>{const t=TOPICS.find(t=>t.key===key);t.x2=t.x2||{};for(const k in x)t.x2[k]=(t.x2[k]||[]).concat(x[k]);};
+
+EX2("vec",{
+gap:[["To add two vectors, draw them [nose] to [tail]. The [resultant] goes from the start of the first to the end of the last.",["side","side by side","normal"],"This works for any number of vectors."]],
+order:[["Put the steps in order to calculate the size of the resultant of 6 N east and 8 N north.",["Sketch the two vectors nose to tail.","See that they make a right-angled triangle.","Use Pythagoras: resultant² = 6² + 8².","Resultant² = 100.","Resultant = 10 N."],"At right angles, use Pythagoras for the size and trigonometry or a scale drawing for the direction."]],
+write:[["A pupil walks 100 m east, then 100 m west in 200 s. Explain why her average speed is not zero but her average velocity is.",[["distance|200 ?m","Distance is 200 m, so speed is not zero"],["displacement.{0,30}(zero|0|nothing)|(zero|0).{0,30}displacement|back (to|at) (the )?start","Her displacement is zero"],["velocity.{0,40}displacement|displacement.{0,40}velocity|vector","Velocity uses displacement"]],2,"Average speed uses distance: 200 m ÷ 200 s = 1 m/s. Average velocity uses displacement, which is zero because she ends where she started, so her average velocity is zero."]]
+});
+
+EX2("vt",{
+sort:[["Sort each feature of a velocity-time graph by what it tells you.",{"Acceleration":["the gradient of the line","how steep the line is"],"Displacement":["the area under the line"],"Velocity":["the height of the line at a moment","the value read from the vertical axis"]},"Gradient for acceleration, area for displacement, reading for velocity."]],
+build:[["Explain how to tell from a velocity-time graph which of two cars has the bigger acceleration.",["Acceleration is the gradient of a velocity-time graph.","Compare how steep each line is.","The car with the steeper line has the bigger acceleration.","The height of the line shows velocity, not acceleration."],["The car with the higher line has the bigger acceleration.","The car with the larger area has the bigger acceleration."],"Steeper gradient means velocity changes faster."]],
+write:[["A car's velocity-time graph slopes up for 5 s, stays level for 10 s, then slopes down to zero in 3 s. Describe the motion.",[["(accelerat|speed(s|ing)? up)","Accelerates (speeds up) first"],["(constant|steady|same) (velocity|speed)","Then moves at a constant velocity"],["(decelerat|slow(s|ing)? down)","Then decelerates"],["(stop|rest|zero)","Comes to a stop"]],3,"The car accelerates steadily for 5 s, then travels at a constant velocity for 10 s, then decelerates steadily and stops after 3 s."]]
+});
+
+EX2("newton",{
+gap:[["The resultant force on a falling skydiver is [weight] minus [air resistance]. At terminal velocity this resultant force is [zero].",["mass","gravity","maximum"],"Balanced forces mean zero resultant force."]],
+sort:[["Sort these pairs of forces: are they a Newton's third law pair?",{"Third law pair":["You push a wall, the wall pushes you","Earth pulls the Moon, the Moon pulls the Earth","A gun pushes a bullet, the bullet pushes the gun"],"Not a third law pair":["A book's weight and the table pushing up on the book","Engine force and air resistance on a car"]},"Third law pairs act on two different objects and are the same type of force."]],
+write:[["Explain why a car needs more force to accelerate when it is full of passengers.",[["mass","Its mass is greater"],["F\\s*=\\s*ma|force.{0,30}mass.{0,30}acceleration|bigger mass.{0,40}(more|bigger) force","F = ma: more mass needs more force"],["same acceleration","For the same acceleration"]],2,"The passengers increase the car's mass. Since F = ma, a bigger mass needs a bigger unbalanced force to give the same acceleration."]]
+});
+
+EX2("energy",{
+gap:[["When a car brakes, its [kinetic] energy changes into [heat] in the brakes. The work done by the brakes equals the [kinetic] energy lost.",["potential","light","chemical"],"Brakes use friction to turn kinetic energy into heat."]],
+sort:[["Sort these: is work being done on the object or not?",{"Work done":["lifting a box onto a shelf","pushing a trolley along a corridor","a crane raising a load"],"No work done on it":["holding a heavy bag still","pushing against a wall that does not move"]},"Work done needs a force and movement in the direction of the force."]],
+order:[["Put the steps in order to calculate the speed of a ball dropped from 2.0 m (no air resistance).",["Calculate Ep at the top using mgh.","Ep lost equals Ek gained at the bottom.","Write Ek = ½mv².","Rearrange to find v.","The mass cancels, so v = √(2gh)."],"Energy conservation: mgh = ½mv²."]],
+write:[["Explain why a skier at the bottom of a slope is moving more slowly than energy calculations predict.",[["friction|air resistance","Friction and air resistance act on the skier"],["heat|thermal|sound","Some energy becomes heat or sound"],["(less|smaller).{0,30}kinetic|kinetic.{0,30}(less|smaller)|not all","So less kinetic energy is gained"]],2,"Friction with the snow and air resistance change some of the potential energy into heat and sound. So the skier gains less kinetic energy than the calculation, which ignores friction, predicts."]]
+});
+
+EX2("proj",{
+build:[["Explain why a satellite does not fall to Earth even though gravity acts on it.",["Gravity pulls the satellite towards the Earth.","The satellite has a very high horizontal speed.","As it falls, the Earth's surface curves away beneath it.","So it keeps falling around the Earth without hitting it."],["There is no gravity in space.","The satellite's engines hold it up."],"A satellite is a projectile that is always falling, but moving sideways fast enough to keep missing the Earth."]],
+gap:[["A projectile's [horizontal] motion is at a constant velocity. Its [vertical] motion has a constant [acceleration] of 9.8 m/s².",["diagonal","speed","force"],"The two motions are independent."]],
+write:[["A pupil throws a ball horizontally off a cliff twice as fast as before. Explain whether it takes longer to land.",[["(same|equal|no).{0,15}(time|longer)|does not take longer|doesn.t take longer","It takes the same time"],["vertical","Time depends on vertical motion"],["independent|does not affect|doesn.t affect|not affect","Horizontal speed does not affect vertical motion"],["(further|more distance|farther)","But it lands further away"]],2,"It takes the same time to land. The time depends only on the vertical motion, which is the same, because horizontal and vertical motion are independent. It does land further away."]]
+});
+
+EX2("spex",{
+gap:[["The higher a satellite orbits, the [longer] its period. A [geostationary] satellite has a period of [24] hours.",["shorter","polar","12"],"Height and period increase together."]],
+build:[["Explain why space telescopes such as the James Webb telescope are placed above the atmosphere.",["The atmosphere absorbs some types of electromagnetic radiation.","For example, much infrared and X-ray radiation does not reach the ground.","Above the atmosphere, telescopes can detect these types of radiation.","There is also no cloud or weather to block the view."],["Space telescopes are closer to the stars so they see more.","Light travels faster in space."],"Getting above the atmosphere lets telescopes detect radiation that never reaches the ground."]],
+write:[["State two dangers faced by astronauts in space.",[["radiation|cosmic|solar","Radiation"],["temperature|hot|cold","Extreme temperatures"],["oxygen|air|pressure|vacuum|breathe","No air or pressure"],["(bone|muscle|weightless)","Effects of weightlessness on bone and muscle"],["re-?entry|launch|debris|meteor","Dangers of launch, re-entry or debris"]],2,"Any two: high levels of radiation, extreme temperatures, no air pressure or oxygen, loss of bone and muscle in weightlessness, dangers during launch and re-entry, space debris."]]
+});
+
+EX2("cosmo",{
+sort:[["Sort these types of telescope by the radiation they detect.",{"Radio telescope":["large dish on the ground","detects radio waves from gas clouds"],"Infrared telescope":["sees through dust clouds","detects heat from cool objects"],"X-ray telescope":["must be in space","detects very hot objects such as black hole surroundings"]},"Different radiation shows different things, so astronomers use many types of telescope."]],
+build:[["Explain how astronomers know the universe is expanding.",["Astronomers look at the line spectra of light from distant galaxies.","The lines are shifted towards the red end of the spectrum.","This redshift shows the galaxies are moving away from us.","More distant galaxies have bigger redshifts, so the universe is expanding."],["The galaxies are getting redder because they are cooling.","The lines move towards the blue end."],"Redshift that increases with distance is evidence of expansion."]],
+write:[["Explain why astronomers use light years instead of metres.",[["(large|huge|big|enormous|vast).{0,20}(distance|number)|distances.{0,20}(large|huge|big|enormous|vast)","Distances in space are huge"],["(number|numbers).{0,30}(large|huge|big|long)|easier|simpler|manageable","Metres would give very large numbers"]],2,"Distances in space are enormous. In metres the numbers would be very large and hard to use, so light years give smaller, easier numbers."]]
+});
+
+EX2("charge",{
+build:[["Explain what is meant by an electric field and how it affects charges.",["An electric field is a region where a charge feels a force.","A positive charge feels a force in the direction of the field.","A negative charge feels a force in the opposite direction.","This force can make the charge move."],["An electric field only affects uncharged particles.","Charges in an electric field feel no force unless they touch."],"Fields push positive charges one way and negative charges the other."]],
+order:[["Put these in order from smallest to largest current.",["5 mA","0.05 A","0.5 A","2 A","13 A"],"1 mA = 0.001 A, so 5 mA = 0.005 A."]],
+write:[["Explain the difference between a.c. and d.c.",[["(d\\.?c\\.?|direct).{0,60}(one direction|same direction|one way)","d.c. flows in one direction only"],["(a\\.?c\\.?|alternating).{0,60}(changes direction|reverses|back and forth|both directions)","a.c. changes direction regularly"],["battery|cell|mains|50 ?hz","Gives an example source"]],2,"Direct current flows in one direction only, for example from a battery. Alternating current changes direction many times each second, for example the mains at 50 Hz."]]
+});
+
+EX2("ohm",{
+gap:[["Resistance = [voltage] ÷ [current]. A larger resistance gives a [smaller] current for the same voltage.",["power","charge","larger"],"R = V ÷ I."]],
+build:[["Explain how to show that a resistor obeys Ohm's law.",["Measure the current through the resistor at several different voltages.","Plot a graph of voltage against current.","If the graph is a straight line through the origin, current is directly proportional to voltage.","This shows the resistor obeys Ohm's law."],["If the graph is curved, the resistor obeys Ohm's law.","You only need one reading of voltage and current."],"Ohm's law: a straight line through the origin, so V ÷ I is constant."]],
+write:[["Describe how to measure the resistance of a resistor.",[["ammeter","Use an ammeter (in series)"],["voltmeter","Use a voltmeter (across the resistor)"],["R\\s*=\\s*V\\s*(/|÷)\\s*I|V\\s*=\\s*IR|voltage.{0,20}(divided|÷).{0,20}current|ohm","Calculate R = V ÷ I"]],3,"Connect an ammeter in series with the resistor and a voltmeter across it. Read the current and voltage, then calculate R = V ÷ I."]]
+});
+
+EX2("circ",{
+gap:[["In a potential divider, the voltage is shared between the resistors in the same [ratio] as their [resistances]. The bigger resistor gets the [bigger] share.",["sum","currents","smaller"],"V₁ ÷ V₂ = R₁ ÷ R₂."]],
+sort:[["Sort these circuit rules: true for series, true for parallel, or both?",{"Series only":["one path for the current","voltages add up to the supply voltage"],"Parallel only":["each branch has the full supply voltage","currents in branches add up to the supply current"],"Both":["energy is conserved","current is the flow of charge"]},"Know which rule belongs to which circuit."]],
+build:[["Explain why an LED does not light when it is connected the wrong way round.",["An LED is a diode.","A diode only lets current flow in one direction.","Connected the wrong way round, it blocks the current.","With no current, the LED does not light."],["The LED is broken when connected backwards.","The LED needs more voltage when backwards."],"Diodes are one-way: the wrong way round, no current flows."]]
+});
+
+EX2("power",{
+gap:[["Power = energy ÷ [time]. An appliance rated at [1000] W transfers 1000 J every [second].",["current","100","minute"],"P = E ÷ t."]],
+build:[["Explain why the cable for an electric cooker is thicker than the cable for a lamp.",["The cooker has a much higher power rating.","So it draws a much larger current.","A thin cable would overheat with this current.","A thicker cable has less resistance so it stays cool."],["Thicker cables make the cooker more powerful.","The lamp needs a thicker cable because it gets hotter."],"High current needs a thick, low-resistance cable to stop overheating."]],
+write:[["Explain why heating appliances usually have higher power ratings than other appliances.",[["heat|thermal|warm","They produce heat"],["(lot|large|more|much).{0,15}energy|energy.{0,20}(lot|large|more)","Heating needs a lot of energy"],["(each|per|every|a) second|quickly|fast|short time","Transferred each second (quickly)"]],2,"Heating things up needs a lot of energy. To do this quickly, a heater must transfer a lot of energy each second, so its power is high."]]
+});
+
+EX2("shc",{
+gap:[["Specific heat capacity is measured in [J/kg°C]. Water has a [high] specific heat capacity, so it heats up [slowly].",["J/kg","low","quickly"],"It takes 4180 J to heat 1 kg of water by 1 °C."]],
+sort:[["Sort these substances by specific heat capacity.",{"High (heats up slowly)":["water","alcohol","glycerol"],"Low (heats up quickly)":["copper","lead","iron"]},"Metals generally have low specific heat capacities. Water is very high."]],
+write:[["Explain why a metal spoon in hot soup heats up much faster than the soup cools down.",[["specific heat capacity|shc","Refers to specific heat capacity"],["(metal|spoon).{0,40}(low|smaller|less)","The metal spoon has a low specific heat capacity"],["(soup|water).{0,40}(high|larger|bigger|more)","The soup (mostly water) has a high specific heat capacity"],["mass","The spoon has much less mass"]],2,"The spoon is metal, which has a low specific heat capacity, and it has a small mass, so a little energy raises its temperature a lot. The soup is mostly water with a high specific heat capacity and much more mass, so losing that energy barely changes its temperature."]]
+});
+
+EX2("slh",{
+gap:[["Specific latent heat is measured in [J/kg]. During a change of state, the [temperature] stays the same while energy breaks [bonds] between particles.",["J/kg°C","mass","atoms"],"No °C in the unit, because there is no temperature change."]],
+order:[["Put the steps in order to measure the specific latent heat of fusion of ice.",["Put crushed ice at 0 °C in a funnel with an immersion heater.","Collect and measure the water that melts in a set time with the heater off.","Switch on the heater and collect the water that melts in the same time.","Subtract to find the mass melted by the heater alone.","Calculate l = E ÷ m."],"The heater-off run allows for ice melted by the warm room."]],
+build:[["Explain why ice at 0 °C is better at cooling a drink than the same mass of water at 0 °C.",["The ice has to melt before its temperature can rise.","Melting needs latent heat of fusion.","The ice takes this energy from the drink.","So the drink loses more energy and becomes colder."],["Ice is colder than water at 0 °C.","Water at 0 °C releases energy into the drink."],"Both are at 0 °C, but ice also takes in latent heat as it melts."]]
+});
+
+EX2("gas",{
+gap:[["Pressure = [force] ÷ [area]. It is measured in [pascals].",["mass","volume","newtons"],"1 Pa = 1 N/m²."]],
+build:[["Explain why a sharp knife cuts better than a blunt knife.",["A sharp knife has a much smaller area touching the food.","For the same force, a smaller area gives a bigger pressure.","Pressure = force ÷ area.","The bigger pressure cuts through the food more easily."],["A sharp knife pushes with a bigger force.","A blunt knife has a smaller area."],"Same force on a smaller area gives a larger pressure."]],
+write:[["Explain why the volume of a balloon increases when it is taken to the top of a high mountain.",[["(outside|air|atmospheric).{0,30}pressure.{0,30}(lower|less|smaller|decrease)|(lower|less|smaller).{0,20}(outside|atmospheric|air) pressure","The air pressure outside is lower"],["(inside|gas).{0,40}(higher|greater|bigger|more)|push(es)? out","The gas inside pushes out more than the air outside pushes in"],["(expand|bigger|increase).{0,40}(until|equal|balance|same)|until.{0,30}(equal|balance|same)","It expands until the pressures balance"]],2,"Higher up, the air pressure outside the balloon is lower. The gas inside now pushes out more than the air pushes in, so the balloon expands until the pressure inside falls to match the pressure outside."]]
+});
+
+EX2("waves",{
+gap:[["The time for one wave to pass a point is the [period]. It is linked to frequency by T = 1 ÷ [f]. A frequency of 50 Hz gives a period of [0.02] s.",["wavelength","v","50"],"T = 1 ÷ f = 1 ÷ 50 = 0.02 s."]],
+build:[["Explain why a boat bobs up and down on water waves instead of moving along with them.",["Waves transfer energy, not matter.","The water particles vibrate up and down as the wave passes.","Water waves are transverse.","So the boat moves up and down but stays in roughly the same place."],["The boat is too heavy to move with the water.","Water waves are longitudinal, so the boat moves back and forth."],"The energy moves along. The water and the boat just oscillate."]],
+write:[["Describe one difference and one similarity between sound waves and light waves.",[["(sound|it).{0,40}longitudinal|longitudinal.{0,40}sound","Sound is longitudinal"],["(light).{0,40}transverse|transverse.{0,40}light","Light is transverse"],["(vacuum|space|medium|material)","Sound needs a medium, light can travel through a vacuum"],["(both|similar|same).{0,40}(energy|wave|reflect|refract|diffract)|transfer energy","Both transfer energy (or both reflect, refract, diffract)"]],2,"Difference: sound is longitudinal and needs a medium, while light is transverse and can travel through a vacuum. Similarity: both transfer energy, and both can be reflected, refracted and diffracted."]]
+});
+
+EX2("em",{
+gap:[["[Radio] waves have the longest wavelength in the EM spectrum. [Gamma] rays have the shortest wavelength and the highest [energy].",["Infrared","Visible","speed"],"Shorter wavelength means higher frequency and more energy."]],
+sort:[["Sort each use to the type of EM radiation.",{"Microwaves":["satellite communication","heating food"],"Infrared":["thermal imaging cameras","TV remote controls"],"Ultraviolet":["detecting forged banknotes","sterilising water"],"X-rays":["imaging broken bones","airport baggage scanners"]},"Each part of the spectrum has its own uses because of its energy and how it interacts with materials."]],
+write:[["Explain why radiographers who take X-rays stand behind a lead screen.",[["(ionis|harm|damage).{0,40}(cell|tissue|body)|(cancer)","X-rays can damage cells or cause cancer"],["lead.{0,40}(absorb|stop|block)|(absorb|stop|block).{0,40}lead","Lead absorbs X-rays"],["(many|every day|repeated|lots of|regular|often|each day)","They are exposed many times, so their dose would build up"]],2,"X-rays carry high energy and can damage cells and cause cancer. Lead absorbs X-rays. A radiographer takes many X-rays every day, so without the screen their dose would build up."]]
+});
+
+EX2("refr",{
+order:[["Put the steps in order to describe light passing from air into a glass block and out again at an angle.",["Light travels through air towards the block.","It enters the glass and slows down.","It bends towards the normal.","It travels in a straight line through the glass.","It leaves the glass, speeds up and bends away from the normal."],"Slow down: towards the normal. Speed up: away from the normal."]],
+gap:[["When light passes into a denser material, its speed [decreases], its wavelength [decreases] and its frequency [stays the same].",["increases","doubles","halves"],"v = fλ: f is fixed by the source, so λ changes with v."]],
+build:[["Explain why a straw in a glass of water looks bent.",["Light from the straw under the water travels up to the surface.","At the surface it passes from water into air.","The light speeds up and bends away from the normal.","Your eyes trace the light back in straight lines, so the straw seems to bend at the surface."],["The water makes the straw bend.","The light slows down as it leaves the water."],"Refraction at the surface changes the direction of the light reaching your eyes."]]
+});
+
+EX2("rad",{
+sort:[["Sort each use by the radiation it needs.",{"Alpha":["smoke detectors"],"Beta":["checking the thickness of paper in a factory"],"Gamma":["sterilising medical equipment","medical tracers","killing cancer cells with a beam"]},"The choice depends on how penetrating the radiation needs to be."]],
+build:[["Explain why a beta source is used to monitor the thickness of paper in a factory.",["Some beta radiation passes through paper, and the amount depends on the thickness.","If the paper gets thicker, less beta reaches the detector.","Alpha would be stopped completely by the paper.","Gamma would pass straight through, so thickness would make little difference."],["Beta is used because it is not ionising.","Alpha is used because it is the most penetrating."],"Beta is partly absorbed by paper, so the count rate changes with thickness."]],
+gap:[["Equivalent dose = absorbed dose × [weighting factor]. Equivalent dose is measured in [sieverts]. Alpha has a weighting factor of [20].",["half-life","grays","1"],"Alpha does 20 times more biological harm per gray than beta or gamma."]]
+});
+
+EX2("words",{
+sort:[["Sort these command words by what they ask you to do.",{"Short answer only":["state","name","give"],"Say what happens":["describe"],"Say what happens and why":["explain","justify"]},"Read the command word before you write."]],
+build:[["Build the best answer: 'Explain why the voltage across an LDR increases when it gets darker.'",["When it gets darker, the resistance of the LDR increases.","In a potential divider, the bigger resistance gets the bigger share of the voltage.","So the voltage across the LDR increases."],["It gets darker so it goes up.","The LDR stores more voltage in the dark."],"Name the change, give the rule, then link to the result."]],
+write:[["Rewrite this answer to get full marks: 'Because it's heavier it falls faster.' (The question asked why a feather and a hammer fall at the same rate on the Moon.)",[["(no|without|isn.t any) (air|atmosphere)|no air resistance","There is no air (resistance) on the Moon"],["(only|just).{0,20}(gravity|weight)|gravity (is the )?only","Only gravity acts"],["(same|equal).{0,20}acceleration|acceleration.{0,30}(same|equal)","So they have the same acceleration"]],2,"There is no air on the Moon, so there is no air resistance. The only force on each object is gravity, which gives every object the same acceleration, so they fall at the same rate."]]
+});
+
+EX2("skills",{
+order:[["Put these in order for planning an investigation.",["Write an aim.","Identify the independent, dependent and control variables.","Choose suitable equipment.","Write a method.","Carry out a risk assessment."],"Plan the variables before choosing equipment and writing the method."]],
+build:[["Explain why a pupil should repeat their measurements.",["Repeating shows whether results are consistent.","It helps to spot outliers.","Taking an average reduces the effect of random uncertainty.","This makes the results more reliable."],["Repeating removes systematic uncertainty.","Repeating makes each reading more accurate."],"Repeats help with random uncertainty and outliers. They do not fix systematic errors."]],
+write:[["Explain the difference between accuracy and reliability.",[["accura.{0,40}(close|near|true)","Accuracy is how close a result is to the true value"],["reliab.{0,60}(repeat|consistent|same|similar|again)","Reliability is how consistent repeated results are"]],2,"Accuracy is how close a measurement is to the true value. Reliability is how close repeated measurements are to each other."]]
+});
 /* ===== engine ===== */
 const TYPES={K:"Key words",TF:"True or false",M:"Multiple choice",H:"Hinge question",P:"Problem solving",G:"Fill the gaps",S:"Sort",O:"Put in order",B:"Build an answer",X:"Spot the mistake",W:"Written answer"};
 const PRESETS=[["All types",Object.keys(TYPES)],["Literacy",["K","G","B","X","W"]],["Knowledge",["K","TF","M","H"]],["Problem solving",["P","H","O","W","S"]]];
@@ -1341,7 +1464,7 @@ function expand(t){
   const items=[];let n=0;
   const add=o=>{o.id=t.key+"."+(++n);o.topic=t.key;items.push(o);};
   /* originals first, then later additions, so existing question numbers never change */
-  [t.d,t.x].forEach(d=>{if(d)expandPart(d,add);});
+  [t.d,t.x,t.x2].forEach(d=>{if(d)expandPart(d,add);});
   return items;
 }
 function expandPart(d,add){
