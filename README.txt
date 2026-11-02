@@ -1,11 +1,11 @@
 N5 Physics Question Bank
 ========================
 
-To use on one computer: open index.html in a web browser (Chrome, Edge, Firefox or Safari).
-Keep the img and lib folders next to index.html.
+To use on one computer: open pastpapers.html in a web browser (Chrome, Edge, Firefox or Safari).
+Keep the img and lib folders next to pastpapers.html.
 
-To put it online: upload the whole folder (index.html, img, lib) to any web space that
-serves web pages, then share the address of index.html with pupils. No account is needed.
+To put it online: upload the whole folder (pastpapers.html, img, lib) to any web space that
+serves web pages, then share the address of pastpapers.html with pupils. No account is needed.
 
 Notes
 - Progress is saved in each pupil's own browser. Use Teacher tools > Move progress to
