@@ -78,6 +78,20 @@ button.b.danger{color:var(--bad)}
 .qtypes[open] summary::before{transform:rotate(45deg)}
 .qt-h{font-weight:700;font-size:1.05rem}
 .qt-body{margin-top:12px}
+.mixchips{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.mixchips .mu{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.mixchips .mu b{font:600 .7rem var(--f-mono);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);flex:0 0 100%;margin-top:4px}
+.qtypes{margin-top:14px;border-top:1px solid var(--line);padding-top:12px}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:14px}
+.col{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px;min-width:0}
+.col h2{margin:0 0 2px;font-size:1.05rem}
+.qs{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.qb{font:600 .82rem var(--f-mono);min-width:2.6rem;padding:7px;border-radius:4px;border:1px solid var(--line);background:var(--tile);color:var(--ink);cursor:pointer;text-align:center;font-variant-numeric:tabular-nums}
+.qb:hover{border-color:var(--accent)}
+.qb.g{background:var(--good-bg);border-color:var(--good);color:var(--good)}
+.qb.a{background:var(--part-bg);border-color:var(--part);color:var(--part)}
+.qb.r{background:var(--bad-bg);border-color:var(--bad);color:var(--bad)}
+.qtitle .qn{font-family:var(--f-mono);color:var(--accent)}
 .startrow{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
 .startrow #startBtn{padding:11px 26px;font-size:1rem}
 .sticky{position:sticky;bottom:0;z-index:5;background:var(--bg);padding:10px 0 calc(10px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);margin-top:16px}
@@ -193,23 +207,23 @@ textarea{font:inherit;font-size:1.05rem;width:100%;min-height:130px;padding:12px
       <div class="bar"><button class="b" id="redoBtn">Redo my mistakes</button></div>
     </header>
 
-    <details class="panel qtypes" id="qtypesBox">
-      <summary><span class="qt-h">Question types</span><span class="msg" id="qtypeSum"></span></summary>
-      <div class="qt-body">
-        <div class="chips" id="presets"></div>
-        <div class="seglbl">Or choose your own</div>
-        <div class="chips" id="types"></div>
-      </div>
-    </details>
-
     <div class="panel">
       <div class="row">
-        <div><h2 style="margin:0">Pick your topics</h2><span class="msg">Tap one topic or several, then start.</span></div>
+        <div><h2 style="margin:0">Mixed practice</h2><span class="msg">Tick one topic or several for a random set of questions.</span></div>
         <div class="bar"><button class="b sm" id="selAll">Select all</button><button class="b sm" id="selNone">Clear</button></div>
       </div>
-      <label class="msg" style="display:flex;gap:6px;align-items:center;margin-top:8px;cursor:pointer"><input type="checkbox" id="skipGot"> Skip questions I got right first time</label>
+      <div id="mixTopics"></div>
+      <details class="qtypes" id="qtypesBox">
+        <summary><span class="qt-h">Question types</span><span class="msg" id="qtypeSum"></span></summary>
+        <div class="qt-body">
+          <div class="chips" id="presets"></div>
+          <div class="seglbl">Or choose your own</div>
+          <div class="chips" id="types"></div>
+        </div>
+      </details>
+      <label class="msg" style="display:flex;gap:6px;align-items:center;margin-top:12px;cursor:pointer"><input type="checkbox" id="skipGot"> Skip questions I got right first time</label>
       <div class="startrow">
-        <span class="msg" id="selMsg">No topics picked yet</span>
+        <span class="msg" id="selMsg">No topics ticked yet</span>
         <div class="bar">
           <label class="msg" for="nq">Questions</label>
           <select id="nq" class="b sm" style="font:600 .9rem var(--f-mono);padding:8px"><option>10</option><option selected>20</option><option>40</option><option value="0">All</option></select>
@@ -218,16 +232,26 @@ textarea{font:inherit;font-size:1.05rem;width:100%;min-height:130px;padding:12px
       </div>
     </div>
 
+    <h2 class="seglbl" style="margin-top:24px">Or open a topic to choose questions by number</h2>
     <div id="units"></div>
 
     <div class="panel">
       <h2>How it works</h2>
-      <p class="msg" style="margin:0;max-width:70ch">Every question shows the physics behind the answer once you finish. If you get one wrong, you get a second try and a hint about the mistake you made. Questions you miss come back again later in the same set.</p>
+      <p class="msg" style="margin:0;max-width:70ch">Every question shows the physics behind the answer once you finish. If you get one wrong, you get a second try and a hint about the mistake you made. In mixed practice, questions you miss come back again later in the set. Questions are numbered within each topic and never change, so Question 12 on Gas laws is always the same question.</p>
       <div class="key"><span><i style="background:var(--good-bg);border-color:var(--good)"></i>Right first time</span><span><i style="background:var(--part-bg);border-color:var(--part)"></i>Right on second try</span><span><i style="background:var(--bad-bg);border-color:var(--bad)"></i>Answer shown</span></div>
       <div class="bar" style="margin-top:12px"><button class="b sm danger" id="resetBtn">Reset all progress</button></div>
       <div class="confirm" id="resetAsk" hidden><span class="msg">Clear every result on this device?</span><button class="b sm danger" id="resetYes">Yes, clear it</button><button class="b sm" id="resetNo">Cancel</button></div>
     </div>
     <p class="foot" id="foot">Progress is saved in this browser only.</p>
+  </div>
+
+  <div id="menu" hidden>
+    <div class="row"><button class="b" id="mback">← Topics</button></div>
+    <div class="eyebrow" id="munit" style="margin-top:16px"></div>
+    <h1 id="mtitle"></h1>
+    <div class="bar" style="margin-top:10px"><button class="b pri" id="mstart">Start</button><span class="msg" id="mstat"></span></div>
+    <div class="key"><span><i style="background:var(--good-bg);border-color:var(--good)"></i>Right first time</span><span><i style="background:var(--part-bg);border-color:var(--part)"></i>Right on second try</span><span><i style="background:var(--bad-bg);border-color:var(--bad)"></i>Answer shown</span></div>
+    <div class="cols" id="mcols"></div>
   </div>
 
   <div id="quiz" hidden>
@@ -244,7 +268,7 @@ textarea{font:inherit;font-size:1.05rem;width:100%;min-height:130px;padding:12px
     <div id="fb" class="fb" hidden></div>
     <div id="why" hidden></div>
     <div class="qnav">
-      <button class="b" id="skip">Skip</button>
+      <div class="bar"><button class="b" id="skip">Skip</button><button class="b" id="prev">Previous</button><button class="b" id="rand">Random</button></div>
       <div class="bar"><button class="b pri" id="check">Check</button><button class="b pri" id="next" hidden>Next</button></div>
     </div>
   </div>
@@ -1183,6 +1207,7 @@ function expand(t){
 const ALL=[],BYID={};
 TOPICS.forEach(t=>{t.items=expand(t);t.items.forEach(it=>{ALL.push(it);BYID[it.id]=it;});});
 const TOPIC=Object.fromEntries(TOPICS.map(t=>[t.key,t]));
+const qnum=it=>+it.id.split(".").pop();
 
 /* storage */
 const KEY="n5theory.v1";
@@ -1210,17 +1235,20 @@ function renderHome(){
   $("#qtypeSum").textContent=pre?pre[0]:`${store.types.length} of ${Object.keys(TYPES).length} types`;
   $("#skipGot").checked=store.skip;
   const units=[...new Set(TOPICS.map(t=>t.unit))];
-  $("#units").innerHTML=units.map(u=>`<section class="unit"><h2>${u}</h2><div class="tiles">${TOPICS.filter(t=>t.unit===u).map(t=>{const pb=progBar(t.items);const n=usable(t.items).length;
-    return `<button class="tile${store.sel.includes(t.key)?" on":""}" data-topic="${t.key}" aria-pressed="${store.sel.includes(t.key)}"><span class="nm">${t.name}</span><span class="cnt">${n} of ${t.items.length} questions · ${pb.g+pb.a} right</span>${pb.html}</button>`;}).join("")}</div></section>`).join("");
+  $("#mixTopics").innerHTML=`<div class="mixchips">${units.map(u=>`<div class="mu"><b>${u}</b>${TOPICS.filter(t=>t.unit===u).map(t=>`<button class="tchip" data-sel="${t.key}" aria-pressed="${store.sel.includes(t.key)}">${t.name}</button>`).join("")}</div>`).join("")}</div>`;
+  $("#units").innerHTML=units.map(u=>`<section class="unit"><h2>${u}</h2><div class="tiles">${TOPICS.filter(t=>t.unit===u).map(t=>{const pb=progBar(t.items);
+    return `<button class="tile" data-topic="${t.key}"><span class="nm">${t.name}</span><span class="cnt">${pb.g+pb.a} of ${t.items.length} correct</span>${pb.html}</button>`;}).join("")}</div></section>`).join("");
   const pool=usable(ALL.filter(it=>store.sel.includes(it.topic)));
-  $("#selMsg").textContent=store.sel.length?`${store.sel.length} topic${store.sel.length>1?"s":""} · ${pool.length} questions available`:"No topics picked yet";
+  $("#selMsg").textContent=store.sel.length?`${store.sel.length} topic${store.sel.length>1?"s":""} · ${pool.length} questions available`:"No topics ticked yet";
   $("#startBtn").disabled=!pool.length;
   const miss=ALL.filter(it=>store.p[it.id]==="r"||store.p[it.id]==="a").length;
   $("#redoBtn").textContent=miss?`Redo my mistakes (${miss})`:"Redo my mistakes";$("#redoBtn").disabled=!miss;
   $("#foot").textContent=`${ALL.length} questions across ${TOPICS.length} topics. Progress is saved in this browser only.`;
 }
 document.addEventListener("click",e=>{
-  const t=e.target.closest("[data-topic]");if(t){const k=t.dataset.topic;store.sel=store.sel.includes(k)?store.sel.filter(x=>x!==k):[...store.sel,k];save();renderHome();return;}
+  const sl=e.target.closest("[data-sel]");if(sl){const k=sl.dataset.sel;store.sel=store.sel.includes(k)?store.sel.filter(x=>x!==k):[...store.sel,k];save();renderHome();return;}
+  const t=e.target.closest("[data-topic]");if(t){renderMenu(TOPIC[t.dataset.topic]);return;}
+  const qb=e.target.closest(".qb");if(qb&&curT){startSingle(curT.items[+qb.dataset.i]);return;}
   const ty=e.target.closest("[data-type]");if(ty){const k=ty.dataset.type;store.types=store.types.includes(k)?store.types.filter(x=>x!==k):[...store.types,k];if(!store.types.length)store.types=[k];save();renderHome();return;}
   const pr=e.target.closest("[data-pre]");if(pr){store.types=PRESETS[+pr.dataset.pre][1].slice();save();renderHome();}
 });
@@ -1233,9 +1261,28 @@ $("#resetYes").onclick=()=>{store.p={};save();$("#resetAsk").hidden=true;renderH
 $("#startBtn").onclick=()=>{const n=+$("#nq").value;startSet(usable(ALL.filter(it=>store.sel.includes(it.topic))),n,"set");};
 $("#redoBtn").onclick=()=>startSet(ALL.filter(it=>store.p[it.id]==="r"||store.p[it.id]==="a"),0,"redo");
 
+/* ===== topic menu ===== */
+let curT=null;
+function renderMenu(t){
+  curT=t;$("#munit").textContent=t.unit;$("#mtitle").textContent=t.name;
+  let g=0,a=0,r=0;t.items.forEach(it=>{const v=store.p[it.id];if(v==="g")g++;else if(v==="a")a++;else if(v==="r")r++;});
+  $("#mstat").textContent=`${t.items.length} questions · ${g} right first time · ${a} on second try · ${r} shown`;
+  const groups=[];t.items.forEach((it,i)=>{let gr=groups.find(x=>x.type===it.type);if(!gr){gr={type:it.type,list:[]};groups.push(gr);}gr.list.push(i);});
+  $("#mcols").innerHTML=groups.map(gr=>`<section class="col"><h2>${TYPES[gr.type]}</h2><div class="msg">${gr.list.length} question${gr.list.length>1?"s":""}</div><div class="qs">${gr.list.map(i=>`<button class="qb ${store.p[t.items[i].id]||""}" data-i="${i}">${i+1}</button>`).join("")}</div></section>`).join("");
+  show("menu");
+}
+$("#mback").onclick=()=>{show("home");renderHome();};
+$("#mstart").onclick=()=>{const t=curT;const it=t.items.find(x=>store.p[x.id]!=="g")||t.items[0];startSingle(it);};
+function startSingle(it){Q={single:true,list:[{it,retry:false}],i:0,res:{},mode:"single"};show("quiz");renderQ();}
+function stepSingle(d){const t=TOPIC[Q.list[0].it.topic],n=t.items.length;let i=t.items.indexOf(Q.list[0].it);
+  for(let k=0;k<n;k++){i=(i+d+n)%n;if(!(store.skip&&store.p[t.items[i].id]==="g"))break;}
+  Q.list=[{it:t.items[i],retry:false}];renderQ();}
+$("#prev").onclick=()=>stepSingle(-1);
+$("#rand").onclick=()=>{const t=TOPIC[Q.list[0].it.topic];const pool=t.items.filter(x=>x!==Q.list[0].it&&!(store.skip&&store.p[x.id]==="g"));if(!pool.length)return;Q.list=[{it:pool[Math.floor(Math.random()*pool.length)],retry:false}];renderQ();};
+
 /* ===== session ===== */
 let Q=null;
-function show(id){["home","quiz","summary"].forEach(s=>$("#"+s).hidden=s!==id);window.scrollTo(0,0);}
+function show(id){["home","menu","quiz","summary"].forEach(s=>$("#"+s).hidden=s!==id);window.scrollTo(0,0);}
 /* spread kinds so the set doesn't clump: shuffle then avoid same type twice in a row where possible */
 function mix(arr){const a=shuffle(arr);for(let i=1;i<a.length;i++){if(a[i].type===a[i-1].type){const j=a.findIndex((x,k)=>k>i&&x.type!==a[i-1].type);if(j>0)[a[i],a[j]]=[a[j],a[i]];}}return a;}
 function startSet(pool,n,mode){
@@ -1249,18 +1296,19 @@ function finishItem(result){
   if(e.retry){if(result!=="r")store.p[id]="a";}
   else{store.p[id]=result;Q.res[id]=result;}
   save();
-  if(result==="r"&&!e.retry){Q.list.splice(Math.min(Q.i+4,Q.list.length),0,{it:e.it,retry:true});}
+  if(result==="r"&&!e.retry&&!Q.single){Q.list.splice(Math.min(Q.i+4,Q.list.length),0,{it:e.it,retry:true});}
 }
 
 let cur=null,tries=0,done=false;
 function renderQ(){
   const e=Q.list[Q.i],it=e.it;tries=0;done=false;
-  $("#qtopic").textContent=TOPIC[it.topic].name;
+  $("#qtopic").innerHTML=`${TOPIC[it.topic].name} · <span class="qn">Q${qnum(it)}</span>`;
+  const S=!!Q.single;$("#qpos").hidden=S;$(".qprog").hidden=S;$("#finishNow").hidden=S;$("#prev").hidden=!S;$("#rand").hidden=!S;
   $("#qtype").textContent=TYPES[it.type]+(e.retry?" · again":"");
   $("#qtype").className="chip"+(it.type==="H"||it.type==="P"?" h":"");
   $("#qpos").textContent=`${Q.i+1} / ${Q.list.length}`;
   $("#qbarfill").style.width=`${Q.i/Q.list.length*100}%`;
-  $("#fb").hidden=true;$("#why").hidden=true;$("#next").hidden=true;$("#skip").hidden=false;
+  $("#fb").hidden=true;$("#why").hidden=true;$("#next").hidden=!S;$("#skip").hidden=S;
   $("#check").textContent="Check";
   const box=$("#qbox");box.innerHTML="";
   cur=KINDS[it.kind](it,box);
@@ -1286,11 +1334,11 @@ function attempt(ok,it,{maxTries=2,hint="",revealMsg="",extra=""}={}){
   cur.lock&&cur.lock(false);settle("r",it,revealMsg||hint,extra);
 }
 $("#check").onclick=()=>{if(cur&&cur.check&&!done)cur.check();};
-$("#next").onclick=()=>{Q.i++;if(Q.i>=Q.list.length)summary();else renderQ();};
+$("#next").onclick=()=>{if(Q.single){stepSingle(1);return;}Q.i++;if(Q.i>=Q.list.length)summary();else renderQ();};
 $("#skip").onclick=()=>{Q.list.push(Q.list.splice(Q.i,1)[0]);if(Q.list.length===1){summary();return;}renderQ();};
-$("#back").onclick=()=>{show("home");renderHome();};
+$("#back").onclick=()=>{if(Q.single)renderMenu(TOPIC[Q.list[0].it.topic]);else{show("home");renderHome();}};
 $("#finishNow").onclick=()=>{if(Object.keys(Q.res).length)summary();else{show("home");renderHome();}};
-document.addEventListener("keydown",e=>{if($("#quiz").hidden)return;if(e.key==="Enter"&&e.target.tagName!=="TEXTAREA"){if(!$("#next").hidden){e.preventDefault();$("#next").click();}else if(!$("#check").hidden&&!$("#check").disabled){e.preventDefault();$("#check").click();}}});
+document.addEventListener("keydown",e=>{if($("#quiz").hidden)return;if(e.key==="Enter"&&e.target.tagName!=="TEXTAREA"){if(!done&&!$("#check").hidden&&!$("#check").disabled){e.preventDefault();$("#check").click();}else if(done&&!$("#next").hidden){e.preventDefault();$("#next").click();}}});
 
 function summary(){
   show("summary");const ids=Object.keys(Q.res);const v=ids.map(i=>Q.res[i]);
@@ -1299,7 +1347,8 @@ function summary(){
   $("#summary .eyebrow").textContent=Q.i<Q.list.length?`Finished early · ${ids.length} of ${new Set(Q.list.map(x=>x.it.id)).size} questions answered`:"Set finished";
   $("#sline").textContent=`${g} right first time · ${a} on the second try · ${r} answer shown`;
   const byT={};ids.forEach(id=>{const t=BYID[id].topic;(byT[t]=byT[t]||[]).push(Q.res[id]);});
-  $("#slist").innerHTML=Object.entries(byT).map(([t,arr])=>{const ok=arr.filter(x=>x!=="r").length;const col=ok===arr.length?"var(--good)":ok>=arr.length/2?"var(--part)":"var(--bad)";return `<div class="sl"><i style="background:${col}"></i><span>${TOPIC[t].name}: ${ok} of ${arr.length}</span></div>`;}).join("");
+  const missRef={};ids.filter(id=>Q.res[id]==="r").forEach(id=>{const t=BYID[id].topic;(missRef[t]=missRef[t]||[]).push(qnum(BYID[id]));});
+  $("#slist").innerHTML=Object.entries(byT).map(([t,arr])=>{const ok=arr.filter(x=>x!=="r").length;const col=ok===arr.length?"var(--good)":ok>=arr.length/2?"var(--part)":"var(--bad)";return `<div class="sl"><i style="background:${col}"></i><span>${TOPIC[t].name}: ${ok} of ${arr.length}${missRef[t]?` · missed Q${missRef[t].sort((x,y)=>x-y).join(", Q")}`:""}</span></div>`;}).join("");
   const missed=ids.filter(id=>Q.res[id]==="r").map(id=>BYID[id]);
   $("#smiss").hidden=!missed.length;
   $("#smiss").onclick=()=>startSet(missed,0,"redo");
