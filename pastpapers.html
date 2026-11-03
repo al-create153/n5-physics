@@ -298,9 +298,9 @@ function fromCode(c){const m=/^(\d{4}|SPQ|QS)([ms])(\d+)$/.exec(c);if(!m)return 
 
 /* ---------- countdown ---------- */
 const EXAM=new Date('2027-05-04T13:00:00+01:00');
-function tick(){let s=Math.max(0,Math.floor((EXAM-Date.now())/1000));const d=Math.floor(s/86400);s%=86400;const h=Math.floor(s/3600);s%=3600;const m=Math.floor(s/60);
-  $('cdt').innerHTML=`<span>${d}<small>days</small></span><span>${h}<small>hrs</small></span><span>${m}<small>min</small></span>`}
-tick();setInterval(tick,30000);
+function tick(){let s=Math.max(0,Math.floor((EXAM-Date.now())/1000));const d=Math.floor(s/86400);s%=86400;const h=Math.floor(s/3600);s%=3600;const m=Math.floor(s/60);const sc=s%60;
+  $('cdt').innerHTML=`<span>${d}<small>days</small></span><span>${h}<small>hrs</small></span><span>${m}<small>min</small></span><span>${sc}<small>sec</small></span>`}
+tick();setInterval(tick,1000);
 
 /* ---------- home ---------- */
 function progBar(list){const n=list.length||1;let g=0,p=0,b=0;list.forEach(q=>{const r=prog[q.id];if(r==='got')g++;else if(r==='part')p++;else if(r==='not')b++});

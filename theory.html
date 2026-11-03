@@ -1502,9 +1502,9 @@ store.sel=store.sel.filter(k=>TOPIC[k]);
 
 /* countdown */
 function tick(){const ms=new Date("2027-05-04T13:00:00+01:00")-new Date();const el=$("#cdt");if(ms<=0){el.textContent="Good luck";return;}
-  const d=Math.floor(ms/864e5),h=Math.floor(ms/36e5)%24,m=Math.floor(ms/6e4)%60;
-  el.innerHTML=`<span>${d}<small>days</small></span><span>${h}<small>hours</small></span><span>${m}<small>mins</small></span>`;}
-tick();setInterval(tick,30000);
+  const d=Math.floor(ms/864e5),h=Math.floor(ms/36e5)%24,m=Math.floor(ms/6e4)%60,sc=Math.floor(ms/1e3)%60;
+  el.innerHTML=`<span>${d}<small>days</small></span><span>${h}<small>hours</small></span><span>${m}<small>mins</small></span><span>${sc}<small>secs</small></span>`;}
+tick();setInterval(tick,1000);
 
 /* ===== home ===== */
 function progBar(items){const n=items.length||1;let g=0,a=0,r=0;items.forEach(it=>{const v=store.p[it.id];if(v==="g")g++;else if(v==="a")a++;else if(v==="r")r++;});

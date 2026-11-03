@@ -774,9 +774,9 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')$('drawer').hidden=t
 
 /* countdown */
 function tick(){const d=Date.UTC(2027,4,4,12,0)-Date.now();if(d<=0){$('cdt').textContent='Good luck';return}
-  const D=Math.floor(d/864e5),H=Math.floor(d%864e5/36e5),M=Math.floor(d%36e5/6e4);
-  $('cdt').innerHTML=`<span>${D}<small>days</small></span><span>${H}<small>hours</small></span><span>${M}<small>mins</small></span>`}
-tick();setInterval(tick,30000);
+  const D=Math.floor(d/864e5),H=Math.floor(d%864e5/36e5),M=Math.floor(d%36e5/6e4),S=Math.floor(d%6e4/1e3);
+  $('cdt').innerHTML=`<span>${D}<small>days</small></span><span>${H}<small>hours</small></span><span>${M}<small>mins</small></span><span>${S}<small>secs</small></span>`}
+tick();setInterval(tick,1000);
 
 renderHome();show('home');
 </script>
