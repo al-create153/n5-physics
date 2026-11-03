@@ -701,7 +701,7 @@ function unitOptions(){return`<option value="">Choose…</option>`+UL.map(([l])=
 $('aunit').innerHTML=unitOptions();
 function openQ(){
   const [fid,idx]=QS.list[QS.pos];const f=FB[fid];const q=buildQ(f,idx);curQ=q;tries=0;done=false;
-  $('qeq').innerHTML=f.eq;$('qnum').textContent=idx+1;$('qsec').textContent=['Non-rearranging','Rearranging','Random'][q.sec];
+  $('qeq').innerHTML=QS.set?'Mixed practice':f.eq;$('qnum').textContent=idx+1;$('qsec').textContent=['Non-rearranging','Rearranging','Random'][q.sec];
   $('qtext').innerHTML=q.text;$('ain').value='';$('aunit').value='';$('fb').hidden=true;$('sol').hidden=true;$('sol').innerHTML='';
   $('ain').disabled=$('aunit').disabled=$('acheck').disabled=false;$('showAns').disabled=false;
   $('qpos').textContent=QS.set?`${QS.pos+1} of ${QS.list.length}`:'';
@@ -709,12 +709,12 @@ function openQ(){
   show('quiz');
 }
 function finishQ(res){
-  done=true;$('ain').disabled=$('aunit').disabled=$('acheck').disabled=true;$('showAns').disabled=true;
+  done=true;$('qeq').innerHTML=curQ.f.eq;$('ain').disabled=$('aunit').disabled=$('acheck').disabled=true;$('showAns').disabled=true;
   $('sol').innerHTML=solHTML(curQ);$('sol').hidden=false;
   setSt(curQ.f.id,curQ.idx,res);if(QS.set)QS.res[QS.pos]=res;
 }
 $('aform').addEventListener('submit',e=>{e.preventDefault();if(done)return;
-  const k=mark(curQ,$('ain').value,$('aunit').value);const [cls,txt]=MSG[k];
+  const k=mark(curQ,$('ain').value,$('aunit').value);if(k!=='parse'&&k!=='nounit')$('qeq').innerHTML=curQ.f.eq;const [cls,txt]=MSG[k];
   const fb=$('fb');fb.className='fb '+cls;fb.textContent=txt;fb.hidden=false;
   if(k==='right'){finishQ(tries===0?'g':'a')}else if(k!=='parse'&&k!=='nounit'){tries++}});
 $('showAns').onclick=()=>{if(done)return;const fb=$('fb');fb.className='fb no';fb.textContent='Answer shown. Read through the working, then try another.';fb.hidden=false;finishQ('r')};
