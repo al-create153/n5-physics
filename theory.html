@@ -1452,6 +1452,856 @@ build:[["Explain why a pupil should repeat their measurements.",["Repeating show
 write:[["Explain the difference between accuracy and reliability.",[["accura.{0,40}(close|near|true)","Accuracy is how close a result is to the true value"],["reliab.{0,60}(repeat|consistent|same|similar|again)","Reliability is how consistent repeated results are"]],2,"Accuracy is how close a measurement is to the true value. Reliability is how close repeated measurements are to each other."]]
 });
 /* ===== engine ===== */
+/*X3START*/
+const EX3=(key,x)=>{const t=TOPICS.find(t=>t.key===key);t.x3=t.x3||{};for(const k in x)t.x3[k]=(t.x3[k]||[]).concat(x[k]);};
+EX3("vec",{
+mc:[
+["Which of these is a scalar quantity?","time",[["force","Force has a direction."],["velocity","Velocity is a vector."],["displacement","Displacement has a direction."]],"Time has size only, so it is a scalar.",""],
+["A pupil runs 100 m in a straight line and back again in 40 s. What is her average velocity?","0 m/s",[["5 m/s","That is her average speed, using distance."],["2.5 m/s","Her displacement is zero."],["10 m/s","Check the working: displacement ÷ time."]],"She ends where she started, so displacement is 0 and average velocity is 0.","h"],
+["A boat moves at 3 m/s north in a river flowing 3 m/s south. What is the boat's resultant velocity?","0 m/s",[["6 m/s north","The current is in the opposite direction, so subtract."],["3 m/s north","The current cancels the boat's velocity."],["4.2 m/s north-east","Pythagoras is only for vectors at right angles."]],"Equal and opposite velocities cancel.","h"],
+["A car travels 12 km east and then 5 km north. What is the size of its displacement?","13 km",[["17 km","That is the distance."],["7 km","You cannot subtract vectors at right angles."],["60 km","Multiplying has no meaning here."]],"√(12² + 5²) = 13 km.","p"],
+["A hiker walks 8 km east then 6 km south in 2 hours. What is her average velocity?","5 km/h",[["7 km/h","That uses the distance, 14 km."],["10 km/h","That is the displacement, not the velocity."],["2.5 km/h","Check: 10 km ÷ 2 h."]],"Displacement = √(8² + 6²) = 10 km. Velocity = 10 ÷ 2 = 5 km/h (south of east).","p"],
+["A plane flies at 120 m/s north. A crosswind blows at 50 m/s east. What is the plane's resultant speed?","130 m/s",[["170 m/s","You cannot add vectors at right angles."],["70 m/s","The wind is not in the opposite direction."],["120 m/s","The wind changes the resultant."]],"√(120² + 50²) = 130 m/s.","p"]
+],
+gap:[
+["Speed is the [distance] travelled per second. [Velocity] is the displacement per second.",["mass","force"],"Velocity is a vector; speed is a scalar."],
+["Two vectors at right angles can be added using [Pythagoras] for the size and a scale [drawing] or trigonometry for the direction.",["subtraction","graph"],"Draw them nose to tail first."]
+],
+sort:[
+["Sort these: distance or displacement?",{"Distance":["the length of a winding path","the total length of a lap","12 km by road"],"Displacement":["5 km north of the start","zero after a full lap","3 m to the left"]},"Displacement always needs a direction."],
+["Sort these by the size of the resultant of 6 N and 8 N.",{"14 N":["both acting to the right"],"2 N":["acting in opposite directions"],"10 N":["acting at right angles"]},"Same direction add, opposite subtract, right angles use Pythagoras."],
+["Sort these: speed or velocity?",{"Speed":["30 mph on a speedometer","an average of 5 m/s for a run","the speed of sound, 340 m/s"],"Velocity":["20 m/s due east","3 m/s up the slope","−4 m/s (moving backwards)"]},"Velocity gives a direction."]
+],
+order:[
+["Put the steps in order to find average velocity.",["Find the start and end points.","Measure the straight line from start to end: the displacement.","Note its direction.","Divide the displacement by the total time."],"Velocity uses displacement, not distance."],
+["Put these journeys in order of displacement, smallest first.",["one lap of a 400 m track","200 m along a straight road","300 m east then 400 m north","600 m along a straight road"],"0 m, 200 m, 500 m, 600 m."],
+["Put the steps in order to add two vectors by scale drawing.",["Choose a scale.","Draw the first arrow to scale.","Draw the second arrow from the tip of the first.","Join the start to the finish to make the resultant.","Measure the length and angle."],"Nose to tail."]
+],
+build:[
+["Explain why a runner who finishes one lap of a track has run 400 m but has a displacement of zero.",["Distance is the total length of the path.","The runner covered 400 m of track.","Displacement is the straight line from start to finish.","The runner finished where she started, so the displacement is zero."],["Displacement is always bigger than distance.","The track is curved, so displacement cannot be measured."],"Distance: whole path. Displacement: start to finish."],
+["Explain why a pilot must point the plane slightly into a crosswind to fly due north.",["Velocity is a vector.","The wind adds a sideways velocity to the plane.","The resultant velocity would point away from north.","Pointing slightly into the wind cancels the sideways part."],["The wind slows the plane's engines.","Pointing into the wind makes the plane faster."],"Add the vectors so the resultant points north."],
+["Explain how to find the average speed of a car on a journey.",["Measure the total distance travelled.","Measure the total time taken.","Divide the total distance by the total time.","Give the unit, such as m/s."],["Use the speed shown at the end of the journey.","Divide the time by the distance."],"Average speed = total distance ÷ total time."]
+],
+spot:[
+["A car drives 3 km north then 4 km east. Find its displacement.",["Draw the vectors nose to tail.","They make a right-angled triangle.","Displacement = 3 + 4 = 7 km.","Give a direction, east of north."],2,"Use Pythagoras: √(3² + 4²) = 5 km."],
+["Classify force and mass.",["Force has size and direction.","Force is a vector.","Mass has size and direction.","Mass is a scalar."],2,"Mass has size only. It has no direction."],
+["Find the resultant of 10 N right and 4 N left.",["The forces are in opposite directions.","Subtract the smaller from the larger.","Resultant = 6 N.","The direction is to the left."],3,"The bigger force is to the right, so the resultant is 6 N to the right."]
+],
+write:[
+["State the difference between a scalar and a vector.",[["scalar.{0,40}(size|magnitude).{0,15}only|scalar.{0,30}no direction","A scalar has size only"],["vector.{0,40}(direction)","A vector has size and direction"]],2,"A scalar has size (magnitude) only. A vector has size and direction."],
+["Explain why the velocity of a car on a roundabout changes even when its speed is steady.",[["direction.{0,30}chang|chang.{0,30}direction","Its direction changes"],["velocity.{0,20}vector|vector","Velocity is a vector (has direction)"]],2,"Velocity is a vector, so it includes direction. On a roundabout the direction keeps changing, so the velocity changes even if the speed stays the same."],
+["Give two examples of vectors and two examples of scalars.",[["(force|velocity|displacement|acceleration|weight|momentum)","An example of a vector"],["(speed|distance|mass|time|energy|temperature)","An example of a scalar"]],2,"Vectors: force, velocity, displacement, acceleration, weight. Scalars: speed, distance, mass, time, energy."]
+]
+});
+
+EX3("vt",{
+mc:[
+["On a velocity-time graph, what does a horizontal line above the time axis show?","constant velocity",[["the object is at rest","That would be a line along the axis at v = 0."],["constant acceleration","That would be a sloping straight line."],["decreasing velocity","The velocity is not changing."]],"Flat line: no change in velocity.",""],
+["What is the unit of acceleration?","m/s²",[["m/s","That is the unit of velocity."],["m","That is a distance."],["N","That is force."]],"Acceleration is change in velocity per second.",""],
+["Which line on a velocity-time graph shows the greatest acceleration?","the steepest line",[["the longest line","Length does not show acceleration."],["the highest line","Height shows velocity."],["the flattest line","Flat means little or no acceleration."]],"Acceleration is the gradient.",""],
+["A car accelerates from 10 m/s to 30 m/s in 5 s. What is its acceleration?","4 m/s²",[["6 m/s²","That uses 30 ÷ 5."],["2 m/s²","That uses 10 ÷ 5."],["100 m/s²","Divide by time, do not multiply."]],"a = (v − u) ÷ t = 20 ÷ 5 = 4 m/s².","p"],
+["A train slows from 20 m/s to rest in 40 s. How far does it travel while slowing?","400 m",[["800 m","That uses 20 × 40. Use the average velocity."],["0.5 m","That is the deceleration."],["200 m","Check: ½ × 20 × 40."]],"Area of triangle = ½ × 40 × 20 = 400 m.","p"],
+["A cyclist accelerates from rest at 2 m/s² for 6 s. What is her final velocity?","12 m/s",[["3 m/s","That divides 6 by 2."],["8 m/s","Multiply a by t."],["36 m/s","That squares the time."]],"v = u + at = 0 + 2 × 6 = 12 m/s.","p"]
+],
+gap:[
+["The [gradient] of a velocity-time graph gives the acceleration. The [area] under it gives the displacement.",["length","height"],"Two key graph skills."],
+["A [sloping] straight line on a velocity-time graph shows constant [acceleration].",["flat","speed"],"Steeper slope, bigger acceleration."],
+["Acceleration is the change in [velocity] divided by the [time] taken.",["distance","mass"],"a = (v − u) ÷ t."]
+],
+sort:[
+["Sort these velocity-time graph shapes.",{"Constant velocity":["horizontal line above the axis"],"Constant acceleration":["straight line sloping up"],"Constant deceleration":["straight line sloping down"],"At rest":["horizontal line along the time axis"]},"Read the gradient."],
+["Sort these: what do you find from a velocity-time graph?",{"From the gradient":["acceleration","deceleration"],"From the area":["displacement","distance travelled"],"Read straight off":["velocity at a given time"]},"Gradient, area, or read the value."],
+["Sort these motions.",{"Accelerating":["a car pulling away from lights","a ball falling from a cliff"],"Decelerating":["a car braking","a ball thrown upwards on its way up"],"Constant velocity":["a car on cruise control on a straight road","a skydiver at terminal velocity"]},"Is the velocity changing?"]
+],
+order:[
+["Put the steps in order to find the acceleration from a velocity-time graph.",["Pick two points on the straight line.","Read off the change in velocity.","Read off the time taken.","Divide the change in velocity by the time."],"Gradient = rise ÷ run."],
+["Put these accelerations in order, smallest first.",["0 to 10 m/s in 10 s","0 to 10 m/s in 5 s","0 to 20 m/s in 5 s","0 to 30 m/s in 5 s"],"1, 2, 4, 6 m/s²."],
+["Put the stages of a bus journey in order, as shown on a velocity-time graph.",["The bus speeds up from the stop.","It travels at a steady velocity.","It slows down approaching the next stop.","It stops: the line returns to zero."],"Slope up, flat, slope down."]
+],
+build:[
+["Explain how to find the distance travelled from a velocity-time graph made of a triangle and a rectangle.",["The distance is the area under the graph.","Find the area of the triangle: ½ × base × height.","Find the area of the rectangle: base × height.","Add the two areas together."],["Multiply the final velocity by the total time.","Find the gradient of each part."],"Area under the line, shape by shape."],
+["Explain what a velocity-time graph shows for a car that is slowing down uniformly.",["The line slopes downwards.","The velocity decreases by the same amount each second.","So the gradient is negative and constant.","This means a constant deceleration."],["The line slopes upwards.","The line curves away from the axis."],"Straight line sloping down."],
+["Explain why the velocity of a falling ball increases by about 9.8 m/s every second.",["Gravity pulls the ball downwards.","This gives it a constant acceleration of about 9.8 m/s².","Acceleration is the change in velocity per second.","So the velocity increases by 9.8 m/s each second (ignoring air resistance)."],["The ball gets heavier as it falls.","The velocity stays the same once the ball is dropped."],"Constant acceleration due to gravity."]
+],
+spot:[
+["A car speeds up from 5 m/s to 25 m/s in 4 s. Find its acceleration.",["a = (v − u) ÷ t","a = (25 + 5) ÷ 4","a = 7.5 m/s²","The unit is m/s²."],1,"Subtract u from v: (25 − 5) ÷ 4 = 5 m/s²."],
+["A graph rises from 0 to 8 m/s in 4 s. Find the distance travelled.",["Distance is the area under the graph.","The shape is a triangle.","Area = base × height = 4 × 8.","Distance = 32 m."],2,"Triangle area is ½ × base × height = 16 m."],
+["Describe a flat line at 6 m/s on a velocity-time graph.",["The velocity is 6 m/s.","The velocity is not changing.","The acceleration is 6 m/s².","The object travels 6 m every second."],2,"A flat line has zero gradient, so the acceleration is zero."]
+],
+write:[
+["State what the gradient of a velocity-time graph represents.",[["acceleration","Acceleration"]],1,"The gradient of a velocity-time graph is the acceleration."],
+["Describe how a light gate and card can measure the final velocity of a trolley.",[["(length|width).{0,20}card","Measure the length of the card"],["time.{0,30}(card|block|light gate|beam)|light gate.{0,30}time","Measure the time for the card to pass the light gate"],["(divide|÷).{0,30}(time)|length.{0,10}(÷|\\/|divided)","Velocity = card length ÷ time"]],2,"Measure the length of the card. Record the time the card takes to pass through the light gate. Velocity = card length ÷ time."],
+["Explain what a velocity-time graph would look like for a car parked at the side of the road.",[["(flat|horizontal|straight)","A horizontal line"],["(zero|0|along the (time )?axis|x.?axis)","Along the time axis, at zero velocity"]],2,"A horizontal line along the time axis, because the velocity stays at zero."]
+]
+});
+
+EX3("newton",{
+mc:[
+["What is the unit of force?","newton (N)",[["kilogram (kg)","That is mass."],["joule (J)","That is energy."],["watt (W)","That is power."]],"Force is measured in newtons.",""],
+["Which force acts against a cyclist moving along a road?","air resistance",[["weight","Weight acts downwards."],["thrust","Thrust drives the cyclist forwards."],["upthrust","Upthrust acts upwards in a fluid."]],"Air resistance and friction oppose motion.",""],
+["A 1200 kg car brakes with an unbalanced force of 6000 N. What is its deceleration?","5 m/s²",[["0.2 m/s²","That is m ÷ F."],["7200 m/s²","Divide, do not add or multiply."],["50 m/s²","Check: 6000 ÷ 1200."]],"a = F ÷ m = 6000 ÷ 1200 = 5 m/s².","p"],
+["A rocket of mass 2000 kg has a thrust of 30 000 N. What is its initial acceleration upwards? (g = 9.8 N/kg)","5.2 m/s²",[["15 m/s²","Subtract the weight first."],["9.8 m/s²","That is g."],["24.8 m/s²","Weight acts against thrust."]],"Weight = 19 600 N. Unbalanced force = 10 400 N. a = 10 400 ÷ 2000 = 5.2 m/s².","p"],
+["A 70 kg skydiver falls at terminal velocity. What is the air resistance on them?","686 N",[["0 N","Air resistance balances the weight."],["70 N","Multiply by g."],["7.1 N","That divides by g."]],"Air resistance = weight = 70 × 9.8 = 686 N.","p"]
+],
+gap:[
+["Newton's third law says that if A pushes on B, then B pushes on A with an [equal] force in the [opposite] direction.",["bigger","same"],"The forces act on different objects."]
+],
+sort:[
+["Sort these by which Newton's law they show best.",{"First law":["a passenger lurches forward when a bus brakes","a puck slides on ice at steady speed"],"Second law":["a heavier trolley accelerates less with the same push","a bigger engine force gives a bigger acceleration"],"Third law":["a swimmer pushes water back and moves forward","a rocket pushes gas down and moves up"]},"Inertia, F = ma, and pairs."],
+["Sort these: does friction help or hinder?",{"Helps":["tyres gripping the road","shoes gripping the floor","brakes slowing a bike"],"Hinders":["air resistance on a racing car","friction in a bicycle chain","drag on a swimmer"]},"Friction can be useful or a nuisance."],
+["Sort these situations.",{"Forces balanced":["a book resting on a table","a lift moving up at steady speed"],"Forces unbalanced":["a car pulling away","a ball falling just after it is dropped","a parachutist just after the parachute opens"]},"Is the velocity changing?"]
+],
+order:[
+["Put the steps in order to work out acceleration from a diagram of forces.",["Mark all the forces and their directions.","Find the unbalanced force.","Write down the mass.","Use a = F ÷ m."],"Unbalanced force first."],
+["Put these in order of acceleration, smallest first, for a force of 100 N.",["a 100 kg crate","a 50 kg pupil","a 20 kg trolley","a 10 kg box"],"a = F ÷ m: smaller mass, bigger acceleration."],
+["Put the stages in order for a car pulling away and reaching top speed.",["The engine force is bigger than friction, so the car accelerates.","As speed increases, air resistance increases.","The unbalanced force gets smaller, so acceleration decreases.","Air resistance plus friction equals the engine force: top speed."],"The forces gradually balance."]
+],
+build:[
+["Explain why a passenger without a seatbelt moves forward when a car stops suddenly.",["The car is stopped by the brakes.","No unbalanced force acts on the passenger at first.","By Newton's first law the passenger keeps moving forward.","So the passenger moves forward relative to the car."],["The passenger is pushed forwards by a force from the seat.","The brakes push the passenger forwards."],"Newton's first law: things keep moving unless a force acts."],
+["Explain why a car's acceleration decreases as it gets faster.",["The engine force stays about the same.","Air resistance increases as speed increases.","So the unbalanced force gets smaller.","Since a = F ÷ m, the acceleration decreases."],["The car's mass increases as it goes faster.","The engine force increases with speed."],"Smaller unbalanced force, smaller acceleration."]
+],
+spot:[
+["A 5 kg box is pushed with 20 N against 5 N of friction. Find its acceleration.",["Unbalanced force = 20 − 5 = 15 N.","a = F ÷ m","a = 5 ÷ 15","a = 0.33 m/s²"],2,"a = F ÷ m = 15 ÷ 5 = 3 m/s²."],
+["Explain why a book on a table does not move.",["The book's weight acts down.","The table pushes up on the book.","The two forces are balanced.","So the book accelerates slowly."],3,"Balanced forces mean no acceleration, so the book stays at rest."],
+["Describe the forces on a car moving at constant speed.",["The engine force acts forwards.","Friction and air resistance act backwards.","The engine force is bigger than the backward forces.","There is no acceleration."],2,"At constant speed the forces are balanced: the engine force equals the backward forces."]
+],
+write:[
+["State Newton's first law.",[["(rest|still|stationary)","Stays at rest"],["(constant|steady|same) (speed|velocity)|moving in a straight line","Or moves at constant velocity"],["(unless|until|no).{0,30}(unbalanced|resultant|net) force","Unless an unbalanced force acts"]],2,"An object stays at rest or keeps moving at a constant velocity unless an unbalanced force acts on it."],
+["Explain why a heavy lorry takes longer to stop than a car with the same braking force.",[["(more|bigger|larger|greater) mass|heavier","The lorry has more mass"],["(smaller|less|lower) (deceleration|acceleration)|a *= *F *\\/ *m|F *= *ma","So a smaller deceleration (a = F/m)"],["(longer|more) (time|distance)","So it takes longer to stop"]],2,"With the same force, a bigger mass gives a smaller deceleration (a = F ÷ m), so the lorry takes longer to stop."]
+]
+});
+
+EX3("energy",{
+mc:[
+["What is the unit of energy?","joule (J)",[["watt (W)","That is power."],["newton (N)","That is force."],["kilogram (kg)","That is mass."]],"Energy is measured in joules.",""],
+["Which energy does a stretched catapult store?","elastic potential energy",[["kinetic energy","It is not moving yet."],["gravitational potential energy","That depends on height."],["heat energy","It is stored, not heat."]],"Stretched or squashed objects store elastic potential energy.",""],
+["A ball is dropped. Ignoring air resistance, what happens to its total energy as it falls?","It stays the same.",[["It increases.","Energy cannot be created."],["It decreases.","Without air resistance, no energy is lost."],["It becomes zero at the ground.","It is all kinetic energy just before landing."]],"Eₚ changes to Eₖ, but the total is conserved.","h"],
+["A 60 kg climber gains 17 640 J of potential energy. How high has she climbed?","30 m",[["294 m","Divide by g as well as m."],["0.033 m","That is upside down."],["3 m","Check: 17 640 ÷ (60 × 9.8)."]],"h = Eₚ ÷ (mg) = 17 640 ÷ 588 = 30 m.","p"],
+["A 2 kg ball is dropped from 5 m. What is its speed just before it lands, ignoring air resistance?","9.9 m/s",[["98 m/s","That is v², take the square root."],["49 m/s","That is 2gh ÷ 2... check: v = √(2gh)."],["5 m/s","That is the height."]],"mgh = ½mv², so v = √(2 × 9.8 × 5) = 9.9 m/s.","p"],
+["A crane does 50 000 J of work lifting a load 10 m. What force does it apply?","5000 N",[["500 000 N","Divide, do not multiply."],["0.0002 N","That is d ÷ E."],["50 000 N","Divide by the distance."]],"F = E ÷ d = 50 000 ÷ 10 = 5000 N.","p"]
+],
+gap:[
+["Energy cannot be [created] or destroyed. It can only be [changed] from one form to another.",["used","measured"],"Conservation of energy."],
+["Work done is the [force] multiplied by the [distance] moved in the direction of the force.",["mass","speed"],"E = Fd."]
+],
+sort:[
+["Sort these into the main energy store.",{"Kinetic":["a moving car","a flying ball"],"Gravitational potential":["a book on a high shelf","water behind a dam"],"Elastic potential":["a stretched spring","a drawn bow"],"Chemical":["food","a battery"]},"Name the store."],
+["Sort the energy changes in a bouncing ball.",{"Eₚ to Eₖ":["falling from its highest point"],"Eₖ to elastic":["squashing against the floor"],"Eₖ to Eₚ":["rising after the bounce"]},"Energy moves between stores."],
+["Sort these into useful and wasted energy for a car engine.",{"Useful":["kinetic energy of the car"],"Wasted":["heat in the engine","sound","heat from friction in moving parts"]},"Most of the energy from fuel is wasted as heat."]
+],
+order:[
+["Put the energy changes in order for a pendulum swinging from its highest point.",["All Eₚ at the top.","Eₚ changes to Eₖ as it swings down.","Maximum Eₖ at the bottom.","Eₖ changes back to Eₚ as it rises."],"Energy swaps between Eₚ and Eₖ."],
+["Put the steps in order to find the speed of a falling object using energy.",["Calculate the potential energy lost: Eₚ = mgh.","Assume all of this becomes kinetic energy.","Write Eₖ = ½mv².","Rearrange to find v."],"Eₚ lost = Eₖ gained."],
+["Put these in order of gravitational potential energy, smallest first (all 1 kg on Earth).",["on the floor","on a table","on a shelf","on a roof"],"Higher means more Eₚ."]
+],
+build:[
+["Explain why a ball bounces lower each time.",["When the ball hits the floor some energy is changed into heat.","Some energy is also changed into sound.","So the ball has less kinetic energy after each bounce.","It can only rise to a lower height."],["The ball's mass decreases each bounce.","Gravity gets stronger after each bounce."],"Energy is wasted each bounce."],
+["Explain how energy changes on a roller coaster.",["The car is lifted to the top, gaining Eₚ.","As it goes down, Eₚ changes to Eₖ.","As it goes up the next hill, Eₖ changes back to Eₚ.","Some energy is wasted as heat and sound due to friction."],["The car gains energy as it goes down.","Energy is used up and disappears."],"Eₚ ↔ Eₖ, with some waste."],
+["Explain why the speed of a falling object can be found without knowing its mass.",["Potential energy lost is mgh.","Kinetic energy gained is ½mv².","Setting them equal, the mass cancels.","So v = √(2gh) does not depend on mass."],["Heavier objects always fall faster.","The mass is needed to find the speed."],"Mass appears on both sides."]
+],
+spot:[
+["A 2 kg box is lifted 3 m. Find the Eₚ gained.",["Eₚ = mgh","Eₚ = 2 × 9.8 × 3","Eₚ = 58.8 J","Eₚ = 59 kJ"],3,"The answer is 59 J, not kJ."],
+["A 1000 kg car moves at 20 m/s. Find its kinetic energy.",["Eₖ = ½mv²","Eₖ = ½ × 1000 × 20","Eₖ = 10 000 J","The speed must be in m/s."],1,"The speed must be squared: ½ × 1000 × 20² = 200 000 J."],
+["Describe the energy of a ball at the top of its throw.",["Its speed is zero for an instant.","So its kinetic energy is zero.","It has its maximum potential energy.","Its total energy is zero."],3,"The total energy is all potential energy at the top; it is not zero."]
+],
+write:[
+["State the principle of conservation of energy.",[["(cannot|can.t|not).{0,20}(created|made)","Energy cannot be created"],["(destroyed)","or destroyed"],["(changed|transferred|converted)","It is changed from one form to another"]],2,"Energy cannot be created or destroyed. It can only be changed from one form into another."],
+["Explain why a pendulum eventually stops swinging.",[["(friction|air resistance|drag)","Friction or air resistance"],["(heat|thermal|sound)","Energy is changed into heat or sound"],["(less|lose|lost|decrease)","So it loses energy each swing"]],2,"Air resistance and friction at the pivot change some energy into heat each swing, so the pendulum has less energy and swings lower until it stops."],
+["Describe the energy change when a car brakes to a stop.",[["kinetic","Kinetic energy"],["(heat|thermal)","Changes into heat"],["(brake|friction)","In the brakes, by friction"]],2,"The car's kinetic energy is changed into heat (and some sound) by friction in the brakes."]
+]
+});
+
+EX3("proj",{
+mc:[
+["What shape is the path of a projectile when air resistance is ignored?","a curve (parabola)",[["a straight line","Gravity makes the path curve."],["a circle","It is not orbiting."],["a zigzag","The motion is smooth."]],"Constant horizontal velocity plus increasing vertical velocity gives a curve.",""],
+["Which force acts on a projectile in flight, ignoring air resistance?","its weight only",[["a forward force from the throw","The throw only acts while in contact."],["weight and a forward force","There is no forward force in flight."],["no forces","Gravity always acts."]],"Only gravity acts once it has been launched.","h"],
+["A ball rolls off a table at 2 m/s. Ignoring air resistance, what is its horizontal velocity just before it lands?","2 m/s",[["0 m/s","The horizontal velocity does not change."],["more than 2 m/s","No horizontal force acts."],["less than 2 m/s","Without air resistance, nothing slows it horizontally."]],"Horizontal velocity is constant.","h"],
+["A ball is thrown horizontally at 8 m/s from a cliff and lands after 3 s. How far from the base does it land?","24 m",[["2.7 m","Multiply, do not divide."],["11 m","Add is wrong: d = vt."],["29 m","Check: 8 × 3."]],"Horizontal distance = 8 × 3 = 24 m.","p"],
+["A ball is projected horizontally and falls for 2 s. What is its vertical velocity just before landing?","19.6 m/s",[["9.8 m/s","That is after 1 s."],["4.9 m/s","That uses half of g."],["0 m/s","It starts at zero but speeds up."]],"v = u + at = 0 + 9.8 × 2 = 19.6 m/s.","p"],
+["A ball falls for 1.5 s after rolling off a ledge. How high is the ledge?","11 m",[["15 m","That is the final vertical velocity."],["7.4 m","Find the average vertical velocity first."],["22 m","Use the average velocity, not the final."]],"Final vertical v = 14.7 m/s; average = 7.35 m/s; height = 7.35 × 1.5 = 11 m.","p"]
+],
+gap:[
+["A projectile's [horizontal] velocity stays constant. Its [vertical] velocity increases at 9.8 m/s².",["total","sideways"],"Treat each direction separately."],
+["The time of flight is the same for the [horizontal] and vertical motion. It is found from the [vertical] motion.",["upwards","total"],"Time links the two directions."],
+["Horizontal distance = horizontal [velocity] × [time].",["acceleration","mass"],"d = vt."]
+],
+sort:[
+["Sort these for a ball thrown horizontally (no air resistance).",{"Stays constant":["horizontal velocity","acceleration"],"Increases":["vertical velocity","distance fallen","horizontal distance travelled"]},"Gravity acts only vertically."],
+["Sort these into horizontal or vertical motion of a projectile.",{"Horizontal":["constant velocity","d = vt"],"Vertical":["accelerates at 9.8 m/s²","starts at 0 m/s if thrown sideways"]},"Two separate motions."],
+["Sort these changes for a ball thrown horizontally from a cliff (no air resistance).",{"Longer time in the air":["throw it from a higher cliff","throw it from a taller tower"],"Same time in the air":["throw it faster","use a heavier ball","throw it more slowly"]},"Time depends only on the height fallen."]
+],
+order:[
+["Put the steps in order to find how far a ball thrown horizontally travels.",["Find the time of flight from the vertical motion.","Note the horizontal velocity, which is constant.","Multiply horizontal velocity by time.","Give the answer in metres."],"Vertical gives time; horizontal gives distance."],
+["Put the steps in order to find the time a ball takes to fall from a ledge, given its final vertical velocity.",["Write u = 0 m/s vertically.","Use a = 9.8 m/s².","Use t = (v − u) ÷ a.","Calculate t."],"Use the acceleration equation vertically."],
+["Put these horizontal launch speeds in order of landing distance from the same cliff, shortest first.",["2 m/s","5 m/s","8 m/s","12 m/s"],"Same time, so distance ∝ horizontal speed."]
+],
+build:[
+["Explain why a ball dropped and a ball thrown horizontally from the same height land at the same time.",["Both start with zero vertical velocity.","Both have the same vertical acceleration, 9.8 m/s².","The horizontal motion does not affect the vertical motion.","So both take the same time to fall."],["The thrown ball falls more slowly because it is moving sideways.","The dropped ball is heavier so it falls faster."],"Vertical motion is independent of horizontal motion."],
+["Explain how to find the vertical velocity of a projectile just before it lands, if the time of flight is known.",["The initial vertical velocity is zero.","The vertical acceleration is 9.8 m/s².","Use v = u + at.","Multiply 9.8 by the time of flight."],["Use the horizontal velocity.","Divide the height by the time."],"v = 0 + 9.8t."],
+["Explain why air resistance shortens the range of a real projectile.",["Air resistance acts opposite to the motion.","It reduces the horizontal velocity during the flight.","So the projectile covers less horizontal distance each second.","It lands closer than predicted."],["Air resistance makes the projectile heavier.","Air resistance only affects the vertical motion."],"Horizontal velocity is no longer constant."]
+],
+spot:[
+["A ball is kicked horizontally at 10 m/s off a cliff and lands after 2 s. Find the horizontal distance.",["Horizontal velocity = 10 m/s.","Horizontal velocity changes at 9.8 m/s².","Distance = 10 × 2.","Distance = 20 m."],1,"Horizontal velocity is constant; only the vertical velocity changes."],
+["A ball falls for 3 s from a ledge. Find its final vertical velocity.",["u = 0 m/s","a = 9.8 m/s²","v = u + at = 0 + 9.8 × 3","v = 3.3 m/s"],3,"9.8 × 3 = 29.4 m/s."],
+["Describe the path of a ball thrown horizontally.",["It moves sideways at a steady speed.","It falls faster and faster.","Its path is a straight line sloping down.","It lands after the same time as a dropped ball."],2,"The path is a curve, because the vertical speed increases while the horizontal speed stays constant."]
+],
+write:[
+["State what happens to the horizontal and vertical velocities of a projectile (ignore air resistance).",[["horizontal.{0,40}(constant|same|unchanged|does not change)","Horizontal velocity stays constant"],["vertical.{0,40}(increase|accelerat|9\\.8)","Vertical velocity increases (accelerates at 9.8 m/s²)"]],2,"The horizontal velocity stays constant. The vertical velocity increases at 9.8 m/s² because of gravity."],
+["Explain why the time a projectile is in the air does not depend on its horizontal speed.",[["(horizontal|sideways).{0,40}(not affect|independent|separate|no effect)|independent","The horizontal and vertical motions are independent"],["(vertical|gravity|height)","The time depends on the vertical motion (height)"]],2,"The horizontal and vertical motions are independent. The time of flight depends only on the vertical motion, which is the same whatever the horizontal speed."],
+["Describe how to find the horizontal distance travelled by a projectile.",[["horizontal (velocity|speed)","Use the horizontal velocity"],["time","Multiply by the time of flight"]],2,"Multiply the horizontal velocity by the time of flight: d = vt."]
+]
+});
+
+EX3("spex",{
+mc:[
+["Which of these is a benefit of space exploration to everyday life?","GPS navigation",[["the Moon's tides","Tides happen without space exploration."],["volcanoes","Not linked to space exploration."],["photosynthesis","A natural process."]],"Satellites provide GPS, weather forecasts and communications.",""],
+["Why does a space probe need much less fuel once it is moving in deep space?","There is almost no friction or air resistance, so it keeps moving (Newton's first law).",[["Gravity pushes it along.","Gravity pulls; far from planets it is very weak."],["It has no mass in space.","Its mass does not change."],["Space is downhill.","There is no 'downhill' in space."]],"No unbalanced force means constant velocity.","h"],
+["Why do spacecraft need heat shields to return to Earth?","Friction with the atmosphere heats them to very high temperatures.",[["The Sun is hotter near the Earth.","The heating comes from the air."],["Space is very hot.","Space itself is very cold."],["Their engines overheat on re-entry.","Engines are usually off during re-entry."]],"Kinetic energy is changed into heat by friction.","h"],
+["What is the weight of a 50 kg astronaut on the Moon (g = 1.6 N/kg)?","80 N",[["490 N","That uses Earth's g."],["31 N","That divides by g."],["50 N","Weight is in newtons: W = mg."]],"W = mg = 50 × 1.6 = 80 N.","p"],
+["A rover has a weight of 1110 N on Mars (g = 3.7 N/kg). What is its mass?","300 kg",[["4107 kg","Divide, do not multiply."],["1110 kg","Weight and mass are different."],["113 kg","That uses Earth's g."]],"m = W ÷ g = 1110 ÷ 3.7 = 300 kg.","p"],
+["A rocket of mass 5000 kg has an engine thrust of 80 000 N on Earth. What is its initial acceleration?","6.2 m/s²",[["16 m/s²","Subtract the weight first."],["9.8 m/s²","That is g."],["0.06 m/s²","That is m ÷ F."]],"Weight = 49 000 N. Unbalanced = 31 000 N. a = 31 000 ÷ 5000 = 6.2 m/s².","p"]
+],
+gap:[
+["A [satellite] is an object that orbits a planet. A [geostationary] satellite stays above the same point on the Earth.",["star","polar"],"It takes 24 hours to orbit."],
+["Weight depends on the [gravitational] field strength, which is different on each [planet].",["electric","star"],"W = mg."]
+],
+sort:[
+["Sort these into how satellites help us.",{"Communication":["satellite TV","phone calls across the world"],"Navigation":["GPS in a car","finding a ship's position"],"Observation":["weather forecasts","monitoring crop growth","tracking melting ice"]},"Three big uses."],
+["Sort these risks of space exploration.",{"Risk to astronauts":["exposure to radiation","no air to breathe","extreme temperatures"],"Risk to the mission":["fuel running out","a heat shield failing on re-entry"]},"Space is a dangerous environment."],
+["Sort these: does a space probe need fuel for this?",{"Needs fuel":["launching from Earth","changing direction","slowing down to land"],"No fuel needed":["coasting at constant speed in deep space"]},"Newton's first law."]
+],
+order:[
+["Put these stages of a crewed Moon mission in order.",["Launch from Earth.","Travel through space to the Moon.","Land on the Moon.","Launch from the Moon.","Re-enter the Earth's atmosphere."],"Launch, travel, land, return."],
+["Put these in order of gravitational field strength, smallest first.",["the Moon (1.6 N/kg)","Mars (3.7 N/kg)","Earth (9.8 N/kg)","Jupiter (23 N/kg)"],"Bigger planets usually have stronger gravity."],
+["Put the steps of re-entry in order.",["The spacecraft enters the atmosphere at high speed.","Friction with the air heats the heat shield.","The heat shield absorbs and radiates the heat.","Parachutes slow the capsule for landing."],"Kinetic energy becomes heat."]
+],
+build:[
+["Explain why an astronaut's mass is the same on the Moon but their weight is less.",["Mass is the amount of matter in the astronaut.","This does not change from place to place.","Weight is the force of gravity on the astronaut, W = mg.","The Moon's gravitational field strength is smaller, so the weight is less."],["The astronaut loses mass on the Moon.","There is no gravity on the Moon."],"Mass stays; weight depends on g."],
+["Explain why a rocket accelerates upwards at launch.",["The engines push hot gas downwards.","The gas pushes the rocket upwards (Newton's third law).","The thrust is bigger than the rocket's weight.","So there is an unbalanced upward force and the rocket accelerates."],["The rocket pushes against the air.","The rocket's weight helps it go up."],"Thrust > weight."],
+["Explain why a space probe can keep moving without using its engines.",["In deep space there is almost no air resistance or friction.","So there is no unbalanced force on the probe.","By Newton's first law it keeps moving at constant velocity.","It only uses its engines to change speed or direction."],["The Sun pushes it along.","It needs the engines to keep its speed."],"Newton's first law."]
+],
+spot:[
+["Find the weight of a 20 kg probe on Mars (g = 3.7 N/kg).",["W = mg","W = 20 × 3.7","W = 74 kg","Weight is a force."],2,"Weight is in newtons: 74 N."],
+["Describe a geostationary satellite.",["It orbits above the equator.","It takes 24 hours to go round once.","It stays above the same point on the Earth.","It orbits closer to the Earth than the ISS."],3,"Geostationary satellites are about 36 000 km up, much higher than the ISS."],
+["Explain why a heat shield is needed.",["The spacecraft returns at very high speed.","Friction with the atmosphere slows it down.","Its potential energy is changed into heat.","The heat shield protects the crew from the heat."],2,"It is mainly kinetic energy that is changed into heat."]
+],
+write:[
+["Give one benefit of satellite technology to everyday life.",[["(gps|navigat|weather|forecast|tv|television|phone|communicat|internet|broadcast|map|climate|monitor)","A correct benefit"]],1,"Any one of: GPS navigation, weather forecasting, TV and phone communications, monitoring the climate or crops."],
+["Describe one risk of space travel to astronauts.",[["(radiation|cosmic|solar)","Radiation"],["(air|oxygen|breath|pressure|vacuum)","No air / low pressure"],["(temperature|cold|hot|heat)","Extreme temperatures"],["(re-?entry|landing|launch|explosion)","Dangers of launch or re-entry"]],1,"Any one: harmful radiation, no air to breathe, extreme temperatures, or danger during launch and re-entry."],
+["Explain why the weight of a lander is different on Mars and on Earth.",[["(gravitational field strength|g )|gravity","Different gravitational field strength"],["(smaller|less|lower|weaker).{0,20}(mars)|mars.{0,30}(smaller|less|lower|weaker)","Mars has a smaller g"],["W *= *mg|mass.{0,20}(same|unchanged)","W = mg with the same mass"]],2,"The mass is the same, but Mars has a smaller gravitational field strength, so W = mg is smaller on Mars."]
+]
+});
+
+EX3("cosmo",{
+mc:[
+["What is a light year?","the distance light travels in one year",[["the time light takes to reach the Earth","It is a distance, not a time."],["the age of a star","It is a unit of distance."],["the brightness of a star","Not a measure of brightness."]],"A light year is about 9.5 × 10¹⁵ m.",""],
+["Which of these is the largest?","the Universe",[["a galaxy","Galaxies are inside the Universe."],["a solar system","Solar systems are inside galaxies."],["a star","Stars are inside galaxies."]],"Universe > galaxy > solar system > star > planet.",""],
+["The Sun is about 8 light-minutes away. What does this mean?","We see the Sun as it was about 8 minutes ago.",[["The Sun is 8 minutes old.","It is billions of years old."],["The Sun will reach us in 8 minutes.","The light reaches us, not the Sun."],["The Sun travels 8 minutes per year.","It is a distance light covers."]],"Light takes time to travel, so we see the past.","h"],
+["How far is one light year in metres?","9.5 × 10¹⁵ m",[["3.0 × 10⁸ m","That is how far light goes in one second."],["365 m","Multiply the speed of light by the seconds in a year."],["1.1 × 10¹³ m","Check: 3.0 × 10⁸ × 3.15 × 10⁷."]],"3.0 × 10⁸ × 365 × 24 × 3600 = 9.5 × 10¹⁵ m.","p"],
+["A star is 4.2 light years away. How far is this in metres?","4.0 × 10¹⁶ m",[["4.2 m","Multiply by 9.5 × 10¹⁵."],["1.3 × 10⁹ m","That multiplies by the speed of light only."],["2.3 × 10¹⁵ m","That divides."]],"4.2 × 9.5 × 10¹⁵ = 4.0 × 10¹⁶ m.","p"],
+["Light from a galaxy took 2 million years to reach us. How far away is it?","2 million light years",[["2 million metres","Light years, not metres."],["1 million light years","Distance in light years equals time in years."],["4 million light years","Do not double it."]],"One light year for each year of travel.","p"]
+],
+gap:[
+["The Universe began with the [Big] Bang about 14 [billion] years ago.",["million","small"],"Evidence includes redshift and the CMB."],
+["Each element produces its own line [spectrum]. This lets astronomers find which elements are in a [star].",["colour","planet"],"Like a fingerprint."],
+["A [galaxy] is a huge group of stars. Our galaxy is the Milky [Way].",["planet","Road"],"There are billions of galaxies."]
+],
+sort:[
+["Sort these into order of type.",{"Star":["the Sun","Proxima Centauri"],"Planet":["Mars","Jupiter"],"Galaxy":["the Milky Way","Andromeda"],"Moon":["Titan","the Moon"]},"Know the definitions."],
+["Sort these: used to observe the Universe in which part of the spectrum?",{"Radio telescope":["mapping hydrogen gas clouds"],"Infrared telescope":["seeing through dust clouds"],"X-ray telescope":["studying very hot gas near black holes"],"Optical telescope":["photographing planets and stars in visible light"]},"Different telescopes see different things."],
+["Sort these as evidence for the Big Bang or not.",{"Evidence for the Big Bang":["galaxies moving away from us","cosmic microwave background radiation"],"Not evidence for the Big Bang":["the Moon's phases","the seasons on Earth"]},"Large-scale evidence only."]
+],
+order:[
+["Put these in order of size, smallest first.",["planet","star","solar system","galaxy","Universe"],"Each is part of the next."],
+["Put these in order of distance from the Earth, nearest first.",["the Moon","the Sun","Proxima Centauri","the Andromeda galaxy"],"Light-seconds, light-minutes, light years, millions of light years."],
+["Put the steps in order to identify an element in a star.",["Collect light from the star with a telescope.","Split the light into a spectrum.","Find the lines in the spectrum.","Match the lines to the line spectra of known elements."],"Line spectra are fingerprints."]
+],
+build:[
+["Explain how astronomers know which elements are in a distant star.",["Each element produces its own pattern of spectral lines.","Light from the star is split into a spectrum.","The lines in the star's spectrum are compared with known elements.","Matching patterns show which elements are present."],["Astronomers send probes to collect samples from stars.","Stars of each colour are made of one element."],"Line spectra as fingerprints."],
+["Explain why telescopes are put in space.",["The Earth's atmosphere absorbs some parts of the EM spectrum.","It also blurs the images (twinkling).","In space there is no atmosphere in the way.","So clearer images and more wavelengths can be studied."],["Space telescopes are closer to the stars.","There is more light in space."],"Above the atmosphere."],
+["Explain why looking at distant galaxies is like looking back in time.",["Light travels at a fixed speed.","Light from distant galaxies takes millions of years to reach us.","We see the light that left the galaxy long ago.","So we see the galaxy as it was in the past."],["Distant galaxies are older than the Universe.","Light from galaxies arrives instantly."],"Light takes time to travel."]
+],
+spot:[
+["Define a light year.",["A light year is a unit of distance.","It is the distance light travels in one year.","It is about 9.5 × 10¹⁵ m.","It is used to measure time."],3,"A light year measures distance, not time."],
+["Describe the Big Bang theory.",["The Universe began about 14 billion years ago.","It started very hot and dense.","It has been expanding ever since.","The Big Bang happened at the centre of our galaxy."],3,"The Big Bang happened everywhere; it was not centred on our galaxy."],
+["Describe how to calculate a distance in metres from light years.",["Find the distance light travels in one year.","Speed of light × seconds in a year.","Multiply by the number of light years.","Divide the answer by 1000 to get metres."],3,"The answer is already in metres."]
+],
+write:[
+["State what is meant by a light year.",[["distance","A distance"],["light","Travelled by light"],["(one|1|a) year","In one year"]],3,"A light year is the distance light travels in one year."],
+["Give two pieces of evidence for the Big Bang.",[["(redshift|moving away|expand)","Galaxies are moving away (redshift)"],["(cosmic microwave|CMB|background radiation)","Cosmic microwave background radiation"],["(hydrogen|helium|abundance)","Abundance of light elements"]],2,"Any two: galaxies are redshifted and moving away; the cosmic microwave background; the abundance of hydrogen and helium."],
+["Explain why astronomers use different types of telescope.",[["(different|other).{0,20}(wavelength|parts|types).{0,30}(spectrum|radiation|EM)|EM spectrum","Objects emit different types of EM radiation"],["(more|different|extra) (information|detail)|see (more|different)","Each gives different information"]],2,"Objects in space give out different parts of the electromagnetic spectrum. Using telescopes for different wavelengths gives more information than visible light alone."]
+]
+});
+
+EX3("charge",{
+mc:[
+["What is the unit of charge?","coulomb (C)",[["ampere (A)","That is current."],["volt (V)","That is voltage."],["ohm (Ω)","That is resistance."]],"Charge is measured in coulombs.",""],
+["Which particles move to carry current in a metal wire?","electrons",[["protons","Protons are fixed in the nucleus."],["neutrons","Neutrons have no charge."],["atoms","The atoms stay in place."]],"Free electrons drift through the metal.",""],
+["What is the difference between a.c. and d.c.?","d.c. flows in one direction; a.c. keeps changing direction",[["a.c. is always bigger than d.c.","Size is not the difference."],["d.c. comes from the mains","The mains supply is a.c."],["a.c. only flows in a battery","Batteries give d.c."]],"Direction is the key difference.",""],
+["Two charged balloons repel. What can you say about their charges?","They have the same type of charge.",[["They have opposite charges.","Opposites attract."],["One of them is uncharged.","An uncharged object would be attracted, not repelled."],["They have no charge.","Uncharged objects do not repel."]],"Like charges repel.","h"],
+["A current of 2 A flows for 30 s. How much charge passes?","60 C",[["15 C","Multiply, do not divide."],["0.067 C","That is t ÷ ... upside down."],["32 C","Q = It, not I + t."]],"Q = It = 2 × 30 = 60 C.","p"],
+["120 C of charge passes a point in 1 minute. What is the current?","2 A",[["120 A","Convert 1 minute to 60 s."],["7200 A","Divide, do not multiply."],["0.5 A","That is t ÷ Q."]],"I = Q ÷ t = 120 ÷ 60 = 2 A.","p"],
+["A phone charger delivers 0.5 A. How long does it take to deliver 900 C?","1800 s",[["450 s","Divide Q by I."],["0.00056 s","That is I ÷ Q."],["900 s","Current is not 1 A."]],"t = Q ÷ I = 900 ÷ 0.5 = 1800 s.","p"],
+["A lamp takes 250 mA for 2 minutes. How much charge passes?","30 C",[["500 C","Convert mA to A."],["0.5 C","Convert minutes to seconds."],["30 000 C","250 mA is 0.25 A."]],"Q = 0.25 × 120 = 30 C.","p"]
+],
+gap:[
+["Current is the rate of flow of [charge]. It is measured in [amperes].",["voltage","volts"],"I = Q ÷ t."],
+["An electric field is a region where a [charge] feels a [force].",["mass","heat"],"Field lines go from positive to negative."],
+["A battery gives [direct] current. The mains supply gives [alternating] current.",["static","constant"],"d.c. and a.c."]
+],
+sort:[
+["Sort these into a.c. or d.c.",{"a.c.":["the mains supply","a power station generator"],"d.c.":["a battery","a solar cell","a car battery"]},"a.c. changes direction."],
+["Sort these: attract or repel?",{"Attract":["positive and negative","negative and positive"],"Repel":["positive and positive","negative and negative"]},"Like charges repel, unlike attract."],
+["Sort these into conductors and insulators.",{"Conductors":["copper","graphite","aluminium"],"Insulators":["plastic","rubber","glass"]},"Conductors have free electrons."]
+],
+order:[
+["Put the steps in order to find the charge passed in a circuit.",["Measure the current with an ammeter.","Measure the time in seconds.","Multiply current by time.","Give the answer in coulombs."],"Q = It."],
+["Put these in order of charge passed, smallest first.",["1 A for 10 s","2 A for 10 s","1 A for 60 s","3 A for 60 s"],"10 C, 20 C, 60 C, 180 C."],
+["Put the steps in order to charge a balloon by rubbing.",["Rub the balloon on a jumper.","Electrons move from the jumper to the balloon.","The balloon now has extra electrons.","The balloon is negatively charged."],"Only electrons move."]
+],
+build:[
+["Explain how a balloon becomes charged when rubbed on hair.",["Rubbing causes friction between the balloon and the hair.","Electrons are transferred from the hair to the balloon.","The balloon gains electrons, so it becomes negative.","The hair loses electrons, so it becomes positive."],["Protons move from the balloon to the hair.","Rubbing creates new charge."],"Electrons are transferred; charge is not created."],
+["Explain what happens to a charge placed in an electric field.",["An electric field is a region where charges feel a force.","A positive charge is pushed in the direction of the field lines.","A negative charge is pushed the opposite way.","The force makes the charge accelerate."],["The charge stays still because fields do nothing.","All charges move towards the positive plate."],"Field direction is the direction a positive charge would move."],
+["Explain why the current is the same at all points in a series circuit.",["Current is the flow of charge.","In a series circuit there is only one path.","Charge cannot be lost or created.","So the same amount of charge passes every point each second."],["Each component uses up some current.","The current is biggest next to the battery."],"Charge is conserved."]
+],
+spot:[
+["Find the charge when 3 A flows for 2 minutes.",["Q = It","t = 2 minutes = 120 s","Q = 3 × 2","Q = 360 C"],2,"Use t in seconds: Q = 3 × 120 = 360 C."],
+["Describe how a rod becomes positively charged.",["The rod is rubbed with a cloth.","Electrons move between the rod and cloth.","The rod gains protons.","The rod becomes positive."],2,"Protons do not move; the rod loses electrons."],
+["Describe the current in a metal wire.",["Current is a flow of charge.","In a metal, the charges are electrons.","The electrons flow from positive to negative.","Current is measured in amperes."],2,"Electrons flow from negative to positive."]
+],
+write:[
+["State what is meant by electric current.",[["(flow|movement|rate).{0,20}charge|charge.{0,30}(per second|each second|per unit time)","The rate of flow of charge"]],1,"Electric current is the rate of flow of charge (charge passing a point each second)."],
+["Explain the difference between a.c. and d.c.",[["d\\.?c\\.?.{0,40}(one|single|same) direction","d.c. flows in one direction"],["a\\.?c\\.?.{0,40}(chang|revers|back and forth|alternat)","a.c. keeps changing direction"]],2,"d.c. flows in one direction only. a.c. keeps changing direction, many times a second."]
+]
+});
+
+EX3("ohm",{
+mc:[
+["What is the unit of resistance?","ohm (Ω)",[["ampere (A)","That is current."],["volt (V)","That is voltage."],["watt (W)","That is power."]],"Resistance is measured in ohms.",""],
+["Which meter measures voltage?","voltmeter",[["ammeter","An ammeter measures current."],["ohmmeter","An ohmmeter measures resistance."],["joulemeter","That measures energy."]],"A voltmeter is connected in parallel.",""],
+["What does a straight line through the origin on a V–I graph show?","the resistance is constant",[["the resistance increases","A curve would show that."],["the current is zero","The current changes along the line."],["the voltage is constant","The voltage changes along the line."]],"V ∝ I means constant R (Ohm's law).",""],
+["The voltage across a resistor is doubled. What happens to the current (constant temperature)?","It doubles.",[["It halves.","I = V ÷ R, so I increases."],["It stays the same.","The current depends on voltage."],["It quadruples.","Only power depends on V²."]],"I ∝ V when R is constant.","h"],
+["What happens to the resistance of a filament lamp as it gets hotter?","It increases.",[["It decreases.","That is a thermistor's behaviour."],["It stays the same.","A lamp is not ohmic."],["It drops to zero.","Metals still have resistance."]],"Hotter metal has more resistance.","h"],
+["A pupil connects a voltmeter in series with a lamp. What happens?","The lamp barely lights, because the voltmeter has a very high resistance.",[["The lamp is brighter.","The voltmeter adds a large resistance."],["The voltmeter reads zero.","It will read close to the supply voltage."],["Nothing changes.","Voltmeters should be in parallel."]],"Voltmeters go in parallel.","h"],
+["A 12 V supply drives 0.5 A through a resistor. What is its resistance?","24 Ω",[["6 Ω","That is V × I."],["0.042 Ω","That is I ÷ V."],["12.5 Ω","R = V ÷ I."]],"R = V ÷ I = 12 ÷ 0.5 = 24 Ω.","p"],
+["A 470 Ω resistor has 0.02 A through it. What is the voltage across it?","9.4 V",[["23 500 V","Multiply, do not divide."],["0.000043 V","Multiply I by R."],["470 V","Use the current too."]],"V = IR = 0.02 × 470 = 9.4 V.","p"],
+["A 9 V battery is connected across a 1.5 kΩ resistor. What is the current?","6 mA",[["6 A","1.5 kΩ is 1500 Ω."],["13.5 A","Divide, do not multiply."],["0.17 A","That is R ÷ V... check units."]],"I = 9 ÷ 1500 = 0.006 A = 6 mA.","p"]
+],
+gap:[
+["Ohm's law says that the current through a resistor is directly [proportional] to the [voltage], at constant temperature.",["resistance","inverse"],"V = IR."],
+["An ammeter is connected in [series]. A voltmeter is connected in [parallel].",["circuit","line"],"Ammeters measure current through; voltmeters measure across."]
+],
+sort:[
+["Sort these into quantity and unit pairs.",{"Voltage":["volt","V"],"Current":["ampere","A"],"Resistance":["ohm","Ω"]},"Know each unit and symbol."],
+["Sort these: ohmic or non-ohmic?",{"Ohmic":["a fixed resistor at constant temperature","a length of nichrome wire kept cool"],"Non-ohmic":["a filament lamp","a thermistor","an LED"]},"Ohmic means R is constant."],
+["Sort these: what happens to the current if this changes (other things fixed)?",{"Current increases":["voltage increases","resistance decreases"],"Current decreases":["voltage decreases","resistance increases"]},"I = V ÷ R."],
+["Sort these meters by how they are connected.",{"In series":["ammeter"],"In parallel":["voltmeter"],"With the circuit switched off":["ohmmeter"]},"Correct meter placement."]
+],
+order:[
+["Put the steps in order to find the resistance of a resistor.",["Set up the resistor with an ammeter in series.","Connect a voltmeter in parallel across it.","Record the voltage and current.","Calculate R = V ÷ I."],"Measure V and I, then calculate."],
+["Put the steps in order to show Ohm's law.",["Set up a resistor, ammeter and voltmeter with a variable supply.","Record V and I for several settings.","Plot a graph of V against I.","Check for a straight line through the origin."],"V ∝ I."],
+["Put these in order of current from a 12 V supply, smallest first.",["120 Ω","60 Ω","24 Ω","6 Ω"],"0.1 A, 0.2 A, 0.5 A, 2 A."]
+],
+build:[
+["Explain why a filament lamp's V–I graph curves.",["As the current increases the filament gets hotter.","The metal ions vibrate more.","This makes it harder for electrons to pass, so resistance increases.","So V and I are not proportional, and the graph curves."],["The lamp gets cooler as current increases.","The voltage is not measured correctly."],"Temperature rise increases resistance."],
+["Explain how to use a V–I graph to find the resistance of a resistor.",["Pick a point on the straight line.","Read the voltage and current at that point.","Calculate R = V ÷ I.","This is the gradient if V is on the y-axis."],["Read the resistance off the x-axis.","Add the voltage and the current."],"R from the gradient or from V ÷ I."],
+["Explain why the current changes when the resistance in a circuit is increased.",["The supply voltage stays the same.","I = V ÷ R.","A bigger resistance makes it harder for charge to flow.","So the current decreases."],["A bigger resistance increases the current.","The voltage increases to keep the current the same."],"Inverse relationship."]
+],
+spot:[
+["Find the current when 6 V is across a 3 Ω resistor.",["V = IR","I = V × R","I = 6 × 3","I = 18 A"],1,"I = V ÷ R = 6 ÷ 3 = 2 A."],
+["Describe how to measure the voltage across a lamp.",["Use a voltmeter.","Connect it in series with the lamp.","Read the voltage in volts.","Record the reading."],1,"A voltmeter is connected in parallel across the lamp."],
+["Find the resistance when 4.5 V gives 300 mA.",["R = V ÷ I","I = 300 mA = 0.3 A","R = 4.5 ÷ 300","R = 15 Ω"],2,"Use I in amps: R = 4.5 ÷ 0.3 = 15 Ω."]
+],
+write:[
+["State Ohm's law.",[["current.{0,40}(proportional)|(proportional).{0,40}current|V *= *IR","Current is proportional to voltage"],["(constant|same|fixed) temperature|temperature.{0,20}(constant|same|fixed)","At constant temperature"]],2,"The current through a resistor is directly proportional to the voltage across it, provided the temperature stays constant."],
+["Describe how to connect an ammeter and a voltmeter to measure the resistance of a resistor.",[["ammeter.{0,30}series","Ammeter in series"],["voltmeter.{0,30}parallel|voltmeter.{0,30}across","Voltmeter in parallel"],["R *= *V *(÷|\\/)|V *÷ *I|divid","Calculate R = V ÷ I"]],2,"Connect the ammeter in series with the resistor and the voltmeter in parallel across it. Then calculate R = V ÷ I."],
+["Explain why the resistance of a metal wire increases when it gets hot.",[["(ions|atoms|particles).{0,30}vibrat|vibrat","The ions vibrate more"],["(electrons|charge).{0,40}(harder|collide|collisions|obstruct|more difficult)|collisions","Electrons collide more often"]],2,"When the wire gets hot, the metal ions vibrate more. The electrons collide with them more often, so it is harder for them to flow and the resistance increases."]
+]
+});
+
+EX3("circ",{
+mc:[
+["In a parallel circuit, what is the same for each branch?","the voltage",[["the current","The current splits between branches."],["the resistance","Branches can have different resistances."],["the power","Power depends on each branch's current."]],"Each branch is connected across the same supply.",""],
+["What happens to the total resistance when another resistor is added in parallel?","It decreases.",[["It increases.","That happens in series."],["It stays the same.","Adding a path lets more current flow."],["It doubles.","Parallel reduces resistance."]],"More paths, less total resistance.",""],
+["Two identical lamps are in parallel with a battery. One lamp breaks. What happens to the other?","It stays lit at the same brightness.",[["It goes out.","That happens in series."],["It gets brighter.","Its voltage stays the same."],["It gets dimmer.","Its voltage stays the same."]],"Each branch is independent.","h"],
+["Resistors of 4 Ω and 6 Ω are in series. What is the total resistance?","10 Ω",[["2.4 Ω","That is the parallel value."],["24 Ω","Add, do not multiply."],["2 Ω","Add the values."]],"Rₜ = 4 + 6 = 10 Ω.","p"],
+["Two 12 Ω resistors are connected in parallel. What is the total resistance?","6 Ω",[["24 Ω","That is the series value."],["12 Ω","Parallel resistance is smaller."],["0.17 Ω","That is 1/Rₜ; take the reciprocal."]],"1/Rₜ = 1/12 + 1/12 = 1/6, so Rₜ = 6 Ω.","p"]
+],
+gap:[
+["In a series circuit the supply voltage is [shared] between the components. The [current] is the same everywhere.",["voltage","doubled"],"Series rules."],
+["In a parallel circuit the currents in the branches [add] up to the [total] current.",["subtract","smallest"],"Charge splits and rejoins."]
+],
+sort:[
+["Sort these rules into series or parallel.",{"Series":["the current is the same everywhere","the voltages add up to the supply","Rₜ = R₁ + R₂"],"Parallel":["the voltage is the same across each branch","the branch currents add up to the total","1/Rₜ = 1/R₁ + 1/R₂"]},"Learn both sets of rules."],
+["Sort these into series or parallel uses.",{"Series":["a switch with the lamp it controls","a fuse in a plug"],"Parallel":["the lights in a house","sockets in a ring main"]},"Parallel lets each item work on its own."]
+],
+order:[
+["Put these in order of total resistance, smallest first.",["two 10 Ω in parallel","one 10 Ω","two 10 Ω in series","three 10 Ω in series"],"5 Ω, 10 Ω, 20 Ω, 30 Ω."],
+["Put the steps in order to find the current from the supply in a series circuit.",["Add the resistances to find Rₜ.","Write down the supply voltage.","Use I = V ÷ Rₜ.","Give the answer in amps."],"Total resistance first."],
+["Put the steps in order to find the total resistance of two resistors in parallel.",["Write 1/Rₜ = 1/R₁ + 1/R₂.","Work out 1/R₁ and 1/R₂.","Add them to get 1/Rₜ.","Take the reciprocal to find Rₜ."],"Do not forget the last step."]
+],
+build:[
+["Explain why lights in a house are wired in parallel.",["Each light gets the full mains voltage.","Each light can be switched on and off on its own.","If one light breaks, the others stay on.","Adding more lights does not dim the others."],["Parallel uses less current in total.","Series circuits need more switches."],"Independent, full voltage."],
+["Explain why adding a resistor in parallel increases the current from the supply.",["Adding a branch gives the current another path.","This lowers the total resistance.","The supply voltage stays the same.","So by I = V ÷ R, the supply current increases."],["The new resistor adds to the total resistance.","The supply voltage increases."],"More paths, more current."]
+],
+spot:[
+["Find the total resistance of 6 Ω and 3 Ω in parallel.",["1/Rₜ = 1/6 + 1/3","1/Rₜ = 0.5","Rₜ = 0.5 Ω","The total is smaller than either resistor."],2,"Take the reciprocal: Rₜ = 1 ÷ 0.5 = 2 Ω."],
+["Describe the voltages in a series circuit with two lamps on a 6 V supply.",["The current is the same through each lamp.","The voltage is shared between the lamps.","Each lamp has 6 V across it.","Identical lamps would have 3 V each."],2,"The voltages add to 6 V, so they cannot both be 6 V."],
+["Describe a parallel circuit with two lamps.",["Each lamp is on its own branch.","Each lamp has the full supply voltage.","The current is the same in each branch.","The branch currents add up to the supply current."],2,"The branch currents can differ if the lamps are different."]
+],
+write:[
+["State the rule for current in a series circuit.",[["(same|equal|constant)","The current is the same at all points"]],1,"In a series circuit the current is the same at all points."],
+["State the rule for voltage in a parallel circuit.",[["(same|equal)","The voltage is the same"],["(branch|each|supply)","Across each branch as the supply"]],2,"The voltage across each branch is the same as the supply voltage."],
+["Explain why a fuse is connected in series with an appliance.",[["series.{0,40}(all|whole|same) current|current.{0,40}(through|passes)","All the current goes through it"],["(melt|break|blow).{0,40}(circuit|current|stop)|(break|cut).{0,20}circuit","When it melts it breaks the circuit"]],2,"In series, all the appliance current passes through the fuse. If the current is too big the fuse melts and breaks the circuit, stopping the current."]
+]
+});
+
+EX3("power",{
+mc:[
+["What is the unit of power?","watt (W)",[["joule (J)","That is energy."],["volt (V)","That is voltage."],["ampere (A)","That is current."]],"1 W = 1 J/s.",""],
+["Which appliance usually has the highest power rating?","an electric shower",[["a phone charger","A charger is a few watts."],["an LED bulb","LEDs use very little power."],["a radio","A radio is low power."]],"Heating appliances have the highest power.",""],
+["Two kettles boil the same water. Kettle A is 3 kW and kettle B is 2 kW. Which is true?","Kettle A boils it faster, using the same energy.",[["Kettle A uses more energy.","Same water, same energy needed (ignoring losses)."],["Kettle B boils it faster.","Lower power is slower."],["They take the same time.","Power is the rate of energy transfer."]],"Power = energy ÷ time.","h"],
+["The current in a resistor doubles. What happens to the power (same resistor)?","It is four times bigger.",[["It doubles.","P = I²R, so it depends on I²."],["It halves.","More current means more power."],["It stays the same.","Power depends on current."]],"P ∝ I².","h"],
+["A 230 V kettle draws 10 A. Which fuse is best: 3 A, 5 A or 13 A?","13 A",[["3 A","It would blow straight away."],["5 A","It would blow straight away."],["any of them","The fuse must be just above the normal current."]],"Choose the fuse just above the normal current.","h"],
+["A 2000 W heater is on for 30 s. How much energy does it transfer?","60 000 J",[["67 J","Multiply, do not divide."],["2030 J","E = Pt."],["0.015 J","That is t ÷ P."]],"E = Pt = 2000 × 30 = 60 000 J.","p"],
+["A 12 V lamp takes 2 A. What is its power?","24 W",[["6 W","That is V ÷ I."],["14 W","P = IV, not I + V."],["0.17 W","That is I ÷ V."]],"P = IV = 2 × 12 = 24 W.","p"],
+["A current of 3 A flows through a 20 Ω resistor. What is the power?","180 W",[["60 W","P = I²R, square the current."],["6.7 W","Multiply, do not divide."],["1200 W","Square the current, not the resistance."]],"P = I²R = 9 × 20 = 180 W.","p"]
+],
+gap:[
+["Power is the [energy] transferred each [second].",["charge","metre"],"P = E ÷ t."],
+["Electrical power can be found using P = I[V], P = I²[R] or P = V²/R.",["t","Q"],"Choose the version that fits the data."]
+],
+sort:[
+["Sort these appliances by their main useful energy output.",{"Heat":["kettle","toaster","hairdryer heater"],"Light":["LED bulb","torch"],"Kinetic":["electric fan","food mixer"]},"Think about the job each does."],
+["Sort these by fuse rating (230 V mains).",{"3 A fuse":["a 60 W lamp","a 200 W TV","a 500 W fridge"],"13 A fuse":["a 2 kW kettle","a 2.5 kW heater"]},"I = P ÷ V; choose just above."],
+["Sort these: which formula would you use?",{"P = IV":["you know current and voltage"],"P = I²R":["you know current and resistance"],"P = V²/R":["you know voltage and resistance"],"P = E/t":["you know energy and time"]},"Pick the formula from the data."],
+["Sort these: low power or high power?",{"Low power (under 100 W)":["phone charger","LED bulb","laptop"],"High power (over 1000 W)":["electric shower","oven","kettle"]},"Heating needs lots of power."]
+],
+order:[
+["Put these in order of power, lowest first.",["LED bulb","TV","microwave","electric shower"],"About 5 W, 100 W, 800 W, 9000 W."],
+["Put the steps in order to choose a fuse.",["Find the power rating of the appliance.","Use I = P ÷ V to find the normal current.","Look at the fuses available.","Choose the smallest fuse that is bigger than the normal current."],"Just above the normal current."],
+["Put the steps in order to find the energy used by a heater.",["Write down the power rating in watts.","Convert the time to seconds.","Use E = Pt.","Give the answer in joules."],"Seconds and watts give joules."],
+["Put these in order of energy used, smallest first.",["100 W for 10 s","100 W for 60 s","1000 W for 10 s","1000 W for 60 s"],"1000 J, 6000 J, 10 000 J, 60 000 J."]
+],
+build:[
+["Explain why a fuse of the correct rating must be fitted.",["The fuse rating should be just above the normal current.","If a fault causes a large current, the fuse melts.","This breaks the circuit and stops the current.","This protects the cable from overheating and causing a fire."],["A higher fuse rating is always safer.","The fuse makes the appliance use less power."],"Protects the flex."],
+["Explain why a 3 kW kettle boils water faster than a 2 kW kettle.",["Power is the energy transferred each second.","The 3 kW kettle transfers 3000 J each second.","The 2 kW kettle transfers 2000 J each second.","The same water needs the same energy, so the 3 kW kettle takes less time."],["The 3 kW kettle uses less energy.","The 2 kW kettle wastes all its energy."],"P = E ÷ t."],
+["Explain why thick cables are used for high-power appliances.",["High-power appliances draw a large current.","A large current in a cable makes it heat up (P = I²R).","Thick cables have a lower resistance.","So less heat is produced and the cable is safer."],["Thick cables increase the current.","Thin cables have a lower resistance."],"Lower R, less heating."]
+],
+spot:[
+["Find the power of a 230 V hairdryer taking 5 A.",["P = IV","P = 5 × 230","P = 1150 W","P = 1.15 W"],3,"1150 W is 1.15 kW, not 1.15 W."],
+["Find the current in a 690 W toaster on 230 V.",["P = IV","I = P × V","I = 690 × 230","I = 158 700 A"],1,"I = P ÷ V = 690 ÷ 230 = 3 A."],
+["Find the energy used by a 60 W lamp in 2 minutes.",["E = Pt","t = 120 s","E = 60 × 120","E = 7200 W"],3,"Energy is in joules: 7200 J."]
+],
+write:[
+["State what is meant by power.",[["energy","Energy"],["(per|each|every|a) second|per unit time|rate","Transferred per second"]],2,"Power is the energy transferred per second."],
+["Explain why the fuse in a lamp plug is 3 A, not 13 A.",[["(normal|operating|working) current.{0,30}(small|low|less)|(small|low).{0,20}current","The lamp's normal current is small"],["(just|slightly) (above|bigger|higher)|(13|thirteen).{0,40}(would not|wouldn.t|not) (blow|melt)","A 13 A fuse would not blow in a fault"]],2,"The lamp's normal current is well below 1 A. A 3 A fuse is just above this, so it will melt if there is a fault. A 13 A fuse might not melt and the flex could overheat."],
+["Describe how to measure the power of a lamp in the lab.",[["voltmeter","Measure voltage with a voltmeter"],["ammeter","Measure current with an ammeter"],["P *= *IV|multiply","P = IV"]],2,"Measure the voltage across the lamp with a voltmeter (in parallel) and the current with an ammeter (in series). Then P = IV."]
+]
+});
+
+EX3("shc",{
+mc:[
+["What is the unit of specific heat capacity?","J/kg °C",[["J/kg","That is specific latent heat."],["°C","That is temperature."],["W","That is power."]],"Energy per kilogram per degree.",""],
+["What does a high specific heat capacity mean?","It takes a lot of energy to raise the temperature.",[["It heats up very quickly.","The opposite is true."],["It has a high melting point.","That is a different property."],["It is a good conductor of heat.","That is thermal conductivity."]],"More energy per kg per °C.",""],
+["Water has a specific heat capacity of 4180 J/kg °C. What does this mean?","4180 J raises the temperature of 1 kg of water by 1 °C.",[["4180 J melts 1 kg of water.","That would be latent heat."],["1 kg of water stores 4180 J.","It is per degree of temperature change."],["Water boils at 4180 °C.","Water boils at 100 °C."]],"The definition of c.",""],
+["Which instrument measures the energy supplied to a heater?","joulemeter",[["thermometer","That measures temperature."],["ammeter","That measures current only."],["balance","That measures mass."]],"A joulemeter reads energy directly.",""],
+["Equal masses of water and oil get the same energy. Water has the higher c. Which is true?","The oil has the bigger temperature rise.",[["The water has the bigger temperature rise.","Higher c means a smaller rise."],["They have the same rise.","Different c, different rise."],["Neither changes temperature.","Energy is added."]],"ΔT = E ÷ (cm).","h"],
+["In a lab experiment the measured c of water is higher than 4180 J/kg °C. Why?","Some energy was lost to the surroundings, so not all of it heated the water.",[["The water gained energy from the air.","That would make c lower."],["The thermometer was too accurate.","Accuracy does not raise c."],["The mass was too large.","c is per kg, so mass is allowed for."]],"Heat loss means more energy for the same rise.","h"],
+["How much energy heats 2 kg of water from 20 °C to 70 °C? (c = 4180 J/kg °C)","418 000 J",[["585 200 J","Use the temperature change, 50 °C."],["8360 J","Multiply by ΔT."],["167 200 J","ΔT is 50 °C, not 20 °C."]],"E = cmΔT = 4180 × 2 × 50 = 418 000 J.","p"],
+["9000 J heats 0.5 kg of aluminium by 20 °C. What is its specific heat capacity?","900 J/kg °C",[["90 000 J/kg °C","Divide by m and ΔT."],["225 J/kg °C","Check: 9000 ÷ (0.5 × 20)."],["4500 J/kg °C","Divide by ΔT as well."]],"c = E ÷ (mΔT) = 9000 ÷ 10 = 900 J/kg °C.","p"],
+["A 2 kW heater warms 3 kg of water (c = 4180 J/kg °C) by 10 °C. How long does it take, with no heat loss?","63 s",[["125 400 s","That is the energy, not the time."],["0.016 s","Divide energy by power."],["15 s","Check: E = 125 400 J."]],"E = 4180 × 3 × 10 = 125 400 J. t = 125 400 ÷ 2000 = 63 s.","p"]
+],
+gap:[
+["The energy needed to change temperature depends on the [mass], the [specific heat capacity] and the temperature change.",["volume","density"],"E = cmΔT."],
+["In the experiment to find c, the beaker is [insulated] to reduce heat [loss].",["painted","gain"],"Less loss, more accurate result."]
+],
+sort:[
+["Sort these into what you measure to find c.",{"Measure":["mass of the block","start and end temperature","energy supplied"],"Calculate":["temperature change","specific heat capacity"]},"Measure, then calculate."],
+["Sort these: big or small temperature rise for the same energy?",{"Bigger rise":["small mass","low specific heat capacity"],"Smaller rise":["large mass","high specific heat capacity"]},"ΔT = E ÷ (cm)."],
+["Sort these ways to improve the c experiment.",{"Reduces heat loss":["insulate the block","put a lid on the beaker"],"Improves the reading":["stir the water","wait for the highest temperature"]},"Heat loss is the main error."]
+],
+order:[
+["Put the steps in order to measure the specific heat capacity of a metal block.",["Measure the mass of the block.","Record the start temperature.","Heat the block, recording the energy with a joulemeter.","Record the highest temperature.","Calculate c = E ÷ (mΔT)."],"Mass, temperature, energy, temperature, calculate."],
+["Put these in order of energy needed to heat 1 kg by 1 °C, smallest first.",["lead (128 J/kg °C)","copper (386 J/kg °C)","aluminium (902 J/kg °C)","water (4180 J/kg °C)"],"Higher c needs more energy."],
+["Put these in order of temperature rise for 1 kg given 10 000 J, biggest first.",["lead","copper","aluminium","water"],"Lowest c, biggest rise."]
+],
+build:[
+["Explain why water is used in central heating radiators.",["Water has a high specific heat capacity.","It can store a lot of heat energy.","It gives out a lot of heat as it cools.","It is cheap and easy to pump."],["Water heats up very quickly.","Water has a low specific heat capacity."],"High c stores lots of energy."],
+["Explain why the measured c in a school experiment is usually too high.",["Some heat is lost to the surroundings.","So the temperature rise is smaller than it should be.","c = E ÷ (mΔT), with a smaller ΔT.","This gives a bigger value of c."],["The joulemeter reads too low.","The block gains heat from the air."],"Heat loss makes c look bigger."],
+["Explain how to find the energy needed to heat water in a kettle.",["Measure the mass of the water in kg.","Find the temperature change.","Use c for water, 4180 J/kg °C.","Use E = cmΔT."],["Use the volume in litres as the temperature.","Multiply the boiling point by the mass."],"E = cmΔT."],
+["Explain why a metal spoon in hot soup gets hot faster than the soup cools.",["The spoon has a small mass.","Metal has a low specific heat capacity.","So a small amount of energy gives a big temperature rise.","The soup has a large mass and high c, so it barely cools."],["The spoon gains more energy than the soup loses.","Metals have high specific heat capacity."],"Low mc, large ΔT."]
+],
+spot:[
+["Find the energy to heat 0.5 kg of water by 30 °C.",["E = cmΔT","E = 4180 × 0.5 × 30","E = 62 700 J","E = 62.7 J"],3,"62 700 J is 62.7 kJ, not 62.7 J."],
+["Find ΔT when 20 °C water is heated to 80 °C.",["ΔT = final − start","ΔT = 80 − 20","ΔT = 100 °C","Use this in E = cmΔT."],2,"80 − 20 = 60 °C."],
+["Describe the c experiment.",["Insulate the block.","Measure the mass on a balance.","Use an ammeter to measure the energy.","Measure the temperature rise."],2,"A joulemeter measures energy."]
+],
+write:[
+["State what is meant by specific heat capacity.",[["energy","Energy"],["(1|one) ?kg","For 1 kg"],["(1|one) ?(°|degree)|1 ?°C","By 1 °C"]],3,"The specific heat capacity is the energy needed to raise the temperature of 1 kg of a substance by 1 °C."],
+["Give two ways to make the c experiment more accurate.",[["insulat","Insulate the block or beaker"],["lid|cover","Use a lid"],["(highest|maximum|max).{0,20}temperature|wait","Wait for the highest temperature"],["stir","Stir the water"],["repeat","Repeat and average"]],2,"Any two: insulate the block, use a lid, stir the water, record the highest temperature, repeat and average."],
+["Explain why coastal areas have milder winters than inland areas.",[["(sea|water).{0,40}(high|large) (specific heat|c)|specific heat","The sea has a high specific heat capacity"],["(cool|lose|release|give).{0,30}(slow|heat|energy)|stores","The sea cools slowly, releasing stored heat"]],2,"The sea has a high specific heat capacity, so it stores a lot of energy in summer and cools slowly. It releases heat in winter, keeping coastal areas milder."]
+]
+});
+
+EX3("slh",{
+mc:[
+["What is the unit of specific latent heat?","J/kg",[["J/kg °C","That is specific heat capacity."],["J","That is energy."],["°C","That is temperature."]],"Energy per kilogram.",""],
+["What happens to the temperature of ice while it is melting?","It stays at 0 °C.",[["It rises steadily.","The energy breaks bonds instead."],["It falls.","Energy is being added."],["It rises then falls.","It stays constant during the change of state."]],"Temperature is constant during a change of state.",""],
+["What is the latent heat of vaporisation?","the energy to change 1 kg of liquid into gas, with no temperature change",[["the energy to melt 1 kg of solid","That is fusion."],["the energy to heat 1 kg by 1 °C","That is specific heat capacity."],["the energy to boil water from 20 °C","That includes heating too."]],"Vaporisation is liquid to gas.",""],
+["A heating graph for ice shows two flat sections. What do they show?","melting and boiling",[["heating the solid and the liquid","Those are the sloping parts."],["freezing and condensing","The substance is being heated."],["the heater being switched off","The heater is on throughout."]],"Flat parts are changes of state.","h"],
+["Why does sweating cool you down?","The sweat evaporates, taking latent heat from your skin.",[["Sweat is colder than your skin.","Sweat comes out at body temperature."],["Sweat reflects heat.","It is the evaporation that matters."],["Sweat blocks the Sun's rays.","Evaporation is the key."]],"Evaporation needs latent heat.","h"],
+["Steam at 100 °C causes worse burns than water at 100 °C. Why?","Steam releases its latent heat of vaporisation as it condenses on the skin.",[["Steam is hotter than 100 °C.","Both are at 100 °C."],["Steam has more mass.","Same mass is compared."],["Water cannot burn.","Water at 100 °C can burn."]],"Condensing releases a lot of extra energy.","h"],
+["How much energy melts 2 kg of ice at 0 °C? (lf = 3.34 × 10⁵ J/kg)","6.68 × 10⁵ J",[["1.67 × 10⁵ J","Multiply, do not divide."],["3.34 × 10⁵ J","That is for 1 kg."],["6.0 × 10⁻⁶ J","That is m ÷ l."]],"E = ml = 2 × 3.34 × 10⁵ = 6.68 × 10⁵ J.","p"],
+["4.52 × 10⁶ J turns 2 kg of water at 100 °C into steam. What is the latent heat of vaporisation?","2.26 × 10⁶ J/kg",[["9.04 × 10⁶ J/kg","Divide, do not multiply."],["4.52 × 10⁶ J/kg","Divide by the mass."],["4.4 × 10⁻⁷ J/kg","That is m ÷ E."]],"l = E ÷ m = 4.52 × 10⁶ ÷ 2 = 2.26 × 10⁶ J/kg.","p"],
+["A 1 kW kettle boils for 113 s after reaching 100 °C. What mass of water turns to steam? (lv = 2.26 × 10⁶ J/kg)","0.05 kg",[["20 kg","Divide energy by l."],["113 kg","Find the energy first: E = Pt."],["0.5 kg","Check: 113 000 ÷ 2 260 000."]],"E = 1000 × 113 = 113 000 J. m = E ÷ l = 0.05 kg.","p"]
+],
+gap:[
+["During a change of state the energy breaks [bonds] between particles, so the [temperature] stays the same.",["atoms","mass"],"Latent means hidden."],
+["The latent heat of [fusion] is for melting. The latent heat of [vaporisation] is for boiling.",["evaporation","freezing"],"Two kinds of latent heat."]
+],
+sort:[
+["Sort these changes of state.",{"Energy taken in":["melting","boiling","evaporating"],"Energy given out":["freezing","condensing"]},"Breaking bonds takes energy."],
+["Sort these: latent heat of fusion or vaporisation?",{"Fusion":["ice melting into water","solid wax becoming liquid"],"Vaporisation":["water boiling into steam","sweat evaporating"]},"Solid↔liquid or liquid↔gas."],
+["Sort the parts of a heating graph for ice.",{"Temperature rising":["heating the ice from −10 °C","heating the water from 0 °C to 100 °C"],"Temperature constant":["ice melting at 0 °C","water boiling at 100 °C"]},"Slopes and flat parts."]
+],
+order:[
+["Put the stages in order as ice at −10 °C is heated to steam at 110 °C.",["The ice warms to 0 °C.","The ice melts at 0 °C.","The water warms to 100 °C.","The water boils at 100 °C.","The steam warms above 100 °C."],"Heat, change, heat, change, heat."],
+["Put the steps in order to measure the latent heat of fusion of ice.",["Put crushed ice in a funnel with a heater.","Switch on the heater and record the joulemeter reading.","Collect the melted water in a beaker for a set time.","Measure the mass of water collected.","Calculate l = E ÷ m."],"Energy and mass melted."],
+["Put the steps in order to find the energy to turn 1 kg of ice at 0 °C into water at 20 °C.",["Find the energy to melt the ice: E = ml.","Find the energy to heat the water by 20 °C: E = cmΔT.","Add the two energies.","Give the total in joules."],"Two stages, two equations."]
+],
+build:[
+["Explain why the temperature stays constant while water boils.",["The heater still supplies energy.","The energy is used to break the bonds between the water molecules.","It does not increase the kinetic energy of the molecules.","So the temperature stays at 100 °C until all the water has boiled."],["The energy is lost to the air.","The thermometer stops working at 100 °C."],"Energy goes into breaking bonds."],
+["Explain why ice is good for cooling drinks.",["Ice melts at 0 °C.","Melting needs a lot of energy (latent heat of fusion).","This energy is taken from the drink.","So the drink cools down a lot."],["Ice adds coldness to the drink.","Ice has a high specific heat capacity, so it warms quickly."],"Latent heat taken from the drink."],
+["Explain why a burn from steam is worse than from boiling water.",["Both are at 100 °C.","When steam touches skin it condenses.","Condensing releases the latent heat of vaporisation.","So much more energy is passed to the skin."],["Steam is hotter than boiling water.","Water does not transfer heat to skin."],"Extra latent heat."]
+],
+spot:[
+["Find the energy to melt 0.5 kg of ice. (lf = 3.34 × 10⁵ J/kg)",["E = ml","E = 0.5 × 3.34 × 10⁵","E = 1.67 × 10⁵ J","The temperature of the ice rises while it melts."],3,"The temperature stays at 0 °C while the ice melts."],
+["Describe what happens when a liquid condenses.",["A gas turns into a liquid.","Bonds form between particles.","Energy is taken in.","The temperature stays constant during the change."],2,"Energy is given out when a gas condenses."],
+["Find the mass boiled by 6.78 × 10⁵ J. (lv = 2.26 × 10⁶ J/kg)",["E = ml","m = E × l","m = 6.78 × 10⁵ × 2.26 × 10⁶","m = 1.5 × 10¹² kg"],1,"m = E ÷ l = 0.3 kg."]
+],
+write:[
+["State what is meant by the specific latent heat of fusion.",[["energy","Energy"],["(1|one) ?kg","For 1 kg"],["(solid.{0,30}liquid|melt)","To change solid to liquid"],["(no|without).{0,20}(change|rise).{0,20}temperature|constant temperature|same temperature","With no change in temperature"]],3,"The energy needed to change 1 kg of a solid into a liquid without changing its temperature."],
+["Explain why your skin feels cold when you get out of a swimming pool on a windy day.",[["evaporat","Water evaporates"],["(latent|energy|heat).{0,30}(skin|body|from)","Energy (latent heat) is taken from the skin"],["wind.{0,40}(faster|more|increase|quick)","Wind speeds up evaporation"]],2,"The water on your skin evaporates. Evaporation needs latent heat, which is taken from your skin, so it cools. The wind makes the water evaporate faster."],
+["Describe the energy changes when 1 kg of steam at 100 °C turns to water at 50 °C.",[["condens","The steam condenses"],["latent","Releasing latent heat"],["(cool|temperature (falls|drops|decreases)|cmΔT|specific heat)","Then the water cools, giving out more energy"]],2,"First the steam condenses at 100 °C, giving out its latent heat of vaporisation. Then the water cools from 100 °C to 50 °C, giving out energy E = cmΔT."]
+]
+});
+
+EX3("gas",{
+mc:[
+["What is the unit of pressure?","pascal (Pa)",[["newton (N)","That is force."],["joule (J)","That is energy."],["kelvin (K)","That is temperature."]],"1 Pa = 1 N/m².",""],
+["What is absolute zero?","−273 °C, the lowest possible temperature",[["0 °C","That is the melting point of ice."],["−100 °C","Absolute zero is colder."],["the temperature of space","Space is a few kelvin above absolute zero."]],"0 K = −273 °C.",""],
+["What causes the pressure of a gas in a container?","particles colliding with the walls",[["particles colliding with each other","Collisions with the walls exert the force."],["the weight of the gas","Gas weight is tiny."],["particles sticking to the walls","They bounce off."]],"Each collision exerts a force on the wall.",""],
+["A sealed gas is heated at constant volume. Why does the pressure rise?","The particles move faster, hitting the walls harder and more often.",[["The particles get bigger.","Particle size does not change."],["More particles are made.","The container is sealed."],["The particles move more slowly.","Heating speeds them up."]],"Faster particles, more force per second.","h"],
+["A gas is squashed into half the volume at constant temperature. What happens to its pressure?","It doubles.",[["It halves.","pV is constant, so p goes up."],["It stays the same.","The volume has changed."],["It quadruples.","p ∝ 1/V."]],"Boyle's law: pV = constant.","h"],
+["A force of 600 N acts on an area of 0.02 m². What is the pressure?","30 000 Pa",[["12 Pa","Divide, do not multiply."],["0.000033 Pa","That is A ÷ F."],["600 Pa","Divide by the area."]],"p = F ÷ A = 600 ÷ 0.02 = 30 000 Pa.","p"],
+["Gas at 27 °C and 100 kPa is heated to 327 °C at constant volume. What is the new pressure?","200 kPa",[["1211 kPa","Use kelvin, not °C."],["50 kPa","The pressure rises when heated."],["300 kPa","Check: 600 K ÷ 300 K = 2."]],"300 K → 600 K, so pressure doubles to 200 kPa.","p"]
+],
+gap:[
+["To convert from degrees Celsius to kelvin, [add] [273].",["subtract","100"],"0 °C = 273 K."],
+["At constant temperature, the pressure of a fixed mass of gas is [inversely] proportional to its [volume].",["directly","mass"],"Boyle's law."]
+],
+sort:[
+["Sort these into the correct gas law.",{"Pressure and volume (constant T)":["p₁V₁ = p₂V₂","squashing a syringe"],"Pressure and temperature (constant V)":["p₁/T₁ = p₂/T₂","a sealed can heated"],"Volume and temperature (constant p)":["V₁/T₁ = V₂/T₂","a balloon in a fridge"]},"Three laws, three pairs."],
+["Sort these temperatures.",{"0 K":["absolute zero","−273 °C"],"273 K":["0 °C","melting ice"],"373 K":["100 °C","boiling water"]},"Add 273."],
+["Sort these: increases or decreases the gas pressure in a sealed container?",{"Increases":["heating the gas","reducing the volume","adding more gas"],"Decreases":["cooling the gas","increasing the volume"]},"Think about collisions per second."],
+["Sort these into what changes when a gas is heated at constant volume.",{"Increases":["average speed of particles","pressure","kinetic energy of particles"],"Stays the same":["number of particles","volume"]},"Heating speeds up particles."]
+],
+order:[
+["Put these in order of temperature, coldest first.",["0 K","100 K","0 °C","300 K"],"0 °C = 273 K."],
+["Put the steps in order to explain why heating a sealed gas raises its pressure.",["The particles gain kinetic energy.","They move faster.","They hit the walls more often and harder.","The force on the walls increases, so the pressure increases."],"Kinetic model."],
+["Put the steps in order to use p₁/T₁ = p₂/T₂.",["Convert the temperatures to kelvin.","Substitute the known values.","Rearrange to find the unknown.","Check whether the answer is sensible."],"Always kelvin."]
+],
+build:[
+["Explain, using the kinetic model, why squashing a gas increases its pressure.",["The particles are in a smaller space.","They hit the walls more often.","More collisions per second give a bigger force.","So the pressure increases."],["The particles move faster when squashed.","The particles get smaller."],"Same speed, more frequent collisions."],
+["Explain why kelvin must be used in the gas laws.",["The gas laws need a scale that starts at absolute zero.","At 0 K the particles have the least possible kinetic energy.","Pressure is proportional to the kelvin temperature.","Using °C would give wrong answers, even negative ones."],["Kelvin numbers are bigger, so they are more accurate.","Celsius cannot be used for gases."],"Absolute scale."]
+],
+spot:[
+["Convert 50 °C to kelvin.",["Kelvin = °C + 273","Kelvin = 50 + 273","Kelvin = 323 K","So 50 °C is −223 K."],3,"50 °C is 323 K. Kelvin is never negative."],
+["A gas at 200 kPa and 2 m³ is compressed to 1 m³ at constant temperature. Find the new pressure.",["p₁V₁ = p₂V₂","200 × 2 = p₂ × 1","p₂ = 100 kPa","The pressure increases."],2,"p₂ = 400 kPa."],
+["Explain the pressure of a gas.",["Gas particles move randomly.","They collide with the walls.","Each collision exerts a force.","The particles lose energy in each collision, so pressure falls."],3,"The collisions are elastic; the pressure stays constant if nothing changes."]
+],
+write:[
+["State what is meant by absolute zero.",[["(−|-)273|0 ?K","−273 °C or 0 K"],["(lowest|coldest|minimum)|particles.{0,30}(stop|least|no|minimum)","The lowest possible temperature (particles have least energy)"]],2,"Absolute zero is 0 K (−273 °C), the lowest possible temperature, where the particles have the least possible kinetic energy."],
+["Explain why the pressure in a car tyre increases after a long journey.",[["(temperature|hot|heat|warm)","The air in the tyre gets hotter"],["(faster|more kinetic|kinetic energy)","The particles move faster"],["(collide|collision|hit).{0,40}(walls|tyre|more|harder)","They hit the walls harder and more often"]],2,"Friction heats the tyre, so the air inside gets hotter. The particles move faster and hit the walls harder and more often, so the pressure increases."],
+["Describe how to show the relationship between pressure and temperature of a gas.",[["(flask|container|sealed|fixed).{0,40}(gas|air)|(air|gas).{0,40}(flask|sealed)","Seal a fixed mass of gas in a flask"],["(water bath|heat)","Heat it in a water bath"],["(pressure (gauge|sensor|meter)|gauge)","Read the pressure with a gauge"],["thermometer|temperature","Measure the temperature"]],3,"Seal a flask of air and connect it to a pressure gauge. Put it in a water bath with a thermometer. Heat the water and record the pressure and temperature at intervals. Plot p against T in kelvin."]
+]
+});
+
+EX3("waves",{
+mc:[
+["What is the unit of frequency?","hertz (Hz)",[["metre (m)","That is wavelength."],["metre per second (m/s)","That is speed."],["second (s)","That is the period."]],"1 Hz = one wave per second.",""],
+["What do waves transfer?","energy",[["matter","The medium stays in place on average."],["mass","Waves do not carry mass along."],["particles","The particles only vibrate."]],"Waves carry energy, not matter.",""],
+["Which of these is a longitudinal wave?","sound",[["light","Light is transverse."],["a water wave","Water waves are treated as transverse."],["microwaves","All EM waves are transverse."]],"Sound vibrations are along the direction of travel.",""],
+["Waves pass through a gap the same size as their wavelength. What happens?","They spread out a lot (diffraction).",[["They stop.","Waves pass through the gap."],["They speed up.","Speed depends on the medium."],["They reflect back.","Most pass through and spread."]],"Biggest diffraction when the gap is about one wavelength.","h"],
+["A wave has a frequency of 50 Hz and a wavelength of 4 m. What is its speed?","200 m/s",[["12.5 m/s","Multiply, do not divide."],["54 m/s","v = fλ, not f + λ."],["0.08 m/s","That is λ ÷ f."]],"v = fλ = 50 × 4 = 200 m/s.","p"],
+["Sound travels at 340 m/s. What is the wavelength of a 170 Hz note?","2 m",[["57 800 m","Divide, do not multiply."],["0.5 m","That is f ÷ v."],["170 m","λ = v ÷ f."]],"λ = 340 ÷ 170 = 2 m.","p"],
+["A wave travels 600 m in 4 s. What is its speed?","150 m/s",[["2400 m/s","Divide distance by time."],["0.0067 m/s","That is t ÷ d."],["604 m/s","d ÷ t."]],"v = d ÷ t = 600 ÷ 4 = 150 m/s.","p"],
+["20 waves pass a point in 5 s. What is the period?","0.25 s",[["4 s","That is the frequency in Hz."],["100 s","Divide, do not multiply."],["5 s","That is the total time."]],"f = 4 Hz, T = 1 ÷ f = 0.25 s.","p"]
+],
+gap:[
+["The [amplitude] of a wave is the height from the middle to a crest. The [wavelength] is the distance from one crest to the next.",["frequency","period"],"Learn the labels on a wave diagram."],
+["In a [transverse] wave the vibrations are at right angles to the direction of travel. In a [longitudinal] wave they are along it.",["static","radial"],"Light versus sound."]
+],
+sort:[
+["Sort these into transverse or longitudinal.",{"Transverse":["light","radio waves","waves on a rope"],"Longitudinal":["sound","ultrasound","a slinky pushed back and forth"]},"Direction of vibration."],
+["Sort these quantities with their units.",{"Hz":["frequency"],"m":["wavelength","amplitude"],"s":["period"],"m/s":["wave speed"]},"Know the units."],
+["Sort these: which gives more diffraction?",{"More diffraction":["long wavelength","narrow gap"],"Less diffraction":["short wavelength","wide gap"]},"Long waves bend more."]
+],
+order:[
+["Put these in order of wavelength, shortest first.",["gamma rays","visible light","microwaves","radio waves"],"Across the EM spectrum."],
+["Put the steps in order to measure the speed of sound with two microphones.",["Place two microphones a measured distance apart.","Connect them to a fast timer.","Make a sharp sound in line with the microphones.","Divide the distance by the time between the two signals."],"v = d ÷ t."],
+["Put these waves in order of frequency, lowest first.",["10 Hz","2 kHz","0.5 MHz","3 GHz"],"k, M, G prefixes."],
+["Put the steps in order to find the speed of water waves in a ripple tank.",["Count the waves passing a point in 10 s.","Divide by 10 to find the frequency.","Measure the wavelength using a ruler under the tank.","Use v = fλ."],"Find f and λ."]
+],
+build:[
+["Explain why radio waves can be received behind hills but TV signals often cannot.",["Radio waves have a long wavelength.","Long wavelengths diffract a lot around large obstacles.","TV signals have a much shorter wavelength.","So TV signals diffract less and leave a shadow behind the hill."],["Radio waves travel faster than TV signals.","TV signals are absorbed by the air."],"Diffraction depends on wavelength."],
+["Explain how a wave on a rope carries energy without carrying the rope.",["The hand moves the end of the rope up and down.","Each part of the rope vibrates about a fixed position.","The vibration is passed along to the next part of the rope.","So energy moves along, but the rope stays in place."],["The rope moves along with the wave.","The wave pushes the rope away from the hand."],"Energy transfer, not matter."],
+["Explain how to find the frequency of a wave from a diagram showing several waves over a time.",["Count the number of complete waves.","Note the time shown.","Divide the number of waves by the time.","Give the answer in hertz."],["Measure the height of the wave.","Divide the time by the wavelength."],"f = N ÷ t."]
+],
+spot:[
+["Find the speed of a wave with f = 25 Hz and λ = 0.4 m.",["v = fλ","v = 25 × 0.4","v = 10 m/s","v = 62.5 m/s"],3,"25 × 0.4 = 10 m/s; 62.5 is 25 ÷ 0.4."],
+["Describe sound waves.",["Sound is a longitudinal wave.","It needs a medium to travel through.","It travels fastest through a vacuum.","It travels faster in solids than in air."],2,"Sound cannot travel through a vacuum."],
+["Define the amplitude of a wave.",["It is a distance.","It is measured from the middle line.","It goes from crest to trough.","A bigger amplitude means more energy."],2,"Amplitude is from the middle line to a crest (half crest-to-trough)."]
+],
+write:[
+["State what is meant by the frequency of a wave.",[["(number|how many).{0,20}waves","The number of waves"],["(second|per second|each second)","Each second"]],2,"The frequency is the number of waves produced (or passing a point) each second."],
+["Describe the difference between transverse and longitudinal waves.",[["transverse.{0,60}(right angles|perpendicular|90)","Transverse: vibrations at right angles to the direction of travel"],["longitudinal.{0,60}(parallel|same direction|along|in line)","Longitudinal: vibrations along the direction of travel"]],2,"In a transverse wave the particles vibrate at right angles to the direction of travel. In a longitudinal wave they vibrate along (parallel to) the direction of travel."]
+]
+});
+
+EX3("em",{
+mc:[
+["What do all electromagnetic waves travel at in a vacuum?","3 × 10⁸ m/s",[["340 m/s","That is sound in air."],["different speeds","They all travel at the same speed."],["3 × 10⁶ m/s","Check the power of ten."]],"The speed of light.",""],
+["Which EM wave is used in remote controls?","infrared",[["ultraviolet","UV is used for security marks."],["gamma rays","Gamma is used for sterilising."],["X-rays","X-rays are for medical images."]],"Infrared is used for remotes and thermal imaging.",""],
+["Which part of the EM spectrum can cause skin cancer?","ultraviolet",[["radio waves","Radio is not ionising."],["infrared","Infrared causes burns, not cancer."],["visible light","Visible light is not ionising."]],"UV damages skin cells.","h"],
+["A microwave and an X-ray travel through space. Which statement is correct?","They have the same speed but the X-ray has a higher frequency.",[["The X-ray travels faster.","All EM waves travel at 3 × 10⁸ m/s."],["The microwave has the higher frequency.","X-rays have higher frequency."],["They have the same wavelength.","X-rays have a much shorter wavelength."]],"Same speed, different f and λ.","h"],
+["A radio wave has a frequency of 100 MHz. What is its wavelength?","3 m",[["3 × 10¹⁶ m","Divide, do not multiply."],["0.33 m","That is f ÷ v."],["300 m","100 MHz is 1 × 10⁸ Hz."]],"λ = 3 × 10⁸ ÷ 1 × 10⁸ = 3 m.","p"],
+["A microwave has a wavelength of 0.12 m. What is its frequency?","2.5 × 10⁹ Hz",[["3.6 × 10⁷ Hz","Divide v by λ."],["4 × 10⁻¹⁰ Hz","That is λ ÷ v."],["2.5 × 10⁶ Hz","Check the power of ten."]],"f = 3 × 10⁸ ÷ 0.12 = 2.5 × 10⁹ Hz.","p"],
+["Light takes 500 s to reach Earth from the Sun. How far away is the Sun?","1.5 × 10¹¹ m",[["6 × 10⁵ m","Use the speed of light."],["1.7 × 10⁻⁶ m","Multiply, do not divide."],["1.5 × 10⁸ m","Check the powers of ten."]],"d = vt = 3 × 10⁸ × 500 = 1.5 × 10¹¹ m.","p"],
+["A radar pulse returns after 2 × 10⁻⁴ s. How far away is the aircraft?","30 km",[["60 km","Halve it, the pulse goes there and back."],["15 km","Check: 3 × 10⁸ × 2 × 10⁻⁴ ÷ 2."],["3 km","Check the powers of ten."]],"Total distance = 60 000 m; one way = 30 000 m = 30 km.","p"]
+],
+gap:[
+["Gamma rays have the [highest] frequency and the shortest [wavelength] in the EM spectrum.",["lowest","speed"],"Radio is the opposite end."],
+["Infrared radiation is detected by a [thermal] camera or blackened [thermometer].",["Geiger","photographic"],"Infrared is heat radiation."],
+["X-rays are [absorbed] by bone but pass through soft [tissue].",["reflected","metal"],"That is why X-ray images work."]
+],
+sort:[
+["Sort these EM waves by use.",{"Communication":["radio waves","microwaves"],"Medicine":["X-rays","gamma rays"],"Detecting heat":["infrared"]},"Uses of the spectrum."],
+["Sort these into ionising and non-ionising radiation.",{"Ionising":["gamma rays","X-rays","ultraviolet"],"Non-ionising":["radio waves","microwaves","infrared"]},"High frequency radiation ionises."],
+["Sort these detectors.",{"Radio waves":["aerial"],"Visible light":["eye","photographic film"],"Ultraviolet":["fluorescent paint"],"Gamma rays":["Geiger-Müller tube"]},"Each wave has a detector."]
+],
+order:[
+["Put the EM spectrum in order, longest wavelength first.",["radio","microwave","infrared","visible","ultraviolet","X-ray","gamma"],"Raging Martians Invaded Venus Using X-ray Guns."],
+["Put these in order of frequency, lowest first.",["microwaves","visible light","ultraviolet","gamma rays"],"Frequency rises along the spectrum."],
+["Put these in order of energy, lowest first.",["radio waves","infrared","X-rays","gamma rays"],"Higher frequency, more energy."],
+["Put the steps in order to find the distance to a plane by radar.",["Send out a pulse of microwaves.","The pulse reflects off the plane.","Measure the time for the echo to return.","Use d = vt and halve the answer."],"There and back."]
+],
+build:[
+["Explain why gamma rays are more dangerous than radio waves.",["Gamma rays have a much higher frequency.","So they carry more energy.","They are ionising and can damage cells and DNA.","Radio waves have low energy and are not ionising."],["Gamma rays travel faster than radio waves.","Radio waves cannot pass through the body."],"Frequency and energy."],
+["Explain how a thermal imaging camera can find people in the dark.",["All objects give out infrared radiation.","Warmer objects give out more infrared.","People are warmer than their surroundings.","The camera detects the infrared and shows warm areas brightly."],["The camera sends out light to see people.","People reflect ultraviolet light."],"Infrared detection."],
+["Explain how all EM waves are similar.",["They are all transverse waves.","They all travel at 3 × 10⁸ m/s in a vacuum.","They can all travel through a vacuum.","They all transfer energy."],["They all have the same frequency.","They all need a medium."],"Common properties."]
+],
+spot:[
+["Find the wavelength of a 6 × 10¹⁴ Hz light wave.",["v = fλ","λ = v ÷ f","λ = 3 × 10⁸ ÷ 6 × 10¹⁴","λ = 2 × 10⁶ m"],3,"λ = 5 × 10⁻⁷ m."],
+["Describe the EM spectrum.",["All EM waves are transverse.","They travel at the speed of light in a vacuum.","Radio waves have the highest frequency.","Gamma rays carry the most energy."],2,"Radio waves have the lowest frequency."],
+["Describe uses of EM waves.",["Microwaves are used for satellite communication.","Ultraviolet detects forged bank notes.","X-rays are used in remote controls.","Gamma rays sterilise medical equipment."],2,"Remote controls use infrared."]
+],
+write:[
+["Give one use and one danger of ultraviolet radiation.",[["(security|forged|bank ?note|sterilis|tanning|vitamin|fluoresc)","A use of UV"],["(skin cancer|cancer|sunburn|eye|cataract|damage)","A danger of UV"]],2,"Use: detecting forged bank notes (security marking). Danger: it can cause skin cancer and eye damage."],
+["Explain why X-rays can be used to see broken bones.",[["(absorb|stopped|blocked).{0,30}bone|bone.{0,30}(absorb|stop|block)","Bone absorbs X-rays"],["(pass|through|transmit).{0,30}(tissue|flesh|skin)|(tissue|flesh).{0,30}(pass|through)","X-rays pass through soft tissue"]],2,"X-rays pass through soft tissue but are absorbed by bone. So the bones show up as a shadow on the detector, and breaks can be seen."],
+["State two properties shared by all electromagnetic waves.",[["transverse","Transverse"],["(3 ?× ?10|speed of light|same speed)","Same speed in a vacuum"],["(vacuum|space).{0,20}(travel|pass)|travel.{0,20}(vacuum|space)","Travel through a vacuum"],["(energy)","Transfer energy"]],2,"Any two: they are transverse; they travel at 3 × 10⁸ m/s in a vacuum; they can travel through a vacuum; they transfer energy."]
+]
+});
+
+EX3("refr",{
+mc:[
+["What is refraction?","the change in speed (and often direction) of a wave as it enters a new medium",[["the bouncing back of a wave","That is reflection."],["the spreading of a wave through a gap","That is diffraction."],["the change in frequency of a wave","Frequency stays the same."]],"Refraction is a change in speed.",""],
+["What is the normal?","a line drawn at 90° to the surface where the ray hits",[["the surface of the glass","It is at right angles to it."],["the path of the reflected ray","It is a reference line."],["a ray with no refraction","It is a construction line."]],"Angles are measured from the normal.",""],
+["Light goes from air into glass. What happens to its speed?","It decreases.",[["It increases.","Glass is denser than air."],["It stays the same.","Then it would not refract."],["It drops to zero.","Light still travels through glass."]],"Light slows down in glass.",""],
+["When light enters a glass block along the normal, what happens?","It slows down but does not change direction.",[["It bends towards the normal.","At 0° there is no bending."],["It reflects back.","Most goes through."],["It speeds up.","It slows in glass."]],"No change in direction at 0°.",""],
+["Light passes from glass into air. Which way does it bend?","away from the normal",[["towards the normal","That is from air into glass."],["it does not bend","It bends unless it is along the normal."],["back into the glass","That is reflection."]],"Speeds up, bends away.","h"],
+["A ray hits glass at an angle of incidence of 40°. Which is a possible angle of refraction?","25°",[["40°","The ray bends in glass."],["55°","In glass it bends towards the normal."],["90°","That is too large."]],"Angle of refraction is smaller going into glass.","p"],
+["A ray of light hits a mirror at 30° to the surface. What is the angle of reflection?","60°",[["30°","Measure from the normal."],["90°","The angles are equal from the normal."],["120°","Check the geometry."]],"Angle of incidence = 90 − 30 = 60°, so reflection is 60°.","p"],
+["Light enters glass and its speed changes from 3 × 10⁸ m/s to 2 × 10⁸ m/s. The frequency is 5 × 10¹⁴ Hz. What is the wavelength in glass?","4 × 10⁻⁷ m",[["6 × 10⁻⁷ m","That is the wavelength in air."],["1 × 10²³ m","Divide, do not multiply."],["2.5 × 10⁶ m","That is f ÷ v."]],"λ = v ÷ f = 2 × 10⁸ ÷ 5 × 10¹⁴ = 4 × 10⁻⁷ m.","p"]
+],
+gap:[
+["The angle of [incidence] and the angle of refraction are measured from the [normal].",["reflection","surface"],"Always from the normal."],
+["When light enters a denser medium it [slows] down and bends [towards] the normal.",["speeds","away from"],"Air to glass."],
+["During refraction the [frequency] of the light stays the same, but the [wavelength] changes.",["amplitude","colour"],"v = fλ."]
+],
+sort:[
+["Sort these: towards the normal or away from it?",{"Towards the normal":["air into glass","air into water"],"Away from the normal":["glass into air","water into air"]},"Slows down: towards."],
+["Sort these: what changes when light enters glass at an angle?",{"Changes":["speed","wavelength","direction"],"Stays the same":["frequency"]},"Frequency is set by the source."],
+["Sort these into reflection or refraction.",{"Reflection":["seeing yourself in a mirror","an echo"],"Refraction":["a pool looking shallower than it is","a straw looking bent in water"]},"Bounce or bend."],
+["Sort these: what is needed to draw a refraction diagram?",{"Lines":["incident ray","refracted ray","normal"],"Angles":["angle of incidence","angle of refraction"]},"Label rays and angles."]
+],
+order:[
+["Put the steps in order to investigate refraction through a glass block.",["Draw round the block on paper.","Shine a ray into the block at an angle.","Mark the rays going in and out.","Join the points and draw the normal.","Measure the angles with a protractor."],"Trace, mark, join, measure."],
+["Put these in order of speed of light, slowest first.",["diamond","glass","water","air"],"Denser media slow light more."],
+["Put the steps in order to draw a ray entering glass.",["Draw the normal at the point the ray hits.","Draw the incident ray.","Draw the refracted ray bending towards the normal.","Label the angles of incidence and refraction."],"Normal first."]
+],
+build:[
+["Explain why a swimming pool looks shallower than it really is.",["Light from the bottom of the pool travels up to the surface.","At the surface it passes from water into air.","It speeds up and bends away from the normal.","The brain traces the ray back in a straight line, so the bottom looks higher."],["Light slows down as it leaves the water.","The water magnifies the pool floor."],"Refraction at the surface."],
+["Explain why light changes direction when it enters glass at an angle.",["Light travels more slowly in glass than in air.","One side of the wavefront enters the glass first.","That side slows down first.","So the wave changes direction."],["The glass pulls the light towards it.","Light speeds up in glass."],"Change of speed causes the bend."],
+["Explain why light entering glass along the normal does not change direction.",["The whole wavefront enters the glass at the same time.","It all slows down at the same time.","So there is no turning effect.","The speed changes, but the direction does not."],["Light along the normal does not slow down.","Light along the normal is reflected."],"No bending at 0°."]
+],
+spot:[
+["Describe a ray going from air into glass at an angle.",["The ray slows down.","It bends away from the normal.","The angle of refraction is smaller than the angle of incidence.","Its frequency stays the same."],1,"It bends towards the normal going into glass."],
+["Measure the angle of incidence.",["Draw the normal at 90° to the surface.","Place the protractor at the point of incidence.","Measure the angle between the ray and the surface.","Record the angle in degrees."],2,"Measure between the ray and the normal."],
+["Describe what happens when light leaves glass into air.",["The light speeds up.","The wavelength increases.","The frequency increases.","It bends away from the normal."],2,"The frequency stays the same."]
+],
+write:[
+["State what is meant by the normal in a ray diagram.",[["(90|right angle|perpendicular)","At 90° to the surface"],["(surface|boundary)","At the surface or boundary"]],2,"The normal is a line drawn at 90° to the surface, at the point where the ray hits it."],
+["Describe how light changes when it enters water from air at an angle.",[["(slow|speed decreases|reduc)","It slows down"],["towards the normal","It bends towards the normal"],["wavelength.{0,20}(decrease|shorter|smaller)","The wavelength decreases"]],2,"The light slows down, its wavelength decreases and it bends towards the normal. The frequency stays the same."],
+["Explain why the frequency of light does not change during refraction.",[["(source|produced|emitted)","Frequency is set by the source"],["(same number|waves arriving|each second|per second)","The same number of waves arrive each second"]],1,"The frequency is set by the source. The same number of waves must arrive at the boundary and leave it each second, so the frequency cannot change."]
+]
+});
+
+EX3("rad",{
+mc:[
+["What is an alpha particle?","two protons and two neutrons",[["a fast electron","That is beta."],["an EM wave","That is gamma."],["a neutron","Alpha has charge."]],"Alpha is a helium nucleus.",""],
+["Which radiation is most ionising?","alpha",[["beta","Beta is less ionising."],["gamma","Gamma is least ionising."],["they are all equal","They differ greatly."]],"Alpha is large and highly charged.",""],
+["What is the unit of activity?","becquerel (Bq)",[["sievert (Sv)","That is equivalent dose."],["gray (Gy)","That is absorbed dose."],["hertz (Hz)","Not used for activity."]],"1 Bq = 1 decay per second.",""],
+["A source has an activity of 800 Bq and a half-life of 2 hours. What is its activity after 6 hours?","100 Bq",[["200 Bq","That is after 4 hours."],["267 Bq","Half-life halves, not divides by 3."],["0 Bq","It never reaches zero exactly."]],"6 h = 3 half-lives: 800 → 400 → 200 → 100 Bq.","p"],
+["A tissue absorbs 0.6 J of energy. Its mass is 3 kg. What is the absorbed dose?","0.2 Gy",[["1.8 Gy","Divide, do not multiply."],["5 Gy","That is m ÷ E."],["0.6 Gy","Divide by mass."]],"D = E ÷ m = 0.6 ÷ 3 = 0.2 Gy.","p"]
+],
+gap:[
+["The [half-life] is the time for the activity to fall to [half] its starting value.",["lifetime","zero"],"Half-life is constant for a source."]
+],
+sort:[
+["Sort these into what stops each radiation.",{"Stopped by paper":["alpha"],"Stopped by a few mm of aluminium":["beta"],"Reduced by thick lead":["gamma"]},"Penetrating power."],
+["Sort these uses of radiation.",{"Medical":["treating cancer with gamma rays","tracers to find blockages"],"Industrial":["checking paper thickness with beta","smoke alarms using alpha"]},"Many uses of radiation."]
+],
+order:[
+["Put these in order of penetrating power, least first.",["alpha","beta","gamma"],"Alpha least, gamma most."],
+["Put the steps in order to find the half-life from a graph of activity against time.",["Read the starting activity.","Halve it.","Find the time when the activity reaches this value.","That time is the half-life."],"Read across and down."],
+["Put the steps in order to measure the activity of a source fairly.",["Measure the background count rate.","Measure the count rate with the source.","Subtract the background.","Repeat and average."],"Correct for background."]
+],
+build:[
+["Explain why alpha sources are most dangerous inside the body.",["Alpha is the most ionising radiation.","Outside the body, it is stopped by skin.","Inside the body, it is right next to living cells.","It can do a lot of damage to cells close by."],["Alpha passes through the body easily.","Alpha is harmless outside and inside the body."],"Highly ionising but short range."],
+["Explain why a gamma source is used as a medical tracer.",["Gamma passes out of the body to the detector.","It is the least ionising, so less cell damage.","The tracer should have a short half-life.","So it does not stay active in the body for long."],["Gamma is the most ionising.","A long half-life is best for tracers."],"Penetrating, low ionisation, short half-life."]
+],
+spot:[
+["A source falls from 400 Bq to 50 Bq in 9 hours. Find the half-life.",["400 → 200 → 100 → 50","That is 3 half-lives.","Half-life = 9 × 3","Half-life = 3 hours"],2,"Half-life = 9 ÷ 3 = 3 hours."],
+["Describe beta radiation.",["Beta is a fast-moving electron.","It comes from the nucleus.","It is stopped by a sheet of paper.","It is stopped by a few mm of aluminium."],2,"Beta passes through paper."],
+["Describe how to reduce exposure to radiation.",["Keep as far from the source as possible.","Spend as little time near it as possible.","Use shielding such as lead.","Hold the source in your hand."],3,"Use tongs, not your hands."]
+],
+write:[
+["State what is meant by ionisation.",[["(gain|lose|loss|remov|add).{0,30}electron|electron.{0,30}(removed|added|lost|gained)","An atom gains or loses electrons"],["(atom|charged|ion)","Becoming a charged ion"]],2,"Ionisation is when an atom gains or loses electrons and becomes a charged ion."],
+["Give two ways a worker can reduce their exposure to radiation.",[["(distance|far|tongs)","Increase distance"],["(time|less time|short)","Reduce time"],["(shield|lead|barrier)","Use shielding"],["(badge|dosimeter|monitor)","Wear a film badge"]],2,"Any two: keep a large distance (use tongs), spend as little time as possible near the source, use shielding such as lead."]
+]
+});
+
+EX3("words",{
+mc:[
+["Which command word means you must say what happens and why?","explain",[["state","State needs just a fact."],["describe","Describe is what, not why."],["determine","Determine means work out a value."]],"Explain: what AND why.",""],
+["Which command word asks you to work out a value?","calculate",[["describe","Describe asks what happens."],["state","State asks for a fact."],["suggest","Suggest asks for an idea."]],"Calculate: show working and give units.",""],
+["A question asks you to 'Describe what happens to the current.' Which answer is best?","The current increases.",[["Current is the flow of charge.","That is a definition, not what happens."],["The current increases because resistance decreases.","Fine, but the reason is not needed."],["Amps.","That is a unit."]],"Describe: say what happens.","h"],
+["Which answer best fits 'Explain why the lamp gets brighter'?","The current increases, so more energy is transferred to the lamp each second.",[["The lamp gets brighter.","That repeats the question."],["Because of the battery.","Too vague."],["The current increases.","Missing the 'so'."]],"Link the reason with 'so' or 'because'.","h"],
+["A 'calculate' question is worth 3 marks. How are the marks usually given?","1 for the equation, 1 for substitution, 1 for the answer with unit",[["3 for the right answer only","Working gains marks."],["1 for each line of text","Marks are for physics steps."],["2 for the unit, 1 for the answer","The unit is part of the final mark."]],"Equation, substitution, answer and unit.","p"],
+["A pupil writes 'v = 12'. The answer should be 12 m/s. What mark is lost?","the final mark, because the unit is missing",[["no mark is lost","The unit is required."],["all the marks","Equation and substitution can still earn marks."],["the equation mark","The equation was not shown here."]],"Always include the unit.","p"],
+["Data: 2.0 m and 3.45 s. How many significant figures should the answer have?","2",[["3","Use the smallest number of sig figs in the data."],["1","2.0 has 2 sig figs."],["4","Too many."]],"Smallest sig figs in the data.","p"]
+],
+gap:[
+["A '[state]' question needs a short answer. An '[explain]' question needs a reason.",["calculate","list"],"Match the length to the command word."],
+["In a calculation, show the [equation], the substitution and the final answer with a [unit].",["graph","diagram"],"Three marks."],
+["Use the word '[because]' or '[so]' to link a cause to an effect in an explain answer.",["and","then"],"Link words show reasoning."]
+],
+sort:[
+["Sort these command words.",{"Short answer":["state","name","give"],"What happens":["describe"],"What and why":["explain","justify"]},"Match the answer to the word."],
+["Sort these answer features.",{"Good practice":["naming the quantity, e.g. 'the current'","giving a unit","linking cause and effect"],"Poor practice":["writing 'it' without saying what it is","rounding too early","repeating the question"]},"Precise answers score."],
+["Sort these: which command word fits?",{"Calculate":["Find the speed of the car."],"State":["Give the unit of energy."],"Explain":["Why does the lamp get dimmer?"]},"Read the question carefully."]
+],
+order:[
+["Put the steps in order for a calculation.",["Write the equation.","Substitute the values.","Work out the answer.","Add the unit."],"Equation, substitution, answer, unit."],
+["Put these answer lengths in order, shortest first.",["state","describe","explain","open-ended 'comment on'"],"More marks, more detail."],
+["Put the steps in order to answer an open-ended question.",["Read the question and pick out the physics.","Note the key physics ideas that apply.","Write a clear answer using physics words.","Check that your ideas are explained, not just listed."],"Show understanding."]
+],
+build:[
+["Build a good answer to 'Explain why a cyclist reaches a top speed.'",["As the cyclist speeds up, air resistance increases.","Eventually air resistance equals the forward force.","The forces are now balanced.","So there is no acceleration and the speed stays constant."],["The cyclist gets tired.","It gets slower because of it."],"Link each step with physics."],
+["Build a good answer to 'Explain why the reading on the ammeter falls when a resistor is added in series.'",["Adding a resistor in series increases the total resistance.","The supply voltage stays the same.","I = V ÷ R.","So the current, and the ammeter reading, decreases."],["The resistor uses up the current.","The ammeter gets less accurate."],"Physics reasons linked together."]
+],
+spot:[
+["Answer to 'State the unit of power'.",["The answer should be short.","The answer is 'watt'.","You must explain what a watt is.","'W' is also accepted."],2,"State needs no explanation."],
+["Advice for 'calculate' questions.",["Write the equation first.","Show the substitution.","Round your answer to as many figures as possible.","Include the unit."],2,"Round sensibly to match the data's significant figures."],
+["Advice for 'explain' questions.",["Say what happens.","Say why it happens.","Use physics words.","Use 'it' and 'they' to keep it short."],3,"Name the thing instead of using 'it'."]
+],
+write:[
+["State the difference between a 'describe' and an 'explain' question.",[["describe.{0,40}(what|happens)","Describe: what happens"],["explain.{0,40}(why|reason)","Explain: why it happens"]],2,"Describe means say what happens. Explain means say what happens and why, using physics."],
+["Give two pieces of advice for answering a 3-mark calculation.",[["equation|formula","Write the equation"],["substitut","Show the substitution"],["unit","Include the unit"],["(sig|significant|round)","Use sensible significant figures"]],2,"Write the equation, show the substitution, give the answer with a unit, and round to sensible significant figures."],
+["Explain why it is better to write 'the current increases' than 'it increases'.",[["(clear|unclear|which|what).{0,40}(quantity|thing|meant|refer)|(name|names).{0,20}quantity|clear","Says clearly which quantity is meant"],["(marks?|marker|examiner)","Markers need to know what you mean"]],1,"Naming the quantity makes it clear what you mean. The marker cannot give credit if 'it' could refer to more than one thing."]
+]
+});
+
+EX3("skills",{
+mc:[
+["What is the independent variable?","the variable you change",[["the variable you measure","That is the dependent variable."],["the variable you keep the same","That is a control variable."],["the result of the experiment","That is the dependent variable."]],"You choose and change it.",""],
+["Why do we repeat measurements?","to reduce the effect of random errors and find a reliable average",[["to make the experiment take longer","Not a reason."],["to remove systematic errors","Repeating does not fix systematic errors."],["to change the variable","That is not repeating."]],"Averages are more reliable.",""],
+["A ruler is used but the zero is worn off, so every reading is 2 mm too long. What kind of error is this?","systematic error",[["random error","Random errors vary each time."],["no error","Every reading is wrong by 2 mm."],["a reading error that averaging removes","Averaging cannot remove a constant offset."]],"A constant offset is systematic.","h"],
+["A pupil's results lie on a straight line through the origin. What does this show?","the two variables are directly proportional",[["they are inversely proportional","That gives a curve."],["there is no relationship","A straight line shows a relationship."],["the experiment failed","It is a clear result."]],"Straight line through origin: y ∝ x.","h"],
+["Readings: 2.1 s, 2.3 s, 2.2 s, 2.4 s. What is the mean?","2.25 s",[["2.4 s","That is the largest value."],["9.0 s","Divide by 4."],["2.2 s","Check: 9.0 ÷ 4 = 2.25."]],"Mean = 9.0 ÷ 4 = 2.25 s.","p"],
+["Readings: 3.2, 3.6, 3.4, 3.0 cm. What is the approximate random uncertainty?","0.15 cm",[["0.6 cm","Divide the range by the number of readings."],["3.3 cm","That is the mean."],["0.3 cm","Divide 0.6 by 4."]],"(3.6 − 3.0) ÷ 4 = 0.15 cm.","p"],
+["A graph shows distance against time. The line goes from (0, 0) to (5, 20). What is the gradient?","4",[["100","Divide, do not multiply."],["0.25","That is run ÷ rise."],["20","Divide by 5."]],"Gradient = 20 ÷ 5 = 4 (m/s).","p"]
+],
+gap:[
+["A [control] variable is kept the same so the test is [fair].",["dependent","accurate"],"Only change one thing."],
+["The dependent variable goes on the [y]-axis. The independent variable goes on the [x]-axis.",["z","w"],"Change on x, measure on y."],
+["Random uncertainty = ([max] − [min]) ÷ number of readings.",["mean","average"],"The range divided by n."]
+],
+sort:[
+["Sort these errors.",{"Random":["reaction time when starting a stopwatch","reading a scale from slightly different angles"],"Systematic":["a balance that reads 5 g with nothing on it","a thermometer that reads 2 °C too high"]},"Random scatters; systematic shifts."],
+["Sort these parts of a pendulum experiment.",{"Independent":["length of string"],"Dependent":["time for 10 swings"],"Control":["mass of bob","angle of release"]},"Change, measure, keep the same."],
+["Sort these ways to improve an experiment.",{"Reduce random error":["repeat and average","time 10 swings not 1"],"Reduce systematic error":["zero the balance first","calibrate the thermometer"]},"Different fixes."]
+],
+order:[
+["Put the steps in order to draw a line graph.",["Choose suitable scales.","Label the axes with quantity and unit.","Plot the points accurately.","Draw a line or curve of best fit."],"Scales, labels, points, line."],
+["Put the steps in order to find a mean with uncertainty.",["Take repeated readings.","Find the mean.","Find the range (max − min).","Divide the range by the number of readings."],"Mean ± uncertainty."],
+["Put these timing methods in order of accuracy, worst first.",["timing 1 swing with a stopwatch","timing 10 swings with a stopwatch","timing 10 swings and repeating 3 times","using a light gate and timer"],"Bigger times and electronic timing help."]
+],
+build:[
+["Explain why timing 10 swings of a pendulum gives a better result than timing 1.",["Reaction time causes the same error each time you start and stop the watch.","With 10 swings the total time is much bigger.","So the reaction-time error is a smaller fraction of the reading.","Dividing by 10 gives a more accurate time for one swing."],["10 swings make the pendulum swing faster.","The stopwatch is more accurate for longer times."],"Reduce the percentage error."],
+["Explain why a fair test is needed.",["Only the independent variable should change.","All other variables are kept constant.","Then any change in the dependent variable is caused by the independent variable.","So a valid conclusion can be drawn."],["A fair test gives everyone the same marks.","A fair test means you repeat it."],"Control variables."],
+["Explain how to deal with an anomalous result.",["Spot the result that does not fit the pattern.","Check it by repeating the measurement.","If it is still odd, leave it out of the average.","Mention it in your evaluation."],["Change it to fit the line.","Use it to draw the line of best fit."],"Check, repeat, exclude."]
+],
+spot:[
+["Plan a pendulum experiment.",["Change the length of the string.","Measure the time for 10 swings.","Change the mass of the bob each time.","Keep the angle of release the same."],2,"The mass is a control variable and must stay the same."],
+["Draw a graph of results.",["Put the independent variable on the x-axis.","Label the axes with units.","Join the points dot to dot.","Use most of the graph paper."],2,"Draw a line or curve of best fit."],
+["Find the mean of 4.0, 4.2 and 4.4 s.",["Add the readings: 12.6 s.","Divide by 3.","Mean = 4.2 s.","The uncertainty is 0.4 s."],3,"Uncertainty = (4.4 − 4.0) ÷ 3 = 0.13 s."]
+],
+write:[
+["State what is meant by a control variable.",[["(kept|keep|stay|remain).{0,20}(same|constant)","A variable kept the same"],["(fair|valid)","So the test is fair"]],1,"A control variable is kept the same throughout so that the test is fair."],
+["Give two ways to reduce random uncertainty.",[["repeat","Repeat readings"],["(average|mean)","Take an average"],["(more|larger) (readings|range|values)|10 swings|longer time","Take more readings or measure a larger quantity"],["(light gate|data logger|electronic|digital)","Use electronic timing"]],2,"Repeat readings and take a mean; measure larger quantities (such as 10 swings); use electronic timing such as light gates."],
+["Explain the difference between random and systematic errors.",[["random.{0,60}(vary|varies|different|scatter|unpredict)","Random errors vary unpredictably"],["systematic.{0,60}(same|constant|always|every|consistent)","Systematic errors are the same each time"],["(repeat|averag).{0,40}random|random.{0,40}(averag|repeat)","Averaging reduces random errors"]],2,"Random errors vary unpredictably from one reading to the next and are reduced by repeating and averaging. Systematic errors shift every reading by the same amount and are not removed by averaging."]
+]
+});
+
+EX3("vt",{mc:[
+["A velocity-time graph line slopes downwards but stays above the axis. What is the object doing?","moving forwards and slowing down",[["moving backwards","The velocity is still positive."],["speeding up","The velocity is decreasing."],["at rest","The velocity is not zero."]],"Positive velocity that is decreasing.","h"]
+]});
+EX3("newton",{mc:[
+["What is the weight of a 5 kg bag on Earth? (g = 9.8 N/kg)","49 N",[["5 N","Weight is mass × g."],["0.51 N","Multiply, do not divide."],["5 kg","Weight is a force, in newtons."]],"W = mg = 5 × 9.8 = 49 N.",""]
+]});
+EX3("energy",{mc:[
+["Which equation gives kinetic energy?","Eₖ = ½mv²",[["Eₖ = mgh","That is potential energy."],["Eₖ = Fd","That is work done."],["Eₖ = mv","That is not energy."]],"Kinetic energy depends on mass and speed squared.",""]
+]});
+EX3("proj",{
+mc:[
+["Ignoring air resistance, what is the vertical acceleration of a projectile on Earth?","9.8 m/s² downwards",[["0 m/s²","Gravity acts throughout."],["9.8 m/s² upwards","Gravity pulls down."],["it increases as it falls","g is constant."]],"Constant acceleration due to gravity.",""],
+["What is the vertical velocity of a ball at the moment it rolls horizontally off a table?","0 m/s",[["9.8 m/s","That is its acceleration."],["the same as its horizontal velocity","It has no vertical motion yet."],["it cannot be known","It starts at zero."]],"It only starts falling once it leaves the table.",""]
+],
+order:[["Put these cliff heights in order of time for a ball to fall, shortest first.",["5 m","20 m","45 m","80 m"],"1 s, 2 s, 3 s, 4 s (roughly)."]]
+});
+EX3("spex",{
+mc:[["An astronaut on the ISS appears to float. Why?","The astronaut and the ISS are both falling towards Earth at the same rate.",[["There is no gravity in orbit.","Gravity there is about 90% of that on the surface."],["The astronaut has no mass in space.","Mass does not change."],["The ISS is too high for gravity to reach.","Gravity reaches far beyond the ISS."]],"They are in free fall together.","h"]],
+order:[["Put the steps in order to find the weight of an object on another planet.",["Measure the mass of the object in kg.","Look up the gravitational field strength of the planet.","Use W = mg.","Give the answer in newtons."],"Mass is the same everywhere."]]
+});
+EX3("cosmo",{mc:[
+["Two stars have the same brightness as seen from Earth. One is much further away. What can you say?","The further star must give out more light.",[["The nearer star is bigger.","Brightness depends on output and distance."],["They give out the same light.","Distance reduces brightness."],["The further star is cooler.","Not enough information."]],"Distant objects look fainter.","h"],
+["Light from a distant galaxy is shifted to longer wavelengths. What does this show?","The galaxy is moving away from us.",[["The galaxy is moving towards us.","That would be blueshift."],["The galaxy is getting hotter.","Redshift is about motion."],["The galaxy is very small.","Redshift does not show size."]],"Redshift: moving away, evidence for expansion.","h"]
+]});
+
+/*X3END*/
 const TYPES={K:"Key words",TF:"True or false",M:"Multiple choice",H:"Hinge question",P:"Problem solving",G:"Fill the gaps",S:"Sort",O:"Put in order",B:"Build an answer",X:"Spot the mistake",W:"Written answer"};
 const PRESETS=[["All types",Object.keys(TYPES)],["Literacy",["K","G","B","X","W"]],["Knowledge",["K","TF","M","H"]],["Problem solving",["P","H","O","W","S"]]];
 const $=s=>document.querySelector(s);
@@ -1464,7 +2314,7 @@ function expand(t){
   const items=[];let n=0;
   const add=o=>{o.id=t.key+"."+(++n);o.topic=t.key;items.push(o);};
   /* originals first, then later additions, so existing question numbers never change */
-  [t.d,t.x,t.x2].forEach(d=>{if(d)expandPart(d,add);});
+  [t.d,t.x,t.x2,t.x3].forEach(d=>{if(d)expandPart(d,add);});
   return items;
 }
 function expandPart(d,add){
