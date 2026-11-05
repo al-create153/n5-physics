@@ -197,6 +197,7 @@ button.b.ghost:hover{border-color:var(--line);color:var(--ink)}
       <div class="bar"><button class="b" id="prev">Previous</button><button class="b" id="rand">Random</button><button class="b" id="next">Next</button></div>
     </div>
     <div class="bar" style="margin-top:14px"><button class="b" id="addSet" hidden>Add to set</button><span class="msg" id="setInfo"></span></div>
+    <div class="bar" style="margin-top:14px"><button class="b sm" id="back2" aria-label="Back to question list" title="Back to question list">←</button></div>
   </div>
 
   <div id="summary" hidden>
@@ -396,6 +397,7 @@ $('prev').onclick=()=>{if(qz.i>0){qz.i--;renderQ()}};
 $('next').onclick=()=>{if(qz.i<qz.ids.length-1){qz.i++;renderQ()}else if(qz.mode!=='topic')finish()};
 $('rand').onclick=()=>{if(qz.ids.length>1){let j;do{j=Math.floor(Math.random()*qz.ids.length)}while(j===qz.i);qz.i=j;renderQ()}};
 $('back').onclick=()=>{if(qz.mode==='topic'&&curTopic)openMenu(curTopic);else if(qz.mode==='mix')show('mix');else{renderHome();show('home')}};
+$('back2').onclick=()=>$('back').click();
 function finish(){const ids=qz.ids;let g=0,p=0;ids.forEach(id=>{const r=qz.res[id];if(r==='got')g++;else if(r==='part')p+=.5});
   $('sscore').textContent=`${g+p} / ${ids.length}`;
   $('slist').innerHTML=ids.map(id=>{const q=Q[id],r=qz.res[id];return `${pname(q.p)} ${q.t==='m'?'MC':'S2'} Q${q.n}: ${r==='got'?'got it':r==='part'?'partly':r==='not'?'not yet':'not marked'}`}).join('<br>');

@@ -197,6 +197,7 @@ table.dt td:last-child{font-family:var(--f-mono);font-variant-numeric:tabular-nu
       <button class="b" id="showAns">Show answer</button>
       <div class="bar"><button class="b" id="prev">Previous</button><button class="b" id="rand">Random</button><button class="b pri" id="next">Next</button></div>
     </div>
+    <div class="bar" style="margin-top:14px"><button class="b sm" id="back2" aria-label="Back to question list" title="Back to question list">←</button></div>
   </div>
 
   <div id="summary" hidden>
@@ -724,6 +725,7 @@ $('next').onclick=()=>{if(QS.set){if(QS.pos<QS.list.length-1){QS.pos++;openQ()}e
 $('prev').onclick=()=>stepSingle(-1);
 $('rand').onclick=()=>{const f=FB[QS.list[0][0]];const pool=[...Array(f.n).keys()].filter(i=>i!==QS.list[0][1]&&skipOK(f.id,i));const i=pool.length?pool[Math.floor(Math.random()*pool.length)]:QS.list[0][1];QS.list=[[f.id,i]];openQ()};
 $('back').onclick=()=>{if(QS.set){renderHome();show('home')}else renderMenu(FB[QS.list[0][0]])};
+$('back2').onclick=()=>$('back').click();
 function summary(){const n=QS.list.length,g=QS.res.filter(x=>x==='g').length,a=QS.res.filter(x=>x==='a').length;
   $('sscore').textContent=`${g} / ${n}`;$('slist').textContent=`Right first time: ${g}. Right after another try: ${a}. Answer shown or skipped: ${n-g-a}.`;show('summary')}
 

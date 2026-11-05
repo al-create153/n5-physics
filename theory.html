@@ -274,6 +274,7 @@ textarea{font:inherit;font-size:1.05rem;width:100%;min-height:130px;padding:12px
       <div class="bar"><button class="b" id="skip">Skip</button><button class="b" id="prev">Previous</button><button class="b" id="rand">Random</button></div>
       <div class="bar"><button class="b pri" id="check">Check</button><button class="b pri" id="next" hidden>Next</button></div>
     </div>
+    <div class="bar" style="margin-top:14px"><button class="b sm" id="back2" aria-label="Back to question list" title="Back to question list">←</button></div>
   </div>
 
   <div id="summary" hidden>
@@ -2470,6 +2471,7 @@ $("#check").onclick=()=>{if(cur&&cur.check&&!done)cur.check();};
 $("#next").onclick=()=>{if(Q.single){stepSingle(1);return;}Q.i++;if(Q.i>=Q.list.length)summary();else renderQ();};
 $("#skip").onclick=()=>{Q.list.push(Q.list.splice(Q.i,1)[0]);if(Q.list.length===1){summary();return;}renderQ();};
 $("#back").onclick=()=>{if(Q.single)renderMenu(TOPIC[Q.list[0].it.topic]);else{show("home");renderHome();}};
+$("#back2").onclick=()=>$("#back").click();
 $("#finishNow").onclick=()=>{if(Object.keys(Q.res).length)summary();else{show("home");renderHome();}};
 document.addEventListener("keydown",e=>{if($("#quiz").hidden)return;if(e.key==="Enter"&&e.target.tagName!=="TEXTAREA"){if(!done&&!$("#check").hidden&&!$("#check").disabled){e.preventDefault();$("#check").click();}else if(done&&!$("#next").hidden){e.preventDefault();$("#next").click();}}});
 
